@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Offchat - Truly Offline</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed-dim": "#e9c349",
+              "on-primary-fixed-variant": "#574500",
+              "error": "#ffb4ab",
+              "on-secondary-fixed-variant": "#544519",
+              "primary": "#f2ca50",
+              "on-primary": "#3c2f00",
+              "surface-tint": "#e9c349",
+              "on-secondary-fixed": "#241a00",
+              "surface": "#131313",
+              "background": "#131313",
+              "secondary-fixed-dim": "#dac58d",
+              "on-primary-container": "#554300",
+              "tertiary-fixed": "#dbe1ff",
+              "on-surface-variant": "#d0c5af",
+              "on-surface": "#e2e2e2",
+              "inverse-on-surface": "#303030",
+              "surface-container": "#1f1f1f",
+              "tertiary-container": "#97b0ff",
+              "on-secondary": "#3c2f05",
+              "on-tertiary-fixed-variant": "#27438a",
+              "on-tertiary-container": "#254188",
+              "on-background": "#e2e2e2",
+              "surface-container-highest": "#353535",
+              "secondary-fixed": "#f7e1a6",
+              "on-error": "#690005",
+              "tertiary": "#bfcdff",
+              "surface-bright": "#393939",
+              "primary-container": "#d4af37",
+              "primary-fixed": "#ffe088",
+              "on-primary-fixed": "#241a00",
+              "secondary": "#dac58d",
+              "secondary-container": "#544519",
+              "surface-container-lowest": "#0e0e0e",
+              "surface-container-high": "#2a2a2a",
+              "on-tertiary-fixed": "#00174b",
+              "error-container": "#93000a",
+              "on-tertiary": "#082b72",
+              "surface-variant": "#353535",
+              "surface-dim": "#131313",
+              "tertiary-fixed-dim": "#b4c5ff",
+              "outline-variant": "#4d4635",
+              "inverse-surface": "#e2e2e2",
+              "outline": "#99907c",
+              "on-secondary-container": "#c8b37d",
+              "surface-container-low": "#1b1b1b",
+              "inverse-primary": "#735c00",
+              "on-error-container": "#ffdad6"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .gilded-gradient {
+            background: linear-gradient(135deg, #f2ca50 0%, #d4af37 100%);
+        }
+        .text-glow { text-shadow: 0 0 15px rgba(242, 202, 80, 0.3); }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body min-h-screen flex flex-col selection:bg-primary selection:text-on-primary overflow-hidden">
+<!-- Top Navigation -->
+<header class="fixed top-0 w-full z-50 flex justify-center items-center h-16 px-6 bg-surface/80 backdrop-blur-md">
+<div class="flex items-center justify-between w-full max-w-2xl">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="near_me">near_me</span>
+<img alt="Offchat Logo" class="h-10 w-auto object-contain brightness-110 drop-shadow-[0_0_8px_rgba(212,175,55,0.3)]" src="https://lh3.googleusercontent.com/aida/ADBb0ujcfArjYK_8bETqI2iZxRBg2Cn31s7zqklo5pnwwioN0D5AJ8QQN-7U9tEXARtiLW4SfheRdt2S06-Dsfwco27dSuPY1XV9P94Vm5r6noDPuc2EwZiDQIceC9LowhOLomPzwnWkeCdDpdz2fhdec2QiIcvc_6k0Isjd7Duzb57I_Lb_o583CtEQX9VbFSj64TiJMel77UxiA4wIA5XwpeAuq8cU7dD20p2ZCgE1iRh0KLodC4thBPXqlKyZ8sQXua_sNHiUAC940g"/>
+<div class="w-8"></div> <!-- Spacer -->
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center justify-center px-8 pt-20 pb-48 max-w-2xl mx-auto w-full">
+<!-- Hero Visual Section -->
+<div class="relative w-full aspect-[4/3] max-w-md mx-auto mb-10 flex items-center justify-center scale-90 md:scale-100">
+<!-- Background Atmospheric Glow -->
+<div class="absolute inset-0 bg-primary/5 rounded-full blur-[100px]"></div>
+<!-- Central Graphic -->
+<div class="relative w-full h-full flex items-center justify-center">
+<!-- Offline Indicator (Center Background) -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 opacity-20">
+<span class="material-symbols-outlined text-on-surface-variant text-8xl" data-icon="signal_wifi_off">signal_wifi_off</span>
+</div>
+<!-- Device Left -->
+<div class="absolute left-6 top-1/2 -translate-y-1/2 w-32 h-60 bg-surface-container-high rounded-[2rem] border border-outline-variant/30 shadow-2xl p-2.5 -rotate-6 transition-transform hover:rotate-0 duration-700">
+<div class="w-full h-full bg-surface-container-lowest rounded-[1.5rem] overflow-hidden flex flex-col p-3 space-y-3">
+<div class="w-10 h-1 bg-surface-variant/40 rounded-full self-center mb-1"></div>
+<div class="bg-primary/20 w-4/5 h-3 rounded-full"></div>
+<div class="bg-surface-variant/20 w-3/5 h-2 rounded-full"></div>
+</div>
+</div>
+<!-- Device Right -->
+<div class="absolute right-6 top-1/2 -translate-y-1/2 w-32 h-60 bg-surface-container-high rounded-[2rem] border border-outline-variant/30 shadow-2xl p-2.5 rotate-6 transition-transform hover:rotate-0 duration-700">
+<div class="w-full h-full bg-surface-container-lowest rounded-[1.5rem] overflow-hidden flex flex-col p-3 space-y-3">
+<div class="w-10 h-1 bg-surface-variant/40 rounded-full self-center mb-1"></div>
+<div class="bg-surface-variant/20 w-3/5 h-2 rounded-full self-end"></div>
+<div class="bg-primary/30 w-4/5 h-3 rounded-full self-end"></div>
+</div>
+</div>
+<!-- Golden Connection Line -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none z-20" fill="none" viewbox="0 0 400 400">
+<path d="M150 200 C 200 170, 200 230, 250 200" stroke="url(#gold-gradient)" stroke-dasharray="8 12" stroke-linecap="round" stroke-width="3"></path>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="gold-gradient" x1="150" x2="250" y1="200" y2="200">
+<stop stop-color="#f2ca50"></stop>
+<stop offset="1" stop-color="#d4af37"></stop>
+</lineargradient>
+</defs>
+<!-- Pulsing Node Left -->
+<circle cx="150" cy="200" fill="#f2ca50" r="5">
+<animate attributename="r" dur="3s" repeatcount="indefinite" values="4;6;4"></animate>
+</circle>
+<!-- Pulsing Node Right -->
+<circle cx="250" cy="200" fill="#f2ca50" r="5">
+<animate attributename="r" dur="3s" repeatcount="indefinite" values="4;6;4"></animate>
+</circle>
+</svg>
+</div>
+</div>
+<!-- Copy Content -->
+<div class="text-center space-y-5">
+<h2 class="text-4xl font-extrabold tracking-tight text-on-surface text-glow">
+                Truly <span class="text-primary italic">Offline</span>.
+            </h2>
+<p class="text-base text-on-surface-variant leading-relaxed max-w-[320px] mx-auto">
+                Message and chat securely even without an internet connection using our peer-to-peer mesh network.
+            </p>
+</div>
+</main>
+<!-- Fixed Bottom Actions -->
+<footer class="fixed bottom-0 w-full px-6 pb-12 pt-8 bg-gradient-to-t from-background via-background to-transparent">
+<div class="max-w-md mx-auto flex flex-col items-center">
+<!-- Step Progress Indicator -->
+<div class="flex flex-col items-center mb-8 gap-3">
+<div class="flex gap-1.5 mb-1">
+<div class="w-4 h-1 rounded-full bg-primary"></div>
+<div class="w-8 h-1 rounded-full bg-primary shadow-[0_0_8px_rgba(242,202,80,0.4)]"></div>
+<div class="w-4 h-1 rounded-full bg-outline-variant/30"></div>
+<div class="w-4 h-1 rounded-full bg-outline-variant/30"></div>
+<div class="w-4 h-1 rounded-full bg-outline-variant/30"></div>
+<div class="w-4 h-1 rounded-full bg-outline-variant/30"></div>
+<div class="w-4 h-1 rounded-full bg-outline-variant/30"></div>
+</div>
+</div>
+<button class="w-full py-5 bg-[#D4AF37] h-16 rounded-full text-[#201c12] font-extrabold text-sm uppercase tracking-[0.15em] shadow-[0_0_25px_rgba(212,175,55,0.3)] hover:shadow-[0_0_35px_rgba(212,175,55,0.4)] active:scale-[0.98] transition-all duration-300">Continue</button>
+<div class="mt-8 flex flex-col items-center gap-1">
+<span class="text-[10px] uppercase tracking-[0.2em] font-bold text-primary/80 text-[#D4AF37]">Step 02 <span class="text-on-surface-variant/40 mx-1">/</span> 07</span>
+<p class="text-[9px] tracking-[0.15em] uppercase text-on-surface-variant/40 font-bold">
+                    Powered by Mesh-Grid Protocol
+                </p>
+</div>
+</div>
+</footer>
+<!-- Background Decoration -->
+<div class="fixed top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/3 rounded-full blur-[150px] pointer-events-none -z-10"></div>
+<div class="fixed bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/3 rounded-full blur-[150px] pointer-events-none -z-10"></div>
+</body></html>

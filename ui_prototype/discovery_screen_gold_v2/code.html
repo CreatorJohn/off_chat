@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#D4AF37", // Gold accent
+              "on-primary": "#000000",
+              "surface": "#121212",
+              "on-surface": "#FFFFFF",
+              "surface-variant": "#1E1E1E",
+              "on-surface-variant": "#A0A0A0",
+              "outline": "#333333",
+              "background": "#0A0A0A"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-effect {
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl flex items-center justify-between px-6 py-4 border-b border-outline/50">
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors active:scale-90 duration-200">
+<span class="material-symbols-outlined text-primary" data-icon="refresh">refresh</span>
+</button>
+</div>
+<h1 class="font-headline text-xl font-extrabold tracking-tight text-primary">Offchat</h1>
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors active:scale-90 duration-200">
+<span class="material-symbols-outlined text-primary" data-icon="notifications">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border-2 border-primary/40">
+<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSc5oBuS-hWhjUZ1qzDNRPI-Q-HynxOtYgI9VCsnesKizaGIpRujhRImXi9XJaRkWLlOwSowZdIhCI7tYdZ-Y-5RD5DnWOwqrfN9nsFfCBgrtpIWNMANlPcW2tRXyCa7XkMBDwu4-V2EggAChMRAtmKIh9DNkNox5crSgdOqlUtyHFnTFJP3eEDZuOeYFG3B08Gr3bLE09tkgKQue_iL1DyG9njWhZ3a87Sw9Vk5211UBqM2qhu_52zYy0WkhWyK1TsNCgySQjJuvq"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 pt-24 pb-32 px-6">
+<!-- Section Header -->
+<div class="mb-8 flex items-end justify-between">
+<div>
+<h2 class="font-headline text-2xl font-bold text-on-surface">Nearby Devices</h2>
+<p class="text-on-surface-variant text-sm font-medium">Scanning for active pulses...</p>
+</div>
+<span class="text-[10px] font-bold text-on-primary uppercase tracking-widest px-3 py-1 bg-primary rounded-full">Active</span>
+</div>
+<!-- Devices List -->
+<div class="space-y-4">
+<!-- Device Item 1 -->
+<div class="group flex items-center p-4 bg-surface-variant/50 border border-outline/30 rounded-2xl transition-all duration-300 hover:border-primary/50 hover:bg-surface-variant cursor-pointer">
+<div class="relative w-14 h-14 mr-4">
+<img alt="Julian" class="w-full h-full object-cover rounded-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUXGUOuSsmD5voHjZh73Z7GwCqRxoIdkU02NeFF37qasUID9hf_MCzsu7Yhi4FLrrH9UAb2oXLOQmlHJ6zYEKcSxeujUBjFctB2dsxac9yV2CrMvqokmJWdNwllva70hIge2IPoVhXFjlaKNdIPIa8LRaSSXpwV8Ih2mZMiGs8Rz1m5H9BhwrmxL9UnpcpENA_V8Q55bDv89SGi8NHMqzU8771oKOmKJnjZ1n9a9H_vKDdqJey7uERBNDR0U9YfgLDAtpHhSBNUvX9"/>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-surface rounded-full"></div>
+</div>
+<div class="flex-1">
+<h3 class="font-headline font-bold text-on-surface text-base">Julian's MacBook Pro</h3>
+<p class="text-on-surface-variant text-xs flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]" data-icon="history">history</span>
+                    Discovered 2 mins ago
+                </p>
+</div>
+<button class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+</button>
+</div>
+<!-- Device Item 2 -->
+<div class="group flex items-center p-4 bg-surface-variant/50 border border-outline/30 rounded-2xl transition-all duration-300 hover:border-primary/50 hover:bg-surface-variant cursor-pointer">
+<div class="relative w-14 h-14 mr-4">
+<img alt="Sarah" class="w-full h-full object-cover rounded-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcmiJWI1xrW6vlU0gh5NLeIbVZbvUQ0FJK7RvkNaW0kRr2FTuTNTVKfuEfhJPmJzCfLQuJZy4Ehm6yvygg906VV4PwJwlq1qxNH5lxoKlCUtBR9X8XvPem4lG6L21TkuyFAl_wiJJob0mQh7c3l4wEfrHBGzi_HERWYBY_LxUrc97JHqqQQlNrza_EpT75g3wTOYG_P8sTr9jx0pR9SsO-b3_u1mChKeeHP8DA4o7sgRvQeGYTRYduDhlN1CSIh66l7VE3TnXh0nJo"/>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-surface rounded-full"></div>
+</div>
+<div class="flex-1">
+<h3 class="font-headline font-bold text-on-surface text-base">Sarah's iPhone</h3>
+<p class="text-on-surface-variant text-xs flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]" data-icon="history">history</span>
+                    Discovered 5 mins ago
+                </p>
+</div>
+<button class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+</button>
+</div>
+<!-- Device Item 3 -->
+<div class="group flex items-center p-4 bg-surface-variant/50 border border-outline/30 rounded-2xl transition-all duration-300 hover:border-primary/50 hover:bg-surface-variant cursor-pointer">
+<div class="relative w-14 h-14 mr-4">
+<div class="w-full h-full bg-primary/20 rounded-xl flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl" data-icon="headphones">headphones</span>
+</div>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 bg-zinc-600 border-2 border-surface rounded-full"></div>
+</div>
+<div class="flex-1">
+<h3 class="font-headline font-bold text-on-surface text-base">Beats Studio Pro</h3>
+<p class="text-on-surface-variant text-xs flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]" data-icon="history">history</span>
+                    Discovered 14 mins ago
+                </p>
+</div>
+<button class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+<!-- Device Item 4 -->
+<div class="group flex items-center p-4 bg-surface-variant/50 border border-outline/30 rounded-2xl transition-all duration-300 hover:border-primary/50 hover:bg-surface-variant cursor-pointer">
+<div class="relative w-14 h-14 mr-4">
+<img alt="Marcus" class="w-full h-full object-cover rounded-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfjkhlghTtbIcO3mC2n2IoN0pCSxDAzI9Gt23fi5_sT9oWUSO0S4urlUJaJSLFK2liSN288yd2jvLE7nUU5ff6o1Kt-4jEbtB-NFtta5Q9EkKrgsuLyFDBy8D7lNi_gl5rL-4WIWOfWaWJIwNEGEjTYN93xUXxVc6GDC3JRmf4M_ndNvYAh2MUKziKGGBk__siV6h_asAVqeOxnjC4MmufC7YqO2D8xoV5eT8tk6zIlcKROexF7zPZlsJAggGsEPY730zYUMkBTGWG"/>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-surface rounded-full"></div>
+</div>
+<div class="flex-1">
+<h3 class="font-headline font-bold text-on-surface text-base">Marcus - iPad Air</h3>
+<p class="text-on-surface-variant text-xs flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]" data-icon="history">history</span>
+                    Discovered 22 mins ago
+                </p>
+</div>
+<button class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+</button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-3 bg-surface/90 backdrop-blur-xl border-t border-outline/50">
+<!-- Discovery (Active) -->
+<a class="flex flex-col items-center justify-center text-primary px-5 py-2 group" href="#">
+<span class="material-symbols-outlined" data-icon="explore" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="text-[10px] font-bold tracking-wide uppercase mt-1">Discovery</span>
+</a>
+<!-- Location -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="radar">radar</span>
+<span class="text-[10px] font-bold tracking-wide uppercase mt-1">Location</span>
+</a>
+<!-- Messages -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="text-[10px] font-bold tracking-wide uppercase mt-1">Messages</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px] font-bold tracking-wide uppercase mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

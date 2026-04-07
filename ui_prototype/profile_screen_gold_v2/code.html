@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-highest": "#333333",
+              "on-background": "#F5F5F5",
+              "inverse-surface": "#F5F5F5",
+              "on-tertiary-fixed-variant": "#D4AF37",
+              "primary-fixed": "#D4AF37",
+              "on-secondary-fixed": "#000000",
+              "surface-container": "#1A1A1A",
+              "on-error-container": "#FFDAD6",
+              "secondary": "#A0A0A0",
+              "surface": "#0A0A0A",
+              "on-tertiary-fixed": "#000000",
+              "secondary-fixed-dim": "#C0C0C0",
+              "secondary-fixed": "#E0E0E0",
+              "on-surface-variant": "#B0B0B0",
+              "on-primary-container": "#000000",
+              "on-primary-fixed-variant": "#000000",
+              "on-tertiary": "#000000",
+              "on-error": "#FFFFFF",
+              "on-tertiary-container": "#000000",
+              "surface-container-low": "#111111",
+              "on-secondary": "#1A1A1A",
+              "on-surface": "#F5F5F5",
+              "secondary-container": "#2A2A2A",
+              "surface-tint": "#D4AF37",
+              "surface-container-lowest": "#050505",
+              "error-dim": "#FFB4AB",
+              "background": "#0A0A0A",
+              "tertiary-fixed-dim": "#D4AF37",
+              "secondary-dim": "#808080",
+              "inverse-primary": "#000000",
+              "error-container": "#93000A",
+              "outline-variant": "#444444",
+              "surface-bright": "#1A1A1A",
+              "tertiary": "#D4AF37",
+              "on-secondary-fixed-variant": "#333333",
+              "surface-dim": "#0A0A0A",
+              "error": "#FFB4AB",
+              "tertiary-container": "#222222",
+              "primary-fixed-dim": "#B8860B",
+              "on-secondary-container": "#F5F5F5",
+              "inverse-on-surface": "#0A0A0A",
+              "surface-variant": "#222222",
+              "on-primary": "#000000",
+              "tertiary-fixed": "#D4AF37",
+              "primary": "#D4AF37",
+              "outline": "#666666",
+              "tertiary-dim": "#B8860B",
+              "surface-container-high": "#222222",
+              "primary-dim": "#B8860B",
+              "on-primary-fixed": "#000000",
+              "primary-container": "#D4AF37"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .aurelian-glass {
+        background: rgba(26, 26, 26, 0.6);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(212, 175, 55, 0.2);
+      }
+      .gold-gradient-border {
+        background: linear-gradient(#0a0a0a, #0a0a0a) padding-box,
+                    linear-gradient(to bottom right, #D4AF37, #B8860B, #554411) border-box;
+        border: 2px solid transparent;
+      }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl flex items-center justify-between px-6 py-4 border-b border-primary/10">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-primary/30">
+<img alt="User Profile" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcUSJGu0_mAdpW7-bbWQMve4CKMaL9TvSzKiKwoDZ-2WZLs5tXvefMt7MRf1iWd-Bp-EPXo7BQ-O1_xA6a4jFmbJvIGDH3yswVsskMJ33LPnSUcSI-kbQxxIra-WRvosVri6fRlhpF8ie14FaSJ7h9-7o-WJypYxZRvR0O1F0U7a82pIYs9dlXVHUjaADIqs-X3vVyIQnzxeMnvFab7Sd2IX8noF1lfPefFM1nK86YzyJGcIZm9mR53-ppHqVWW9LmHDc0gLa5MITs"/>
+</div>
+</div>
+<h1 class="font-headline text-primary text-xl font-bold tracking-[0.2em] uppercase">Offchat</h1>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-primary/70 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="pt-24 px-6 max-w-2xl mx-auto space-y-10">
+<!-- Profile Hero Section -->
+<section class="flex flex-col items-center text-center space-y-6 py-4">
+<div class="relative group">
+<div class="w-36 h-36 gold-gradient-border rounded-2xl overflow-hidden p-1 shadow-[0_0_30px_rgba(212,175,55,0.15)]">
+<img alt="Large Avatar" class="w-full h-full object-cover rounded-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0gIqxlHkHQMVKB_jtpahBVd0NB_ONM6_vXZbf-IhqfB7IORxQs9mmL9ZKjs-WV_z2qku_wgrroDbguTepnZbHtAkz9Id43AfPXTgO4fBTOQUqK5ARuq6y9shBFY5ub5bskVLHXDk2v8jYMZefsJpMlvpw5lOyJejSC7KklKekjU6TJ528jY45ME-7jK9Bm5JD6n7-Atb9BcZc0GHc0spbc9NLz99ul1jW1MnnFJhXPrTBzI2Vq3W0TyQ6Nq4-ldm_0rZFs8_l8SQW"/>
+</div>
+<button class="absolute -bottom-2 -right-2 bg-primary text-on-primary p-2.5 rounded-lg shadow-xl hover:scale-105 transition-transform border border-on-primary/20">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+</button>
+</div>
+<div class="space-y-1">
+<h2 class="font-headline text-3xl font-extrabold text-on-background tracking-tight">Alex Sterling</h2>
+<p class="text-primary font-bold tracking-[0.1em] text-sm uppercase">@alex_offchat</p>
+</div>
+</section>
+<!-- Bento Grid Settings -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Location Settings Card -->
+<section class="aurelian-glass p-6 rounded-2xl space-y-6 flex flex-col justify-between min-h-[180px]">
+<div class="flex items-start justify-between">
+<div class="bg-primary/10 p-3 rounded-xl border border-primary/20">
+<span class="material-symbols-outlined text-primary" data-icon="radar">radar</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-12 h-6 bg-surface-container-highest border border-outline/20 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-on-primary after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div>
+<h3 class="font-headline font-bold text-lg text-on-surface">Location Visibility</h3>
+<p class="font-body text-sm text-on-surface-variant mt-1 leading-relaxed">Broadcast device presence on active radar</p>
+</div>
+</section><section class="aurelian-glass p-6 rounded-2xl space-y-6 flex flex-col justify-between min-h-[180px]">
+<div class="flex items-start justify-between">
+<div class="bg-primary/10 p-3 rounded-xl border border-primary/20">
+<span class="material-symbols-outlined text-primary" data-icon="dark_mode">dark_mode</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-12 h-6 bg-surface-container-highest border border-outline/20 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-on-primary after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div>
+<h3 class="font-headline font-bold text-lg text-on-surface">Theme Mode</h3>
+<p class="font-body text-sm text-on-surface-variant mt-1 leading-relaxed">Toggle between Gilded Light and Deep Noir</p>
+</div>
+</section>
+<!-- Status Card -->
+</div>
+<!-- Notification Settings -->
+<section class="aurelian-glass p-6 rounded-2xl space-y-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="notifications_active">notifications_active</span>
+<h3 class="font-headline font-bold text-xl text-on-surface tracking-tight">System Alerts</h3>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-4 bg-surface-container-low/50 rounded-xl border border-outline/10 group hover:border-primary/30 transition-all">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface tracking-wide">Legacy Contacts</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-wider">Known signatures only</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-12 h-6 bg-surface-container-highest border border-outline/20 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-on-primary after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low/50 rounded-xl border border-outline/10 group hover:border-primary/30 transition-all">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface tracking-wide">Deep Scan Discovery</span>
+<span class="text-xs text-on-surface-variant uppercase tracking-wider">Unidentified proximity pings</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-12 h-6 bg-surface-container-highest border border-outline/20 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-on-primary after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- Footer Info -->
+<footer class="text-center py-8 space-y-4">
+<div class="w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
+<p class="text-primary/40 font-bold text-[10px] tracking-[0.4em] uppercase">Security Level 4 // v1.0.0</p>
+</footer>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-4 bg-surface/90 backdrop-blur-2xl border-t border-primary/20">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-2 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="explore">explore</span>
+<span class="text-[9px] font-bold tracking-[0.2em] uppercase">Radar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-2 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="location_on">location_on</span>
+<span class="text-[9px] font-bold tracking-[0.2em] uppercase">Nodes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-2 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="chat_bubble">chat_bubble</span>
+<span class="text-[9px] font-bold tracking-[0.2em] uppercase">Crypt</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary px-5 py-2 relative" href="#">
+<div class="absolute -top-1 w-8 h-0.5 bg-primary"></div>
+<span class="material-symbols-outlined mb-1" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="text-[9px] font-bold tracking-[0.2em] uppercase">Identity</span>
+</a>
+</nav>
+</body></html>

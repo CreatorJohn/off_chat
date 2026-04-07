@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Off Chat - Decentralized Digital Concierge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gold: #f2ca50;
+            --background: #131313;
+            --surface: #1b1b1b;
+            --surface-variant: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--surface-variant);
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: var(--primary-gold);
+            font-size: 1.5rem;
+        }
+
+        .lang-selector {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .lang-btn {
+            background: none;
+            border: 1px solid var(--primary-gold);
+            color: var(--primary-gold);
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background-color: var(--primary-gold);
+            color: var(--background);
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-gold);
+            margin-bottom: 1.5rem;
+        }
+
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 1.8rem; margin-top: 3rem; }
+        h3 { font-size: 1.3rem; margin-top: 2rem; }
+
+        p, li {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .card {
+            background-color: var(--surface);
+            padding: 2rem;
+            border-radius: 24px;
+            border: 1px solid rgba(242, 202, 80, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        code {
+            background-color: var(--surface-variant);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: monospace;
+            color: var(--primary-gold);
+        }
+
+        pre {
+            background-color: var(--surface-variant);
+            padding: 1.5rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .prototype-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .prototype-card {
+            background-color: var(--surface);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(242, 202, 80, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .prototype-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .prototype-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .prototype-card p {
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            font-weight: 600;
+        }
+
+        [lang="cs"] { display: none; }
+
+        .visible { display: block !important; }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">OFFCHAT</div>
+            <div class="lang-selector">
+                <button class="lang-btn active" onclick="switchLang('en')">EN</button>
+                <button class="lang-btn" onclick="switchLang('cs')">CS</button>
+            </div>
+        </header>
+
+        <main id="content-en">
+            <section class="section">
+                <h1>Off Chat: A Decentralized Digital Concierge</h1>
+                <p><strong>Bachelor Thesis Project | CTU FEE, Prague</strong></p>
+                <p>Off Chat is an offline-first, peer-to-peer communication platform built with Flutter. It utilizes Bluetooth Low Energy (BLE) to enable device discovery, relative location tracking (Radar), and secure messaging without any reliance on internet or cellular connectivity.</p>
+            </section>
+
+            <section class="section">
+                <h2>🌟 Key Features</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>The Nodes (Discovery)</h3>
+                        <p>Real-time scanning of nearby active devices. Displays user profiles (avatar, alias) and proximity metadata.</p>
+                    </div>
+                    <div class="card">
+                        <h3>The Radar (Location)</h3>
+                        <p>A custom-painted visualization showing the relative bearing and distance of peers using GPS and compass data.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Off-Grid Messaging</h3>
+                        <p>Reliable text and media exchange over BLE GATT characteristics.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Identity Protocol</h3>
+                        <p>Secure local profile management with automated image compression and background synchronization.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>🛰 UI Prototypes</h2>
+                <p>Designed with the <strong>Aurelian Noir</strong> aesthetic: Deep black surfaces and gold primary accents.</p>
+                <div class="prototype-grid">
+                    <div class="prototype-card">
+                        <img src="ui_prototype/onboarding_splash_screen_updated_logo/screen.png" alt="Splash Screen">
+                        <p>Splash Screen</p>
+                    </div>
+                    <div class="prototype-card">
+                        <img src="ui_prototype/discovery_screen_gold_v2/screen.png" alt="Discovery Screen">
+                        <p>Discovery Screen</p>
+                    </div>
+                    <div class="prototype-card">
+                        <img src="ui_prototype/location_screen_gold_v2/screen.png" alt="Radar Screen">
+                        <p>Location Radar</p>
+                    </div>
+                    <div class="prototype-card">
+                        <img src="ui_prototype/message_screen_gold_v2/screen.png" alt="Chat Screen">
+                        <p>Secure Chat</p>
+                    </div>
+                    <div class="prototype-card">
+                        <img src="ui_prototype/profile_screen_gold_v2/screen.png" alt="Profile Screen">
+                        <p>Profile View</p>
+                    </div>
+                    <div class="prototype-card">
+                        <img src="ui_prototype/onboarding_step_1_user_discovery/screen.png" alt="Onboarding 1">
+                        <p>Discovery Setup</p>
+                    </div>
+                    <div class="prototype-card">
+                        <img src="ui_prototype/onboarding_step_2_offline_messaging/screen.png" alt="Onboarding 2">
+                        <p>Messaging Intro</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>🏗 Tech Stack</h2>
+                <ul>
+                    <li><strong>Framework:</strong> Flutter (Dart)</li>
+                    <li><strong>State Management:</strong> Riverpod</li>
+                    <li><strong>Database:</strong> Isar (NoSQL)</li>
+                    <li><strong>Communication:</strong> flutter_blue_plus & ble_peripheral</li>
+                </ul>
+            </section>
+        </main>
+
+        <main id="content-cs" lang="cs">
+            <section class="section">
+                <h1>Off Chat: Decentralizovaný Digitální Concierge</h1>
+                <p><strong>Bakalářská práce | ČVUT FEL, Praha</strong></p>
+                <p>Off Chat je offline peer-to-peer komunikační platforma postavená na Flutteru. Využívá Bluetooth Low Energy (BLE) pro objevování zařízení, sledování relativní polohy (Radar) a bezpečnou výměnu zpráv bez závislosti na internetu nebo mobilním signálu.</p>
+            </section>
+
+            <section class="section">
+                <h2>🌟 Klíčové Vlastnosti</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Uzly (Objevování)</h3>
+                        <p>Skenování blízkých aktivních zařízení v reálném čase. Zobrazuje profily uživatelů (avatar, alias) a metadata o blízkosti.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Radar (Poloha)</h3>
+                        <p>Vlastní vizualizace ukazující relativní směr a vzdálenost ostatních uživatelů pomocí GPS a dat z kompasu.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Off-Grid Zprávy</h3>
+                        <p>Spolehlivá výměna textu a médií přes BLE GATT charakteristiky.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Identitní Protokol</h3>
+                        <p>Bezpečná správa profilů s automatickou kompresí obrázků a synchronizací na pozadí.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>🛰 UI Prototypy</h2>
+                <p>Navrženo v estetice <strong>Aurelian Noir</strong>: Hluboké černé plochy se zlatými akcenty.</p>
+                <div class="prototype-grid">
+                    <div class="prototype-card">
+                        <img src="ui_prototype/onboarding_splash_screen_updated_logo/screen.png" alt="Splash Screen">
+                        <p>Úvodní Obrazovka</p>
+                    </div>
+                    <div class="prototype-card">
+                        <img src="ui_prototype/discovery_screen_gold_v2/screen.png" alt="Discovery Screen">
+                        <p>Seznam Zařízení</p>
+                    </div>
+                    <div class="prototype-card">
+                        <img src="ui_prototype/location_screen_gold_v2/screen.png" alt="Radar Screen">
+                        <p>Lokální Radar</p>
+                    </div>
+                    <div class="prototype-card">
+                        <img src="ui_prototype/message_screen_gold_v2/screen.png" alt="Chat Screen">
+                        <p>Zabezpečený Chat</p>
+                    </div>
+                    <div class="prototype-card">
+                        <img src="ui_prototype/profile_screen_gold_v2/screen.png" alt="Profile Screen">
+                        <p>Detail Profilu</p>
+                    </div>
+                    <div class="prototype-card">
+                        <img src="ui_prototype/onboarding_step_1_user_discovery/screen.png" alt="Onboarding 1">
+                        <p>Nastavení Objevování</p>
+                    </div>
+                    <div class="prototype-card">
+                        <img src="ui_prototype/onboarding_step_2_offline_messaging/screen.png" alt="Onboarding 2">
+                        <p>Úvod do Zpráv</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>🏗 Použité Technologie</h2>
+                <ul>
+                    <li><strong>Framework:</strong> Flutter (Dart)</li>
+                    <li><strong>Stavové Řízení:</strong> Riverpod</li>
+                    <li><strong>Databáze:</strong> Isar (NoSQL)</li>
+                    <li><strong>Komunikace:</strong> flutter_blue_plus & ble_peripheral</li>
+                </ul>
+            </section>
+        </main>
+
+        <footer style="text-align: center; padding: 4rem 0; border-top: 1px solid var(--surface-variant); color: var(--text-secondary); font-size: 0.8rem;">
+            <p>© 2026 Off Chat - CTU FEE Bachelor Thesis | V1.1.0+2</p>
+        </footer>
+    </div>
+
+    <script>
+        function switchLang(lang) {
+            const en = document.getElementById('content-en');
+            const cs = document.getElementById('content-cs');
+            const btns = document.querySelectorAll('.lang-btn');
+
+            btns.forEach(btn => {
+                if (btn.innerText.toLowerCase() === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            if (lang === 'en') {
+                en.classList.remove('hidden');
+                en.classList.add('visible');
+                cs.classList.remove('visible');
+                cs.classList.add('hidden');
+            } else {
+                cs.classList.remove('hidden');
+                cs.classList.add('visible');
+                en.classList.remove('visible');
+                en.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
