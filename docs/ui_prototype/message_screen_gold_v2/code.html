@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-highest": "#332d24",
+              "on-background": "#e6e1e5",
+              "inverse-surface": "#e6e1e5",
+              "primary-fixed": "#ffdf9d",
+              "surface-container": "#25231f",
+              "secondary": "#d9c4a0",
+              "surface": "#141311",
+              "on-surface-variant": "#d1c5b4",
+              "on-tertiary": "#141311",
+              "on-error": "#ffffff",
+              "surface-container-low": "#1d1b18",
+              "on-secondary": "#141311",
+              "on-surface": "#e6e1e5",
+              "secondary-container": "#4f4539",
+              "surface-tint": "#d4af37",
+              "surface-container-lowest": "#0f0e0c",
+              "background": "#141311",
+              "inverse-primary": "#141311",
+              "error-container": "#8c1d18",
+              "outline-variant": "#4f4539",
+              "surface-bright": "#3b3834",
+              "tertiary": "#d4af37",
+              "surface-dim": "#141311",
+              "error": "#f2b8b5",
+              "primary": "#d4af37",
+              "outline": "#9a8f80",
+              "surface-container-high": "#2b2925",
+              "primary-container": "#544619"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #d4af37 0%, #f3cf7a 100%);
+        }
+        .noir-message-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl flex items-center justify-between px-6 py-4 border-b border-outline-variant/30">
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-primary hover:bg-primary/10 transition-colors active:scale-90 duration-200">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="flex items-center gap-3">
+<div class="relative">
+<img class="w-10 h-10 rounded-full object-cover border-2 border-primary/30 shadow-sm" data-alt="Close-up portrait of a stylish young man with a friendly expression, soft natural lighting, urban lifestyle aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvmL6ZkfHMg1XBXa5sy7n1H5mZ_mr36fhDmX450Zc6FoU1qYhTHs72TPqJERhjICAh2y1yGd1mrQVKT-ExE7jSb7LfeVkNIbjeIiD7lTkXg9dfB7pGsCJO-QcP9j25MfNNWRT_OvordTjTXPqo8Id_lYx2hM557hU5rDBR_QxaMr39pqCmreLz--PlHAbhqFQS0xnznTh0wodjgRvkPrqWvBgRT3IilifW-WAkAomKIIO4lNuPSw6Sb0MItx6eUTFo7amdLrHKUEZV"/>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full border-2 border-surface"></div>
+</div>
+<div>
+<h1 class="font-headline font-bold text-primary tracking-tight text-lg leading-tight">Julian S.</h1>
+<span class="text-[10px] font-semibold tracking-wide uppercase text-on-surface-variant/60">Connected via Radar</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container transition-colors active:scale-90 duration-200">
+<span class="material-symbols-outlined">videocam</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container transition-colors active:scale-90 duration-200">
+<span class="material-symbols-outlined">info</span>
+</button>
+</div>
+</header>
+<!-- Main Chat Canvas -->
+<main class="flex-1 pt-24 pb-32 px-6 max-w-4xl mx-auto w-full flex flex-col gap-8 hide-scrollbar">
+<!-- Date Separator -->
+<div class="flex justify-center">
+<span class="px-4 py-1.5 bg-surface-container-high rounded-full text-[11px] font-bold text-primary tracking-widest uppercase border border-primary/10">Today</span>
+</div>
+<!-- Message Group: Incoming -->
+<div class="flex flex-col items-start gap-1 max-w-[85%]">
+<div class="bg-surface-container-low text-on-surface p-5 rounded-2xl rounded-tl-none border border-outline-variant/30 noir-message-shadow">
+<p class="text-sm leading-relaxed">Hey! I saw your device pop up on my radar. Are you near the main plaza right now?</p>
+</div>
+<span class="ml-2 text-[10px] font-semibold text-on-surface-variant/40 uppercase tracking-tighter">02:14 PM</span>
+</div>
+<!-- Message Group: Outgoing -->
+<div class="flex flex-col items-end gap-1 ml-auto max-w-[85%]">
+<div class="gold-gradient text-surface p-5 rounded-2xl rounded-tr-none shadow-lg font-medium noir-message-shadow">
+<p class="text-sm leading-relaxed">Yeah, just grabbed a coffee at the corner shop. The signal is surprisingly strong today!</p>
+</div>
+<div class="flex items-center gap-1 mr-2">
+<span class="text-[10px] font-semibold text-on-surface-variant/40 uppercase tracking-tighter">02:16 PM</span>
+<span class="material-symbols-outlined text-[12px] text-primary" style="font-variation-settings: 'FILL' 1;">done_all</span>
+</div>
+</div>
+<!-- Message Group: Incoming -->
+<div class="flex flex-col items-start gap-2 max-w-[85%]">
+<div class="bg-surface-container-low text-on-surface p-5 rounded-2xl rounded-tl-none border border-outline-variant/30 noir-message-shadow">
+<p class="text-sm leading-relaxed">Awesome. Do you want to try that new peer-to-peer file transfer we were talking about?</p>
+</div>
+<div class="bg-surface-container-low text-on-surface p-5 rounded-2xl rounded-tl-none border border-outline-variant/30 noir-message-shadow">
+<p class="text-sm leading-relaxed">I have those architectural renders ready for you to check out. 📂</p>
+</div>
+<span class="ml-2 text-[10px] font-semibold text-on-surface-variant/40 uppercase tracking-tighter">02:17 PM</span>
+</div>
+<!-- Image Sharing (Outgoing) -->
+<div class="flex flex-col items-end gap-1 ml-auto max-w-[85%]">
+<div class="p-2 bg-surface-container-highest rounded-2xl rounded-tr-none border border-primary/20 noir-message-shadow">
+<img class="w-full h-48 object-cover rounded-xl mb-2 grayscale-[0.2]" data-alt="Architectural visualization of a modern glass skyscraper reflecting the blue sky and surrounding city at noon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAptMmOd4nafGSoX9eB_r2rr-MLOQDWV4wFmSfDPvTIqyAlEd5D_APjj5Q2vQrHnnAiiK6nh44x2GXO0f-YZ0pwdJ5FPJSHqp7v6n4M50u_tnSUjtvJYonyTsiQkDU1YeuUhorXxTiUEH5VtBNm8wWPceLLA4L6nNh5hvoV1QN-ePZI49cJ0az6QhokIgPx39E9h6vJx6-tOO0JiQ0SbBIjWf7jGQBPhLY9y4KUdq6QT0wJrhfQQSrZ45ezxAQfGuxJY_j-7-k_9jae"/>
+<div class="gold-gradient text-surface p-4 rounded-xl font-medium">
+<p class="text-sm">Found a similar reference for the facade. Check this out!</p>
+</div>
+</div>
+<div class="flex items-center gap-1 mr-2">
+<span class="text-[10px] font-semibold text-on-surface-variant/40 uppercase tracking-tighter">02:20 PM</span>
+<span class="material-symbols-outlined text-[12px] text-primary" style="font-variation-settings: 'FILL' 1;">done_all</span>
+</div>
+</div>
+<!-- Proximity Alert (System Style) -->
+<div class="flex justify-center my-4">
+<div class="bg-primary/5 px-6 py-2 rounded-full flex items-center gap-2 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">radar</span>
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">Julian is now within 10 meters</span>
+</div>
+</div>
+<!-- Latest Message -->
+<div class="flex flex-col items-start gap-1 max-w-[85%]">
+<div class="bg-surface-container-low text-on-surface p-5 rounded-2xl rounded-tl-none border border-outline-variant/30 noir-message-shadow">
+<p class="text-sm leading-relaxed">That's exactly what I was thinking! Sending the folder now... ⚡️</p>
+</div>
+<span class="ml-2 text-[10px] font-semibold text-on-surface-variant/40 uppercase tracking-tighter">Just now</span>
+</div>
+</main>
+<!-- Sticky Message Input -->
+<footer class="fixed bottom-0 left-0 w-full p-6 z-50">
+<div class="max-w-4xl mx-auto flex items-end gap-3 bg-surface-container/90 backdrop-blur-xl p-3 rounded-2xl border border-outline-variant/30 noir-message-shadow">
+<button class="w-12 h-12 flex items-center justify-center rounded-full text-primary hover:bg-primary/10 transition-colors active:scale-90 duration-200 shrink-0">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+<div class="flex-1 relative">
+<textarea class="w-full bg-transparent border-none focus:ring-0 text-sm py-3 px-1 placeholder-on-surface-variant/40 resize-none max-h-32 text-on-surface font-medium" placeholder="Message Offchat..." rows="1"></textarea>
+<div class="absolute bottom-0 left-0 w-full h-0.5 bg-outline-variant/20 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-0 transition-all duration-300"></div>
+</div>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-primary hover:bg-primary/10 transition-colors active:scale-90 duration-200">
+<span class="material-symbols-outlined">mic</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-xl gold-gradient text-surface shadow-lg shadow-primary/20 active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</div>
+</footer>
+<!-- Bottom Padding to handle sticky input -->
+<div class="h-10"></div>
+</body></html>

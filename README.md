@@ -53,17 +53,18 @@ We pack essential metadata into a byte-level structure to fit within Manufacture
 ### 2. Hybrid Strategy
 - **Foreground:** Data is broadcasted via **Scan Response** packets. Peers read this instantly without connecting.
 - **Background:** On iOS, when packets are stripped by the OS, the app detects the Service UUID and performs a **silent GATT connection** to read the "Identity Characteristic," fetching the 13-byte payload before disconnecting.
-- **Media Transfer:** Images are compressed and transmitted in chunks sized to the negotiated MTU (Maximum Transmission Unit) to ensure integrity over low-bandwidth links.
 
 ---
 
-## 🛠 Tech Stack
+## 🛠 Tech Stack & Dependencies
 
 - **Framework:** Flutter (Dart)
 - **State Management:** Riverpod (Generator & Annotation)
 - **Navigation:** GoRouter
 - **Database:** Isar (NoSQL)
-- **Communication:** `flutter_blue_plus` (Client) & `flutter_ble_peripheral` (Server)
+- **Communication:** `flutter_blue_plus` (Client) & `ble_peripheral` (Server)
+- **Permissions:** `permission_handler` (Runtime Android 12+ BLE/Location support)
+- **Logging:** `logging` (Structured output for debugging)
 - **Sensors:** `geolocator` (GPS) & `flutter_compass`
 - **Design:** Google Fonts (Plus Jakarta Sans)
 
@@ -73,8 +74,8 @@ We pack essential metadata into a byte-level structure to fit within Manufacture
 
 ### Prerequisites
 - Flutter SDK (Latest Stable)
-- Two physical devices (BLE cannot be fully tested on emulators)
-- Location and Bluetooth permissions enabled
+- Two physical devices **OR** Android Emulators with **Netsim** enabled.
+- Android 12+ (API 31) for full BLE Advertising/Scanning support.
 
 ### Installation
 1. Clone the repository.
@@ -82,25 +83,36 @@ We pack essential metadata into a byte-level structure to fit within Manufacture
    ```bash
    flutter pub get
    ```
-3. Run code generation:
+3. Run code generation (required for Riverpod and Isar):
    ```bash
    dart run build_runner build --delete-conflicting-outputs
    ```
-4. Deploy to a physical device:
+4. Deploy to a device:
    ```bash
    flutter run
    ```
 
 ---
 
-## 🧪 Verification
+## 🧪 Testing & Verification
 
-The project includes unit tests for the core mathematical and deterministic logic:
-- **Radar Math:** Validates Haversine distance and bearing calculations.
-- **Profile Utils:** Validates deterministic hashing for the BLE payload.
+### Multi-Emulator Testing (Netsim)
+You can test BLE discovery and GATT sync locally using **Netsim** (Android Network Simulator):
+1. Launch two Android emulators (API 31+).
+2. Ensure Netsim is enabled in emulator settings.
+3. Open the Netsim GUI: `http://localhost:7681/gui` to manage device proximity and signal strength.
 
-Run tests using:
+### Continuous Integration
+A GitHub Action is configured to build release artifacts on every push to `master`.
+- **APK:** `off-chat-release.apk`
+- **App Bundle:** `off-chat-release.aab`
+Builds are pushed automatically to the `android` branch for deployment.
+
+### Automated Checks
+The project strictly follows Dart style guidelines (lowerCamelCase constants, no `print` in production).
+Verify code quality and run tests:
 ```bash
+flutter analyze
 flutter test
 ```
 

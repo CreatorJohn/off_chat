@@ -49,4 +49,14 @@ class ProfileController extends _$ProfileController {
       state = AsyncData(user);
     }
   }
+
+  Future<void> toggleNotifications(bool enabled) async {
+    final isar = await ref.read(isarDatabaseProvider.future);
+    final user = state.value;
+    if (user != null) {
+      user.isNotificationsEnabled = enabled;
+      await isar.writeTxn(() => isar.userModels.put(user));
+      state = AsyncData(user);
+    }
+  }
 }

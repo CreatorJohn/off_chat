@@ -1,7 +1,9 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:off_chat/src/core/theme/app_theme.dart';
+import 'package:off_chat/src/features/discovery/data/ble_service.dart';
 import 'package:off_chat/src/features/discovery/presentation/discovery_controller.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -11,12 +13,49 @@ class DiscoveryScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final devicesAsync = ref.watch(discoveryControllerProvider);
+    final bleServiceInstance = ref.watch(bleServiceProvider);
 
     return Scaffold(
       backgroundColor: AppTheme.surfaceBlack,
       appBar: AppBar(
         backgroundColor: AppTheme.surfaceBlack.withValues(alpha: 0.8),
         elevation: 0,
+        leading: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(width: 8),
+            StreamBuilder<bool>(
+              stream: bleServiceInstance.isScanning,
+              initialData: false,
+              builder: (context, snapshot) {
+                final isScanning = snapshot.data ?? false;
+                return _StatusIndicator(
+                  isActive: isScanning,
+                  activeColor: Colors.blue,
+                  icon: Icons.radar,
+                  tooltip: isScanning ? 'Scanning Active' : 'Scanning Inactive',
+                );
+              },
+            ),
+            if (kDebugMode) ...[
+              const SizedBox(width: 8),
+              StreamBuilder<bool>(
+                stream: bleServiceInstance.isAdvertising,
+                initialData: false,
+                builder: (context, snapshot) {
+                  final isAdvertising = snapshot.data ?? false;
+                  return _StatusIndicator(
+                    isActive: isAdvertising,
+                    activeColor: Colors.green,
+                    icon: Icons.broadcast_on_personal,
+                    tooltip: isAdvertising ? 'Advertising Active' : 'Advertising Inactive',
+                  );
+                },
+              ),
+            ],
+          ],
+        ),
+        leadingWidth: kDebugMode ? 100 : 60,
         title: Text(
           'OFFCHAT',
           style: Theme.of(context).textTheme.labelSmall?.copyWith(
@@ -224,6 +263,87 @@ class DiscoveryScreen extends ConsumerWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _StatusIndicator extends StatelessWidget {
+  const _StatusIndicator({
+    required this.isActive,
+    required this.activeColor,
+    required this.icon,
+    required this.tooltip,
+  });
+
+  final bool isActive;
+  final Color activeColor;
+  final IconData icon;
+  final String tooltip;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 28,
+      height: 28,
+      child: Tooltip(
+        message: tooltip,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            if (isActive)
+              _PulseAnimation(color: activeColor),
+            Icon(
+              icon,
+              size: 18,
+              color: isActive ? activeColor : Colors.grey.withValues(alpha: 0.3),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _PulseAnimation extends StatefulWidget {
+  const _PulseAnimation({required this.color});
+  final Color color;
+
+  @override
+  State<_PulseAnimation> createState() => _PulseAnimationState();
+}
+
+class _PulseAnimationState extends State<_PulseAnimation> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        return Container(
+          width: 24 + (16 * _controller.value),
+          height: 24 + (16 * _controller.value),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: widget.color.withValues(alpha: 0.2 * (1 - _controller.value)),
+          ),
+        );
+      },
     );
   }
 }

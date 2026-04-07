@@ -15,5 +15,7 @@ class UserModel {
 
   bool isLocationVisible = true;
 
+  bool isNotificationsEnabled = true;
+
   bool isOnboarded = false;
 }

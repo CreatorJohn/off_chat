@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Offchat - Radar Location (Aurelian Noir)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#D4AF37", // Aurelian Gold
+              "on-primary": "#1A1A1A",
+              "background": "#0A0A0A", // Noir Background
+              "surface": "#141414",
+              "surface-container": "#1F1F1F",
+              "on-surface": "#EAEAEA",
+              "on-surface-variant": "#A0A0A0",
+              "outline": "#333333",
+              "outline-variant": "#D4AF37", // Gold for accents
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .radar-sweep {
+        background: conic-gradient(from 0deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0) 60deg);
+        transform-origin: center;
+      }
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+</head>
+<body class="bg-background font-body text-on-surface selection:bg-primary/30 selection:text-primary">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl flex items-center justify-between px-6 py-4 border-b border-outline/50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden border border-primary/30">
+<img alt="user profile photo" class="w-full h-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcXBQJhHiVIThL0CyAY8GDtcQn2ccWaigdoIa3C9PEM7haQWsnedz8VjUeiEDPL3OfWVdeEfrB-VgJL4eeXSMkHrRq7sbCzg4g1480qv7ZIcN8GuafPFWdkCRGKIW5pYrX1ibOXMjc42AM0Un1tVRsbaFr6gsK77dgUTpjDkHypuJeXq2sc8VwRChMazd6xIBqGJuVg1om4-PJAofAR3g1deQsecRlu_VLCTm8hzNUW6VbL4dQQBdE6rWqWBOLklhdtsQnM6f-I2Ge"/>
+</div>
+<h1 class="font-headline text-xl font-bold tracking-tight text-primary">Offchat</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all active:scale-90">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="min-h-screen pt-20 pb-20 px-6 flex flex-col items-center justify-center overflow-hidden relative">
+<!-- Search Background Texture -->
+<div class="absolute inset-0 z-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(circle at 50% 50%, #D4AF37 0%, transparent 70%);"></div>
+<!-- Radar Display Container -->
+<div class="relative w-full aspect-square max-w-md flex items-center justify-center">
+<!-- Concentric Circles (Distance Indicators) -->
+<div class="absolute w-full h-full border border-primary/20 rounded-full"></div>
+<div class="absolute w-[75%] h-[75%] border border-primary/20 rounded-full"></div>
+<div class="absolute w-[50%] h-[50%] border border-primary/20 rounded-full"></div>
+<div class="absolute w-[25%] h-[25%] border border-primary/20 rounded-full"></div>
+<!-- Radar Sweep Visual -->
+<div class="absolute w-full h-full radar-sweep rounded-full animate-[spin_4s_linear_infinite]"></div>
+<!-- Distance Labels -->
+<span class="absolute top-[12.5%] font-label text-[10px] font-bold text-primary/40 tracking-widest">50M</span>
+<span class="absolute top-[25%] font-label text-[10px] font-bold text-primary/40 tracking-widest">25M</span>
+<span class="absolute top-[37.5%] font-label text-[10px] font-bold text-primary/40 tracking-widest">10M</span>
+<!-- My Device (Center Anchor) -->
+<div class="relative z-20 flex flex-col items-center">
+<div class="w-20 h-20 rounded-full bg-surface-container p-1 shadow-[0_0_30px_rgba(212,175,55,0.2)] transition-transform hover:scale-105 duration-300">
+<div class="w-full h-full rounded-full overflow-hidden border-2 border-primary">
+<img alt="My Device" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmtqB0Cbd7cd02qLksbOSXiwWfVF254mPs24pmsrR6BAJVw4ucWZr-PZL9uVgflNs-sNY56MSmaMZt-XLLSyJw38123PaRFkrKZ6n_oxaenhUjgPMaMWhGs8eDaWxUMDbsz29Cmz1B0fxIP_wubCEsGn2SNiBuj409J6u5Ty0pBgnl1D3U5BNDzQJmOCAXjgg4DI_FjaQDk731ElOEHQ0ELWMhaDLSBBPuXGrhf0yC3V7IDK44G8X5-2rrcLTjUtgr1vWZygIgIRVS"/>
+</div>
+</div>
+<div class="mt-2 bg-primary px-3 py-1 rounded-full shadow-lg">
+<span class="font-label text-[10px] font-bold text-on-primary uppercase tracking-wider">My Device</span>
+</div>
+</div>
+<!-- Surrounding Devices (Orbits) -->
+<!-- Device 1: Jamie (Near) -->
+<div class="absolute top-[20%] left-[65%] z-10 flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-surface p-0.5 shadow-lg border border-primary/40 transition-all hover:scale-110">
+<div class="w-full h-full rounded-full overflow-hidden">
+<img alt="Jamie" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCci6WJnho87uav2AmxWshpWzr8ZU0BUZNBiXGWS5S-uIfwBZ5pXYj4H7v3N4HUU_xTdbN-dMdUgkuXChgB-QP_uQ_i754hlzMsQ9P0NF5QGtuIXNmGI1_w4Ofg3IzASfX04G_hZVG4dA-UGaEMgPgiNfPxkKyeH_LnflFtl8QN5eKWYmiofNIURDVFwidXN35sCfSGSq6T5S_uFhN0PKKL-ps1BNOQH6rM57w4vfcRlN8aZyMPNmNe0R6ON7mqbdC5uq17OmN7hfFG"/>
+</div>
+</div>
+<span class="mt-1 font-body text-xs font-bold text-on-surface">Jamie</span>
+</div>
+<!-- Device 2: Alex (Medium) -->
+<div class="absolute bottom-[15%] left-[20%] z-10 flex flex-col items-center">
+<div class="w-14 h-14 rounded-full bg-surface p-0.5 shadow-lg border border-primary/40 transition-all hover:scale-110">
+<div class="w-full h-full rounded-full overflow-hidden">
+<img alt="Alex" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDq6tV3aoZhqehq3tGD0zx1Be3TjcQ-BV0cqFI_GWaP7zHySCdtiLCHjdnDgD_OFQ7EJh2NdVCMcBq4E0sbW1I-YkqZxHtBN2BO9K3iRqWmPHweOv7Q2OLg7JqMcJq7veKbf480U4eUMzXgTwlnuawvWfXjoyLkOsM02s_GT-9ZyeZ_waoEt4D8DMxULi-_3HEPotoZh6ZMacJXYiVYCXSRwMX8Drsl5MdI1adywR5R5q6mutUZZ7CsfAcL7je3aqPiIhoI-kkK3ZPq"/>
+</div>
+</div>
+<span class="mt-1 font-body text-xs font-bold text-on-surface">Alex</span>
+</div>
+<!-- Device 3: Sarah (Far) -->
+<div class="absolute top-[10%] left-[15%] z-10 flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-surface p-0.5 shadow-lg border border-primary/40 transition-all hover:scale-110">
+<div class="w-full h-full rounded-full overflow-hidden">
+<img alt="Sarah" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCH-bSGVsLb9WEah6Vuh4ZNdN4T1vEnzG-VmlSZNIBLGO_2qW3544p4QD3DvmZgi6zk2XrNhD1a7Lwwemt3uoB_ee_evUeYQipYdqUNESySzGvcC7C7kchnWGILn6mHAMuBtNI-ZxshE7E4VA3ltWFgclarwZRqXIfIyCq__y8L5ztlxtBV8Aeeo8LyMrWV5BS9JuaYQvR6ZddORoEUZ7zRRhqL93V0gXW6Bqa7-09ncPfRqpqXu0wWj0hTq0clRl0IV7jtdQQzmcnV"/>
+</div>
+</div>
+<span class="mt-1 font-body text-xs font-bold text-on-surface">Sarah</span>
+</div>
+<!-- Device 4: Sam (Far/Group) -->
+<div class="absolute bottom-[25%] right-[10%] z-10 flex flex-col items-center">
+<div class="w-11 h-11 rounded-full bg-surface p-0.5 shadow-lg border border-primary/40 transition-all hover:scale-110">
+<div class="w-full h-full rounded-full overflow-hidden">
+<img alt="Sam" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvPh3KJDC0Xxrqwgwc6-xS_4F-sthbib6qNTrC-3d40du8TpZt0hqJbtdQI5rnq9-ntqGgWC-6kAm55c1SbE2F82FQWLwM1cwPtW5qg8r-qFEitMOJMil5JElH9EgiUhrlgNUYtfm66StXj2Cam5xsApRuLZdXnnClcdBImEZG5MpTKA-Tl0lTg1_Uy7E6_ZSDmeWu18BB6eicus9GIeKSLbnM1hnswR-shds2LD-EZpFfQgyie-V4Ig4JLJ61Fs8RoazKmoG4YBDM"/>
+</div>
+</div>
+<span class="mt-1 font-body text-xs font-bold text-on-surface">Sam</span>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-background/90 backdrop-blur-xl border-t border-outline/30 rounded-t-[2.5rem]">
+<!-- Discovery -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-2 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="explore">explore</span>
+<span class="font-label text-[10px] font-semibold tracking-wide uppercase">Discovery</span>
+</a>
+<!-- Location (ACTIVE) -->
+<a class="flex flex-col items-center justify-center bg-primary text-on-primary rounded-full px-5 py-2 transition-all shadow-[0_4px_16px_rgba(212,175,55,0.4)]" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="radar">radar</span>
+<span class="font-label text-[10px] font-semibold tracking-wide uppercase">Location</span>
+</a>
+<!-- Messages -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-2 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="chat_bubble">chat_bubble</span>
+<span class="font-label text-[10px] font-semibold tracking-wide uppercase">Messages</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-2 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-label text-[10px] font-semibold tracking-wide uppercase">Profile</span>
+</a>
+</nav>
+</body></html>

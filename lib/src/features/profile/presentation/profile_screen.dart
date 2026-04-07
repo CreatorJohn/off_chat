@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 import 'package:off_chat/src/features/profile/presentation/profile_controller.dart';
@@ -132,7 +133,11 @@ class ProfileScreen extends ConsumerWidget {
                         icon: Icons.notifications_active,
                         title: 'Notifications',
                         subtitle: 'Configure message alerts',
-                        trailing: const Icon(Icons.chevron_right, color: AppTheme.primaryGold),
+                        trailing: Switch(
+                          value: user.isNotificationsEnabled,
+                          activeTrackColor: AppTheme.primaryGold,
+                          onChanged: (val) => ref.read(profileControllerProvider.notifier).toggleNotifications(val),
+                        ),
                       ),
                       const SizedBox(height: 48),
                       
@@ -151,12 +156,19 @@ class ProfileScreen extends ConsumerWidget {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      Text(
-                        'SECURITY LEVEL 4 // V1.0.0',
-                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          color: AppTheme.primaryGold.withValues(alpha: 0.4),
-                          letterSpacing: 2,
-                        ),
+                      FutureBuilder<PackageInfo>(
+                        future: PackageInfo.fromPlatform(),
+                        builder: (context, snapshot) {
+                          final version = snapshot.data?.version ?? '1.0.0';
+                          final buildNumber = snapshot.data?.buildNumber ?? '1';
+                          return Text(
+                            'SECURITY LEVEL 4 // V$version+$buildNumber',
+                            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                              color: AppTheme.primaryGold.withValues(alpha: 0.4),
+                              letterSpacing: 2,
+                            ),
+                          );
+                        },
                       ),
                       const SizedBox(height: 120),
                     ],

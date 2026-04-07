@@ -21,8 +21,13 @@ class RadarDevice {
 class RadarState {
   final LocationData? userLocation;
   final List<RadarDevice> nearbyDevices;
+  final bool isLoading;
 
-  RadarState({this.userLocation, this.nearbyDevices = const []});
+  RadarState({
+    this.userLocation,
+    this.nearbyDevices = const [],
+    this.isLoading = false,
+  });
 }
 
 @riverpod
@@ -32,11 +37,15 @@ class RadarController extends _$RadarController {
     final locationAsync = ref.watch(locationServiceProvider);
     final devicesAsync = ref.watch(discoveryControllerProvider);
 
+    if (locationAsync.isLoading || devicesAsync.isLoading) {
+      return RadarState(isLoading: true);
+    }
+
     final userLocation = locationAsync.value;
     final devices = devicesAsync.value ?? [];
 
     if (userLocation == null) {
-      return RadarState();
+      return RadarState(isLoading: locationAsync.isLoading);
     }
 
     final radarDevices = devices
@@ -58,6 +67,10 @@ class RadarController extends _$RadarController {
         })
         .toList();
 
-    return RadarState(userLocation: userLocation, nearbyDevices: radarDevices);
+    return RadarState(
+      userLocation: userLocation,
+      nearbyDevices: radarDevices,
+      isLoading: false,
+    );
   }
 }

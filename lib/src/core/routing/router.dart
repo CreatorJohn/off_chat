@@ -17,12 +17,16 @@ final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
 @riverpod
 GoRouter router(Ref ref) {
-  final isOnboardedAsync = ref.watch(onboardingControllerProvider);
+  final refreshListenable = ValueNotifier<bool>(false);
+  ref.listen(onboardingControllerProvider, (_, _) => refreshListenable.value = !refreshListenable.value);
+  ref.onDispose(() => refreshListenable.dispose());
 
   return GoRouter(
     initialLocation: '/',
     navigatorKey: _rootNavigatorKey,
+    refreshListenable: refreshListenable,
     redirect: (context, state) {
+      final isOnboardedAsync = ref.read(onboardingControllerProvider);
       if (isOnboardedAsync.isLoading) return null;
       
       final isOnboarded = isOnboardedAsync.value ?? false;
@@ -95,9 +99,9 @@ class ScaffoldWithNavBar extends StatelessWidget {
           showUnselectedLabels: true,
           type: BottomNavigationBarType.fixed,
           items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'RADAR'),
-            BottomNavigationBarItem(icon: Icon(Icons.location_on), label: 'NODES'),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'IDENTITY'),
+            BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'Discovery'),
+            BottomNavigationBarItem(icon: Icon(Icons.location_on), label: 'Radar'),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
           ],
         ),
       ),

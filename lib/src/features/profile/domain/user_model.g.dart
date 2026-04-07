@@ -27,18 +27,23 @@ const UserModelSchema = CollectionSchema(
       name: r'isLocationVisible',
       type: IsarType.bool,
     ),
-    r'isOnboarded': PropertySchema(
+    r'isNotificationsEnabled': PropertySchema(
       id: 2,
+      name: r'isNotificationsEnabled',
+      type: IsarType.bool,
+    ),
+    r'isOnboarded': PropertySchema(
+      id: 3,
       name: r'isOnboarded',
       type: IsarType.bool,
     ),
     r'profilePicturePath': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'profilePicturePath',
       type: IsarType.string,
     ),
     r'username': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'username',
       type: IsarType.string,
     )
@@ -101,9 +106,10 @@ void _userModelSerialize(
 ) {
   writer.writeString(offsets[0], object.deviceId);
   writer.writeBool(offsets[1], object.isLocationVisible);
-  writer.writeBool(offsets[2], object.isOnboarded);
-  writer.writeString(offsets[3], object.profilePicturePath);
-  writer.writeString(offsets[4], object.username);
+  writer.writeBool(offsets[2], object.isNotificationsEnabled);
+  writer.writeBool(offsets[3], object.isOnboarded);
+  writer.writeString(offsets[4], object.profilePicturePath);
+  writer.writeString(offsets[5], object.username);
 }
 
 UserModel _userModelDeserialize(
@@ -116,9 +122,10 @@ UserModel _userModelDeserialize(
   object.deviceId = reader.readStringOrNull(offsets[0]);
   object.id = id;
   object.isLocationVisible = reader.readBool(offsets[1]);
-  object.isOnboarded = reader.readBool(offsets[2]);
-  object.profilePicturePath = reader.readStringOrNull(offsets[3]);
-  object.username = reader.readString(offsets[4]);
+  object.isNotificationsEnabled = reader.readBool(offsets[2]);
+  object.isOnboarded = reader.readBool(offsets[3]);
+  object.profilePicturePath = reader.readStringOrNull(offsets[4]);
+  object.username = reader.readString(offsets[5]);
   return object;
 }
 
@@ -136,8 +143,10 @@ P _userModelDeserializeProp<P>(
     case 2:
       return (reader.readBool(offset)) as P;
     case 3:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readBool(offset)) as P;
     case 4:
+      return (reader.readStringOrNull(offset)) as P;
+    case 5:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -566,6 +575,16 @@ extension UserModelQueryFilter
     });
   }
 
+  QueryBuilder<UserModel, UserModel, QAfterFilterCondition>
+      isNotificationsEnabledEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'isNotificationsEnabled',
+        value: value,
+      ));
+    });
+  }
+
   QueryBuilder<UserModel, UserModel, QAfterFilterCondition> isOnboardedEqualTo(
       bool value) {
     return QueryBuilder.apply(this, (query) {
@@ -894,6 +913,20 @@ extension UserModelQuerySortBy on QueryBuilder<UserModel, UserModel, QSortBy> {
     });
   }
 
+  QueryBuilder<UserModel, UserModel, QAfterSortBy>
+      sortByIsNotificationsEnabled() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isNotificationsEnabled', Sort.asc);
+    });
+  }
+
+  QueryBuilder<UserModel, UserModel, QAfterSortBy>
+      sortByIsNotificationsEnabledDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isNotificationsEnabled', Sort.desc);
+    });
+  }
+
   QueryBuilder<UserModel, UserModel, QAfterSortBy> sortByIsOnboarded() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isOnboarded', Sort.asc);
@@ -971,6 +1004,20 @@ extension UserModelQuerySortThenBy
     });
   }
 
+  QueryBuilder<UserModel, UserModel, QAfterSortBy>
+      thenByIsNotificationsEnabled() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isNotificationsEnabled', Sort.asc);
+    });
+  }
+
+  QueryBuilder<UserModel, UserModel, QAfterSortBy>
+      thenByIsNotificationsEnabledDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isNotificationsEnabled', Sort.desc);
+    });
+  }
+
   QueryBuilder<UserModel, UserModel, QAfterSortBy> thenByIsOnboarded() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isOnboarded', Sort.asc);
@@ -1024,6 +1071,13 @@ extension UserModelQueryWhereDistinct
     });
   }
 
+  QueryBuilder<UserModel, UserModel, QDistinct>
+      distinctByIsNotificationsEnabled() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'isNotificationsEnabled');
+    });
+  }
+
   QueryBuilder<UserModel, UserModel, QDistinct> distinctByIsOnboarded() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'isOnboarded');
@@ -1063,6 +1117,13 @@ extension UserModelQueryProperty
   QueryBuilder<UserModel, bool, QQueryOperations> isLocationVisibleProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'isLocationVisible');
+    });
+  }
+
+  QueryBuilder<UserModel, bool, QQueryOperations>
+      isNotificationsEnabledProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'isNotificationsEnabled');
     });
   }
 

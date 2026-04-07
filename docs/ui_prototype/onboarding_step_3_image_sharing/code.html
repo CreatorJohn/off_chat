@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed-dim": "#e9c349",
+              "on-primary-fixed-variant": "#574500",
+              "error": "#ffb4ab",
+              "on-secondary-fixed-variant": "#544519",
+              "primary": "#f2ca50",
+              "on-primary": "#3c2f00",
+              "surface-tint": "#e9c349",
+              "on-secondary-fixed": "#241a00",
+              "surface": "#131313",
+              "background": "#131313",
+              "secondary-fixed-dim": "#dac58d",
+              "on-primary-container": "#554300",
+              "tertiary-fixed": "#dbe1ff",
+              "on-surface-variant": "#d0c5af",
+              "on-surface": "#e2e2e2",
+              "inverse-on-surface": "#303030",
+              "surface-container": "#1f1f1f",
+              "tertiary-container": "#97b0ff",
+              "on-secondary": "#3c2f05",
+              "on-tertiary-fixed-variant": "#27438a",
+              "on-tertiary-container": "#254188",
+              "on-background": "#e2e2e2",
+              "surface-container-highest": "#353535",
+              "secondary-fixed": "#f7e1a6",
+              "on-error": "#690005",
+              "tertiary": "#bfcdff",
+              "surface-bright": "#393939",
+              "primary-container": "#d4af37",
+              "primary-fixed": "#ffe088",
+              "on-primary-fixed": "#241a00",
+              "secondary": "#dac58d",
+              "secondary-container": "#544519",
+              "surface-container-lowest": "#0e0e0e",
+              "surface-container-high": "#2a2a2a",
+              "on-tertiary-fixed": "#00174b",
+              "error-container": "#93000a",
+              "on-tertiary": "#082b72",
+              "surface-variant": "#353535",
+              "surface-dim": "#131313",
+              "tertiary-fixed-dim": "#b4c5ff",
+              "outline-variant": "#4d4635",
+              "inverse-surface": "#e2e2e2",
+              "outline": "#99907c",
+              "on-secondary-container": "#c8b37d",
+              "surface-container-low": "#1b1b1b",
+              "inverse-primary": "#735c00",
+              "on-error-container": "#ffdad6"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .gilded-gradient {
+            background: linear-gradient(135deg, #f2ca50 0%, #d4af37 100%);
+        }
+        .smoked-glass {
+            background-color: rgba(53, 53, 53, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .golden-glow {
+            box-shadow: 0 0 30px rgba(242, 202, 80, 0.12);
+        }
+        .text-glow {
+            text-shadow: 0 0 15px rgba(242, 202, 80, 0.3);
+        }
+    </style>
+<style>
+        body {
+          min-height: 100dvh;
+          display: flex;
+          flex-direction: column;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30 overflow-x-hidden">
+<header class="fixed top-0 w-full z-50 flex justify-center items-center h-20 px-6 bg-surface/80 backdrop-blur-md">
+<div class="flex items-center justify-between w-full max-w-2xl relative"><div class="flex items-center justify-center w-full">
+<img alt="Offchat Logo" class="h-12 w-auto object-contain brightness-110 drop-shadow-[0_0_8px_rgba(242,202,80,0.3)]" src="https://lh3.googleusercontent.com/aida/ADBb0ujcfArjYK_8bETqI2iZxRBg2Cn31s7zqklo5pnwwioN0D5AJ8QQN-7U9tEXARtiLW4SfheRdt2S06-Dsfwco27dSuPY1XV9P94Vm5r6noDPuc2EwZiDQIceC9LowhOLomPzwnWkeCdDpdz2fhdec2QiIcvc_6k0Isjd7Duzb57I_Lb_o583CtEQX9VbFSj64TiJMel77UxiA4wIA5XwpeAuq8cU7dD20p2ZCgE1iRh0KLodC4thBPXqlKyZ8sQXua_sNHiUAC940g"/>
+</div></div>
+</header>
+<main class="flex-grow flex flex-col items-center justify-center pt-24 pb-48 px-8 max-w-lg mx-auto w-full">
+<!-- Media Beam Visualization -->
+<div class="relative w-full aspect-[4/5] flex items-center justify-center mb-10">
+<!-- Source Device -->
+<div class="absolute top-4 left-4 w-36 h-60 bg-surface-container rounded-[2.5rem] p-2 rotate-[-10deg] z-20 border border-outline-variant/30 golden-glow">
+<div class="w-full h-full bg-surface-container-highest rounded-[2.2rem] overflow-hidden relative">
+<img alt="Modern architecture" class="w-full h-full object-cover opacity-50 grayscale contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhLTyNfk5dSh8Impcf6qn7iLzEZGHAsgDXh1ujCXik3XUMifkCXzh7VIk0_vjHbc0kgeoans4Hm5BUIuk30zMLgN83gb_DGlBSjBtpFSWdpqED6BLS_w0rnHfhWpX2gxVUPypPHAp9CozYJ3KA7jZ5DIOZ77NORDbmLpgzqhVARxV1mnH1-H__-pieZm2EI7MPGR7LzH2Chm09m9JJ7WquL0mSXTPA1Tq_VjzbvoEU_fTXTOFiYnLl_Gqii1pBYiEfoXvCVVrGEpPD"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-highest via-transparent to-transparent"></div>
+</div>
+</div>
+<!-- Connection Path -->
+<div class="absolute inset-0 pointer-events-none z-10 flex items-center justify-center">
+<svg class="w-full h-full opacity-60" viewbox="0 0 400 400">
+<path d="M 120 150 Q 200 200 280 250" fill="none" stroke="url(#goldGradient)" stroke-dasharray="1 12" stroke-linecap="round" stroke-width="6"></path>
+<defs>
+<lineargradient id="goldGradient" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" style="stop-color:#f2ca50;stop-opacity:0.1"></stop>
+<stop offset="50%" style="stop-color:#f2ca50;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#d4af37;stop-opacity:0.1"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+<!-- Target Device -->
+<div class="absolute bottom-4 right-4 w-36 h-60 bg-surface-container rounded-[2.5rem] p-2 rotate-[6deg] z-20 border border-primary/30 shadow-2xl">
+<div class="w-full h-full bg-surface-container-highest rounded-[2.2rem] overflow-hidden flex items-center justify-center">
+<div class="w-28 h-40 bg-surface-container rounded-2xl overflow-hidden relative shadow-inner">
+<img alt="Received architectural photo" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmXTq7Ct2Rt4j4QCA-b5a4Rzdb1vC4GgmES9oWN5dX7XVKz35EgLfPEWluDapZAhHh0778j-r6HZv1KNSDxNxsVJdsvYdJnAzwx2nIuUkpXUDZ4W1ei8jnZNG1hyJDcpG3gwm6ZgcoVMuANAK0PIdM0LEWKSxVoKl9wmiC2rzUxQjxBLi3alLzn9Ooco2F-4sCiAQQTokr-JBBAguo4qNluhjWn4OERxrj_7hiSnq2QEAecSUJcdRtU8WNAu682wl5HEUCivmp26PP"/>
+<div class="absolute inset-0 bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary scale-150 drop-shadow-lg" data-icon="download_done">download_done</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Status Badge -->
+<div class="absolute z-30 smoked-glass px-5 py-2.5 rounded-full flex items-center gap-2.5 border border-outline-variant/40 golden-glow top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+<span class="material-symbols-outlined text-primary text-base" data-icon="bolt">bolt</span>
+<span class="text-[11px] font-bold tracking-[0.15em] uppercase text-on-surface">94 MB/s</span>
+</div>
+</div>
+<!-- Content -->
+<div class="text-center space-y-4 w-full px-4">
+<h2 class="text-3xl font-extrabold tracking-tight text-on-surface leading-tight text-glow">
+            Share the <span class="text-primary">Moment</span>
+</h2>
+<p class="text-on-surface-variant text-base leading-relaxed max-w-[320px] mx-auto">
+            Send high-quality images and files directly to nearby devices instantly.
+        </p>
+</div>
+</main>
+<!-- Fixed Bottom Action Area -->
+<div class="fixed bottom-0 left-0 w-full px-6 pb-10 pt-10 bg-gradient-to-t from-surface via-surface to-transparent">
+<div class="max-w-md mx-auto flex flex-col items-center"><!-- Step Progress Indicator -->
+<div class="flex gap-1.5 mb-6">
+<div class="w-8 h-1 rounded-full bg-primary shadow-[0_0_8px_rgba(242,202,80,0.4)]"></div>
+<div class="w-8 h-1 rounded-full bg-primary shadow-[0_0_8px_rgba(242,202,80,0.4)]"></div>
+<div class="w-12 h-1 rounded-full bg-primary shadow-[0_0_12px_rgba(242,202,80,0.6)]"></div>
+<div class="w-8 h-1 rounded-full bg-outline-variant/30"></div>
+<div class="w-8 h-1 rounded-full bg-outline-variant/30"></div>
+<div class="w-8 h-1 rounded-full bg-outline-variant/30"></div>
+<div class="w-8 h-1 rounded-full bg-outline-variant/30"></div>
+</div>
+<button class="gilded-gradient w-full rounded-full text-on-primary font-extrabold text-sm uppercase tracking-[0.2em] shadow-[0_12px_30px_rgba(242,202,80,0.2)] active:scale-[0.98] transition-all py-6 h-20">
+                Continue
+            </button>
+<div class="mt-6 flex flex-col items-center gap-1">
+<span class="text-[11px] uppercase tracking-[0.3em] font-bold text-primary/70">Step 03 / 07</span>
+<p class="text-[9px] tracking-[0.15em] uppercase text-on-surface-variant/40 font-bold">
+                    Aurelian Security Protocol Active
+                </p>
+</div></div>
+</div>
+</body></html>

@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_compass/flutter_compass.dart';
+import 'package:logging/logging.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'location_service.g.dart';
+
+final _log = Logger('LocationService');
 
 class LocationData {
   final double latitude;
@@ -27,10 +30,14 @@ class LocationService extends _$LocationService {
   double _currentHeading = 0;
 
   @override
-  Stream<LocationData> build() {
-    _init();
-    
-    // Combine both streams
+  Stream<LocationData> build() async* {
+    // Await permission and service check before yielding any data
+    final hasPermission = await _handlePermission();
+    if (!hasPermission) {
+      // You could yield a default value or throw an error
+      return;
+    }
+
     final controller = StreamController<LocationData>.broadcast();
 
     _positionSubscription = Geolocator.getPositionStream(
@@ -38,24 +45,35 @@ class LocationService extends _$LocationService {
         accuracy: LocationAccuracy.high,
         distanceFilter: 1,
       ),
-    ).listen((position) {
-      _currentLat = position.latitude;
-      _currentLng = position.longitude;
-      controller.add(LocationData(
-        latitude: _currentLat,
-        longitude: _currentLng,
-        heading: _currentHeading,
-      ));
-    });
+    ).listen(
+      (position) {
+        _currentLat = position.latitude;
+        _currentLng = position.longitude;
+        controller.add(LocationData(
+          latitude: _currentLat,
+          longitude: _currentLng,
+          heading: _currentHeading,
+        ));
+      },
+      onError: (error) {
+        // Handle stream errors
+        _log.severe('Location stream error: $error');
+      },
+    );
 
-    _compassSubscription = FlutterCompass.events?.listen((event) {
-      _currentHeading = event.heading ?? 0;
-      controller.add(LocationData(
-        latitude: _currentLat,
-        longitude: _currentLng,
-        heading: _currentHeading,
-      ));
-    });
+    _compassSubscription = FlutterCompass.events?.listen(
+      (event) {
+        _currentHeading = event.heading ?? 0;
+        controller.add(LocationData(
+          latitude: _currentLat,
+          longitude: _currentLng,
+          heading: _currentHeading,
+        ));
+      },
+      onError: (error) {
+        _log.severe('Compass stream error: $error');
+      },
+    );
 
     ref.onDispose(() {
       _positionSubscription?.cancel();
@@ -63,20 +81,30 @@ class LocationService extends _$LocationService {
       controller.close();
     });
 
-    return controller.stream;
+    yield* controller.stream;
   }
 
-  Future<void> _init() async {
+  Future<bool> _handlePermission() async {
     bool serviceEnabled;
     LocationPermission permission;
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) return;
+    if (!serviceEnabled) {
+      return false;
+    }
 
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) return;
+      if (permission == LocationPermission.denied) {
+        return false;
+      }
     }
+    
+    if (permission == LocationPermission.deniedForever) {
+      return false;
+    }
+
+    return true;
   }
 }

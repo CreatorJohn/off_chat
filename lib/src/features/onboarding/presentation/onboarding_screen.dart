@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
-import 'package:go_router/go_router.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:off_chat/src/core/theme/app_theme.dart';
 import 'package:off_chat/src/features/onboarding/presentation/onboarding_controller.dart';
 
@@ -70,13 +70,27 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       );
       return;
     }
+
+    // Handle Location Permissions
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+    }
+    
+    if (permission == LocationPermission.deniedForever) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Location permissions are permanently denied. Bluetooth scanning will not work.')),
+        );
+      }
+      // Continue anyway, but functionality will be limited
+    }
+
     await ref.read(onboardingControllerProvider.notifier).completeOnboarding(
       username: _nameController.text.trim(),
       profilePicturePath: _profilePicturePath,
     );
-    if (mounted) {
-      context.go('/');
-    }
+    // Navigation is handled by the router redirect
   }
 
   @override
