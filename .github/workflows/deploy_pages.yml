@@ -27,11 +27,16 @@ jobs:
           mkdir temp_site
           cp -r docs/* temp_site/
           
-          # Check if the docs branch exists
+          # Fetch all branches
+          git fetch origin
+          
+          # Switch to (or create) the docs branch
           if git show-ref --verify --quiet refs/remotes/origin/docs; then
-            git checkout docs
+            # Use -B to explicitly set up the branch and track the remote, bypassing ambiguity
+            git checkout -B docs origin/docs
           else
             git checkout --orphan docs
+            git rm -rf .
           fi
           
           # Clear current branch content
