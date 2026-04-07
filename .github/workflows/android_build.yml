@@ -53,7 +53,8 @@ jobs:
           
           # Switch to (or create) the android branch
           if git show-ref --verify --quiet refs/remotes/origin/android; then
-            git checkout android
+            # Use -B to explicitly set up the branch and track the remote, bypassing ambiguity
+            git checkout -B android origin/android
           else
             git checkout --orphan android
             git rm -rf .
