@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
             --primary-gold: #f2ca50;
@@ -57,6 +58,29 @@
             letter-spacing: 4px;
             color: var(--primary-gold);
             font-size: 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .github-link {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .github-link:hover {
+            color: var(--primary-gold);
         }
 
         .lang-selector {
@@ -211,12 +235,17 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="top">
         <header>
-            <div class="logo">OFFCHAT</div>
-            <div class="lang-selector">
-                <button class="lang-btn active" onclick="switchLang('en')">EN</button>
-                <button class="lang-btn" onclick="switchLang('cs')">CS</button>
+            <a href="#top" class="logo">OFFCHAT</a>
+            <div class="header-actions">
+                <a href="https://github.com/CreatorJohn/off_chat" target="_blank" class="github-link" title="View Source on GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <div class="lang-selector">
+                    <button class="lang-btn active" onclick="switchLang('en')">EN</button>
+                    <button class="lang-btn" onclick="switchLang('cs')">CS</button>
+                </div>
             </div>
         </header>
 
