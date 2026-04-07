@@ -15,6 +15,7 @@
             --surface-variant: #2a2a2a;
             --text-primary: #ffffff;
             --text-secondary: rgba(255, 255, 255, 0.7);
+            --accent-glow: rgba(242, 202, 80, 0.15);
         }
 
         * {
@@ -32,7 +33,7 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 2rem;
         }
@@ -74,22 +75,36 @@
             color: var(--background);
         }
 
-        h1, h2, h3 {
+        h1, h2, h3, h4 {
             color: var(--primary-gold);
             margin-bottom: 1.5rem;
         }
 
-        h1 { font-size: 2.5rem; }
-        h2 { font-size: 1.8rem; margin-top: 3rem; }
-        h3 { font-size: 1.3rem; margin-top: 2rem; }
+        h1 { font-size: 2.8rem; line-height: 1.2; }
+        h2 { font-size: 2rem; margin-top: 4rem; border-left: 4px solid var(--primary-gold); padding-left: 1rem; }
+        h3 { font-size: 1.4rem; margin-top: 2rem; }
+        h4 { font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem; }
 
         p, li {
             color: var(--text-secondary);
             margin-bottom: 1rem;
         }
 
+        ul {
+            list-style: none;
+            padding-left: 1rem;
+        }
+
+        ul li::before {
+            content: "•";
+            color: var(--primary-gold);
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
         .section {
-            margin-bottom: 4rem;
+            margin-bottom: 5rem;
         }
 
         .card {
@@ -98,6 +113,12 @@
             border-radius: 24px;
             border: 1px solid rgba(242, 202, 80, 0.1);
             margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--primary-gold);
+            box-shadow: 0 10px 30px var(--accent-glow);
         }
 
         .grid {
@@ -110,53 +131,76 @@
             background-color: var(--surface-variant);
             padding: 0.2rem 0.5rem;
             border-radius: 4px;
-            font-family: monospace;
+            font-family: 'Courier New', Courier, monospace;
             color: var(--primary-gold);
+            font-size: 0.9rem;
         }
 
         pre {
             background-color: var(--surface-variant);
             padding: 1.5rem;
-            border-radius: 12px;
+            border-radius: 16px;
             overflow-x: auto;
             margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
-        .prototype-grid {
+        /* Prototype Flow Styling */
+        .flow-container {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .flow-step {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: 280px 1fr;
+            gap: 3rem;
+            align-items: start;
         }
 
-        .prototype-card {
+        .flow-image {
             background-color: var(--surface);
-            border-radius: 20px;
+            border-radius: 32px;
             overflow: hidden;
-            border: 1px solid rgba(242, 202, 80, 0.1);
-            transition: transform 0.3s ease;
+            border: 2px solid var(--surface-variant);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
-        .prototype-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .prototype-card img {
+        .flow-image img {
             width: 100%;
-            height: auto;
             display: block;
         }
 
-        .prototype-card p {
-            padding: 1rem;
-            text-align: center;
-            font-size: 0.9rem;
-            margin-bottom: 0;
-            font-weight: 600;
+        .flow-content {
+            padding-top: 2rem;
+        }
+
+        .step-number {
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--primary-gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .flow-step {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .flow-image {
+                max-width: 300px;
+                margin: 0 auto;
+            }
+            h1 { font-size: 2rem; }
         }
 
         [lang="cs"] { display: none; }
-
         .visible { display: block !important; }
         .hidden { display: none !important; }
     </style>
@@ -171,153 +215,261 @@
             </div>
         </header>
 
+        <!-- ENGLISH CONTENT -->
         <main id="content-en">
             <section class="section">
                 <h1>Off Chat: A Decentralized Digital Concierge</h1>
-                <p><strong>Bachelor Thesis Project | CTU FEE, Prague</strong></p>
+                <p style="font-size: 1.2rem; color: var(--primary-gold); margin-top: 0.5rem;">Bachelor Thesis Project | CTU FEE, Prague</p>
                 <p>Off Chat is an offline-first, peer-to-peer communication platform built with Flutter. It utilizes Bluetooth Low Energy (BLE) to enable device discovery, relative location tracking (Radar), and secure messaging without any reliance on internet or cellular connectivity.</p>
             </section>
 
             <section class="section">
-                <h2>🌟 Key Features</h2>
+                <h2>🛰 The Off-Chat Protocol</h2>
+                <div class="card">
+                    <h3>Hybrid Discovery Strategy</h3>
+                    <p>To overcome standard BLE advertisement limits (31 bytes) and iOS background restrictions, this project implements a specialized binary payload strategy:</p>
+                    <h4>1. The 13-Byte Payload</h4>
+                    <p>Essential metadata is packed into a compact structure:</p>
+                    <ul>
+                        <li><strong>Byte 0:</strong> Flags (Platform, Location Visibility)</li>
+                        <li><strong>Bytes 1-4:</strong> Profile Hash (CRC32 of username/avatar)</li>
+                        <li><strong>Bytes 5-8:</strong> Latitude (Float32)</li>
+                        <li><strong>Bytes 9-12:</strong> Longitude (Float32)</li>
+                    </ul>
+                    <h4 style="margin-top: 1.5rem;">2. Connection Logic</h4>
+                    <p><strong>Foreground:</strong> Data is broadcasted via Scan Response packets for instant peer updates.</p>
+                    <p><strong>Background:</strong> On iOS, the app initiates a <em>silent GATT connection</em> to read an "Identity Characteristic" when packets are stripped by the OS.</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>📱 User Experience Journey</h2>
+                <p>A walk-through of the premium "Aurelian Noir" interface and the application flow.</p>
+                
+                <div class="flow-container">
+                    <div class="flow-step">
+                        <div class="flow-image"><img src="ui_prototype/onboarding_splash_screen_updated_logo/screen.png"></div>
+                        <div class="flow-content">
+                            <span class="step-number">Entry</span>
+                            <h3>The Arrival</h3>
+                            <p>Users are greeted by the minimalist splash screen, establishing the high-end digital concierge aesthetic immediately.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-image"><img src="ui_prototype/onboarding_step_1_user_discovery/screen.png"></div>
+                        <div class="flow-content">
+                            <span class="step-number">Step 01</span>
+                            <h3>Node Identification</h3>
+                            <p>The onboarding process begins by explaining the decentralized nature of the network. Every device acts as a secure Node.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-image"><img src="ui_prototype/onboarding_step_2_offline_messaging/screen.png"></div>
+                        <div class="flow-content">
+                            <span class="step-number">Step 02</span>
+                            <h3>Offline Security</h3>
+                            <p>Communication occurs directly between devices. No servers, no logs, no internet required.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-image"><img src="ui_prototype/discovery_screen_gold_v2/screen.png"></div>
+                        <div class="flow-content">
+                            <span class="step-number">The Hub</span>
+                            <h3>Node Discovery</h3>
+                            <p>The main interface scans for nearby active pulses. Discovered users appear with their custom aliases and proximity status.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-image"><img src="ui_prototype/location_screen_gold_v2/screen.png"></div>
+                        <div class="flow-content">
+                            <span class="step-number">Spatial Tracking</span>
+                            <h3>The Radar</h3>
+                            <p>A custom-built visualization engine. By combining GPS coordinates and the device's internal compass, it paints the relative position of peers in real-time.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-image"><img src="ui_prototype/message_screen_gold_v2/screen.png"></div>
+                        <div class="flow-content">
+                            <span class="step-number">Communication</span>
+                            <h3>Secure Messaging</h3>
+                            <p>Direct peer-to-peer GATT communication. Supports text and media (images) through automated chunking and reassembly protocols.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-image"><img src="ui_prototype/profile_screen_gold_v2/screen.png"></div>
+                        <div class="flow-content">
+                            <span class="step-number">Management</span>
+                            <h3>Identity & Settings</h3>
+                            <p>Manage your Node's appearance, toggle spatial visibility, and configure notification alerts.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>🏗 Technical Architecture</h2>
+                <pre>
+lib/src/
+├── features/
+│   ├── onboarding/   # Security setup protocol
+│   ├── discovery/    # BLE Scanning & Peer management
+│   ├── location/     # Radar math, Compass, & UI Canvas
+│   ├── profile/      # Local identity & Settings
+│   └── chat/         # Messaging logic & Media chunking
+├── core/
+│   ├── routing/      # Reactive GoRouter
+│   ├── theme/        # Centralized Aurelian Noir
+│   └── database/     # Isar persistence layer
+└── app.dart          # Root Application</pre>
+            </section>
+
+            <section class="section">
+                <h2>🧪 Verification & Quality</h2>
                 <div class="grid">
                     <div class="card">
-                        <h3>The Nodes (Discovery)</h3>
-                        <p>Real-time scanning of nearby active devices. Displays user profiles (avatar, alias) and proximity metadata.</p>
+                        <h3>Netsim Testing</h3>
+                        <p>Simulates BLE radio signals between multiple Android emulators, allowing local verification of discovery and GATT sync logic.</p>
                     </div>
                     <div class="card">
-                        <h3>The Radar (Location)</h3>
-                        <p>A custom-painted visualization showing the relative bearing and distance of peers using GPS and compass data.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Off-Grid Messaging</h3>
-                        <p>Reliable text and media exchange over BLE GATT characteristics.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Identity Protocol</h3>
-                        <p>Secure local profile management with automated image compression and background synchronization.</p>
+                        <h3>CI/CD Pipeline</h3>
+                        <p>GitHub Actions automatically builds release APKs and App Bundles on every push to the master branch.</p>
                     </div>
                 </div>
-            </section>
-
-            <section class="section">
-                <h2>🛰 UI Prototypes</h2>
-                <p>Designed with the <strong>Aurelian Noir</strong> aesthetic: Deep black surfaces and gold primary accents.</p>
-                <div class="prototype-grid">
-                    <div class="prototype-card">
-                        <img src="ui_prototype/onboarding_splash_screen_updated_logo/screen.png" alt="Splash Screen">
-                        <p>Splash Screen</p>
-                    </div>
-                    <div class="prototype-card">
-                        <img src="ui_prototype/discovery_screen_gold_v2/screen.png" alt="Discovery Screen">
-                        <p>Discovery Screen</p>
-                    </div>
-                    <div class="prototype-card">
-                        <img src="ui_prototype/location_screen_gold_v2/screen.png" alt="Radar Screen">
-                        <p>Location Radar</p>
-                    </div>
-                    <div class="prototype-card">
-                        <img src="ui_prototype/message_screen_gold_v2/screen.png" alt="Chat Screen">
-                        <p>Secure Chat</p>
-                    </div>
-                    <div class="prototype-card">
-                        <img src="ui_prototype/profile_screen_gold_v2/screen.png" alt="Profile Screen">
-                        <p>Profile View</p>
-                    </div>
-                    <div class="prototype-card">
-                        <img src="ui_prototype/onboarding_step_1_user_discovery/screen.png" alt="Onboarding 1">
-                        <p>Discovery Setup</p>
-                    </div>
-                    <div class="prototype-card">
-                        <img src="ui_prototype/onboarding_step_2_offline_messaging/screen.png" alt="Onboarding 2">
-                        <p>Messaging Intro</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section">
-                <h2>🏗 Tech Stack</h2>
-                <ul>
-                    <li><strong>Framework:</strong> Flutter (Dart)</li>
-                    <li><strong>State Management:</strong> Riverpod</li>
-                    <li><strong>Database:</strong> Isar (NoSQL)</li>
-                    <li><strong>Communication:</strong> flutter_blue_plus & ble_peripheral</li>
-                </ul>
             </section>
         </main>
 
+        <!-- CZECH CONTENT -->
         <main id="content-cs" lang="cs">
             <section class="section">
                 <h1>Off Chat: Decentralizovaný Digitální Concierge</h1>
-                <p><strong>Bakalářská práce | ČVUT FEL, Praha</strong></p>
+                <p style="font-size: 1.2rem; color: var(--primary-gold); margin-top: 0.5rem;">Bakalářská práce | ČVUT FEL, Praha</p>
                 <p>Off Chat je offline peer-to-peer komunikační platforma postavená na Flutteru. Využívá Bluetooth Low Energy (BLE) pro objevování zařízení, sledování relativní polohy (Radar) a bezpečnou výměnu zpráv bez závislosti na internetu nebo mobilním signálu.</p>
             </section>
 
             <section class="section">
-                <h2>🌟 Klíčové Vlastnosti</h2>
+                <h2>🛰 Protokol Off-Chat</h2>
+                <div class="card">
+                    <h3>Hybridní Strategie Objevování</h3>
+                    <p>K překonání limitů BLE reklamy (31 bajtů) a omezení iOS na pozadí projekt implementuje specializovanou binární strategii:</p>
+                    <h4>1. 13-Bajtový Payload</h4>
+                    <p>Klíčová metadata jsou zabalena do kompaktní struktury:</p>
+                    <ul>
+                        <li><strong>Byte 0:</strong> Příznaky (Platforma, Viditelnost polohy)</li>
+                        <li><strong>Bytes 1-4:</strong> Hash profilu (CRC32 jména a avataru)</li>
+                        <li><strong>Bytes 5-8:</strong> Zeměpisná šířka (Float32)</li>
+                        <li><strong>Bytes 9-12:</strong> Zeměpisná délka (Float32)</li>
+                    </ul>
+                    <h4 style="margin-top: 1.5rem;">2. Logika Připojení</h4>
+                    <p><strong>Popředí:</strong> Data jsou vysílána přes pakety Scan Response pro okamžitou aktualizaci.</p>
+                    <p><strong>Pozadí:</strong> Na iOS aplikace zahájí <em>tiché GATT připojení</em> pro přečtení identity, pokud jsou pakety ořezány operačním systémem.</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>📱 Uživatelská Cesta</h2>
+                <p>Prohlídka prémiového rozhraní "Aurelian Noir" a průběhu používání aplikace.</p>
+                
+                <div class="flow-container">
+                    <div class="flow-step">
+                        <div class="flow-image"><img src="ui_prototype/onboarding_splash_screen_updated_logo/screen.png"></div>
+                        <div class="flow-content">
+                            <span class="step-number">Vstup</span>
+                            <h3>První Dojem</h3>
+                            <p>Uživatelé jsou přivítáni minimalistickou úvodní obrazovkou, která okamžitě definuje estetiku digitálního concierge.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-image"><img src="ui_prototype/onboarding_step_1_user_discovery/screen.png"></div>
+                        <div class="flow-content">
+                            <span class="step-number">Krok 01</span>
+                            <h3>Identifikace Uzlu</h3>
+                            <p>Proces nastavení začíná vysvětlením decentralizované povahy sítě. Každé zařízení funguje jako zabezpečený uzel.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-image"><img src="ui_prototype/onboarding_step_2_offline_messaging/screen.png"></div>
+                        <div class="flow-content">
+                            <span class="step-number">Krok 02</span>
+                            <h3>Offline Bezpečnost</h3>
+                            <p>Komunikace probíhá přímo mezi zařízeními. Žádné servery, žádné záznamy, žádný internet.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-image"><img src="ui_prototype/discovery_screen_gold_v2/screen.png"></div>
+                        <div class="flow-content">
+                            <span class="step-number">Centrum</span>
+                            <h3>Objevování Uzlů</h3>
+                            <p>Hlavní rozhraní skenuje aktivní pulzy v okolí. Objevení uživatelé se zobrazí s vlastními přezdívkami a stavem blízkosti.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-image"><img src="ui_prototype/location_screen_gold_v2/screen.png"></div>
+                        <div class="flow-content">
+                            <span class="step-number">Prostorové Sledování</span>
+                            <h3>Radar</h3>
+                            <p>Vlastní vizualizační engine. Kombinací GPS souřadnic a vnitřního kompasu vykresluje relativní polohu ostatních v reálném čase.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-image"><img src="ui_prototype/message_screen_gold_v2/screen.png"></div>
+                        <div class="flow-content">
+                            <span class="step-number">Komunikace</span>
+                            <h3>Zabezpečené Zprávy</h3>
+                            <p>Přímá peer-to-peer komunikace přes GATT. Podporuje text i média (obrázky) díky protokolu pro automatické dělení a skládání dat.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-image"><img src="ui_prototype/profile_screen_gold_v2/screen.png"></div>
+                        <div class="flow-content">
+                            <span class="step-number">Správa</span>
+                            <h3>Identita a Nastavení</h3>
+                            <p>Spravujte vzhled svého uzlu, přepínejte prostorovou viditelnost a konfigurujte upozornění.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>🏗 Technická Architektura</h2>
+                <pre>
+lib/src/
+├── features/
+│   ├── onboarding/   # Protokol zabezpečeného nastavení
+│   ├── discovery/    # BLE Skenování & správa peerů
+│   ├── location/     # Matematika radaru, Kompas & UI Canvas
+│   ├── profile/      # Lokální identita & Nastavení
+│   └── chat/         # Logika zpráv & dělení médií
+├── core/
+│   ├── routing/      # Reaktivní GoRouter
+│   ├── theme/        # Centralizovaný Aurelian Noir
+│   └── database/     # Perzistentní vrstva Isar
+└── app.dart          # Kořenová aplikace</pre>
+            </section>
+
+            <section class="section">
+                <h2>🧪 Ověřování a Kvalita</h2>
                 <div class="grid">
                     <div class="card">
-                        <h3>Uzly (Objevování)</h3>
-                        <p>Skenování blízkých aktivních zařízení v reálném čase. Zobrazuje profily uživatelů (avatar, alias) a metadata o blízkosti.</p>
+                        <h3>Testování Netsim</h3>
+                        <p>Simuluje BLE rádiové signály mezi emulátory Android, což umožňuje lokální ověření logiky objevování a GATT synchronizace.</p>
                     </div>
                     <div class="card">
-                        <h3>Radar (Poloha)</h3>
-                        <p>Vlastní vizualizace ukazující relativní směr a vzdálenost ostatních uživatelů pomocí GPS a dat z kompasu.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Off-Grid Zprávy</h3>
-                        <p>Spolehlivá výměna textu a médií přes BLE GATT charakteristiky.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Identitní Protokol</h3>
-                        <p>Bezpečná správa profilů s automatickou kompresí obrázků a synchronizací na pozadí.</p>
+                        <h3>CI/CD Pipeline</h3>
+                        <p>GitHub Actions automaticky sestavuje instalační APK a App Bundle při každém nahrání do hlavní větve.</p>
                     </div>
                 </div>
-            </section>
-
-            <section class="section">
-                <h2>🛰 UI Prototypy</h2>
-                <p>Navrženo v estetice <strong>Aurelian Noir</strong>: Hluboké černé plochy se zlatými akcenty.</p>
-                <div class="prototype-grid">
-                    <div class="prototype-card">
-                        <img src="ui_prototype/onboarding_splash_screen_updated_logo/screen.png" alt="Splash Screen">
-                        <p>Úvodní Obrazovka</p>
-                    </div>
-                    <div class="prototype-card">
-                        <img src="ui_prototype/discovery_screen_gold_v2/screen.png" alt="Discovery Screen">
-                        <p>Seznam Zařízení</p>
-                    </div>
-                    <div class="prototype-card">
-                        <img src="ui_prototype/location_screen_gold_v2/screen.png" alt="Radar Screen">
-                        <p>Lokální Radar</p>
-                    </div>
-                    <div class="prototype-card">
-                        <img src="ui_prototype/message_screen_gold_v2/screen.png" alt="Chat Screen">
-                        <p>Zabezpečený Chat</p>
-                    </div>
-                    <div class="prototype-card">
-                        <img src="ui_prototype/profile_screen_gold_v2/screen.png" alt="Profile Screen">
-                        <p>Detail Profilu</p>
-                    </div>
-                    <div class="prototype-card">
-                        <img src="ui_prototype/onboarding_step_1_user_discovery/screen.png" alt="Onboarding 1">
-                        <p>Nastavení Objevování</p>
-                    </div>
-                    <div class="prototype-card">
-                        <img src="ui_prototype/onboarding_step_2_offline_messaging/screen.png" alt="Onboarding 2">
-                        <p>Úvod do Zpráv</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section">
-                <h2>🏗 Použité Technologie</h2>
-                <ul>
-                    <li><strong>Framework:</strong> Flutter (Dart)</li>
-                    <li><strong>Stavové Řízení:</strong> Riverpod</li>
-                    <li><strong>Databáze:</strong> Isar (NoSQL)</li>
-                    <li><strong>Komunikace:</strong> flutter_blue_plus & ble_peripheral</li>
-                </ul>
             </section>
         </main>
 
