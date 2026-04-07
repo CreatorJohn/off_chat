@@ -1,0 +1,49 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'docs/**'
+      - 'ui_prototype/**' # Trigger if prototypes change too
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout master branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Deploy to docs branch
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Create a temporary directory for the site content
+          mkdir temp_site
+          cp -r docs/* temp_site/
+          
+          # Check if the docs branch exists
+          if git show-ref --verify --quiet refs/remotes/origin/docs; then
+            git checkout docs
+          else
+            git checkout --orphan docs
+          fi
+          
+          # Clear current branch content
+          git rm -rf .
+          
+          # Move site content to root
+          mv temp_site/* .
+          rmdir temp_site
+          
+          # Commit and push
+          git add .
+          git commit -m "Automated Pages Deployment: $(date)"
+          git push -f origin docs
