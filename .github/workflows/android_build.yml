@@ -44,26 +44,29 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Create a temporary folder for artifacts
-          mkdir temp_artifacts
-          cp build/app/outputs/flutter-apk/app-release.apk temp_artifacts/off-chat-release.apk
-          cp build/app/outputs/bundle/release/app-release.aab temp_artifacts/off-chat-release.aab
+          # Create a temporary folder for artifacts (using a path outside the repo to be safe)
+          mkdir ../temp_artifacts
+          cp build/app/outputs/flutter-apk/app-release.apk ../temp_artifacts/off-chat-release.apk
+          cp build/app/outputs/bundle/release/app-release.aab ../temp_artifacts/off-chat-release.aab
+          
+          # Discard all local changes (including generated files) to avoid checkout conflicts
+          git reset --hard
+          git clean -fd
           
           # Fetch all branches
           git fetch origin
           
           # Switch to (or create) the android branch
           if git show-ref --verify --quiet refs/remotes/origin/android; then
-            # Use -B to explicitly set up the branch and track the remote, bypassing ambiguity
-            git checkout -B android origin/android
+            git checkout -f android
+            git reset --hard origin/android
           else
             git checkout --orphan android
             git rm -rf .
           fi
           
           # Move artifacts from temp folder to root
-          mv temp_artifacts/* .
-          rmdir temp_artifacts
+          mv ../temp_artifacts/* .
           
           # Add and commit
           git add off-chat-release.apk off-chat-release.aab
