@@ -25,6 +25,10 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--background);
@@ -36,31 +40,44 @@
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0 1.5rem;
         }
 
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 2rem;
+            padding: 1rem 1.5rem;
             border-bottom: 1px solid var(--surface-variant);
             position: sticky;
             top: 0;
             z-index: 1000;
-            background-color: rgba(19, 19, 19, 0.8);
-            backdrop-filter: blur(10px);
-            margin: 0 -2rem 3rem -2rem;
+            background-color: rgba(19, 19, 19, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            margin-bottom: 3rem;
+            width: 100%;
+        }
+
+        /* Fixed the negative margin hack by removing it and using width 100% with proper padding */
+        header .header-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .logo {
             font-weight: 700;
-            letter-spacing: 4px;
+            letter-spacing: 2px;
             color: var(--primary-gold);
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             cursor: pointer;
             text-decoration: none;
             transition: opacity 0.3s ease;
+            white-space: nowrap;
         }
 
         .logo:hover {
@@ -70,13 +87,16 @@
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 1rem;
         }
 
         .github-link {
             color: var(--text-primary);
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .github-link:hover {
@@ -85,17 +105,18 @@
 
         .lang-selector {
             display: flex;
-            gap: 1rem;
+            gap: 0.5rem;
         }
 
         .lang-btn {
             background: none;
             border: 1px solid var(--primary-gold);
             color: var(--primary-gold);
-            padding: 0.5rem 1rem;
+            padding: 0.3rem 0.7rem;
             cursor: pointer;
-            border-radius: 8px;
+            border-radius: 6px;
             font-weight: 600;
+            font-size: 0.8rem;
             transition: all 0.3s ease;
         }
 
@@ -109,14 +130,15 @@
             margin-bottom: 1.5rem;
         }
 
-        h1 { font-size: 2.8rem; line-height: 1.2; }
-        h2 { font-size: 2rem; margin-top: 4rem; border-left: 4px solid var(--primary-gold); padding-left: 1rem; }
+        h1 { font-size: calc(1.8rem + 1.5vw); line-height: 1.2; }
+        h2 { font-size: 1.8rem; margin-top: 4rem; border-left: 4px solid var(--primary-gold); padding-left: 1rem; }
         h3 { font-size: 1.4rem; margin-top: 2rem; }
         h4 { font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem; }
 
         p, li {
             color: var(--text-secondary);
             margin-bottom: 1rem;
+            font-size: 1rem;
         }
 
         ul {
@@ -143,6 +165,7 @@
             border: 1px solid rgba(242, 202, 80, 0.1);
             margin-bottom: 2rem;
             transition: all 0.3s ease;
+            height: 100%;
         }
 
         .card:hover {
@@ -152,8 +175,8 @@
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
         }
 
         code {
@@ -179,23 +202,28 @@
         .flow-container {
             display: flex;
             flex-direction: column;
-            gap: 4rem;
+            gap: 5rem;
             margin-top: 3rem;
         }
 
         .flow-step {
             display: grid;
-            grid-template-columns: 280px 1fr;
+            grid-template-columns: 300px 1fr;
             gap: 3rem;
-            align-items: start;
+            align-items: center;
         }
 
         .flow-image {
             background-color: var(--surface);
-            border-radius: 32px;
+            border-radius: 40px;
             overflow: hidden;
             border: 2px solid var(--surface-variant);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            transition: transform 0.5s ease;
+        }
+
+        .flow-step:hover .flow-image {
+            transform: scale(1.02);
         }
 
         .flow-image img {
@@ -204,29 +232,60 @@
         }
 
         .flow-content {
-            padding-top: 2rem;
+            padding: 1rem 0;
         }
 
         .step-number {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 800;
             color: var(--primary-gold);
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
             display: block;
+            opacity: 0.8;
+        }
+
+        /* Media Queries */
+        @media (max-width: 1024px) {
+            .flow-step {
+                gap: 2rem;
+                grid-template-columns: 260px 1fr;
+            }
         }
 
         @media (max-width: 768px) {
+            .container { padding: 0 1rem; }
+            header { padding: 0.8rem 1rem; }
+            
             .flow-step {
                 grid-template-columns: 1fr;
                 text-align: center;
+                gap: 2rem;
             }
+            
             .flow-image {
-                max-width: 300px;
+                max-width: 280px;
                 margin: 0 auto;
             }
-            h1 { font-size: 2rem; }
+            
+            .flow-content {
+                padding-top: 0;
+            }
+
+            h2 { font-size: 1.6rem; margin-top: 3rem; }
+            .section { margin-bottom: 4rem; }
+            .grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .logo { font-size: 1rem; letter-spacing: 1px; }
+            .header-actions { gap: 0.75rem; }
+            .lang-btn { padding: 0.25rem 0.5rem; font-size: 0.75rem; }
+            .github-link { font-size: 1.1rem; }
+            
+            h1 { font-size: 2.2rem; }
+            .card { padding: 1.5rem; }
         }
 
         [lang="cs"] { display: none; }
@@ -235,8 +294,8 @@
     </style>
 </head>
 <body>
-    <div class="container" id="top">
-        <header>
+    <header>
+        <div class="header-inner">
             <a href="#top" class="logo">OFFCHAT</a>
             <div class="header-actions">
                 <a href="https://github.com/CreatorJohn/off_chat/raw/refs/heads/android/off-chat-release.apk" class="github-link" title="Download Android APK">
@@ -250,13 +309,15 @@
                     <button class="lang-btn" onclick="switchLang('cs')">CS</button>
                 </div>
             </div>
-        </header>
+        </div>
+    </header>
 
+    <div class="container" id="top">
         <!-- ENGLISH CONTENT -->
         <main id="content-en">
             <section class="section">
                 <h1>Off Chat: A Decentralized Digital Concierge</h1>
-                <p style="font-size: 1.2rem; color: var(--primary-gold); margin-top: 0.5rem;">Bachelor Thesis Project | CTU FEE, Prague</p>
+                <p style="font-size: 1.2rem; color: var(--primary-gold); margin-top: 0.5rem; font-weight: 600;">Bachelor Thesis Project | CTU FEE, Prague</p>
                 <p>Off Chat is an offline-first, peer-to-peer communication platform built with Flutter. It utilizes Bluetooth Low Energy (BLE) to enable device discovery, relative location tracking (Radar), and secure messaging without any reliance on internet or cellular connectivity.</p>
             </section>
 
@@ -265,17 +326,24 @@
                 <div class="card">
                     <h3>Hybrid Discovery Strategy</h3>
                     <p>To overcome standard BLE advertisement limits (31 bytes) and iOS background restrictions, this project implements a specialized binary payload strategy:</p>
-                    <h4>1. The 13-Byte Payload</h4>
-                    <p>Essential metadata is packed into a compact structure:</p>
-                    <ul>
-                        <li><strong>Byte 0:</strong> Flags (Platform, Location Visibility)</li>
-                        <li><strong>Bytes 1-4:</strong> Profile Hash (CRC32 of username/avatar)</li>
-                        <li><strong>Bytes 5-8:</strong> Latitude (Float32)</li>
-                        <li><strong>Bytes 9-12:</strong> Longitude (Float32)</li>
-                    </ul>
-                    <h4 style="margin-top: 1.5rem;">2. Connection Logic</h4>
-                    <p><strong>Foreground:</strong> Data is broadcasted via Scan Response packets for instant peer updates.</p>
-                    <p><strong>Background:</strong> On iOS, the app initiates a <em>silent GATT connection</em> to read an "Identity Characteristic" when packets are stripped by the OS.</p>
+                    <div class="grid" style="margin-top: 2rem;">
+                        <div>
+                            <h4>1. The 13-Byte Payload</h4>
+                            <p>Essential metadata is packed into a compact structure:</p>
+                            <ul>
+                                <li><strong>Byte 0:</strong> Flags (Platform, Location Visibility)</li>
+                                <li><strong>Bytes 1-4:</strong> Profile Hash (CRC32 of username/avatar)</li>
+                                <li><strong>Bytes 5-8:</strong> Latitude (Float32)</li>
+                                <li><strong>Bytes 9-12:</strong> Longitude (Float32)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>2. Connection Logic</h4>
+                            <p><strong>Primary Advertisement:</strong> Broadcasts only the Service UUID and essential flags to minimize packet size and maximize discovery reliability (especially for iOS background).</p>
+                            <p><strong>Scan Response:</strong> The 13-byte custom metadata is moved to the Scan Response packet. Local Name is disabled.</p>
+                            <p><strong>Background (iOS):</strong> When Scan Response data is stripped by the OS, the app initiates a <em>silent GATT connection</em> to read the "Identity Characteristic."</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -385,7 +453,7 @@ lib/src/
         <main id="content-cs" lang="cs">
             <section class="section">
                 <h1>Off Chat: Decentralizovaný Digitální Concierge</h1>
-                <p style="font-size: 1.2rem; color: var(--primary-gold); margin-top: 0.5rem;">Bakalářská práce | ČVUT FEL, Praha</p>
+                <p style="font-size: 1.2rem; color: var(--primary-gold); margin-top: 0.5rem; font-weight: 600;">Bakalářská práce | ČVUT FEL, Praha</p>
                 <p>Off Chat je offline peer-to-peer komunikační platforma postavená na Flutteru. Využívá Bluetooth Low Energy (BLE) pro objevování zařízení, sledování relativní polohy (Radar) a bezpečnou výměnu zpráv bez závislosti na internetu nebo mobilním signálu.</p>
             </section>
 
@@ -394,17 +462,23 @@ lib/src/
                 <div class="card">
                     <h3>Hybridní Strategie Objevování</h3>
                     <p>K překonání limitů BLE reklamy (31 bajtů) a omezení iOS na pozadí projekt implementuje specializovanou binární strategii:</p>
-                    <h4>1. 13-Bajtový Payload</h4>
-                    <p>Klíčová metadata jsou zabalena do kompaktní struktury:</p>
-                    <ul>
-                        <li><strong>Byte 0:</strong> Příznaky (Platforma, Viditelnost polohy)</li>
-                        <li><strong>Bytes 1-4:</strong> Hash profilu (CRC32 jména a avataru)</li>
-                        <li><strong>Bytes 5-8:</strong> Zeměpisná šířka (Float32)</li>
-                        <li><strong>Bytes 9-12:</strong> Zeměpisná délka (Float32)</li>
-                    </ul>
-                    <h4 style="margin-top: 1.5rem;">2. Logika Připojení</h4>
-                    <p><strong>Popředí:</strong> Data jsou vysílána přes pakety Scan Response pro okamžitou aktualizaci.</p>
-                    <p><strong>Pozadí:</strong> Na iOS aplikace zahájí <em>tiché GATT připojení</em> pro přečtení identity, pokud jsou pakety ořezány operačním systémem.</p>
+                    <div class="grid" style="margin-top: 2rem;">
+                        <div>
+                            <h4>1. 13-Bajtový Payload</h4>
+                            <p>Klíčová metadata jsou zabalena do kompaktní struktury:</p>
+                            <ul>
+                                <li><strong>Byte 0:</strong> Příznaky (Platforma, Viditelnost polohy)</li>
+                                <li><strong>Bytes 1-4:</strong> Hash profilu (CRC32 jména a avataru)</li>
+                                <li><strong>Bytes 5-8:</strong> Zeměpisná šířka (Float32)</li>
+                                <li><strong>Bytes 9-12:</strong> Zeměpisná délka (Float32)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>2. Logika Připojení</h4>
+                            <p><strong>Popředí:</strong> Data jsou vysílána přes pakety Scan Response pro okamžitou aktualizaci.</p>
+                            <p><strong>Pozadí:</strong> Na iOS aplikace zahájí <em>tiché GATT připojení</em> pro přečtení identity, pokud jsou pakety ořezány operačním systémem.</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -511,7 +585,7 @@ lib/src/
         </main>
 
         <footer style="text-align: center; padding: 4rem 0; border-top: 1px solid var(--surface-variant); color: var(--text-secondary); font-size: 0.8rem;">
-            <p>© 2026 Off Chat - CTU FEE Bachelor Thesis | V1.1.0+2</p>
+            <p>© 2026 Off Chat - CTU FEE Bachelor Thesis | V1.1.1+3</p>
         </footer>
     </div>
 
