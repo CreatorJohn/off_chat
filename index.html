@@ -235,13 +235,15 @@
         }
 
         .carousel-image {
-            border-radius: 32px;
+            border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 30px 60px rgba(0,0,0,0.5);
             border: 1px solid var(--surface-variant);
-            max-height: 65dvh;
+            max-height: 55dvh;
+            width: fit-content;
             display: flex;
             align-items: center;
+            justify-content: center;
             cursor: zoom-in;
             transition: transform 0.3s ease;
         }
@@ -251,8 +253,7 @@
         }
 
         .carousel-image img {
-            width: 100%;
-            height: 100%;
+            height: 50dvh;
             object-fit: contain;
             display: block;
         }
