@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Off Chat - Decentralized Digital Concierge</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -205,7 +206,7 @@
             flex-direction: column;
             justify-content: center;
             padding: 0 4rem;
-            min-height: 0; /* Allow shrinking */
+            min-height: 0; 
         }
 
         .carousel-container {
@@ -238,14 +239,20 @@
             overflow: hidden;
             box-shadow: 0 30px 60px rgba(0,0,0,0.5);
             border: 1px solid var(--surface-variant);
-            max-height: 70dvh;
+            max-height: 65dvh;
             display: flex;
             align-items: center;
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }
+
+        .carousel-image:hover {
+            transform: scale(1.02);
         }
 
         .carousel-image img {
             width: 100%;
-            height: auto;
+            height: 100%;
             object-fit: contain;
             display: block;
         }
@@ -309,6 +316,30 @@
             border-radius: 10px;
         }
 
+        /* Lightbox Dialog */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 2rem;
+            cursor: zoom-out;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 12px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            object-fit: contain;
+        }
+
         /* Responsive Carousel */
         @media (max-width: 900px) {
             .carousel-slide {
@@ -319,7 +350,7 @@
             }
             .carousel-image {
                 max-width: 240px;
-                max-height: 40dvh;
+                max-height: 45dvh;
                 margin: 0 auto;
             }
             .carousel-content {
@@ -366,6 +397,10 @@
         </div>
     </header>
 
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Full Version">
+    </div>
+
     <div class="container" id="top">
         <!-- ENGLISH CONTENT -->
         <main id="content-en">
@@ -386,7 +421,7 @@
                     <div class="carousel-container">
                         <div class="carousel-track">
                             <div class="carousel-slide">
-                                <div class="carousel-image"><img src="ui_prototype/onboarding_splash_screen_updated_logo/screen.png"></div>
+                                <div class="carousel-image" onclick="openLightbox(this)"><img src="ui_prototype/onboarding_splash_screen_updated_logo/screen.png"></div>
                                 <div class="carousel-content">
                                     <span class="step-number">Entry</span>
                                     <h3>The Arrival</h3>
@@ -394,7 +429,7 @@
                                 </div>
                             </div>
                             <div class="carousel-slide">
-                                <div class="carousel-image"><img src="ui_prototype/onboarding_step_1_user_discovery/screen.png"></div>
+                                <div class="carousel-image" onclick="openLightbox(this)"><img src="ui_prototype/onboarding_step_1_user_discovery/screen.png"></div>
                                 <div class="carousel-content">
                                     <span class="step-number">Step 01</span>
                                     <h3>Node Identification</h3>
@@ -402,7 +437,7 @@
                                 </div>
                             </div>
                             <div class="carousel-slide">
-                                <div class="carousel-image"><img src="ui_prototype/onboarding_step_2_offline_messaging/screen.png"></div>
+                                <div class="carousel-image" onclick="openLightbox(this)"><img src="ui_prototype/onboarding_step_2_offline_messaging/screen.png"></div>
                                 <div class="carousel-content">
                                     <span class="step-number">Step 02</span>
                                     <h3>Offline Security</h3>
@@ -410,7 +445,7 @@
                                 </div>
                             </div>
                             <div class="carousel-slide">
-                                <div class="carousel-image"><img src="ui_prototype/discovery_screen_gold_v2/screen.png"></div>
+                                <div class="carousel-image" onclick="openLightbox(this)"><img src="ui_prototype/discovery_screen_gold_v2/screen.png"></div>
                                 <div class="carousel-content">
                                     <span class="step-number">The Hub</span>
                                     <h3>Node Discovery</h3>
@@ -418,7 +453,7 @@
                                 </div>
                             </div>
                             <div class="carousel-slide">
-                                <div class="carousel-image"><img src="ui_prototype/location_screen_gold_v2/screen.png"></div>
+                                <div class="carousel-image" onclick="openLightbox(this)"><img src="ui_prototype/location_screen_gold_v2/screen.png"></div>
                                 <div class="carousel-content">
                                     <span class="step-number">Spatial Tracking</span>
                                     <h3>The Radar</h3>
@@ -426,7 +461,7 @@
                                 </div>
                             </div>
                             <div class="carousel-slide">
-                                <div class="carousel-image"><img src="ui_prototype/message_screen_gold_v2/screen.png"></div>
+                                <div class="carousel-image" onclick="openLightbox(this)"><img src="ui_prototype/message_screen_gold_v2/screen.png"></div>
                                 <div class="carousel-content">
                                     <span class="step-number">Communication</span>
                                     <h3>Secure Messaging</h3>
@@ -434,7 +469,7 @@
                                 </div>
                             </div>
                             <div class="carousel-slide">
-                                <div class="carousel-image"><img src="ui_prototype/profile_screen_gold_v2/screen.png"></div>
+                                <div class="carousel-image" onclick="openLightbox(this)"><img src="ui_prototype/profile_screen_gold_v2/screen.png"></div>
                                 <div class="carousel-content">
                                     <span class="step-number">Management</span>
                                     <h3>Identity & Settings</h3>
@@ -525,7 +560,7 @@ lib/src/
                     <div class="carousel-container">
                         <div class="carousel-track">
                             <div class="carousel-slide">
-                                <div class="carousel-image"><img src="ui_prototype/onboarding_splash_screen_updated_logo/screen.png"></div>
+                                <div class="carousel-image" onclick="openLightbox(this)"><img src="ui_prototype/onboarding_splash_screen_updated_logo/screen.png"></div>
                                 <div class="carousel-content">
                                     <span class="step-number">Vstup</span>
                                     <h3>První Dojem</h3>
@@ -533,7 +568,7 @@ lib/src/
                                 </div>
                             </div>
                             <div class="carousel-slide">
-                                <div class="carousel-image"><img src="ui_prototype/onboarding_step_1_user_discovery/screen.png"></div>
+                                <div class="carousel-image" onclick="openLightbox(this)"><img src="ui_prototype/onboarding_step_1_user_discovery/screen.png"></div>
                                 <div class="carousel-content">
                                     <span class="step-number">Krok 01</span>
                                     <h3>Identifikace Uzlu</h3>
@@ -541,7 +576,7 @@ lib/src/
                                 </div>
                             </div>
                             <div class="carousel-slide">
-                                <div class="carousel-image"><img src="ui_prototype/onboarding_step_2_offline_messaging/screen.png"></div>
+                                <div class="carousel-image" onclick="openLightbox(this)"><img src="ui_prototype/onboarding_step_2_offline_messaging/screen.png"></div>
                                 <div class="carousel-content">
                                     <span class="step-number">Krok 02</span>
                                     <h3>Offline Bezpečnost</h3>
@@ -549,7 +584,7 @@ lib/src/
                                 </div>
                             </div>
                             <div class="carousel-slide">
-                                <div class="carousel-image"><img src="ui_prototype/discovery_screen_gold_v2/screen.png"></div>
+                                <div class="carousel-image" onclick="openLightbox(this)"><img src="ui_prototype/discovery_screen_gold_v2/screen.png"></div>
                                 <div class="carousel-content">
                                     <span class="step-number">Centrum</span>
                                     <h3>Objevování Uzlů</h3>
@@ -557,7 +592,7 @@ lib/src/
                                 </div>
                             </div>
                             <div class="carousel-slide">
-                                <div class="carousel-image"><img src="ui_prototype/location_screen_gold_v2/screen.png"></div>
+                                <div class="carousel-image" onclick="openLightbox(this)"><img src="ui_prototype/location_screen_gold_v2/screen.png"></div>
                                 <div class="carousel-content">
                                     <span class="step-number">Prostorové Sledování</span>
                                     <h3>Radar</h3>
@@ -565,15 +600,15 @@ lib/src/
                                 </div>
                             </div>
                             <div class="carousel-slide">
-                                <div class="carousel-image"><img src="ui_prototype/message_screen_gold_v2/screen.png"></div>
+                                <div class="carousel-image" onclick="openLightbox(this)"><img src="ui_prototype/message_screen_gold_v2/screen.png"></div>
                                 <div class="carousel-content">
                                     <span class="step-number">Komunikace</span>
                                     <h3>Zabezpečené Zprávy</h3>
-                                    <p>Přímá peer-to-peer komunikace přes GATT s automatickým dělením a skládání textu a médií.</p>
+                                    <p>Přímá peer-to-peer komunikace přes GATT s automatickým dělením a skládáním textu a médií.</p>
                                 </div>
                             </div>
                             <div class="carousel-slide">
-                                <div class="carousel-image"><img src="ui_prototype/profile_screen_gold_v2/screen.png"></div>
+                                <div class="carousel-image" onclick="openLightbox(this)"><img src="ui_prototype/profile_screen_gold_v2/screen.png"></div>
                                 <div class="carousel-content">
                                     <span class="step-number">Správa</span>
                                     <h3>Identita a Nastavení</h3>
@@ -662,8 +697,7 @@ lib/src/
                 const slides = track.querySelectorAll('.carousel-slide');
                 const dotsContainer = wrapper.querySelector('.carousel-dots');
                 
-                dotsContainer.innerHTML = ''; // Clear existing
-                // Create dots
+                dotsContainer.innerHTML = ''; 
                 slides.forEach((_, i) => {
                     const dot = document.createElement('button');
                     dot.classList.add('dot');
@@ -698,6 +732,22 @@ lib/src/
             });
         }
 
+        function openLightbox(element) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const imgSrc = element.querySelector('img').src;
+            
+            lightboxImg.src = imgSrc;
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto'; 
+        }
+
         function switchLang(lang) {
             const en = document.getElementById('content-en');
             const cs = document.getElementById('content-cs');
@@ -723,12 +773,10 @@ lib/src/
                 en.classList.add('hidden');
             }
             
-            // Re-init dots for the switched language and reset
             initCarousels();
             goToSlide(lang, 0);
         }
 
-        // Initialize on load
         window.onload = initCarousels;
     </script>
 </body>
