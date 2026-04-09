@@ -2,9 +2,12 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart' as fbp;
 import 'package:ble_peripheral/ble_peripheral.dart' as per;
+import 'package:logging/logging.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'ble_service.g.dart';
+
+final _log = Logger('BleService');
 
 const String offChatServiceUuid = "4a1a5fc0-67a4-4a4c-83b3-8a301bd9b210";
 const String identityCharUuid = "4a1a5fc1-67a4-4a4c-83b3-8a301bd9b210";
@@ -57,17 +60,25 @@ class OffChatBleService {
     byteData.setFloat32(5, latitude, Endian.little);
     byteData.setFloat32(9, longitude, Endian.little);
 
+    _log.info('Preparing to advertise. Payload: ${byteData.buffer.asUint8List()}');
+
     try {
+      // Clear previous advertising if any
+      await per.BlePeripheral.stopAdvertising();
+      
       await per.BlePeripheral.startAdvertising(
         services: [offChatServiceUuid],
-        localName: "OffChat Node",
+        localName: null, // Disable local name to save bytes in primary advertisement
         manufacturerData: per.ManufacturerData(
           manufacturerId: 0xFFFF,
           data: byteData.buffer.asUint8List(),
         ),
+        // Move the 13-byte payload to the scan response packet
+        addManufacturerDataInScanResponse: true,
       );
+      _log.info('BlePeripheral.startAdvertising initiated (Primary: ServiceUUID, ScanResponse: ManufacturerData)');
     } catch (e) {
-      // Log error
+      _log.severe('Error starting advertising: $e');
     }
   }
 

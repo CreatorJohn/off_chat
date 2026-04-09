@@ -77,7 +77,7 @@ class DiscoveryController extends _$DiscoveryController {
           } else {
             final newDevice = DiscoveredDeviceModel()
               ..deviceId = deviceId
-              ..username = 'Connecting...'
+              ..username = 'Unknown Node'
               ..lastDiscovered = DateTime.now();
             
             if (isLocationVisible) {
@@ -95,12 +95,12 @@ class DiscoveryController extends _$DiscoveryController {
           }
         }
       } else if (existingDevice == null) {
-        // This might be an OffChat device in the background (no scan response data)
+        // This might be an OffChat device in the background (no scan response data yet)
         // Check if it has our Service UUID
         if (result.advertisementData.serviceUuids.contains(Guid(offChatServiceUuid))) {
            final newDevice = DiscoveredDeviceModel()
               ..deviceId = deviceId
-              ..username = 'Connecting...'
+              ..username = 'Unknown Node'
               ..lastDiscovered = DateTime.now();
             
             await isar.writeTxn(() async {

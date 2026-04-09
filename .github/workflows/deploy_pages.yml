@@ -45,6 +45,9 @@ jobs:
           # Move site content to root
           mv temp_site/* .
           rmdir temp_site
+
+          # Creating CNAME file
+          echo "offchat.creatorjohn.com" >> CNAME
           
           # Commit and push
           git add .

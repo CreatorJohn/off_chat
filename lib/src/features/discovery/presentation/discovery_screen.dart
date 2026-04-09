@@ -37,22 +37,20 @@ class DiscoveryScreen extends ConsumerWidget {
                 );
               },
             ),
-            if (kDebugMode) ...[
-              const SizedBox(width: 8),
-              StreamBuilder<bool>(
-                stream: bleServiceInstance.isAdvertising,
-                initialData: false,
-                builder: (context, snapshot) {
-                  final isAdvertising = snapshot.data ?? false;
-                  return _StatusIndicator(
-                    isActive: isAdvertising,
-                    activeColor: Colors.green,
-                    icon: Icons.broadcast_on_personal,
-                    tooltip: isAdvertising ? 'Advertising Active' : 'Advertising Inactive',
-                  );
-                },
-              ),
-            ],
+            const SizedBox(width: 8),
+            StreamBuilder<bool>(
+              stream: bleServiceInstance.isAdvertising,
+              initialData: false,
+              builder: (context, snapshot) {
+                final isAdvertising = snapshot.data ?? false;
+                return _StatusIndicator(
+                  isActive: isAdvertising,
+                  activeColor: Colors.green,
+                  icon: Icons.broadcast_on_personal,
+                  tooltip: isAdvertising ? 'Advertising Active' : 'Advertising Inactive',
+                );
+              },
+            ),
           ],
         ),
         leadingWidth: kDebugMode ? 100 : 60,

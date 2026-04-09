@@ -51,8 +51,10 @@ We pack essential metadata into a byte-level structure to fit within Manufacture
 - **Bytes 9-12:** Longitude (Float32).
 
 ### 2. Hybrid Strategy
-- **Foreground:** Data is broadcasted via **Scan Response** packets. Peers read this instantly without connecting.
-- **Background:** On iOS, when packets are stripped by the OS, the app detects the Service UUID and performs a **silent GATT connection** to read the "Identity Characteristic," fetching the 13-byte payload before disconnecting.
+- **Primary Advertisement:** Broadcasts only the Service UUID and essential flags to minimize packet size and maximize discovery reliability (especially for iOS background).
+- **Scan Response:** The 13-byte custom metadata is moved to the Scan Response packet.
+- **Local Name:** Disabled to free up primary advertisement bandwidth.
+- **Background (iOS):** When Scan Response data is stripped by the OS, the app initiates a **silent GATT connection** to read the "Identity Characteristic," fetching the 13-byte payload before disconnecting.
 
 ---
 
