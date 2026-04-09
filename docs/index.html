@@ -17,6 +17,7 @@
             --text-primary: #ffffff;
             --text-secondary: rgba(255, 255, 255, 0.7);
             --accent-glow: rgba(242, 202, 80, 0.15);
+            --header-height: 70px;
         }
 
         * {
@@ -47,7 +48,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 1.5rem;
+            height: var(--header-height);
+            padding: 0 1.5rem;
             border-bottom: 1px solid var(--surface-variant);
             position: sticky;
             top: 0;
@@ -55,7 +57,6 @@
             background-color: rgba(19, 19, 19, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            margin-bottom: 3rem;
             width: 100%;
         }
 
@@ -187,43 +188,65 @@
             border: 1px solid rgba(255,255,255,0.05);
         }
 
-        /* Carousel Styles */
+        /* Carousel Section Full Height */
+        .section-carousel {
+            height: calc(100dvh - var(--header-height));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-bottom: 0;
+            padding: 2rem 0;
+        }
+
         .carousel-wrapper {
             position: relative;
-            margin: 3rem 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             padding: 0 4rem;
+            min-height: 0; /* Allow shrinking */
         }
 
         .carousel-container {
             overflow: hidden;
             border-radius: 32px;
+            flex: 1;
+            display: flex;
         }
 
         .carousel-track {
             display: flex;
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
         }
 
         .carousel-slide {
             min-width: 100%;
             display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 3rem;
+            grid-template-columns: minmax(200px, 350px) 1fr;
+            gap: 4rem;
             align-items: center;
-            padding: 2rem;
+            padding: 2rem 4rem;
             background-color: var(--surface);
             border-radius: 32px;
+            height: 100%;
         }
 
         .carousel-image {
-            border-radius: 24px;
+            border-radius: 32px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
             border: 1px solid var(--surface-variant);
+            max-height: 70dvh;
+            display: flex;
+            align-items: center;
         }
 
         .carousel-image img {
             width: 100%;
+            height: auto;
+            object-fit: contain;
             display: block;
         }
 
@@ -231,16 +254,8 @@
             text-align: left;
         }
 
-        .step-number {
-            font-size: 0.75rem;
-            font-weight: 800;
-            color: var(--primary-gold);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 0.75rem;
-            display: block;
-            opacity: 0.8;
-        }
+        .carousel-content h3 { font-size: 2rem; margin-top: 0; }
+        .carousel-content p { font-size: 1.1rem; }
 
         .carousel-nav {
             position: absolute;
@@ -275,6 +290,7 @@
             justify-content: center;
             gap: 0.75rem;
             margin-top: 2rem;
+            padding-bottom: 1rem;
         }
 
         .dot {
@@ -299,15 +315,17 @@
                 grid-template-columns: 1fr;
                 gap: 2rem;
                 text-align: center;
-                padding: 1.5rem;
+                padding: 2rem;
             }
             .carousel-image {
-                max-width: 260px;
+                max-width: 240px;
+                max-height: 40dvh;
                 margin: 0 auto;
             }
             .carousel-content {
                 text-align: center;
             }
+            .carousel-content h3 { font-size: 1.5rem; }
             .carousel-wrapper {
                 padding: 0 1rem;
             }
@@ -315,12 +333,13 @@
                 width: 3rem;
                 height: 3rem;
                 top: auto;
-                bottom: -4rem;
+                bottom: -1rem;
                 transform: none;
             }
-            .carousel-nav.prev { left: 25%; }
-            .carousel-nav.next { right: 25%; }
-            .carousel-dots { margin-top: 5rem; }
+            .carousel-nav.prev { left: 20%; }
+            .carousel-nav.next { right: 20%; }
+            .carousel-dots { margin-top: 2rem; }
+            .section-carousel { height: auto; min-height: 100dvh; }
         }
 
         [lang="cs"] { display: none; }
@@ -350,40 +369,14 @@
     <div class="container" id="top">
         <!-- ENGLISH CONTENT -->
         <main id="content-en">
-            <section class="section">
+            <section class="section" style="padding-top: 4rem;">
                 <h1>Off Chat: A Decentralized Digital Concierge</h1>
                 <p style="font-size: 1.2rem; color: var(--primary-gold); margin-top: 0.5rem; font-weight: 600;">Bachelor Thesis Project | CTU FEE, Prague</p>
                 <p>Off Chat is an offline-first, peer-to-peer communication platform built with Flutter. It utilizes Bluetooth Low Energy (BLE) to enable device discovery, relative location tracking (Radar), and secure messaging without any reliance on internet or cellular connectivity.</p>
             </section>
 
-            <section class="section">
-                <h2>🛰 The Off-Chat Protocol</h2>
-                <div class="card">
-                    <h3>Hybrid Discovery Strategy</h3>
-                    <p>To overcome standard BLE advertisement limits (31 bytes) and iOS background restrictions, this project implements a specialized binary payload strategy:</p>
-                    <div class="grid" style="margin-top: 2rem;">
-                        <div>
-                            <h4>1. The 13-Byte Payload</h4>
-                            <p>Essential metadata is packed into a compact structure:</p>
-                            <ul>
-                                <li><strong>Byte 0:</strong> Flags (Platform, Location Visibility)</li>
-                                <li><strong>Bytes 1-4:</strong> Profile Hash (CRC32 of username/avatar)</li>
-                                <li><strong>Bytes 5-8:</strong> Latitude (Float32)</li>
-                                <li><strong>Bytes 9-12:</strong> Longitude (Float32)</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4>2. Connection Logic</h4>
-                            <p><strong>Primary Advertisement:</strong> Broadcasts only the Service UUID and essential flags to minimize packet size and maximize discovery reliability (especially for iOS background).</p>
-                            <p><strong>Scan Response:</strong> The 13-byte custom metadata is moved to the Scan Response packet. Local Name is disabled.</p>
-                            <p><strong>Background (iOS):</strong> When Scan Response data is stripped by the OS, the app initiates a <em>silent GATT connection</em> to read the "Identity Characteristic."</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section">
-                <h2>📱 User Experience Journey</h2>
+            <section class="section section-carousel">
+                <h2 style="margin-top: 0;">📱 User Experience Journey</h2>
                 <p>Explore the premium "Aurelian Noir" interface through the application's key lifecycle steps.</p>
                 
                 <div class="carousel-wrapper" id="carousel-en">
@@ -456,6 +449,32 @@
             </section>
 
             <section class="section">
+                <h2>🛰 The Off-Chat Protocol</h2>
+                <div class="card">
+                    <h3>Hybrid Discovery Strategy</h3>
+                    <p>To overcome standard BLE advertisement limits (31 bytes) and iOS background restrictions, this project implements a specialized binary payload strategy:</p>
+                    <div class="grid" style="margin-top: 2rem;">
+                        <div>
+                            <h4>1. The 13-Byte Payload</h4>
+                            <p>Essential metadata is packed into a compact structure:</p>
+                            <ul>
+                                <li><strong>Byte 0:</strong> Flags (Platform, Location Visibility)</li>
+                                <li><strong>Bytes 1-4:</strong> Profile Hash (CRC32 of username/avatar)</li>
+                                <li><strong>Bytes 5-8:</strong> Latitude (Float32)</li>
+                                <li><strong>Bytes 9-12:</strong> Longitude (Float32)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>2. Connection Logic</h4>
+                            <p><strong>Primary Advertisement:</strong> Broadcasts only the Service UUID and essential flags to minimize packet size and maximize discovery reliability (especially for iOS background).</p>
+                            <p><strong>Scan Response:</strong> The 13-byte custom metadata is moved to the Scan Response packet. Local Name is disabled.</p>
+                            <p><strong>Background (iOS):</strong> When Scan Response data is stripped by the OS, the app initiates a <em>silent GATT connection</em> to read the "Identity Characteristic."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
                 <h2>🏗 Technical Architecture</h2>
                 <pre>
 lib/src/
@@ -471,43 +490,32 @@ lib/src/
 │   └── database/     # Isar persistence layer
 └── app.dart          # Root Application</pre>
             </section>
+
+            <section class="section">
+                <h2>🧪 Verification & Quality</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Netsim Testing</h3>
+                        <p>Simulates BLE radio signals between multiple Android emulators, allowing local verification of discovery and GATT sync logic.</p>
+                    </div>
+                    <div class="card">
+                        <h3>CI/CD Pipeline</h3>
+                        <p>GitHub Actions automatically builds release APKs and App Bundles on every push to the master branch.</p>
+                    </div>
+                </div>
+            </section>
         </main>
 
         <!-- CZECH CONTENT -->
         <main id="content-cs" lang="cs">
-            <section class="section">
+            <section class="section" style="padding-top: 4rem;">
                 <h1>Off Chat: Decentralizovaný Digitální Concierge</h1>
                 <p style="font-size: 1.2rem; color: var(--primary-gold); margin-top: 0.5rem; font-weight: 600;">Bakalářská práce | ČVUT FEL, Praha</p>
                 <p>Off Chat je offline peer-to-peer komunikační platforma postavená na Flutteru. Využívá Bluetooth Low Energy (BLE) pro objevování zařízení, sledování relativní polohy (Radar) a bezpečnou výměnu zpráv bez závislosti na internetu nebo mobilním signálu.</p>
             </section>
 
-            <section class="section">
-                <h2>🛰 Protokol Off-Chat</h2>
-                <div class="card">
-                    <h3>Hybridní Strategie Objevování</h3>
-                    <p>K překonání limitů BLE reklamy (31 bajtů) a omezení iOS na pozadí projekt implementuje specializovanou binární strategii:</p>
-                    <div class="grid" style="margin-top: 2rem;">
-                        <div>
-                            <h4>1. 13-Bajtový Payload</h4>
-                            <p>Klíčová metadata jsou zabalena do kompaktní struktury:</p>
-                            <ul>
-                                <li><strong>Byte 0:</strong> Příznaky (Platforma, Viditelnost polohy)</li>
-                                <li><strong>Bytes 1-4:</strong> Hash profilu (CRC32 jména a avataru)</li>
-                                <li><strong>Bytes 5-8:</strong> Zeměpisná šířka (Float32)</li>
-                                <li><strong>Bytes 9-12:</strong> Zeměpisná délka (Float32)</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4>2. Logika Připojení</h4>
-                            <p><strong>Popředí:</strong> Data jsou vysílána přes pakety Scan Response pro okamžitou aktualizaci.</p>
-                            <p><strong>Pozadí:</strong> Na iOS aplikace zahájí <em>tiché GATT připojení</em> pro přečtení identity, pokud jsou pakety ořezány operačním systémem.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section">
-                <h2>📱 Uživatelská Cesta</h2>
+            <section class="section section-carousel">
+                <h2 style="margin-top: 0;">📱 Uživatelská Cesta</h2>
                 <p>Prohlédněte si prémiové rozhraní "Aurelian Noir" skrze klíčové kroky životního cyklu aplikace.</p>
                 
                 <div class="carousel-wrapper" id="carousel-cs">
@@ -561,7 +569,7 @@ lib/src/
                                 <div class="carousel-content">
                                     <span class="step-number">Komunikace</span>
                                     <h3>Zabezpečené Zprávy</h3>
-                                    <p>Přímá peer-to-peer komunikace přes GATT s automatickým dělením a skládáním textu a médií.</p>
+                                    <p>Přímá peer-to-peer komunikace přes GATT s automatickým dělením a skládání textu a médií.</p>
                                 </div>
                             </div>
                             <div class="carousel-slide">
@@ -580,6 +588,31 @@ lib/src/
             </section>
 
             <section class="section">
+                <h2>🛰 Protokol Off-Chat</h2>
+                <div class="card">
+                    <h3>Hybridní Strategie Objevování</h3>
+                    <p>K překonání limitů BLE reklamy (31 bajtů) a omezení iOS na pozadí projekt implementuje specializovanou binární strategii:</p>
+                    <div class="grid" style="margin-top: 2rem;">
+                        <div>
+                            <h4>1. 13-Bajtový Payload</h4>
+                            <p>Klíčová metadata jsou zabalena do kompaktní struktury:</p>
+                            <ul>
+                                <li><strong>Byte 0:</strong> Příznaky (Platforma, Viditelnost polohy)</li>
+                                <li><strong>Bytes 1-4:</strong> Hash profilu (CRC32 jména a avataru)</li>
+                                <li><strong>Bytes 5-8:</strong> Zeměpisná šířka (Float32)</li>
+                                <li><strong>Bytes 9-12:</strong> Zeměpisná délka (Float32)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>2. Logika Připojení</h4>
+                            <p><strong>Popředí:</strong> Data jsou vysílána přes pakety Scan Response pro okamžitou aktualizaci.</p>
+                            <p><strong>Pozadí:</strong> Na iOS aplikace zahájí <em>tiché GATT připojení</em> pro přečtení identity, pokud jsou pakety ořezány operačním systémem.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
                 <h2>🏗 Technická Architektura</h2>
                 <pre>
 lib/src/
@@ -594,6 +627,20 @@ lib/src/
 │   ├── theme/        # Centralizovaný Aurelian Noir
 │   └── database/     # Perzistentní vrstva Isar
 └── app.dart          # Kořenová aplikace</pre>
+            </section>
+
+            <section class="section">
+                <h2>🧪 Ověřování a Kvalita</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Testování Netsim</h3>
+                        <p>Simuluje BLE rádiové signály mezi emulátory Android, což umožňuje lokální ověření logiky objevování a GATT synchronizace.</p>
+                    </div>
+                    <div class="card">
+                        <h3>CI/CD Pipeline</h3>
+                        <p>GitHub Actions automaticky sestavuje instalační APK a App Bundle při každém nahrání do hlavní větve.</p>
+                    </div>
+                </div>
             </section>
         </main>
 
@@ -615,6 +662,7 @@ lib/src/
                 const slides = track.querySelectorAll('.carousel-slide');
                 const dotsContainer = wrapper.querySelector('.carousel-dots');
                 
+                dotsContainer.innerHTML = ''; // Clear existing
                 // Create dots
                 slides.forEach((_, i) => {
                     const dot = document.createElement('button');
@@ -675,7 +723,8 @@ lib/src/
                 en.classList.add('hidden');
             }
             
-            // Reset carousel to first slide on lang switch
+            // Re-init dots for the switched language and reset
+            initCarousels();
             goToSlide(lang, 0);
         }
 
