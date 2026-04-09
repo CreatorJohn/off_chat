@@ -59,7 +59,6 @@
             width: 100%;
         }
 
-        /* Fixed the negative margin hack by removing it and using width 100% with proper padding */
         header .header-inner {
             max-width: 1100px;
             margin: 0 auto;
@@ -165,7 +164,6 @@
             border: 1px solid rgba(242, 202, 80, 0.1);
             margin-bottom: 2rem;
             transition: all 0.3s ease;
-            height: 100%;
         }
 
         .card:hover {
@@ -179,15 +177,6 @@
             gap: 1.5rem;
         }
 
-        code {
-            background-color: var(--surface-variant);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Courier New', Courier, monospace;
-            color: var(--primary-gold);
-            font-size: 0.9rem;
-        }
-
         pre {
             background-color: var(--surface-variant);
             padding: 1.5rem;
@@ -198,41 +187,48 @@
             border: 1px solid rgba(255,255,255,0.05);
         }
 
-        /* Prototype Flow Styling */
-        .flow-container {
-            display: flex;
-            flex-direction: column;
-            gap: 5rem;
-            margin-top: 3rem;
+        /* Carousel Styles */
+        .carousel-wrapper {
+            position: relative;
+            margin: 3rem 0;
+            padding: 0 4rem;
         }
 
-        .flow-step {
+        .carousel-container {
+            overflow: hidden;
+            border-radius: 32px;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .carousel-slide {
+            min-width: 100%;
             display: grid;
             grid-template-columns: 300px 1fr;
             gap: 3rem;
             align-items: center;
-        }
-
-        .flow-image {
+            padding: 2rem;
             background-color: var(--surface);
-            border-radius: 40px;
+            border-radius: 32px;
+        }
+
+        .carousel-image {
+            border-radius: 24px;
             overflow: hidden;
-            border: 2px solid var(--surface-variant);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-            transition: transform 0.5s ease;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border: 1px solid var(--surface-variant);
         }
 
-        .flow-step:hover .flow-image {
-            transform: scale(1.02);
-        }
-
-        .flow-image img {
+        .carousel-image img {
             width: 100%;
             display: block;
         }
 
-        .flow-content {
-            padding: 1rem 0;
+        .carousel-content {
+            text-align: left;
         }
 
         .step-number {
@@ -246,46 +242,85 @@
             opacity: 0.8;
         }
 
-        /* Media Queries */
-        @media (max-width: 1024px) {
-            .flow-step {
-                gap: 2rem;
-                grid-template-columns: 260px 1fr;
-            }
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3.5rem;
+            height: 3.5rem;
+            background-color: var(--surface);
+            border: 1px solid var(--primary-gold);
+            color: var(--primary-gold);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            z-index: 10;
         }
 
-        @media (max-width: 768px) {
-            .container { padding: 0 1rem; }
-            header { padding: 0.8rem 1rem; }
-            
-            .flow-step {
+        .carousel-nav:hover {
+            background-color: var(--primary-gold);
+            color: var(--background);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .carousel-nav.prev { left: 0; }
+        .carousel-nav.next { right: 0; }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 2rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--surface-variant);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .dot.active {
+            background-color: var(--primary-gold);
+            width: 24px;
+            border-radius: 10px;
+        }
+
+        /* Responsive Carousel */
+        @media (max-width: 900px) {
+            .carousel-slide {
                 grid-template-columns: 1fr;
-                text-align: center;
                 gap: 2rem;
+                text-align: center;
+                padding: 1.5rem;
             }
-            
-            .flow-image {
-                max-width: 280px;
+            .carousel-image {
+                max-width: 260px;
                 margin: 0 auto;
             }
-            
-            .flow-content {
-                padding-top: 0;
+            .carousel-content {
+                text-align: center;
             }
-
-            h2 { font-size: 1.6rem; margin-top: 3rem; }
-            .section { margin-bottom: 4rem; }
-            .grid { grid-template-columns: 1fr; }
-        }
-
-        @media (max-width: 480px) {
-            .logo { font-size: 1rem; letter-spacing: 1px; }
-            .header-actions { gap: 0.75rem; }
-            .lang-btn { padding: 0.25rem 0.5rem; font-size: 0.75rem; }
-            .github-link { font-size: 1.1rem; }
-            
-            h1 { font-size: 2.2rem; }
-            .card { padding: 1.5rem; }
+            .carousel-wrapper {
+                padding: 0 1rem;
+            }
+            .carousel-nav {
+                width: 3rem;
+                height: 3rem;
+                top: auto;
+                bottom: -4rem;
+                transform: none;
+            }
+            .carousel-nav.prev { left: 25%; }
+            .carousel-nav.next { right: 25%; }
+            .carousel-dots { margin-top: 5rem; }
         }
 
         [lang="cs"] { display: none; }
@@ -349,71 +384,74 @@
 
             <section class="section">
                 <h2>📱 User Experience Journey</h2>
-                <p>A walk-through of the premium "Aurelian Noir" interface and the application flow.</p>
+                <p>Explore the premium "Aurelian Noir" interface through the application's key lifecycle steps.</p>
                 
-                <div class="flow-container">
-                    <div class="flow-step">
-                        <div class="flow-image"><img src="ui_prototype/onboarding_splash_screen_updated_logo/screen.png"></div>
-                        <div class="flow-content">
-                            <span class="step-number">Entry</span>
-                            <h3>The Arrival</h3>
-                            <p>Users are greeted by the minimalist splash screen, establishing the high-end digital concierge aesthetic immediately.</p>
+                <div class="carousel-wrapper" id="carousel-en">
+                    <button class="carousel-nav prev" onclick="moveCarousel('en', -1)"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="carousel-nav next" onclick="moveCarousel('en', 1)"><i class="fa-solid fa-chevron-right"></i></button>
+                    
+                    <div class="carousel-container">
+                        <div class="carousel-track">
+                            <div class="carousel-slide">
+                                <div class="carousel-image"><img src="ui_prototype/onboarding_splash_screen_updated_logo/screen.png"></div>
+                                <div class="carousel-content">
+                                    <span class="step-number">Entry</span>
+                                    <h3>The Arrival</h3>
+                                    <p>Users are greeted by the minimalist splash screen, establishing the high-end digital concierge aesthetic immediately.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="carousel-image"><img src="ui_prototype/onboarding_step_1_user_discovery/screen.png"></div>
+                                <div class="carousel-content">
+                                    <span class="step-number">Step 01</span>
+                                    <h3>Node Identification</h3>
+                                    <p>The onboarding process begins by explaining the decentralized nature of the network. Every device acts as a secure Node.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="carousel-image"><img src="ui_prototype/onboarding_step_2_offline_messaging/screen.png"></div>
+                                <div class="carousel-content">
+                                    <span class="step-number">Step 02</span>
+                                    <h3>Offline Security</h3>
+                                    <p>Communication occurs directly between devices. No servers, no logs, no internet required.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="carousel-image"><img src="ui_prototype/discovery_screen_gold_v2/screen.png"></div>
+                                <div class="carousel-content">
+                                    <span class="step-number">The Hub</span>
+                                    <h3>Node Discovery</h3>
+                                    <p>The main interface scans for nearby active pulses. Discovered users appear with their custom aliases and proximity status.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="carousel-image"><img src="ui_prototype/location_screen_gold_v2/screen.png"></div>
+                                <div class="carousel-content">
+                                    <span class="step-number">Spatial Tracking</span>
+                                    <h3>The Radar</h3>
+                                    <p>A custom-built visualization engine combines GPS and compass data to paint relative peer positions in real-time.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="carousel-image"><img src="ui_prototype/message_screen_gold_v2/screen.png"></div>
+                                <div class="carousel-content">
+                                    <span class="step-number">Communication</span>
+                                    <h3>Secure Messaging</h3>
+                                    <p>Direct peer-to-peer GATT communication with automated chunking and reassembly protocols for text and media.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="carousel-image"><img src="ui_prototype/profile_screen_gold_v2/screen.png"></div>
+                                <div class="carousel-content">
+                                    <span class="step-number">Management</span>
+                                    <h3>Identity & Settings</h3>
+                                    <p>Manage your Node's appearance, toggle spatial visibility, and configure notification alerts.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="flow-step">
-                        <div class="flow-image"><img src="ui_prototype/onboarding_step_1_user_discovery/screen.png"></div>
-                        <div class="flow-content">
-                            <span class="step-number">Step 01</span>
-                            <h3>Node Identification</h3>
-                            <p>The onboarding process begins by explaining the decentralized nature of the network. Every device acts as a secure Node.</p>
-                        </div>
-                    </div>
-
-                    <div class="flow-step">
-                        <div class="flow-image"><img src="ui_prototype/onboarding_step_2_offline_messaging/screen.png"></div>
-                        <div class="flow-content">
-                            <span class="step-number">Step 02</span>
-                            <h3>Offline Security</h3>
-                            <p>Communication occurs directly between devices. No servers, no logs, no internet required.</p>
-                        </div>
-                    </div>
-
-                    <div class="flow-step">
-                        <div class="flow-image"><img src="ui_prototype/discovery_screen_gold_v2/screen.png"></div>
-                        <div class="flow-content">
-                            <span class="step-number">The Hub</span>
-                            <h3>Node Discovery</h3>
-                            <p>The main interface scans for nearby active pulses. Discovered users appear with their custom aliases and proximity status.</p>
-                        </div>
-                    </div>
-
-                    <div class="flow-step">
-                        <div class="flow-image"><img src="ui_prototype/location_screen_gold_v2/screen.png"></div>
-                        <div class="flow-content">
-                            <span class="step-number">Spatial Tracking</span>
-                            <h3>The Radar</h3>
-                            <p>A custom-built visualization engine. By combining GPS coordinates and the device's internal compass, it paints the relative position of peers in real-time.</p>
-                        </div>
-                    </div>
-
-                    <div class="flow-step">
-                        <div class="flow-image"><img src="ui_prototype/message_screen_gold_v2/screen.png"></div>
-                        <div class="flow-content">
-                            <span class="step-number">Communication</span>
-                            <h3>Secure Messaging</h3>
-                            <p>Direct peer-to-peer GATT communication. Supports text and media (images) through automated chunking and reassembly protocols.</p>
-                        </div>
-                    </div>
-
-                    <div class="flow-step">
-                        <div class="flow-image"><img src="ui_prototype/profile_screen_gold_v2/screen.png"></div>
-                        <div class="flow-content">
-                            <span class="step-number">Management</span>
-                            <h3>Identity & Settings</h3>
-                            <p>Manage your Node's appearance, toggle spatial visibility, and configure notification alerts.</p>
-                        </div>
-                    </div>
+                    
+                    <div class="carousel-dots"></div>
                 </div>
             </section>
 
@@ -432,20 +470,6 @@ lib/src/
 │   ├── theme/        # Centralized Aurelian Noir
 │   └── database/     # Isar persistence layer
 └── app.dart          # Root Application</pre>
-            </section>
-
-            <section class="section">
-                <h2>🧪 Verification & Quality</h2>
-                <div class="grid">
-                    <div class="card">
-                        <h3>Netsim Testing</h3>
-                        <p>Simulates BLE radio signals between multiple Android emulators, allowing local verification of discovery and GATT sync logic.</p>
-                    </div>
-                    <div class="card">
-                        <h3>CI/CD Pipeline</h3>
-                        <p>GitHub Actions automatically builds release APKs and App Bundles on every push to the master branch.</p>
-                    </div>
-                </div>
             </section>
         </main>
 
@@ -484,71 +508,74 @@ lib/src/
 
             <section class="section">
                 <h2>📱 Uživatelská Cesta</h2>
-                <p>Prohlídka prémiového rozhraní "Aurelian Noir" a průběhu používání aplikace.</p>
+                <p>Prohlédněte si prémiové rozhraní "Aurelian Noir" skrze klíčové kroky životního cyklu aplikace.</p>
                 
-                <div class="flow-container">
-                    <div class="flow-step">
-                        <div class="flow-image"><img src="ui_prototype/onboarding_splash_screen_updated_logo/screen.png"></div>
-                        <div class="flow-content">
-                            <span class="step-number">Vstup</span>
-                            <h3>První Dojem</h3>
-                            <p>Uživatelé jsou přivítáni minimalistickou úvodní obrazovkou, která okamžitě definuje estetiku digitálního concierge.</p>
+                <div class="carousel-wrapper" id="carousel-cs">
+                    <button class="carousel-nav prev" onclick="moveCarousel('cs', -1)"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="carousel-nav next" onclick="moveCarousel('cs', 1)"><i class="fa-solid fa-chevron-right"></i></button>
+                    
+                    <div class="carousel-container">
+                        <div class="carousel-track">
+                            <div class="carousel-slide">
+                                <div class="carousel-image"><img src="ui_prototype/onboarding_splash_screen_updated_logo/screen.png"></div>
+                                <div class="carousel-content">
+                                    <span class="step-number">Vstup</span>
+                                    <h3>První Dojem</h3>
+                                    <p>Uživatelé jsou přivítáni minimalistickou úvodní obrazovkou, která okamžitě definuje estetiku digitálního concierge.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="carousel-image"><img src="ui_prototype/onboarding_step_1_user_discovery/screen.png"></div>
+                                <div class="carousel-content">
+                                    <span class="step-number">Krok 01</span>
+                                    <h3>Identifikace Uzlu</h3>
+                                    <p>Proces nastavení začíná vysvětlením decentralizované povahy sítě. Každé zařízení funguje jako zabezpečený uzel.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="carousel-image"><img src="ui_prototype/onboarding_step_2_offline_messaging/screen.png"></div>
+                                <div class="carousel-content">
+                                    <span class="step-number">Krok 02</span>
+                                    <h3>Offline Bezpečnost</h3>
+                                    <p>Komunikace probíhá přímo mezi zařízeními. Žádné servery, žádné záznamy, žádný internet.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="carousel-image"><img src="ui_prototype/discovery_screen_gold_v2/screen.png"></div>
+                                <div class="carousel-content">
+                                    <span class="step-number">Centrum</span>
+                                    <h3>Objevování Uzlů</h3>
+                                    <p>Hlavní rozhraní skenuje aktivní pulzy v okolí. Objevení uživatelé se zobrazí s vlastními přezdívkami a stavem blízkosti.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="carousel-image"><img src="ui_prototype/location_screen_gold_v2/screen.png"></div>
+                                <div class="carousel-content">
+                                    <span class="step-number">Prostorové Sledování</span>
+                                    <h3>Radar</h3>
+                                    <p>Vlastní vizualizační engine kombinuje GPS a kompas pro vykreslení relativní polohy ostatních v reálném čase.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="carousel-image"><img src="ui_prototype/message_screen_gold_v2/screen.png"></div>
+                                <div class="carousel-content">
+                                    <span class="step-number">Komunikace</span>
+                                    <h3>Zabezpečené Zprávy</h3>
+                                    <p>Přímá peer-to-peer komunikace přes GATT s automatickým dělením a skládáním textu a médií.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="carousel-image"><img src="ui_prototype/profile_screen_gold_v2/screen.png"></div>
+                                <div class="carousel-content">
+                                    <span class="step-number">Správa</span>
+                                    <h3>Identita a Nastavení</h3>
+                                    <p>Spravujte vzhled svého uzlu, přepínejte prostorovou viditelnost a konfigurujte upozornění.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="flow-step">
-                        <div class="flow-image"><img src="ui_prototype/onboarding_step_1_user_discovery/screen.png"></div>
-                        <div class="flow-content">
-                            <span class="step-number">Krok 01</span>
-                            <h3>Identifikace Uzlu</h3>
-                            <p>Proces nastavení začíná vysvětlením decentralizované povahy sítě. Každé zařízení funguje jako zabezpečený uzel.</p>
-                        </div>
-                    </div>
-
-                    <div class="flow-step">
-                        <div class="flow-image"><img src="ui_prototype/onboarding_step_2_offline_messaging/screen.png"></div>
-                        <div class="flow-content">
-                            <span class="step-number">Krok 02</span>
-                            <h3>Offline Bezpečnost</h3>
-                            <p>Komunikace probíhá přímo mezi zařízeními. Žádné servery, žádné záznamy, žádný internet.</p>
-                        </div>
-                    </div>
-
-                    <div class="flow-step">
-                        <div class="flow-image"><img src="ui_prototype/discovery_screen_gold_v2/screen.png"></div>
-                        <div class="flow-content">
-                            <span class="step-number">Centrum</span>
-                            <h3>Objevování Uzlů</h3>
-                            <p>Hlavní rozhraní skenuje aktivní pulzy v okolí. Objevení uživatelé se zobrazí s vlastními přezdívkami a stavem blízkosti.</p>
-                        </div>
-                    </div>
-
-                    <div class="flow-step">
-                        <div class="flow-image"><img src="ui_prototype/location_screen_gold_v2/screen.png"></div>
-                        <div class="flow-content">
-                            <span class="step-number">Prostorové Sledování</span>
-                            <h3>Radar</h3>
-                            <p>Vlastní vizualizační engine. Kombinací GPS souřadnic a vnitřního kompasu vykresluje relativní polohu ostatních v reálném čase.</p>
-                        </div>
-                    </div>
-
-                    <div class="flow-step">
-                        <div class="flow-image"><img src="ui_prototype/message_screen_gold_v2/screen.png"></div>
-                        <div class="flow-content">
-                            <span class="step-number">Komunikace</span>
-                            <h3>Zabezpečené Zprávy</h3>
-                            <p>Přímá peer-to-peer komunikace přes GATT. Podporuje text i média (obrázky) díky protokolu pro automatické dělení a skládání dat.</p>
-                        </div>
-                    </div>
-
-                    <div class="flow-step">
-                        <div class="flow-image"><img src="ui_prototype/profile_screen_gold_v2/screen.png"></div>
-                        <div class="flow-content">
-                            <span class="step-number">Správa</span>
-                            <h3>Identita a Nastavení</h3>
-                            <p>Spravujte vzhled svého uzlu, přepínejte prostorovou viditelnost a konfigurujte upozornění.</p>
-                        </div>
-                    </div>
+                    
+                    <div class="carousel-dots"></div>
                 </div>
             </section>
 
@@ -568,20 +595,6 @@ lib/src/
 │   └── database/     # Perzistentní vrstva Isar
 └── app.dart          # Kořenová aplikace</pre>
             </section>
-
-            <section class="section">
-                <h2>🧪 Ověřování a Kvalita</h2>
-                <div class="grid">
-                    <div class="card">
-                        <h3>Testování Netsim</h3>
-                        <p>Simuluje BLE rádiové signály mezi emulátory Android, což umožňuje lokální ověření logiky objevování a GATT synchronizace.</p>
-                    </div>
-                    <div class="card">
-                        <h3>CI/CD Pipeline</h3>
-                        <p>GitHub Actions automaticky sestavuje instalační APK a App Bundle při každém nahrání do hlavní větve.</p>
-                    </div>
-                </div>
-            </section>
         </main>
 
         <footer style="text-align: center; padding: 4rem 0; border-top: 1px solid var(--surface-variant); color: var(--text-secondary); font-size: 0.8rem;">
@@ -590,6 +603,53 @@ lib/src/
     </div>
 
     <script>
+        const carouselStates = {
+            en: { index: 0 },
+            cs: { index: 0 }
+        };
+
+        function initCarousels() {
+            ['en', 'cs'].forEach(lang => {
+                const wrapper = document.getElementById(`carousel-${lang}`);
+                const track = wrapper.querySelector('.carousel-track');
+                const slides = track.querySelectorAll('.carousel-slide');
+                const dotsContainer = wrapper.querySelector('.carousel-dots');
+                
+                // Create dots
+                slides.forEach((_, i) => {
+                    const dot = document.createElement('button');
+                    dot.classList.add('dot');
+                    if (i === 0) dot.classList.add('active');
+                    dot.onclick = () => goToSlide(lang, i);
+                    dotsContainer.appendChild(dot);
+                });
+            });
+        }
+
+        function moveCarousel(lang, direction) {
+            const wrapper = document.getElementById(`carousel-${lang}`);
+            const slides = wrapper.querySelectorAll('.carousel-slide');
+            let newIndex = carouselStates[lang].index + direction;
+            
+            if (newIndex < 0) newIndex = slides.length - 1;
+            if (newIndex >= slides.length) newIndex = 0;
+            
+            goToSlide(lang, newIndex);
+        }
+
+        function goToSlide(lang, index) {
+            const wrapper = document.getElementById(`carousel-${lang}`);
+            const track = wrapper.querySelector('.carousel-track');
+            const dots = wrapper.querySelectorAll('.dot');
+            
+            carouselStates[lang].index = index;
+            track.style.transform = `translateX(-${index * 100}%)`;
+            
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
         function switchLang(lang) {
             const en = document.getElementById('content-en');
             const cs = document.getElementById('content-cs');
@@ -614,7 +674,13 @@ lib/src/
                 en.classList.remove('visible');
                 en.classList.add('hidden');
             }
+            
+            // Reset carousel to first slide on lang switch
+            goToSlide(lang, 0);
         }
+
+        // Initialize on load
+        window.onload = initCarousels;
     </script>
 </body>
 </html>
