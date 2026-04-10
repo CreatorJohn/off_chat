@@ -30,10 +30,25 @@ class OffChatBleService {
   }
 
   Future<void> _initPeripheral() async {
-    await per.BlePeripheral.initialize();
-    per.BlePeripheral.setAdvertisingStatusUpdateCallback((advertising, error) {
-      _advertisingController.add(advertising);
-    });
+    try {
+      _log.info('Initializing BlePeripheral...');
+      await per.BlePeripheral.initialize();
+      _log.info('BlePeripheral initialized.');
+      
+      per.BlePeripheral.setAdvertisingStatusUpdateCallback((advertising, error) {
+        if (error != null) {
+          _log.severe('Advertising status error: $error');
+        }
+        _log.info('Advertising status update: $advertising');
+        _advertisingController.add(advertising);
+      });
+      
+      per.BlePeripheral.setBleStateChangeCallback((state) {
+        _log.info('Bluetooth state changed: $state');
+      });
+    } catch (e) {
+      _log.severe('Failed to initialize BlePeripheral: $e');
+    }
   }
 
   void handleIncomingMessage(String senderId, String text) {

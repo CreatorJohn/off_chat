@@ -3,12 +3,81 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:off_chat/src/core/theme/app_theme.dart';
+import 'package:off_chat/src/core/utils/log_service.dart';
 import 'package:off_chat/src/features/discovery/data/ble_service.dart';
 import 'package:off_chat/src/features/discovery/presentation/discovery_controller.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class DiscoveryScreen extends ConsumerWidget {
   const DiscoveryScreen({super.key});
+
+  void _showDebugTerminal(BuildContext context, WidgetRef ref) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.black,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (context) {
+        final logs = ref.watch(logServiceProvider);
+        return DraggableScrollableSheet(
+          initialChildSize: 0.7,
+          minChildSize: 0.5,
+          maxChildSize: 0.95,
+          expand: false,
+          builder: (context, scrollController) => Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  border: Border(bottom: BorderSide(color: Colors.white.withValues(alpha: 0.1))),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('SYSTEM LOGS', 
+                      style: TextStyle(color: AppTheme.primaryGold, fontWeight: FontWeight.bold, letterSpacing: 2)
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.delete_sweep, color: Colors.redAccent),
+                      onPressed: () => ref.read(logServiceProvider.notifier).clearLogs(),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  controller: scrollController,
+                  padding: const EdgeInsets.all(16),
+                  itemCount: logs.length,
+                  itemBuilder: (context, index) {
+                    final log = logs[index];
+                    Color color = Colors.white70;
+                    if (log.contains('[SEVERE]')) color = Colors.redAccent;
+                    if (log.contains('[WARNING]')) color = Colors.orangeAccent;
+                    if (log.contains('[INFO]')) color = Colors.blueAccent;
+                    
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: Text(
+                        log,
+                        style: const TextStyle(
+                          color: color,
+                          fontFamily: 'monospace',
+                          fontSize: 11,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -54,11 +123,14 @@ class DiscoveryScreen extends ConsumerWidget {
           ],
         ),
         leadingWidth: kDebugMode ? 100 : 60,
-        title: Text(
-          'OFFCHAT',
-          style: Theme.of(context).textTheme.labelSmall?.copyWith(
-            color: AppTheme.primaryGold,
-            letterSpacing: 4,
+        title: GestureDetector(
+          onTripleTap: () => _showDebugTerminal(context, ref),
+          child: Text(
+            'OFFCHAT',
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+              color: AppTheme.primaryGold,
+              letterSpacing: 4,
+            ),
           ),
         ),
         centerTitle: true,

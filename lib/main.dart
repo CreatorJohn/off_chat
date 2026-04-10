@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 import 'package:off_chat/src/app.dart';
+import 'package:off_chat/src/core/utils/log_service.dart';
 import 'package:off_chat/src/features/chat/data/message_sync_service.dart';
 
 void main() {
@@ -14,7 +15,8 @@ void main() {
   });
 
   final container = ProviderContainer();
-  // Initialize the sync service to start listening
+  // Initialize services
+  container.read(logServiceProvider);
   container.read(messageSyncServiceProvider);
 
   runApp(
