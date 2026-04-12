@@ -19,6 +19,9 @@ class OffChatBleService {
   final _imageController = StreamController<({String senderId, Uint8List imageBytes})>.broadcast();
   final _advertisingController = StreamController<bool>.broadcast();
 
+  bool _isInitialized = false;
+  bool _isStarting = false;
+
   Stream<({String senderId, String text})> get incomingMessages => _messageController.stream;
   Stream<({String senderId, Uint8List imageBytes})> get incomingImages => _imageController.stream;
 
@@ -26,13 +29,15 @@ class OffChatBleService {
   Stream<bool> get isAdvertising => _advertisingController.stream;
 
   OffChatBleService() {
-    _initPeripheral();
+    // We will initialize manually after permissions are granted
   }
 
-  Future<void> _initPeripheral() async {
+  Future<void> initialize() async {
+    if (_isInitialized) return;
     try {
       _log.info('Initializing BlePeripheral...');
       await per.BlePeripheral.initialize();
+      _isInitialized = true;
       _log.info('BlePeripheral initialized.');
       
       per.BlePeripheral.setAdvertisingStatusUpdateCallback((advertising, error) {
@@ -66,6 +71,16 @@ class OffChatBleService {
     required double latitude,
     required double longitude,
   }) async {
+    if (!_isInitialized) {
+      await initialize();
+    }
+    
+    if (_isStarting) {
+      _log.info('Advertising already in progress, skipping start request.');
+      return;
+    }
+    _isStarting = true;
+
     final ByteData byteData = ByteData(13);
     int flags = 0;
     if (platformFlag == 1) flags |= (1 << 0);
@@ -78,22 +93,25 @@ class OffChatBleService {
     _log.info('Preparing to advertise. Payload: ${byteData.buffer.asUint8List()}');
 
     try {
-      // Clear previous advertising if any
+      // Clear previous advertising
       await per.BlePeripheral.stopAdvertising();
+      // Small delay to let the OS clean up
+      await Future.delayed(const Duration(milliseconds: 500));
       
       await per.BlePeripheral.startAdvertising(
         services: [offChatServiceUuid],
-        localName: null, // Disable local name to save bytes in primary advertisement
+        localName: null, 
         manufacturerData: per.ManufacturerData(
           manufacturerId: 0xFFFF,
           data: byteData.buffer.asUint8List(),
         ),
-        // Move the 13-byte payload to the scan response packet
         addManufacturerDataInScanResponse: true,
       );
-      _log.info('BlePeripheral.startAdvertising initiated (Primary: ServiceUUID, ScanResponse: ManufacturerData)');
+      _log.info('BlePeripheral.startAdvertising successfully initiated.');
     } catch (e) {
       _log.severe('Error starting advertising: $e');
+    } finally {
+      _isStarting = false;
     }
   }
 

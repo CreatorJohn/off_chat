@@ -56,6 +56,12 @@ We pack essential metadata into a byte-level structure to fit within Manufacture
 - **Local Name:** Disabled to free up primary advertisement bandwidth.
 - **Background (iOS):** When Scan Response data is stripped by the OS, the app initiates a **silent GATT connection** to read the "Identity Characteristic," fetching the 13-byte payload before disconnecting.
 
+### 3. Intelligent Motion (Flight Mode)
+To ensure stability in high-speed environments (airplanes, fast trains), the protocol implements **Adaptive Throttling**:
+- **Normal Mode (< 72 km/h):** Updates location and restarts advertising every **10 meters**.
+- **High-Speed Mode (≥ 72 km/h):** Switches to a stable **2-minute timer**, ignoring distance changes. This prevents rapid Bluetooth stack resets and allows peers a reliable window to connect.
+- **Heartbeat:** Forced update every **5 minutes** even if the device is stationary.
+
 ---
 
 ## 🛠 Tech Stack & Dependencies

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:crclib/catalog.dart';
 import 'package:ble_peripheral/ble_peripheral.dart' as per;
+import 'package:logging/logging.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:off_chat/src/features/discovery/data/ble_service.dart';
@@ -11,8 +12,14 @@ import 'package:off_chat/src/features/location/data/location_service.dart';
 
 part 'advertising_controller.g.dart';
 
+final _log = Logger('AdvertisingController');
+
 @Riverpod(keepAlive: true)
 class AdvertisingController extends _$AdvertisingController {
+  double? _lastLat;
+  double? _lastLng;
+  DateTime? _lastUpdateTime;
+
   @override
   FutureOr<void> build() async {
     final user = await ref.watch(profileControllerProvider.future);
@@ -28,15 +35,53 @@ class AdvertisingController extends _$AdvertisingController {
       ].request();
 
       if (status.values.any((s) => s.isDenied)) {
-        return; // Cannot advertise without permissions
+        _log.severe('BLE permissions denied.');
+        return; 
       }
     }
 
     final locationAsync = ref.watch(locationServiceProvider);
     final bleServiceInstance = ref.read(bleServiceProvider);
 
-    final latitude = locationAsync.value?.latitude ?? 0.0;
-    final longitude = locationAsync.value?.longitude ?? 0.0;
+    // Initialize BLE only after permissions
+    await bleServiceInstance.initialize();
+
+    if (locationAsync.value == null) return;
+
+    final latitude = locationAsync.value!.latitude;
+    final longitude = locationAsync.value!.longitude;
+    final speed = locationAsync.value!.speed;
+
+    final now = DateTime.now();
+    bool shouldUpdate = false;
+
+    if (_lastLat == null || _lastUpdateTime == null) {
+      shouldUpdate = true;
+    } else {
+      final timeSinceUpdate = now.difference(_lastUpdateTime!).inSeconds;
+      
+      // High-Speed (Flight Mode) Check: > 20 m/s (72 km/h)
+      if (speed >= 20.0) {
+        // At high speeds, only update every 2 minutes for stability
+        if (timeSinceUpdate >= 120) {
+          _log.info('High-speed detected ($speed m/s). Throttling updates to 2 mins.');
+          shouldUpdate = true;
+        }
+      } else {
+        // Normal Mode: Check if moved > 10 meters
+        final latDist = (latitude - _lastLat!).abs();
+        final lngDist = (longitude - _lastLng!).abs();
+        if (latDist > 0.0001 || lngDist > 0.0001 || timeSinceUpdate > 300) {
+          shouldUpdate = true;
+        }
+      }
+    }
+
+    if (!shouldUpdate) return;
+
+    _lastLat = latitude;
+    _lastLng = longitude;
+    _lastUpdateTime = now;
 
     // Calculate Profile Hash
     final profileData = '${user.username}${user.profilePicturePath ?? ''}';

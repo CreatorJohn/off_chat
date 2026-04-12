@@ -12,11 +12,13 @@ class LocationData {
   final double latitude;
   final double longitude;
   final double heading;
+  final double speed;
 
   LocationData({
     required this.latitude,
     required this.longitude,
     required this.heading,
+    required this.speed,
   });
 }
 
@@ -28,6 +30,7 @@ class LocationService extends _$LocationService {
   double _currentLat = 0;
   double _currentLng = 0;
   double _currentHeading = 0;
+  double _currentSpeed = 0;
 
   @override
   Stream<LocationData> build() async* {
@@ -49,10 +52,12 @@ class LocationService extends _$LocationService {
       (position) {
         _currentLat = position.latitude;
         _currentLng = position.longitude;
+        _currentSpeed = position.speed;
         controller.add(LocationData(
           latitude: _currentLat,
           longitude: _currentLng,
           heading: _currentHeading,
+          speed: _currentSpeed,
         ));
       },
       onError: (error) {
@@ -68,6 +73,7 @@ class LocationService extends _$LocationService {
           latitude: _currentLat,
           longitude: _currentLng,
           heading: _currentHeading,
+          speed: _currentSpeed,
         ));
       },
       onError: (error) {
