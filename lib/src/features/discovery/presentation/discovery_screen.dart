@@ -63,17 +63,17 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
                     if (log.contains('[WARNING]')) color = Colors.orangeAccent;
                     if (log.contains('[INFO]')) color = Colors.blueAccent;
                     
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: Text(
-                        log,
-                        style: const TextStyle(
-                          color: color,
-                          fontFamily: 'monospace',
-                          fontSize: 11,
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        child: Text(
+                          log,
+                          style: TextStyle(
+                            color: color,
+                            fontFamily: 'monospace',
+                            fontSize: 11,
+                          ),
                         ),
-                      ),
-                    );
+                      );
                   },
                 ),
               ),
