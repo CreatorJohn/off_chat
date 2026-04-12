@@ -548,6 +548,19 @@
                             <p><strong>Background (iOS):</strong> When Scan Response data is stripped by the OS, the app initiates a <em>silent GATT connection</em> to read the "Identity Characteristic."</p>
                         </div>
                     </div>
+                    
+                    <h3 style="margin-top: 3rem;">✈️ Intelligent Motion (Flight Mode)</h3>
+                    <p>High-speed environments (airplanes, fast trains) present a challenge for BLE stability. The protocol implements <strong>Adaptive Throttling</strong>:</p>
+                    <div class="grid">
+                        <div class="card" style="margin-bottom: 0;">
+                            <h4>Normal Mode (< 72 km/h)</h4>
+                            <p>Updates location and resets advertising every <strong>10 meters</strong> for high spatial resolution.</p>
+                        </div>
+                        <div class="card" style="margin-bottom: 0;">
+                            <h4>Flight Mode (≥ 72 km/h)</h4>
+                            <p>Switches to a stable <strong>2-minute timer</strong>, ignoring distance changes. This ensures a reliable connection window for peers.</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -701,6 +714,19 @@ lib/src/
                             <p><strong>Pozadí:</strong> Na iOS aplikace zahájí <em>tiché GATT připojení</em> pro přečtení identity, pokud jsou pakety ořezány operačním systémem.</p>
                         </div>
                     </div>
+
+                    <h3 style="margin-top: 3rem;">✈️ Inteligentní pohyb (Letový režim)</h3>
+                    <p>Prostředí s vysokou rychlostí (letadla, rychlovlaky) představují výzvu pro stabilitu BLE. Protokol implementuje <strong>Adaptivní Throttling</strong>:</p>
+                    <div class="grid">
+                        <div class="card" style="margin-bottom: 0;">
+                            <h4>Normální režim (< 72 km/h)</h4>
+                            <p>Aktualizuje polohu a restartuje vysílání každých <strong>10 metrů</strong> pro vysoké prostorové rozlišení.</p>
+                        </div>
+                        <div class="card" style="margin-bottom: 0;">
+                            <h4>Letový režim (≥ 72 km/h)</h4>
+                            <p>Přepne na stabilní <strong>2minutový časovač</strong>, ignorujíc změny vzdálenosti. To zajišťuje spolehlivé okno pro připojení ostatních.</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -752,7 +778,7 @@ lib/src/
         </main>
 
         <footer style="text-align: center; padding: 4rem 0; border-top: 1px solid var(--surface-variant); color: var(--text-secondary); font-size: 0.8rem;">
-            <p>© 2026 Off Chat - CTU FEE Bachelor Thesis | V1.1.2+4</p>
+            <p>© 2026 Off Chat - CTU FEE Bachelor Thesis | V1.1.4+6</p>
         </footer>
     </div>
 
@@ -765,6 +791,7 @@ lib/src/
         function initCarousels() {
             ['en', 'cs'].forEach(lang => {
                 const wrapper = document.getElementById(`carousel-${lang}`);
+                if (!wrapper) return;
                 const track = wrapper.querySelector('.carousel-track');
                 const slides = track.querySelectorAll('.carousel-slide');
                 const dotsContainer = wrapper.querySelector('.carousel-dots');
@@ -793,6 +820,7 @@ lib/src/
 
         function goToSlide(lang, index) {
             const wrapper = document.getElementById(`carousel-${lang}`);
+            if (!wrapper) return;
             const track = wrapper.querySelector('.carousel-track');
             const dots = wrapper.querySelectorAll('.dot');
             
