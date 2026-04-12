@@ -8,9 +8,14 @@ import 'package:off_chat/src/features/discovery/data/ble_service.dart';
 import 'package:off_chat/src/features/discovery/presentation/discovery_controller.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-class DiscoveryScreen extends ConsumerWidget {
+class DiscoveryScreen extends ConsumerStatefulWidget {
   const DiscoveryScreen({super.key});
 
+  @override
+  ConsumerState<DiscoveryScreen> createState() => _DiscoveryScreenState();
+}
+
+class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
   void _showDebugTerminal(BuildContext context, WidgetRef ref) {
     showModalBottomSheet(
       context: context,
@@ -80,7 +85,7 @@ class DiscoveryScreen extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final devicesAsync = ref.watch(discoveryControllerProvider);
     final bleServiceInstance = ref.watch(bleServiceProvider);
 
@@ -124,12 +129,16 @@ class DiscoveryScreen extends ConsumerWidget {
         ),
         leadingWidth: kDebugMode ? 100 : 60,
         title: GestureDetector(
-          onTripleTap: () => _showDebugTerminal(context, ref),
-          child: Text(
-            'OFFCHAT',
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-              color: AppTheme.primaryGold,
-              letterSpacing: 4,
+          behavior: HitTestBehavior.opaque,
+          onLongPress: () => _showDebugTerminal(context, ref),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Text(
+              'OFFCHAT',
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                color: AppTheme.primaryGold,
+                letterSpacing: 4,
+              ),
             ),
           ),
         ),

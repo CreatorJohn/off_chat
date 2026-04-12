@@ -189,7 +189,7 @@
             border: 1px solid rgba(255,255,255,0.05);
         }
 
-        /* Carousel Section Full Height */
+        /* Carousel Section */
         .section-carousel {
             height: calc(100dvh - var(--header-height));
             display: flex;
@@ -235,15 +235,13 @@
         }
 
         .carousel-image {
-            border-radius: 12px;
+            border-radius: 32px;
             overflow: hidden;
             box-shadow: 0 30px 60px rgba(0,0,0,0.5);
             border: 1px solid var(--surface-variant);
-            max-height: 55dvh;
-            width: fit-content;
+            max-height: 65dvh;
             display: flex;
             align-items: center;
-            justify-content: center;
             cursor: zoom-in;
             transition: transform 0.3s ease;
         }
@@ -253,7 +251,8 @@
         }
 
         .carousel-image img {
-            height: 50dvh;
+            width: 100%;
+            height: 100%;
             object-fit: contain;
             display: block;
         }
@@ -317,6 +316,47 @@
             border-radius: 10px;
         }
 
+        /* Graph Section */
+        .graph-container {
+            width: 100%;
+            height: 600px;
+            background-color: var(--surface);
+            border-radius: 32px;
+            border: 1px solid var(--surface-variant);
+            overflow: hidden;
+            position: relative;
+            margin-top: 2rem;
+        }
+
+        .graph-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .btn-fullscreen {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background-color: var(--primary-gold);
+            color: var(--background);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .btn-fullscreen:hover {
+            transform: scale(1.05);
+        }
+
         /* Lightbox Dialog */
         .lightbox {
             position: fixed;
@@ -341,7 +381,7 @@
             object-fit: contain;
         }
 
-        /* Responsive Carousel */
+        /* Responsive */
         @media (max-width: 900px) {
             .carousel-slide {
                 grid-template-columns: 1fr;
@@ -372,6 +412,7 @@
             .carousel-nav.next { right: 20%; }
             .carousel-dots { margin-top: 2rem; }
             .section-carousel { height: auto; min-height: 100dvh; }
+            .graph-container { height: 400px; }
         }
 
         [lang="cs"] { display: none; }
@@ -511,6 +552,17 @@
             </section>
 
             <section class="section">
+                <h2>🧠 Architectural Knowledge Graph</h2>
+                <p>Interactive visualization of the project's codebase and conceptual relationships generated via Graphify.</p>
+                <div class="graph-container">
+                    <iframe src="graph.html" class="graph-iframe"></iframe>
+                    <a href="graph.html" target="_blank" class="btn-fullscreen">
+                        <i class="fa-solid fa-expand"></i> View Fullscreen
+                    </a>
+                </div>
+            </section>
+
+            <section class="section">
                 <h2>🏗 Technical Architecture</h2>
                 <pre>
 lib/src/
@@ -533,6 +585,10 @@ lib/src/
                     <div class="card">
                         <h3>Netsim Testing</h3>
                         <p>Simulates BLE radio signals between multiple Android emulators, allowing local verification of discovery and GATT sync logic.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Developer Terminal</h3>
+                        <p>A hidden real-time log viewer accessible via triple-tap on the home screen title, enabling deep on-device diagnostics.</p>
                     </div>
                     <div class="card">
                         <h3>CI/CD Pipeline</h3>
@@ -649,6 +705,17 @@ lib/src/
             </section>
 
             <section class="section">
+                <h2>🧠 Architektonický Graf Znalostí</h2>
+                <p>Interaktivní vizualizace kódové základny a konceptuálních vztahů projektu generovaná pomocí Graphify.</p>
+                <div class="graph-container">
+                    <iframe src="graph.html" class="graph-iframe"></iframe>
+                    <a href="graph.html" target="_blank" class="btn-fullscreen">
+                        <i class="fa-solid fa-expand"></i> Celá obrazovka
+                    </a>
+                </div>
+            </section>
+
+            <section class="section">
                 <h2>🏗 Technická Architektura</h2>
                 <pre>
 lib/src/
@@ -673,6 +740,10 @@ lib/src/
                         <p>Simuluje BLE rádiové signály mezi emulátory Android, což umožňuje lokální ověření logiky objevování a GATT synchronizace.</p>
                     </div>
                     <div class="card">
+                        <h3>Vývojářský Terminál</h3>
+                        <p>Skrytý prohlížeč logů v reálném čase přístupný trojitým klepnutím na název domovské obrazovky.</p>
+                    </div>
+                    <div class="card">
                         <h3>CI/CD Pipeline</h3>
                         <p>GitHub Actions automaticky sestavuje instalační APK a App Bundle při každém nahrání do hlavní větve.</p>
                     </div>
@@ -681,7 +752,7 @@ lib/src/
         </main>
 
         <footer style="text-align: center; padding: 4rem 0; border-top: 1px solid var(--surface-variant); color: var(--text-secondary); font-size: 0.8rem;">
-            <p>© 2026 Off Chat - CTU FEE Bachelor Thesis | V1.1.1+3</p>
+            <p>© 2026 Off Chat - CTU FEE Bachelor Thesis | V1.1.2+4</p>
         </footer>
     </div>
 

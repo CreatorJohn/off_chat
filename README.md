@@ -98,6 +98,12 @@ We pack essential metadata into a byte-level structure to fit within Manufacture
 
 ## 🧪 Testing & Verification
 
+### Developer Terminal (In-App)
+A hidden debug console is available for real-time monitoring of BLE status and system logs:
+1.  Navigate to the **Discovery (Home)** screen.
+2.  **Triple-tap** the "OFFCHAT" logo in the header.
+3.  The terminal displays the last 200 logs with color-coded severity levels.
+
 ### Multi-Emulator Testing (Netsim)
 You can test BLE discovery and GATT sync locally using **Netsim** (Android Network Simulator):
 1. Launch two Android emulators (API 31+).
