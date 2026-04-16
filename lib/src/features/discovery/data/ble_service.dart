@@ -11,6 +11,18 @@ part 'ble_service.g.dart';
 
 final _log = Logger('BleService');
 
+// Response status codes
+const int successStatusCode = 0;
+const int invalidCharacteristicStatusCode = 1;
+const int invalidMessageTypeStatusCode = 2;
+const int missingDataStatusCode = 3;
+
+// Message types
+const int startChunkCode = 0;
+const int dataChunkCode = 1;
+const int endChunkCode = 2;
+
+// Identifiers
 const String offChatServiceUuid = "4a1a5fc0-67a4-4a4c-83b3-8a301bd9b210";
 const String identityCharUuid = "4a1a5fc1-67a4-4a4c-83b3-8a301bd9b210";
 const String messageCharUuid = "4a1a5fc2-67a4-4a4c-83b3-8a301bd9b210";
@@ -22,6 +34,9 @@ class OffChatBleService {
   final _imageController =
       StreamController<({String senderId, Uint8List imageBytes})>.broadcast();
   final _advertisingController = StreamController<bool>.broadcast();
+
+  // Device → Characteristic → Data
+  final _incomingData = <String, Map<String, Uint8List>>{};
 
   bool _isInitialized = false;
   bool _isStarting = false;
@@ -35,7 +50,7 @@ class OffChatBleService {
   Stream<bool> get isAdvertising => _advertisingController.stream;
 
   OffChatBleService() {
-    // We will initialize manually after permissions are granted
+    // Service is initialized manually after permissions are granted
   }
 
   Future<void> initialize() async {
@@ -61,23 +76,128 @@ class OffChatBleService {
         _log.info('Bluetooth state changed: $state');
       });
 
-      per.BlePeripheral.setWriteRequestCallback((deviceId, characteristicId, offset, value) {
-        _log.info('GATT Write from $deviceId to $characteristicId. Value len: ${value?.length}');
-        
-        if (value != null) {
-          if (characteristicId == messageCharUuid) {
-            final text = utf8.decode(value);
-            handleIncomingMessage(deviceId, text);
-          } else if (characteristicId == imageCharUuid) {
-            // TODO: Handle image chunking/assembly
-            handleIncomingImage(deviceId, value);
-          }
+      per.BlePeripheral.setWriteRequestCallback((
+        deviceId,
+        characteristicId,
+        offset,
+        value,
+      ) {
+        /*
+          TODO: Implement receiving (sending) data protocol
+
+          Received data → TYPE,CONTENT
+          TYPE → START, DATA, END
+        */
+
+        _log.info(
+          'GATT Write from $deviceId to $characteristicId. Value len: ${value?.length}',
+        );
+
+        // Missing value
+        if (value == null || value.length < 2) {
+          return per.WriteRequestResult(status: missingDataStatusCode);
         }
-        return per.WriteRequestResult();
+
+        // Invalid characteristic
+        if (characteristicId != messageCharUuid &&
+            characteristicId != imageCharUuid) {
+          return per.WriteRequestResult(
+            status: invalidCharacteristicStatusCode,
+          );
+        }
+
+        final [type, ...content] = value;
+
+        switch (type) {
+          case startChunkCode: // First data chunk
+            _handleStartChunk(
+              deviceId,
+              characteristicId,
+              Uint8List.fromList(content),
+            );
+
+            break;
+          case dataChunkCode: // Other data chunks
+            if (!_handleDataChunk(deviceId, characteristicId, content)) {
+              return per.WriteRequestResult(
+                status: invalidMessageTypeStatusCode,
+              );
+            }
+
+            break;
+          case endChunkCode: // Last data chunk
+            if (!_handleLastChunk(deviceId, characteristicId, content)) {
+              return per.WriteRequestResult(
+                status: invalidMessageTypeStatusCode,
+              );
+            }
+
+            break;
+          default: // Invalid message type
+            return per.WriteRequestResult(status: invalidMessageTypeStatusCode);
+        }
+
+        return per.WriteRequestResult(status: successStatusCode);
       });
     } catch (e) {
       _log.severe('Failed to initialize BlePeripheral: $e');
     }
+  }
+
+  void _handleStartChunk(String deviceId, String charId, Uint8List content) {
+    _incomingData.update(deviceId, (chars) {
+      chars[charId] = Uint8List.fromList(content);
+
+      return chars;
+    }, ifAbsent: () => {charId: Uint8List.fromList(content)});
+  }
+
+  bool _handleDataChunk(String deviceId, String charId, List<int> content) {
+    if (_incomingData[deviceId]?.containsKey(charId) == false) {
+      return false;
+    }
+
+    _incomingData.update(deviceId, (oldChar) {
+      oldChar.update(
+        charId,
+        (oldData) => Uint8List.fromList([...oldData, ...content]),
+      );
+
+      return oldChar;
+    });
+
+    return true;
+  }
+
+  bool _handleLastChunk(String deviceId, String charId, List<int> content) {
+    if (_incomingData[deviceId]?.containsKey(charId) == false) {
+      return false;
+    }
+
+    final fullContent = Uint8List.fromList([
+      ..._incomingData[deviceId]![charId]!,
+      ...content,
+    ]);
+
+    _incomingData.update(deviceId, (oldChar) {
+      oldChar.remove(charId);
+
+      return oldChar;
+    });
+
+    switch (charId) {
+      case messageCharUuid:
+        final text = utf8.decode(fullContent);
+
+        handleIncomingMessage(deviceId, text);
+
+        break;
+      case imageCharUuid:
+        handleIncomingImage(deviceId, fullContent);
+        break;
+    }
+
+    return true;
   }
 
   void handleIncomingMessage(String senderId, String text) {
@@ -172,6 +292,7 @@ class OffChatBleService {
 
   Future<void> sendMessage(String remoteId, String text) async {
     final device = fbp.BluetoothDevice.fromId(remoteId);
+
     try {
       await device.connect(license: fbp.License.free);
 
@@ -192,10 +313,24 @@ class OffChatBleService {
       final mtu = await device.mtu.first;
 
       int offset = 0;
+
       while (offset < bytes.length) {
-        int end = offset + mtu - 3;
+        int end = offset + mtu - 4;
+        int type;
+
+        if (end >= bytes.length) {
+          type = endChunkCode;
+        } else if (offset == 0) {
+          type = startChunkCode;
+        } else {
+          type = dataChunkCode;
+        }
+
         if (end > bytes.length) end = bytes.length;
-        await char.write(bytes.sublist(offset, end), withoutResponse: false);
+        await char.write([
+          type,
+          ...bytes.sublist(offset, end),
+        ], withoutResponse: false);
         offset = end;
       }
 
@@ -221,13 +356,24 @@ class OffChatBleService {
 
       int mtu = await device.mtu.first;
       int offset = 0;
+
       while (offset < imageBytes.length) {
-        int end = offset + mtu - 3;
+        int end = offset + mtu - 4;
+        int type;
+
+        if (end >= imageBytes.length) {
+          type = endChunkCode;
+        } else if (offset == 0) {
+          type = startChunkCode;
+        } else {
+          type = dataChunkCode;
+        }
+
         if (end > imageBytes.length) end = imageBytes.length;
-        await char.write(
-          imageBytes.sublist(offset, end),
-          withoutResponse: true,
-        );
+        await char.write([
+          type,
+          ...imageBytes.sublist(offset, end),
+        ], withoutResponse: true);
         offset = end;
       }
     } finally {
