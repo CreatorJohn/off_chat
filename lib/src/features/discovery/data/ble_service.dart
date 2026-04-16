@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart' as fbp;
 import 'package:ble_peripheral/ble_peripheral.dart' as per;
@@ -15,15 +17,19 @@ const String messageCharUuid = "4a1a5fc2-67a4-4a4c-83b3-8a301bd9b210";
 const String imageCharUuid = "4a1a5fc3-67a4-4a4c-83b3-8a301bd9b210";
 
 class OffChatBleService {
-  final _messageController = StreamController<({String senderId, String text})>.broadcast();
-  final _imageController = StreamController<({String senderId, Uint8List imageBytes})>.broadcast();
+  final _messageController =
+      StreamController<({String senderId, String text})>.broadcast();
+  final _imageController =
+      StreamController<({String senderId, Uint8List imageBytes})>.broadcast();
   final _advertisingController = StreamController<bool>.broadcast();
 
   bool _isInitialized = false;
   bool _isStarting = false;
 
-  Stream<({String senderId, String text})> get incomingMessages => _messageController.stream;
-  Stream<({String senderId, Uint8List imageBytes})> get incomingImages => _imageController.stream;
+  Stream<({String senderId, String text})> get incomingMessages =>
+      _messageController.stream;
+  Stream<({String senderId, Uint8List imageBytes})> get incomingImages =>
+      _imageController.stream;
 
   Stream<bool> get isScanning => fbp.FlutterBluePlus.isScanning;
   Stream<bool> get isAdvertising => _advertisingController.stream;
@@ -39,29 +45,35 @@ class OffChatBleService {
       await per.BlePeripheral.initialize();
       _isInitialized = true;
       _log.info('BlePeripheral initialized.');
-      
-      per.BlePeripheral.setAdvertisingStatusUpdateCallback((advertising, error) {
+
+      per.BlePeripheral.setAdvertisingStatusUpdateCallback((
+        advertising,
+        error,
+      ) {
         if (error != null) {
           _log.severe('Advertising status error: $error');
         }
         _log.info('Advertising status update: $advertising');
         _advertisingController.add(advertising);
       });
-      
+
       per.BlePeripheral.setBleStateChangeCallback((state) {
         _log.info('Bluetooth state changed: $state');
       });
 
-      per.BlePeripheral.setWriteRequestCallback((characteristicUuid, deviceId, value) {
-        _log.info('GATT Write from $deviceId to $characteristicUuid. Value len: ${value.length}');
+      per.BlePeripheral.setWriteRequestCallback((deviceId, characteristicId, offset, value) {
+        _log.info('GATT Write from $deviceId to $characteristicId. Value len: ${value?.length}');
         
-        if (characteristicUuid == messageCharUuid) {
-          final text = utf8.decode(value);
-          handleIncomingMessage(deviceId, text);
-        } else if (characteristicUuid == imageCharUuid) {
-          // TODO: Handle image chunking/assembly
-          handleIncomingImage(deviceId, value);
+        if (value != null) {
+          if (characteristicId == messageCharUuid) {
+            final text = utf8.decode(value);
+            handleIncomingMessage(deviceId, text);
+          } else if (characteristicId == imageCharUuid) {
+            // TODO: Handle image chunking/assembly
+            handleIncomingImage(deviceId, value);
+          }
         }
+        return per.WriteRequestResult();
       });
     } catch (e) {
       _log.severe('Failed to initialize BlePeripheral: $e');
@@ -86,7 +98,7 @@ class OffChatBleService {
     if (!_isInitialized) {
       await initialize();
     }
-    
+
     if (_isStarting) {
       _log.info('Advertising already in progress, skipping start request.');
       return;
@@ -102,17 +114,19 @@ class OffChatBleService {
     byteData.setFloat32(5, latitude, Endian.little);
     byteData.setFloat32(9, longitude, Endian.little);
 
-    _log.info('Preparing to advertise. Payload: ${byteData.buffer.asUint8List()}');
+    _log.info(
+      'Preparing to advertise. Payload: ${byteData.buffer.asUint8List()}',
+    );
 
     try {
       // Clear previous advertising
       await per.BlePeripheral.stopAdvertising();
       // Small delay to let the OS clean up
       await Future.delayed(const Duration(milliseconds: 500));
-      
+
       await per.BlePeripheral.startAdvertising(
         services: [offChatServiceUuid],
-        localName: null, 
+        localName: null,
         manufacturerData: per.ManufacturerData(
           manufacturerId: 0xFFFF,
           data: byteData.buffer.asUint8List(),
@@ -135,7 +149,8 @@ class OffChatBleService {
     await per.BlePeripheral.addService(service);
   }
 
-  Stream<List<fbp.ScanResult>> get scanResults => fbp.FlutterBluePlus.scanResults;
+  Stream<List<fbp.ScanResult>> get scanResults =>
+      fbp.FlutterBluePlus.scanResults;
 
   Future<void> startScanning() async {
     if (await fbp.FlutterBluePlus.isSupported == false) return;
@@ -159,19 +174,23 @@ class OffChatBleService {
     final device = fbp.BluetoothDevice.fromId(remoteId);
     try {
       await device.connect(license: fbp.License.free);
-      
+
       // Request higher MTU if possible
       if (Platform.isAndroid) {
         await device.requestMtu(512);
       }
-      
+
       final services = await device.discoverServices();
-      final offChatService = services.firstWhere((s) => s.uuid == fbp.Guid(offChatServiceUuid));
-      final char = offChatService.characteristics.firstWhere((c) => c.uuid == fbp.Guid(messageCharUuid));
-      
+      final offChatService = services.firstWhere(
+        (s) => s.uuid == fbp.Guid(offChatServiceUuid),
+      );
+      final char = offChatService.characteristics.firstWhere(
+        (c) => c.uuid == fbp.Guid(messageCharUuid),
+      );
+
       final bytes = Uint8List.fromList(utf8.encode(text));
       final mtu = await device.mtu.first;
-      
+
       int offset = 0;
       while (offset < bytes.length) {
         int end = offset + mtu - 3;
@@ -179,7 +198,7 @@ class OffChatBleService {
         await char.write(bytes.sublist(offset, end), withoutResponse: false);
         offset = end;
       }
-      
+
       _log.info('Message sent to $remoteId');
     } catch (e) {
       _log.severe('Failed to send message to $remoteId: $e');
@@ -193,15 +212,22 @@ class OffChatBleService {
     try {
       await device.connect(license: fbp.License.free);
       final services = await device.discoverServices();
-      final offChatService = services.firstWhere((s) => s.uuid == fbp.Guid(offChatServiceUuid));
-      final char = offChatService.characteristics.firstWhere((c) => c.uuid == fbp.Guid(imageCharUuid));
-      
+      final offChatService = services.firstWhere(
+        (s) => s.uuid == fbp.Guid(offChatServiceUuid),
+      );
+      final char = offChatService.characteristics.firstWhere(
+        (c) => c.uuid == fbp.Guid(imageCharUuid),
+      );
+
       int mtu = await device.mtu.first;
       int offset = 0;
       while (offset < imageBytes.length) {
         int end = offset + mtu - 3;
         if (end > imageBytes.length) end = imageBytes.length;
-        await char.write(imageBytes.sublist(offset, end), withoutResponse: true);
+        await char.write(
+          imageBytes.sublist(offset, end),
+          withoutResponse: true,
+        );
         offset = end;
       }
     } finally {

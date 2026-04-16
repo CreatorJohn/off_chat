@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:off_chat/src/core/theme/app_theme.dart';
 import 'package:off_chat/src/core/utils/log_service.dart';
 import 'package:off_chat/src/features/discovery/data/ble_service.dart';
@@ -36,17 +37,30 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  border: Border(bottom: BorderSide(color: Colors.white.withValues(alpha: 0.1))),
+                  border: Border(
+                    bottom: BorderSide(
+                      color: Colors.white.withValues(alpha: 0.1),
+                    ),
+                  ),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('SYSTEM LOGS', 
-                      style: TextStyle(color: AppTheme.primaryGold, fontWeight: FontWeight.bold, letterSpacing: 2)
+                    const Text(
+                      'SYSTEM LOGS',
+                      style: TextStyle(
+                        color: AppTheme.primaryGold,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 2,
+                      ),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.delete_sweep, color: Colors.redAccent),
-                      onPressed: () => ref.read(logServiceProvider.notifier).clearLogs(),
+                      icon: const Icon(
+                        Icons.delete_sweep,
+                        color: Colors.redAccent,
+                      ),
+                      onPressed: () =>
+                          ref.read(logServiceProvider.notifier).clearLogs(),
                     ),
                   ],
                 ),
@@ -62,18 +76,18 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
                     if (log.contains('[SEVERE]')) color = Colors.redAccent;
                     if (log.contains('[WARNING]')) color = Colors.orangeAccent;
                     if (log.contains('[INFO]')) color = Colors.blueAccent;
-                    
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 8),
-                        child: Text(
-                          log,
-                          style: TextStyle(
-                            color: color,
-                            fontFamily: 'monospace',
-                            fontSize: 11,
-                          ),
+
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: Text(
+                        log,
+                        style: TextStyle(
+                          color: color,
+                          fontFamily: 'monospace',
+                          fontSize: 11,
                         ),
-                      );
+                      ),
+                    );
                   },
                 ),
               ),
@@ -121,7 +135,9 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
                   isActive: isAdvertising,
                   activeColor: Colors.green,
                   icon: Icons.broadcast_on_personal,
-                  tooltip: isAdvertising ? 'Advertising Active' : 'Advertising Inactive',
+                  tooltip: isAdvertising
+                      ? 'Advertising Active'
+                      : 'Advertising Inactive',
                 );
               },
             ),
@@ -166,22 +182,28 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
                     children: [
                       Text(
                         'Nearby Devices',
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          color: AppTheme.onSurfaceVariant,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context).textTheme.headlineSmall
+                            ?.copyWith(
+                              color: AppTheme.onSurfaceVariant,
+                              fontWeight: FontWeight.bold,
+                            ),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         'Scanning for active pulses...',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: AppTheme.onSurfaceVariant.withValues(alpha: 0.7),
+                          color: AppTheme.onSurfaceVariant.withValues(
+                            alpha: 0.7,
+                          ),
                         ),
                       ),
                     ],
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
                     decoration: BoxDecoration(
                       color: AppTheme.primaryGold,
                       borderRadius: BorderRadius.circular(16),
@@ -217,41 +239,49 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
                   );
                 }
                 return SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      final device = devices[index];
-                      final timeAgoStr = device.lastDiscovered != null 
-                          ? 'Discovered ${timeago.format(device.lastDiscovered!)}'
-                          : 'Unknown';
-                      // Consider "online" if seen in the last 5 minutes
-                      final isOnline = device.lastDiscovered != null && 
-                          DateTime.now().difference(device.lastDiscovered!).inMinutes < 5;
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    final device = devices[index];
+                    final timeAgoStr = device.lastDiscovered != null
+                        ? 'Discovered ${timeago.format(device.lastDiscovered!)}'
+                        : 'Unknown';
+                    // Consider "online" if seen in the last 5 minutes
+                    final isOnline =
+                        device.lastDiscovered != null &&
+                        DateTime.now()
+                                .difference(device.lastDiscovered!)
+                                .inMinutes <
+                            5;
 
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            context.push('/chat/${device.deviceId}');
-                          },
-                          child: _buildDeviceCard(
-                            context: context,
-                            name: device.username ?? 'Unknown Node',
-                            timeAgo: timeAgoStr,
-                            isOnline: isOnline,
-                            profilePicturePath: device.profilePicturePath,
-                          ),
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 16.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          context.push('/chat/${device.deviceId}');
+                        },
+                        child: _buildDeviceCard(
+                          context: context,
+                          name: device.username ?? 'Unknown Node',
+                          timeAgo: timeAgoStr,
+                          isOnline: isOnline,
+                          profilePicturePath: device.profilePicturePath,
                         ),
-                      );
-                    },
-                    childCount: devices.length,
-                  ),
+                      ),
+                    );
+                  }, childCount: devices.length),
                 );
               },
               loading: () => const SliverToBoxAdapter(
-                child: Center(child: CircularProgressIndicator(color: AppTheme.primaryGold)),
+                child: Center(
+                  child: CircularProgressIndicator(color: AppTheme.primaryGold),
+                ),
               ),
               error: (err, stack) => SliverToBoxAdapter(
-                child: Center(child: Text('Error: $err', style: const TextStyle(color: Colors.red))),
+                child: Center(
+                  child: Text(
+                    'Error: $err',
+                    style: const TextStyle(color: Colors.red),
+                  ),
+                ),
               ),
             ),
           ),
@@ -302,7 +332,10 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
                     decoration: BoxDecoration(
                       color: Colors.green,
                       shape: BoxShape.circle,
-                      border: Border.all(color: AppTheme.surfaceBlack, width: 2),
+                      border: Border.all(
+                        color: AppTheme.surfaceBlack,
+                        width: 2,
+                      ),
                     ),
                   ),
                 ),
@@ -323,7 +356,11 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
                 const SizedBox(height: 4),
                 Row(
                   children: [
-                    Icon(Icons.history, size: 14, color: AppTheme.onSurfaceVariant.withValues(alpha: 0.7)),
+                    Icon(
+                      Icons.history,
+                      size: 14,
+                      color: AppTheme.onSurfaceVariant.withValues(alpha: 0.7),
+                    ),
                     const SizedBox(width: 4),
                     Text(
                       timeAgo,
@@ -374,12 +411,13 @@ class _StatusIndicator extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            if (isActive)
-              _PulseAnimation(color: activeColor),
+            if (isActive) _PulseAnimation(color: activeColor),
             Icon(
               icon,
               size: 18,
-              color: isActive ? activeColor : Colors.grey.withValues(alpha: 0.3),
+              color: isActive
+                  ? activeColor
+                  : Colors.grey.withValues(alpha: 0.3),
             ),
           ],
         ),
@@ -396,7 +434,8 @@ class _PulseAnimation extends StatefulWidget {
   State<_PulseAnimation> createState() => _PulseAnimationState();
 }
 
-class _PulseAnimationState extends State<_PulseAnimation> with SingleTickerProviderStateMixin {
+class _PulseAnimationState extends State<_PulseAnimation>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -424,7 +463,9 @@ class _PulseAnimationState extends State<_PulseAnimation> with SingleTickerProvi
           height: 24 + (16 * _controller.value),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: widget.color.withValues(alpha: 0.2 * (1 - _controller.value)),
+            color: widget.color.withValues(
+              alpha: 0.2 * (1 - _controller.value),
+            ),
           ),
         );
       },

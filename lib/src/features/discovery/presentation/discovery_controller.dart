@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:isar/isar.dart';
@@ -35,7 +36,7 @@ class DiscoveryController extends _$DiscoveryController {
     }
 
     final isar = await ref.watch(isarDatabaseProvider.future);
-    
+
     // Start listening to scan results
     final bleServiceInstance = ref.read(bleServiceProvider);
     _scanSubscription = bleServiceInstance.scanResults.listen((results) {
@@ -62,12 +63,15 @@ class DiscoveryController extends _$DiscoveryController {
     for (final result in results) {
       // Look for our specific Manufacturer Data in the Scan Response
       final manufacturerData = result.advertisementData.manufacturerData;
-      
+
       // Extract data if present (foreground device)
       final bool hasOffChatData = manufacturerData.containsKey(0xFFFF);
-      
+
       final deviceId = result.device.remoteId.str;
-      final existingDevice = await isar.discoveredDeviceModels.where().deviceIdEqualTo(deviceId).findFirst();
+      final existingDevice = await isar.discoveredDeviceModels
+          .where()
+          .deviceIdEqualTo(deviceId)
+          .findFirst();
 
       if (hasOffChatData) {
         final payload = manufacturerData[0xFFFF]!;
@@ -93,17 +97,17 @@ class DiscoveryController extends _$DiscoveryController {
               ..deviceId = deviceId
               ..username = 'Unknown Node'
               ..lastDiscovered = DateTime.now();
-            
+
             if (isLocationVisible) {
               newDevice.latitude = lat;
               newDevice.longitude = lng;
             }
-            
+
             await isar.writeTxn(() async {
               await isar.discoveredDeviceModels.put(newDevice);
             });
             updated = true;
-            
+
             // Initiate Identity Sync
             _syncPeerIdentity(result.device, isar);
           }
@@ -111,18 +115,20 @@ class DiscoveryController extends _$DiscoveryController {
       } else if (existingDevice == null) {
         // This might be an OffChat device in the background (no scan response data yet)
         // Check if it has our Service UUID
-        if (result.advertisementData.serviceUuids.contains(Guid(offChatServiceUuid))) {
-           final newDevice = DiscoveredDeviceModel()
-              ..deviceId = deviceId
-              ..username = 'Unknown Node'
-              ..lastDiscovered = DateTime.now();
-            
-            await isar.writeTxn(() async {
-              await isar.discoveredDeviceModels.put(newDevice);
-            });
-            updated = true;
-            
-            _syncPeerIdentity(result.device, isar);
+        if (result.advertisementData.serviceUuids.contains(
+          Guid(offChatServiceUuid),
+        )) {
+          final newDevice = DiscoveredDeviceModel()
+            ..deviceId = deviceId
+            ..username = 'Unknown Node'
+            ..lastDiscovered = DateTime.now();
+
+          await isar.writeTxn(() async {
+            await isar.discoveredDeviceModels.put(newDevice);
+          });
+          updated = true;
+
+          _syncPeerIdentity(result.device, isar);
         }
       }
     }
@@ -135,16 +141,26 @@ class DiscoveryController extends _$DiscoveryController {
 
   Future<void> _syncPeerIdentity(BluetoothDevice device, Isar isar) async {
     try {
-      await device.connect(timeout: const Duration(seconds: 5), license: License.free);
+      await device.connect(
+        timeout: const Duration(seconds: 5),
+        license: License.free,
+      );
       final services = await device.discoverServices();
-      final offChatService = services.firstWhere((s) => s.uuid == Guid(offChatServiceUuid));
-      final char = offChatService.characteristics.firstWhere((c) => c.uuid == Guid(identityCharUuid));
-      
+      final offChatService = services.firstWhere(
+        (s) => s.uuid == Guid(offChatServiceUuid),
+      );
+      final char = offChatService.characteristics.firstWhere(
+        (c) => c.uuid == Guid(identityCharUuid),
+      );
+
       final value = await char.read();
       final identityJson = utf8.decode(value);
       final identityData = jsonDecode(identityJson) as Map<String, dynamic>;
-      
-      final existingDevice = await isar.discoveredDeviceModels.where().deviceIdEqualTo(device.remoteId.str).findFirst();
+
+      final existingDevice = await isar.discoveredDeviceModels
+          .where()
+          .deviceIdEqualTo(device.remoteId.str)
+          .findFirst();
       if (existingDevice != null) {
         await isar.writeTxn(() async {
           existingDevice.username = identityData['username'] as String?;
