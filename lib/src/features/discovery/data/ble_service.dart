@@ -51,6 +51,18 @@ class OffChatBleService {
       per.BlePeripheral.setBleStateChangeCallback((state) {
         _log.info('Bluetooth state changed: $state');
       });
+
+      per.BlePeripheral.setWriteRequestCallback((characteristicUuid, deviceId, value) {
+        _log.info('GATT Write from $deviceId to $characteristicUuid. Value len: ${value.length}');
+        
+        if (characteristicUuid == messageCharUuid) {
+          final text = utf8.decode(value);
+          handleIncomingMessage(deviceId, text);
+        } else if (characteristicUuid == imageCharUuid) {
+          // TODO: Handle image chunking/assembly
+          handleIncomingImage(deviceId, value);
+        }
+      });
     } catch (e) {
       _log.severe('Failed to initialize BlePeripheral: $e');
     }
@@ -147,10 +159,30 @@ class OffChatBleService {
     final device = fbp.BluetoothDevice.fromId(remoteId);
     try {
       await device.connect(license: fbp.License.free);
+      
+      // Request higher MTU if possible
+      if (Platform.isAndroid) {
+        await device.requestMtu(512);
+      }
+      
       final services = await device.discoverServices();
       final offChatService = services.firstWhere((s) => s.uuid == fbp.Guid(offChatServiceUuid));
       final char = offChatService.characteristics.firstWhere((c) => c.uuid == fbp.Guid(messageCharUuid));
-      await char.write(Uint8List.fromList(text.codeUnits));
+      
+      final bytes = Uint8List.fromList(utf8.encode(text));
+      final mtu = await device.mtu.first;
+      
+      int offset = 0;
+      while (offset < bytes.length) {
+        int end = offset + mtu - 3;
+        if (end > bytes.length) end = bytes.length;
+        await char.write(bytes.sublist(offset, end), withoutResponse: false);
+        offset = end;
+      }
+      
+      _log.info('Message sent to $remoteId');
+    } catch (e) {
+      _log.severe('Failed to send message to $remoteId: $e');
     } finally {
       await device.disconnect();
     }

@@ -229,12 +229,17 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
 
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 16.0),
-                        child: _buildDeviceCard(
-                          context: context,
-                          name: device.username ?? 'Unknown Node',
-                          timeAgo: timeAgoStr,
-                          isOnline: isOnline,
-                          profilePicturePath: device.profilePicturePath,
+                        child: GestureDetector(
+                          onTap: () {
+                            context.push('/chat/${device.deviceId}');
+                          },
+                          child: _buildDeviceCard(
+                            context: context,
+                            name: device.username ?? 'Unknown Node',
+                            timeAgo: timeAgoStr,
+                            isOnline: isOnline,
+                            profilePicturePath: device.profilePicturePath,
+                          ),
                         ),
                       );
                     },
