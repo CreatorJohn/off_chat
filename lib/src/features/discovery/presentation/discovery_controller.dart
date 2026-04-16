@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:isar/isar.dart';
 import 'package:logging/logging.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:off_chat/src/core/database/database_provider.dart';
 import 'package:off_chat/src/features/discovery/domain/discovered_device_model.dart';
@@ -19,6 +20,20 @@ class DiscoveryController extends _$DiscoveryController {
 
   @override
   FutureOr<List<DiscoveredDeviceModel>> build() async {
+    // Request permissions before proceeding
+    if (Platform.isAndroid) {
+      final status = await [
+        Permission.bluetoothScan,
+        Permission.bluetoothAdvertise,
+        Permission.bluetoothConnect,
+        Permission.location,
+      ].request();
+
+      if (status.values.any((s) => s.isDenied)) {
+        _log.severe('Discovery permissions denied: $status');
+      }
+    }
+
     final isar = await ref.watch(isarDatabaseProvider.future);
     
     // Start listening to scan results
@@ -27,9 +42,8 @@ class DiscoveryController extends _$DiscoveryController {
       _processScanResults(results, isar);
     });
 
-    // Start scanning (don't await so we can return initial data immediately)
+    // Start scanning
     bleServiceInstance.startScanning().catchError((e) {
-      // Log or handle scan error
       _log.severe('Scan startup error: $e');
     });
 
