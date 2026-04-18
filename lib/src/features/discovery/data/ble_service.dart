@@ -40,6 +40,7 @@ class OffChatBleService {
 
   bool _isInitialized = false;
   bool _isStarting = false;
+  bool _isServiceAdded = false;
 
   Stream<({String senderId, String text})> get incomingMessages =>
       _messageController.stream;
@@ -266,7 +267,13 @@ class OffChatBleService {
   }
 
   Future<void> addService(per.BleService service) async {
+    if (_isServiceAdded) {
+      _log.info('Service already added, skipping.');
+      return;
+    }
     await per.BlePeripheral.addService(service);
+    _isServiceAdded = true;
+    _log.info('Service added successfully.');
   }
 
   Stream<List<fbp.ScanResult>> get scanResults =>
