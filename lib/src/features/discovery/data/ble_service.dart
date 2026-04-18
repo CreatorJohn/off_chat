@@ -268,8 +268,9 @@ class OffChatBleService {
 
   Future<void> addService(per.BleService service) async {
     if (_isServiceAdded) {
-      _log.info('Service already added, skipping.');
-      return;
+      _log.info('Service already added, cleaning first.');
+
+      await per.BlePeripheral.clearServices();
     }
     await per.BlePeripheral.addService(service);
     _isServiceAdded = true;

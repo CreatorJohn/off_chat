@@ -19,7 +19,9 @@ class AdvertisingController extends _$AdvertisingController {
   double? _lastLat;
   double? _lastLng;
   DateTime? _lastUpdateTime;
+  String? _lastIdentityJson;
   bool _isBuilding = false;
+  bool _isDisposalRegistered = false;
 
   @override
   FutureOr<void> build() async {
@@ -33,6 +35,15 @@ class AdvertisingController extends _$AdvertisingController {
     try {
       final user = await ref.watch(profileControllerProvider.future);
       if (user == null || !user.isOnboarded) return;
+
+      final bleServiceInstance = ref.read(bleServiceProvider);
+
+      if (!_isDisposalRegistered) {
+        ref.onDispose(() {
+          bleServiceInstance.stopAdvertising();
+        });
+        _isDisposalRegistered = true;
+      }
 
       // Request permissions before proceeding
       if (Platform.isAndroid) {
@@ -49,12 +60,11 @@ class AdvertisingController extends _$AdvertisingController {
         }
       }
 
-      final bleServiceInstance = ref.read(bleServiceProvider);
       // Initialize BLE only after permissions
       await bleServiceInstance.initialize();
 
       // IMPORTANT: Only watch lat, lng, and speed. Ignore heading (compass) to prevent constant rebuilds.
-      final locationData = ref.read(
+      final locationData = ref.watch(
         locationServiceProvider.select(
           (value) => value.hasValue
               ? (
@@ -89,11 +99,11 @@ class AdvertisingController extends _$AdvertisingController {
             shouldUpdate = true;
           }
         } else {
-          // Normal Mode: Check if moved > 10 meters
+          // Normal Mode: Check if moved > 100 meters
           final latDist = (latitude - _lastLat!).abs();
           final lngDist = (longitude - _lastLng!).abs();
           // Also check for a 5-minute heartbeat update
-          if (latDist > 0.0001 || lngDist > 0.0001 || timeSinceUpdate > 300) {
+          if (latDist > 0.001 || lngDist > 0.001 || timeSinceUpdate > 300) {
             shouldUpdate = true;
           }
         }
@@ -118,36 +128,39 @@ class AdvertisingController extends _$AdvertisingController {
       };
       final identityJson = jsonEncode(identityData);
 
-      final per.BleService service = per.BleService(
-        uuid: offChatServiceUuid,
-        primary: true,
-        characteristics: [
-          per.BleCharacteristic(
-            uuid: identityCharUuid,
-            properties: [per.CharacteristicProperties.read.index],
-            permissions: [per.AttributePermissions.readable.index],
-            value: Uint8List.fromList(utf8.encode(identityJson)),
-          ),
-          per.BleCharacteristic(
-            uuid: messageCharUuid,
-            properties: [
-              per.CharacteristicProperties.write.index,
-              per.CharacteristicProperties.writeWithoutResponse.index,
-            ],
-            permissions: [per.AttributePermissions.writeable.index],
-          ),
-          per.BleCharacteristic(
-            uuid: imageCharUuid,
-            properties: [
-              per.CharacteristicProperties.write.index,
-              per.CharacteristicProperties.writeWithoutResponse.index,
-            ],
-            permissions: [per.AttributePermissions.writeable.index],
-          ),
-        ],
-      );
+      if (_lastIdentityJson != identityJson) {
+        final per.BleService service = per.BleService(
+          uuid: offChatServiceUuid,
+          primary: true,
+          characteristics: [
+            per.BleCharacteristic(
+              uuid: identityCharUuid,
+              properties: [per.CharacteristicProperties.read.index],
+              permissions: [per.AttributePermissions.readable.index],
+              value: Uint8List.fromList(utf8.encode(identityJson)),
+            ),
+            per.BleCharacteristic(
+              uuid: messageCharUuid,
+              properties: [
+                per.CharacteristicProperties.write.index,
+                per.CharacteristicProperties.writeWithoutResponse.index,
+              ],
+              permissions: [per.AttributePermissions.writeable.index],
+            ),
+            per.BleCharacteristic(
+              uuid: imageCharUuid,
+              properties: [
+                per.CharacteristicProperties.write.index,
+                per.CharacteristicProperties.writeWithoutResponse.index,
+              ],
+              permissions: [per.AttributePermissions.writeable.index],
+            ),
+          ],
+        );
 
-      await bleServiceInstance.addService(service);
+        await bleServiceInstance.addService(service);
+        _lastIdentityJson = identityJson;
+      }
 
       // Start Advertising
       await bleServiceInstance.startAdvertising(
@@ -157,10 +170,6 @@ class AdvertisingController extends _$AdvertisingController {
         latitude: latitude,
         longitude: longitude,
       );
-
-      ref.onDispose(() {
-        bleServiceInstance.stopAdvertising();
-      });
     } finally {
       _isBuilding = false;
     }
