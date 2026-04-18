@@ -45,7 +45,7 @@ class AdvertisingController extends _$AdvertisingController {
 
         if (status.values.any((s) => s.isDenied)) {
           _log.severe('BLE permissions denied.');
-          return; 
+          return;
         }
       }
 
@@ -54,9 +54,17 @@ class AdvertisingController extends _$AdvertisingController {
       await bleServiceInstance.initialize();
 
       // IMPORTANT: Only watch lat, lng, and speed. Ignore heading (compass) to prevent constant rebuilds.
-      final locationData = ref.watch(locationServiceProvider.select((value) => 
-        value.hasValue ? (lat: value.value!.latitude, lng: value.value!.longitude, speed: value.value!.speed) : null
-      ));
+      final locationData = ref.read(
+        locationServiceProvider.select(
+          (value) => value.hasValue
+              ? (
+                  lat: value.value!.latitude,
+                  lng: value.value!.longitude,
+                  speed: value.value!.speed,
+                )
+              : null,
+        ),
+      );
 
       if (locationData == null) return;
 
@@ -71,11 +79,13 @@ class AdvertisingController extends _$AdvertisingController {
         shouldUpdate = true;
       } else {
         final timeSinceUpdate = now.difference(_lastUpdateTime!).inSeconds;
-        
+
         // High-Speed (Flight Mode) Check: > 20 m/s (72 km/h)
         if (speed >= 20.0) {
           if (timeSinceUpdate >= 120) {
-            _log.info('High-speed detected ($speed m/s). Throttling updates to 2 mins.');
+            _log.info(
+              'High-speed detected ($speed m/s). Throttling updates to 2 mins.',
+            );
             shouldUpdate = true;
           }
         } else {
@@ -107,19 +117,15 @@ class AdvertisingController extends _$AdvertisingController {
         'hasImage': user.profilePicturePath != null,
       };
       final identityJson = jsonEncode(identityData);
-      
+
       final per.BleService service = per.BleService(
         uuid: offChatServiceUuid,
         primary: true,
         characteristics: [
           per.BleCharacteristic(
             uuid: identityCharUuid,
-            properties: [
-              per.CharacteristicProperties.read.index,
-            ],
-            permissions: [
-              per.AttributePermissions.readable.index,
-            ],
+            properties: [per.CharacteristicProperties.read.index],
+            permissions: [per.AttributePermissions.readable.index],
             value: Uint8List.fromList(utf8.encode(identityJson)),
           ),
           per.BleCharacteristic(
@@ -128,9 +134,7 @@ class AdvertisingController extends _$AdvertisingController {
               per.CharacteristicProperties.write.index,
               per.CharacteristicProperties.writeWithoutResponse.index,
             ],
-            permissions: [
-              per.AttributePermissions.writeable.index,
-            ],
+            permissions: [per.AttributePermissions.writeable.index],
           ),
           per.BleCharacteristic(
             uuid: imageCharUuid,
@@ -138,9 +142,7 @@ class AdvertisingController extends _$AdvertisingController {
               per.CharacteristicProperties.write.index,
               per.CharacteristicProperties.writeWithoutResponse.index,
             ],
-            permissions: [
-              per.AttributePermissions.writeable.index,
-            ],
+            permissions: [per.AttributePermissions.writeable.index],
           ),
         ],
       );
