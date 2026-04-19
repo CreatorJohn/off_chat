@@ -1,3 +1,9 @@
+## BLE & Advertising Constraints
+
+- **Service Registration**: Never call `addService` while advertising is active or duplicate services. Always use `BleService.addService` which handles `clearServices` and idempotency.
+- **Heartbeat Logic**: `AdvertisingController` restarts advertising every 300s or 111m movement. Do not lower these thresholds without battery/stability testing.
+- **iOS Background**: iOS strips Manufacturer Data in background. Fallback to GATT read of `identityCharUuid` for identity sync.
+
 ## graphify
 
 This project has a graphify knowledge graph at graphify-out/.

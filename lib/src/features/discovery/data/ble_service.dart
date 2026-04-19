@@ -289,7 +289,7 @@ class OffChatBleService {
         .first;
 
     await fbp.FlutterBluePlus.startScan(
-      withServices: [fbp.Guid(offChatServiceUuid)],
+      // withServices: [fbp.Guid(offChatServiceUuid)],
       continuousUpdates: true,
     );
   }
