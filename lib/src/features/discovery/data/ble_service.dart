@@ -28,6 +28,8 @@ const String identityCharUuid = "4a1a5fc1-67a4-4a4c-83b3-8a301bd9b210";
 const String messageCharUuid = "4a1a5fc2-67a4-4a4c-83b3-8a301bd9b210";
 const String imageCharUuid = "4a1a5fc3-67a4-4a4c-83b3-8a301bd9b210";
 
+const int manufacturerId = 0xFAFA;
+
 class OffChatBleService {
   final _messageController =
       StreamController<({String senderId, String text})>.broadcast();
@@ -249,11 +251,12 @@ class OffChatBleService {
         services: [offChatServiceUuid],
         localName: null,
         manufacturerData: per.ManufacturerData(
-          manufacturerId: 0xFAFA,
+          manufacturerId: manufacturerId,
           data: byteData.buffer.asUint8List(),
         ),
         addManufacturerDataInScanResponse: true,
       );
+
       _log.info('BlePeripheral.startAdvertising successfully initiated.');
     } catch (e) {
       _log.severe('Error starting advertising: $e');

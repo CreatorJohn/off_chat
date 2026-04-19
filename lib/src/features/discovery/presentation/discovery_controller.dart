@@ -66,7 +66,7 @@ class DiscoveryController extends _$DiscoveryController {
       final manufacturerData = result.advertisementData.manufacturerData;
 
       // Extract data if present (foreground device)
-      final bool hasOffChatData = manufacturerData.containsKey(0xFAFA);
+      final bool hasOffChatData = manufacturerData.containsKey(manufacturerId);
 
       final deviceId = result.device.remoteId.str;
       final existingDevice = await isar.discoveredDeviceModels
@@ -75,7 +75,7 @@ class DiscoveryController extends _$DiscoveryController {
           .findFirst();
 
       if (hasOffChatData) {
-        final payload = manufacturerData[0xFAFA]!;
+        final payload = manufacturerData[manufacturerId]!;
         if (payload.length == 13) {
           final byteData = ByteData.sublistView(Uint8List.fromList(payload));
           final flags = byteData.getUint8(0);
