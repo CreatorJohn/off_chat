@@ -66,7 +66,7 @@ class DiscoveryController extends _$DiscoveryController {
       final manufacturerData = result.advertisementData.manufacturerData;
 
       // Extract data if present (foreground device)
-      final bool hasOffChatData = manufacturerData.containsKey(0xFFFF);
+      final bool hasOffChatData = manufacturerData.containsKey(0xFAFA);
 
       final deviceId = result.device.remoteId.str;
       final existingDevice = await isar.discoveredDeviceModels
@@ -75,7 +75,7 @@ class DiscoveryController extends _$DiscoveryController {
           .findFirst();
 
       if (hasOffChatData) {
-        final payload = manufacturerData[0xFFFF]!;
+        final payload = manufacturerData[0xFAFA]!;
         if (payload.length == 13) {
           final byteData = ByteData.sublistView(Uint8List.fromList(payload));
           final flags = byteData.getUint8(0);
@@ -177,6 +177,14 @@ class DiscoveryController extends _$DiscoveryController {
   }
 
   Future<void> manualRefresh() async {
+    final bleServiceInstance = ref.read(bleServiceProvider);
+
+    await bleServiceInstance.stopScanning();
+
+    await bleServiceInstance.startScanning().catchError((e) {
+      _log.severe('Scan startup error: $e');
+    });
+
     final isar = await ref.read(isarDatabaseProvider.future);
     state = const AsyncLoading();
     state = AsyncData(await isar.discoveredDeviceModels.where().findAll());
