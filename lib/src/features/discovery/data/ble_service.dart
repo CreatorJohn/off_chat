@@ -249,7 +249,7 @@ class OffChatBleService {
         services: [offChatServiceUuid],
         localName: null,
         manufacturerData: per.ManufacturerData(
-          manufacturerId: 0xFFFF,
+          manufacturerId: 0xFAFA,
           data: byteData.buffer.asUint8List(),
         ),
         addManufacturerDataInScanResponse: true,
@@ -290,7 +290,6 @@ class OffChatBleService {
 
     await fbp.FlutterBluePlus.startScan(
       // withServices: [fbp.Guid(offChatServiceUuid)],
-      continuousUpdates: true,
     );
   }
 

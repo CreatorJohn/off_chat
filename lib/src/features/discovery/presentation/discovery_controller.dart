@@ -40,6 +40,7 @@ class DiscoveryController extends _$DiscoveryController {
     // Start listening to scan results
     final bleServiceInstance = ref.read(bleServiceProvider);
     _scanSubscription = bleServiceInstance.scanResults.listen((results) {
+      _log.fine("Processing results: $results");
       _processScanResults(results, isar);
     });
 
