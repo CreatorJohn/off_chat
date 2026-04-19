@@ -31,6 +31,7 @@ class AdvertisingController extends _$AdvertisingController {
       return;
     }
     _isBuilding = true;
+    _log.info("Trying to update the advertising data...");
 
     try {
       final user = await ref.watch(profileControllerProvider.future);
@@ -76,11 +77,13 @@ class AdvertisingController extends _$AdvertisingController {
         ),
       );
 
-      if (locationData == null) return;
+      if (locationData == null) {
+        _log.warning("Location data will be missing in the advertising data!");
+      }
 
-      final latitude = locationData.lat;
-      final longitude = locationData.lng;
-      final speed = locationData.speed;
+      final latitude = locationData?.lat ?? 0;
+      final longitude = locationData?.lng ?? 0;
+      final speed = locationData?.speed ?? 0;
 
       final now = DateTime.now();
       bool shouldUpdate = false;
@@ -109,7 +112,12 @@ class AdvertisingController extends _$AdvertisingController {
         }
       }
 
-      if (!shouldUpdate) return;
+      if (!shouldUpdate) {
+        _log.severe("Failed to update the advertising data!");
+        return;
+      }
+
+      _log.info("Advertising data will be updated!");
 
       // Commit state updates BEFORE starting async BLE work to block rapid re-triggers
       _lastLat = latitude;
@@ -161,6 +169,8 @@ class AdvertisingController extends _$AdvertisingController {
         await bleServiceInstance.addService(service);
         _lastIdentityJson = identityJson;
       }
+
+      _log.info("Device started advertising!");
 
       // Start Advertising
       await bleServiceInstance.startAdvertising(
