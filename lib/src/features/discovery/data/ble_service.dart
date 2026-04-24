@@ -85,13 +85,6 @@ class OffChatBleService {
         offset,
         value,
       ) {
-        /*
-          TODO: Implement receiving (sending) data protocol
-
-          Received data → TYPE,CONTENT
-          TYPE → START, DATA, END
-        */
-
         _log.info(
           'GATT Write from $deviceId to $characteristicId. Value len: ${value?.length}',
         );
@@ -246,10 +239,14 @@ class OffChatBleService {
       await per.BlePeripheral.stopAdvertising();
       // Small delay to let the OS clean up
       await Future.delayed(const Duration(milliseconds: 500));
+      // Clear previous services
+      await per.BlePeripheral.clearServices();
+      // Small delay to let the OS clean up
+      await Future.delayed(const Duration(milliseconds: 500));
 
       await per.BlePeripheral.startAdvertising(
         services: [offChatServiceUuid],
-        localName: null,
+        localName: "Poco BLE",
         manufacturerData: per.ManufacturerData(
           manufacturerId: manufacturerId,
           data: byteData.buffer.asUint8List(),
