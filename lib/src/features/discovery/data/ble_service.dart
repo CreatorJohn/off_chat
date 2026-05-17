@@ -30,6 +30,8 @@ const String imageCharUuid = "4a1a5fc3-67a4-4a4c-83b3-8a301bd9b210";
 
 const int manufacturerId = 0xFAFA;
 
+const String deviceName = "OffchatBLE";
+
 class OffChatBleService {
   final _messageController =
       StreamController<({String senderId, String text})>.broadcast();
@@ -239,14 +241,10 @@ class OffChatBleService {
       await per.BlePeripheral.stopAdvertising();
       // Small delay to let the OS clean up
       await Future.delayed(const Duration(milliseconds: 500));
-      // Clear previous services
-      await per.BlePeripheral.clearServices();
-      // Small delay to let the OS clean up
-      await Future.delayed(const Duration(milliseconds: 500));
 
       await per.BlePeripheral.startAdvertising(
         services: [offChatServiceUuid],
-        localName: "Poco BLE",
+        localName: deviceName,
         manufacturerData: per.ManufacturerData(
           manufacturerId: manufacturerId,
           data: byteData.buffer.asUint8List(),
@@ -281,7 +279,11 @@ class OffChatBleService {
       fbp.FlutterBluePlus.scanResults;
 
   Future<void> startScanning() async {
-    if (await fbp.FlutterBluePlus.isSupported == false) return;
+    if (await fbp.FlutterBluePlus.isSupported == false) {
+      _log.severe("FlutterBluePlus is not supported");
+
+      return;
+    }
 
     // Wait for Bluetooth to be on
     await fbp.FlutterBluePlus.adapterState
