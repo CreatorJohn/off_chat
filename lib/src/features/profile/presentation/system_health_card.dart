@@ -125,7 +125,7 @@ class _HealthItem extends StatelessWidget {
           Expanded(
             child: Text(
               label,
-              style: TextStyle(
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: isOk
                     ? AppTheme.onSurfaceVariant.withValues(alpha: 0.8)
                     : AppTheme.onSurfaceVariant,

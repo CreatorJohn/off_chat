@@ -1,13 +1,12 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as p;
-import 'package:geolocator/geolocator.dart';
 import 'package:off_chat/src/core/theme/app_theme.dart';
 import 'package:off_chat/src/features/onboarding/presentation/onboarding_controller.dart';
+import 'package:off_chat/src/features/profile/data/profile_manager.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:path_provider/path_provider.dart';
 
 class OnboardingScreen extends ConsumerStatefulWidget {
   const OnboardingScreen({super.key});
@@ -30,30 +29,36 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   }
 
   Future<void> _pickImage() async {
-    final picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-    if (image == null) return;
-
-    final dir = await getTemporaryDirectory();
-    final targetPath = p.join(dir.path, "onboarding_${DateTime.now().millisecondsSinceEpoch}.jpg");
-
-    final XFile? compressedFile = await FlutterImageCompress.compressAndGetFile(
-      image.path,
-      targetPath,
-      quality: 70,
-      minWidth: 128,
-      minHeight: 128,
-    );
-
-    if (compressedFile != null) {
+    await ProfileManager.pickAndSaveProfilePicture();
+    final bytes = await ProfileManager.getProfilePicture();
+    if (bytes != null) {
       setState(() {
-        _profilePicturePath = compressedFile.path;
+        _profilePicturePath = "STUB"; // Trigger UI update
       });
     }
   }
 
-  void _nextPage() {
-    if (_currentPage < 6) {
+  void _nextPage() async {
+    if (_currentPage < 5) {
+      _pageController.nextPage(
+        duration: const Duration(milliseconds: 400),
+        curve: Curves.easeInOut,
+      );
+    } else if (_currentPage == 5) {
+      // About to enter Identity screen (index 6)
+      // Request all required permissions
+      await [
+        Permission.bluetoothScan,
+        Permission.bluetoothConnect,
+        Permission.bluetoothAdvertise,
+        Permission.location,
+        Permission.notification,
+      ].request();
+
+      if (await Permission.location.isGranted) {
+        await Permission.locationAlways.request();
+      }
+
       _pageController.nextPage(
         duration: const Duration(milliseconds: 400),
         curve: Curves.easeInOut,
@@ -71,26 +76,14 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       return;
     }
 
-    // Handle Location Permissions
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-    }
+    final dir = await getApplicationDocumentsDirectory();
+    final localPath = "${dir.path}/profile_pic.webp";
+    final file = File(localPath);
     
-    if (permission == LocationPermission.deniedForever) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Location permissions are permanently denied. Bluetooth scanning will not work.')),
-        );
-      }
-      // Continue anyway, but functionality will be limited
-    }
-
     await ref.read(onboardingControllerProvider.notifier).completeOnboarding(
       username: _nameController.text.trim(),
-      profilePicturePath: _profilePicturePath,
+      profilePicturePath: await file.exists() ? localPath : null,
     );
-    // Navigation is handled by the router redirect
   }
 
   @override
@@ -256,7 +249,15 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                     ),
                     child: ClipOval(
                       child: _profilePicturePath != null
-                          ? Image.file(File(_profilePicturePath!), fit: BoxFit.cover)
+                          ? FutureBuilder<Uint8List?>(
+                              future: ProfileManager.getProfilePicture(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData && snapshot.data != null) {
+                                  return Image.memory(snapshot.data!, fit: BoxFit.cover);
+                                }
+                                return const Icon(Icons.person, size: 80, color: Colors.white24);
+                              },
+                            )
                           : const Icon(Icons.person, size: 80, color: Colors.white24),
                     ),
                   ),
@@ -283,10 +284,10 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
           const SizedBox(height: 12),
           TextField(
             controller: _nameController,
-            style: const TextStyle(color: Colors.white, fontSize: 18),
+            style: const TextStyle(color: AppTheme.onSurfaceVariant, fontSize: 18),
             decoration: InputDecoration(
               hintText: 'Enter your alias...',
-              hintStyle: const TextStyle(color: Colors.white24),
+              hintStyle: TextStyle(color: AppTheme.onSurfaceVariant.withValues(alpha: 0.2)),
               filled: true,
               fillColor: AppTheme.surfaceContainerHigh.withValues(alpha: 0.5),
               border: OutlineInputBorder(

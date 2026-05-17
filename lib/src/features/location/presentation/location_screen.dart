@@ -208,7 +208,11 @@ class _LocationScreenState extends ConsumerState<LocationScreen> with SingleTick
               const SizedBox(height: 4),
               Text(
                 device.model.name ?? "Unknown",
-                style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  color: AppTheme.onSurfaceVariant,
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),

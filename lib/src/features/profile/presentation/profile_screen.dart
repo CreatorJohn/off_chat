@@ -221,14 +221,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           TextField(
             controller: _nameController,
             maxLength: BLEAdvertiser.maxNameLength,
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(color: AppTheme.onSurfaceVariant),
             decoration: InputDecoration(
               labelText: 'Display Alias',
-              labelStyle: const TextStyle(color: Colors.white38),
+              labelStyle: TextStyle(color: AppTheme.onSurfaceVariant.withValues(alpha: 0.38)),
               hintText: 'Enter mesh name...',
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(color: Colors.white10),
+                borderSide: BorderSide(color: AppTheme.onSurfaceVariant.withValues(alpha: 0.1)),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),

@@ -37,7 +37,7 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
         backgroundColor: AppTheme.surfaceBlack,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(28),
-          side: const BorderSide(color: Colors.white10),
+          side: BorderSide(color: AppTheme.primaryGold.withValues(alpha: 0.1)),
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -60,17 +60,21 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
             Text(
               device.name ?? 'Unknown Node',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Colors.white,
+                    color: AppTheme.onSurfaceVariant,
                     fontWeight: FontWeight.bold,
                   ),
             ),
             const SizedBox(height: 8),
             Text(
               'STABLE ID: ${device.stableId}',
-              style: const TextStyle(color: Colors.white38, fontSize: 12, letterSpacing: 1),
+              style: TextStyle(
+                color: AppTheme.onSurfaceVariant.withValues(alpha: 0.3),
+                fontSize: 12,
+                letterSpacing: 1,
+              ),
             ),
             const SizedBox(height: 24),
-            const Divider(color: Colors.white10),
+            Divider(color: AppTheme.onSurfaceVariant.withValues(alpha: 0.1)),
             const SizedBox(height: 16),
             _buildProfileInfo(Icons.history, 'LAST SEEN', lastSeenStr),
             if (device.latitude != null) ...[
@@ -116,8 +120,21 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(label, style: const TextStyle(color: Colors.white38, fontSize: 10, fontWeight: FontWeight.bold)),
-            Text(value, style: const TextStyle(color: Colors.white70, fontSize: 13)),
+            Text(
+              label,
+              style: TextStyle(
+                color: AppTheme.onSurfaceVariant.withValues(alpha: 0.3),
+                fontSize: 10,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              value,
+              style: TextStyle(
+                color: AppTheme.onSurfaceVariant.withValues(alpha: 0.7),
+                fontSize: 13,
+              ),
+            ),
           ],
         ),
       ],
@@ -417,7 +434,7 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.05),
+              color: AppTheme.onSurfaceVariant.withValues(alpha: 0.05),
               shape: BoxShape.circle,
             ),
             child: const Icon(Icons.message, color: AppTheme.primaryGold),
@@ -457,7 +474,7 @@ class _StatusIndicator extends StatelessWidget {
               size: 18,
               color: isActive
                   ? activeColor
-                  : Colors.grey.withValues(alpha: 0.3),
+                  : AppTheme.onSurfaceVariant.withValues(alpha: 0.3),
             ),
           ],
         ),

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:off_chat/src/core/utils/watch_log.dart';
+import 'package:off_chat/src/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart' hide LogRecord;
 
@@ -41,7 +42,7 @@ class _LogViewerState extends State<LogViewer> {
     if (level == Level.INFO) return Colors.green[700]!;
     if (level <= Level.FINE) return Colors.grey;
 
-    return Colors.black;
+    return AppTheme.onSurfaceVariant;
   }
 
   @override
@@ -49,7 +50,7 @@ class _LogViewerState extends State<LogViewer> {
     return LayoutBuilder(
       builder: (context, constrains) {
         return AlertDialog(
-          backgroundColor: const Color(0xFF121212),
+          backgroundColor: AppTheme.surfaceBlack,
           surfaceTintColor: Colors.transparent,
           constraints: BoxConstraints(
             maxWidth: constrains.maxWidth * 0.95,
@@ -65,7 +66,7 @@ class _LogViewerState extends State<LogViewer> {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: AppTheme.onSurfaceVariant,
                     letterSpacing: 2,
                   ),
                 ),
@@ -84,14 +85,14 @@ class _LogViewerState extends State<LogViewer> {
                 onPressed: WatchLog.copyLogsToClipboard,
               ),
               IconButton(
-                icon: const Icon(Icons.close, color: Colors.white54, size: 20),
+                icon: Icon(Icons.close, color: AppTheme.onSurfaceVariant.withValues(alpha: 0.5), size: 20),
                 onPressed: Navigator.of(context).pop,
               ),
             ],
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.0),
-            side: const BorderSide(color: Colors.white10),
+            side: BorderSide(color: AppTheme.onSurfaceVariant.withValues(alpha: 0.1)),
           ),
           content: Container(
             width: double.maxFinite,
