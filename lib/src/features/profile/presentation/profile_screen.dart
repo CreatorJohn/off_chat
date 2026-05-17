@@ -1,42 +1,49 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as p;
 import 'package:off_chat/src/features/profile/presentation/profile_controller.dart';
+import 'package:off_chat/src/features/profile/data/profile_manager.dart';
+import 'package:off_chat/src/features/profile/presentation/system_health_card.dart';
+import 'package:off_chat/src/features/discovery/presentation/advertising_state.dart';
+import 'package:off_chat/src/features/discovery/data/ble_advertiser.dart';
 import 'package:off_chat/src/core/theme/app_theme.dart';
 
-class ProfileScreen extends ConsumerWidget {
+class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
 
-  Future<void> _pickAndCompressImage(WidgetRef ref) async {
-    final picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-    
-    if (image == null) return;
+  @override
+  ConsumerState<ProfileScreen> createState() => _ProfileScreenState();
+}
 
-    final dir = await getTemporaryDirectory();
-    final targetPath = p.join(dir.path, "${DateTime.now().millisecondsSinceEpoch}.jpg");
+class _ProfileScreenState extends ConsumerState<ProfileScreen> {
+  final TextEditingController _nameController = TextEditingController();
 
-    final XFile? compressedFile = await FlutterImageCompress.compressAndGetFile(
-      image.path,
-      targetPath,
-      quality: 70,
-      minWidth: 256,
-      minHeight: 256,
-    );
-
-    if (compressedFile != null) {
-      await ref.read(profileControllerProvider.notifier).updateProfilePicture(compressedFile.path);
-    }
+  @override
+  void initState() {
+    super.initState();
+    // Initialize controller with current advertising name
+    Future.microtask(() async {
+      final currentName = await ref.read(advertisingNameProvider.future);
+      _nameController.text = currentName;
+    });
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _pickProfileImage() async {
+    await ProfileManager.pickAndSaveProfilePicture();
+    ref.invalidate(profileControllerProvider);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final profileAsync = ref.watch(profileControllerProvider);
+    final isAdvertising = ref.watch(isAdvertisingProvider);
 
     return Scaffold(
       body: profileAsync.when(
@@ -66,7 +73,7 @@ class ProfileScreen extends ConsumerWidget {
                       const SizedBox(height: 32),
                       // Profile Hero
                       GestureDetector(
-                        onTap: () => _pickAndCompressImage(ref),
+                        onTap: _pickProfileImage,
                         child: Stack(
                           alignment: Alignment.bottomRight,
                           children: [
@@ -114,8 +121,15 @@ class ProfileScreen extends ConsumerWidget {
                         ),
                       ),
                       const SizedBox(height: 40),
+
+                      const SystemHealthCard(),
+                      const SizedBox(height: 24),
+
+                      // Mesh Identity Card
+                      _buildIdentityCard(context, isAdvertising),
+                      const SizedBox(height: 24),
                       
-                      // Settings Bento Grid (using Column for simplicity in prototype)
+                      // Settings Bento Grid
                       _buildSettingCard(
                         context: context,
                         icon: Icons.radar,
@@ -180,6 +194,82 @@ class ProfileScreen extends ConsumerWidget {
         },
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (err, stack) => Center(child: Text('Error: $err')),
+      ),
+    );
+  }
+
+  Widget _buildIdentityCard(BuildContext context, bool isAdvertising) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: AppTheme.surfaceContainerLow.withValues(alpha: 0.6),
+        borderRadius: BorderRadius.circular(32),
+        border: Border.all(color: AppTheme.primaryGold.withValues(alpha: 0.1)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'MESH IDENTITY',
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+              color: AppTheme.primaryGold,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 2,
+            ),
+          ),
+          const SizedBox(height: 16),
+          TextField(
+            controller: _nameController,
+            maxLength: BLEAdvertiser.maxNameLength,
+            style: const TextStyle(color: Colors.white),
+            decoration: InputDecoration(
+              labelText: 'Display Alias',
+              labelStyle: const TextStyle(color: Colors.white38),
+              hintText: 'Enter mesh name...',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(color: Colors.white10),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(color: AppTheme.primaryGold),
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Expanded(
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    final newName = _nameController.text.trim();
+                    if (newName.isNotEmpty) {
+                      ref.read(advertisingNameProvider.notifier).change(newName);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Identity synchronized with mesh')),
+                      );
+                    }
+                  },
+                  icon: const Icon(Icons.sync, size: 18),
+                  label: const Text('SYNC NAME'),
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                  ),
+                ),
+              ),
+              if (isAdvertising) ...[
+                const SizedBox(width: 8),
+                IconButton(
+                  onPressed: () {
+                    BLEAdvertiser().stopAdvertising();
+                  },
+                  icon: const Icon(Icons.stop_circle, color: Colors.redAccent),
+                  tooltip: 'Stop Broadcast',
+                ),
+              ],
+            ],
+          ),
+        ],
       ),
     );
   }

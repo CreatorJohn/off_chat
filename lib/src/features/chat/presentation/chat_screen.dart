@@ -1,9 +1,9 @@
-import 'dart:io';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:off_chat/src/core/theme/app_theme.dart';
 import 'package:off_chat/src/features/chat/presentation/chat_controller.dart';
-import 'package:off_chat/src/features/chat/domain/message_model.dart';
+import 'package:off_chat/src/core/database/models/message.dart';
 import 'package:intl/intl.dart';
 
 class ChatScreen extends ConsumerStatefulWidget {
@@ -56,7 +56,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                   itemCount: messages.length,
                   itemBuilder: (context, index) {
                     final message = messages[index];
-                    final isMe = message.senderId == 'me';
+                    final isMe = !message.isReceived;
                     return _buildMessageBubble(context, message, isMe);
                   },
                 );
@@ -90,14 +90,14 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Node: ${widget.deviceId.substring(0, 8)}',
+                'Node: ${widget.deviceId}',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   color: AppTheme.primaryGold,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
-                'Connected via Radar',
+                'Secured Mesh Connection',
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
                   color: AppTheme.onSurfaceVariant.withValues(alpha: 0.5),
                   fontSize: 10,
@@ -110,8 +110,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     );
   }
 
-  Widget _buildMessageBubble(BuildContext context, MessageModel message, bool isMe) {
-    final bool isImage = message.content.startsWith("IMAGE:");
+  Widget _buildMessageBubble(BuildContext context, Message message, bool isMe) {
     final String time = DateFormat('hh:mm a').format(message.timestamp);
 
     return Padding(
@@ -139,10 +138,10 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               ),
               border: isMe ? null : Border.all(color: AppTheme.primaryGold.withValues(alpha: 0.1)),
             ),
-            child: isImage
+            child: message.isImage && message.data != null
                 ? ClipRRect(
                     borderRadius: BorderRadius.circular(12),
-                    child: Image.file(File(message.content.replaceFirst("IMAGE:", ""))),
+                    child: Image.memory(Uint8List.fromList(message.data!)),
                   )
                 : Text(
                     message.content,
@@ -154,15 +153,29 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                   ),
           ),
           const SizedBox(height: 4),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text(
-              time,
-              style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                color: AppTheme.onSurfaceVariant.withValues(alpha: 0.4),
-                fontSize: 10,
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (isMe) ...[
+                Icon(
+                  message.wasFailed
+                      ? Icons.error_outline
+                      : (message.isDelivered ? Icons.done_all : Icons.done),
+                  size: 12,
+                  color: message.wasFailed
+                      ? Colors.red
+                      : AppTheme.onSurfaceVariant.withValues(alpha: 0.4),
+                ),
+                const SizedBox(width: 4),
+              ],
+              Text(
+                time,
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                  color: AppTheme.onSurfaceVariant.withValues(alpha: 0.4),
+                  fontSize: 10,
+                ),
               ),
-            ),
+            ],
           ),
         ],
       ),

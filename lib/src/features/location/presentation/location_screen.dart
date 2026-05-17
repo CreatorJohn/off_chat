@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:math';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:off_chat/src/core/theme/app_theme.dart';
@@ -199,14 +200,14 @@ class _LocationScreenState extends ConsumerState<LocationScreen> with SingleTick
                   color: AppTheme.surfaceBlack,
                 ),
                 child: ClipOval(
-                  child: device.model.profilePicturePath != null
-                      ? Image.file(File(device.model.profilePicturePath!), fit: BoxFit.cover)
+                  child: device.model.profilePicture != null
+                      ? Image.memory(Uint8List.fromList(device.model.profilePicture!), fit: BoxFit.cover)
                       : const Icon(Icons.person, color: AppTheme.primaryGold, size: 20),
                 ),
               ),
               const SizedBox(height: 4),
               Text(
-                device.model.username ?? "Unknown",
+                device.model.name ?? "Unknown",
                 style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
               ),
             ],

@@ -7,12 +7,12 @@ part of 'discovery_controller.dart';
 // **************************************************************************
 
 String _$discoveryControllerHash() =>
-    r'9f5a1ac7d2915606676ce47cdb8f956842a6f0bd';
+    r'ebffedb768b587cd34a387f6fe2dba730b758d97';
 
 /// See also [DiscoveryController].
 @ProviderFor(DiscoveryController)
-final discoveryControllerProvider = AutoDisposeAsyncNotifierProvider<
-    DiscoveryController, List<DiscoveredDeviceModel>>.internal(
+final discoveryControllerProvider = AutoDisposeStreamNotifierProvider<
+    DiscoveryController, List<FoundDevice>>.internal(
   DiscoveryController.new,
   name: r'discoveryControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,7 +22,6 @@ final discoveryControllerProvider = AutoDisposeAsyncNotifierProvider<
   allTransitiveDependencies: null,
 );
 
-typedef _$DiscoveryController
-    = AutoDisposeAsyncNotifier<List<DiscoveredDeviceModel>>;
+typedef _$DiscoveryController = AutoDisposeStreamNotifier<List<FoundDevice>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

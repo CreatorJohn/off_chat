@@ -1,23 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logging/logging.dart';
 import 'package:off_chat/src/app.dart';
-import 'package:off_chat/src/core/utils/log_service.dart';
-import 'package:off_chat/src/features/chat/data/message_sync_service.dart';
+import 'package:off_chat/src/core/utils/watch_log.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Setup logging
-  Logger.root.level = Level.ALL;
-  Logger.root.onRecord.listen((record) {
-    debugPrint('${record.level.name}: ${record.time}: ${record.message}');
-  });
+  // Setup hardened logging
+  await WatchLog.initialize();
 
   final container = ProviderContainer();
-  // Initialize services
-  container.read(logServiceProvider);
-  container.read(messageSyncServiceProvider);
 
   runApp(
     UncontrolledProviderScope(

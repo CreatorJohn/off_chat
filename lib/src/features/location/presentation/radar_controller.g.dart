@@ -6,7 +6,7 @@ part of 'radar_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$radarControllerHash() => r'cf7b4168af90d804cfbc9ca9a165f1a048a5a99e';
+String _$radarControllerHash() => r'f52ac46eee30b0330f15490a4c7ce1f870b7d48f';
 
 /// See also [RadarController].
 @ProviderFor(RadarController)

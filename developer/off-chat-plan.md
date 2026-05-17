@@ -14,13 +14,13 @@ Flutter, Riverpod, Isar, GoRouter, `flutter_blue_plus`, `ble_peripheral`, `geolo
 ## 4. Implementation Status
 - [x] Phase 1: Setup & Core (Riverpod, Isar, GoRouter, Theme).
 - [x] Phase 2: Profile Screen & Persistence.
-- [/] Phase 3: BLE Discovery & Advertising.
+- [x] Phase 3: BLE Discovery & Advertising (Hardened).
   - [x] Background Scanning/Advertising service.
   - [x] GATT Service Stability (addService guard/clearServices).
   - [x] Throttled Heartbeat (5 min / 111m move).
-- [ ] Phase 4: Messaging & Notifications (GATT write protocol).
-- [ ] Phase 5: Location Radar (Canvas UI + Math).
-- [ ] Phase 6: Polish (iOS background sync verification, Battery).
+- [x] Phase 4: Messaging & Notifications (GATT write protocol).
+- [x] Phase 5: Location Radar (Canvas UI + Math).
+- [x] Phase 6: Polish (iOS background sync verification, Battery Hardening).
 
 ## 5. Critical Constraints
 - **BLE GATT**: Do NOT re-add services while advertising. Clear before re-adding if identity changed.

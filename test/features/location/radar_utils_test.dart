@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:off_chat/src/features/location/domain/radar_utils.dart';
+import 'package:off_chat/src/core/utils/geo_utils.dart';
 
 void main() {
-  group('RadarUtils Math Tests', () {
+  group('GeoUtils Math Tests', () {
     test('calculateDistance should return correct distance in meters', () {
       // Coordinates for two points in Prague
       const lat1 = 50.0755;
@@ -10,7 +10,8 @@ void main() {
       const lat2 = 50.0878;
       const lon2 = 14.4205;
 
-      final distance = RadarUtils.calculateDistance(lat1, lon1, lat2, lon2);
+      // GeoUtils returns km, so multiply by 1000
+      final distance = GeoUtils.calculateDistance(lat1, lon1, lat2, lon2) * 1000;
       
       // Expected distance is approximately 1800-1900 meters
       expect(distance, closeTo(1850, 100));
@@ -22,7 +23,7 @@ void main() {
       const lat2 = 51.0;
       const lon2 = 14.0;
 
-      final bearing = RadarUtils.calculateBearing(lat1, lon1, lat2, lon2);
+      final bearing = GeoUtils.calculateBearing(lat1, lon1, lat2, lon2);
       expect(bearing, closeTo(0, 1));
     });
 
@@ -32,7 +33,7 @@ void main() {
       const lat2 = 50.0;
       const lon2 = 15.0;
 
-      final bearing = RadarUtils.calculateBearing(lat1, lon1, lat2, lon2);
+      final bearing = GeoUtils.calculateBearing(lat1, lon1, lat2, lon2);
       expect(bearing, closeTo(90, 1));
     });
 
@@ -42,7 +43,7 @@ void main() {
       const lat2 = 49.0;
       const lon2 = 14.0;
 
-      final bearing = RadarUtils.calculateBearing(lat1, lon1, lat2, lon2);
+      final bearing = GeoUtils.calculateBearing(lat1, lon1, lat2, lon2);
       expect(bearing, closeTo(180, 1));
     });
 
@@ -52,7 +53,7 @@ void main() {
       const lat2 = 50.0;
       const lon2 = 13.0;
 
-      final bearing = RadarUtils.calculateBearing(lat1, lon1, lat2, lon2);
+      final bearing = GeoUtils.calculateBearing(lat1, lon1, lat2, lon2);
       expect(bearing, closeTo(270, 1));
     });
   });

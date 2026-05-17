@@ -2,20 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>Off Chat needs Bluetooth to discover and communicate with nearby devices off-grid.</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Off Chat needs Bluetooth to be discovered by nearby devices.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Off Chat needs location access to determine the relative distance and bearing of nearby devices for the radar view.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Off Chat needs location access to keep your radar position updated even in the background.</string>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>bluetooth-central</string>
-		<string>bluetooth-peripheral</string>
-		<string>location</string>
-	</array>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -63,10 +49,36 @@
 	</dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs access to your photo library to let you select a profile picture for the mesh network.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs access to your camera to let you take a profile picture for the mesh network.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app needs access to your microphone (required by the image picker library).</string>
+        <key>NSBluetoothAlwaysUsageDescription</key>
+        <string>Off Chat needs Bluetooth to discover and communicate with nearby devices off-grid.</string>
+        <key>NSBluetoothPeripheralUsageDescription</key>
+        <string>Off Chat needs Bluetooth to be discovered by nearby devices.</string>
+        <key>NSLocationWhenInUseUsageDescription</key>
+        <string>Off Chat needs location access to determine the relative distance and bearing of nearby devices for the radar view.</string>
+        <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+        <string>Off Chat needs location access to keep your radar position updated even in the background.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>processing</string>
+		<string>bluetooth-central</string>
+                <string>bluetooth-peripheral</string>
+                <string>location</string>
+	</array>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>dev.flutter.background.refresh</string>
+	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

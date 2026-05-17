@@ -1,54 +1,24 @@
-import 'package:isar/isar.dart';
+import 'dart:typed_data';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as p;
-import 'package:off_chat/src/core/database/database_provider.dart';
-import 'package:off_chat/src/features/discovery/data/ble_service.dart';
-import 'package:off_chat/src/features/chat/domain/message_model.dart';
+import 'package:off_chat/src/core/database/isar_service.dart';
+import 'package:off_chat/src/core/database/models/message.dart';
+import 'package:off_chat/src/features/chat/data/message_handler.dart';
 
 part 'chat_controller.g.dart';
 
 @riverpod
 class ChatController extends _$ChatController {
   @override
-  FutureOr<List<MessageModel>> build(String remoteDeviceId) async {
-    final isar = await ref.watch(isarDatabaseProvider.future);
-    
-    // Fetch initial messages from database
-    return await isar.messageModels
-        .filter()
-        .senderIdEqualTo(remoteDeviceId)
-        .or()
-        .receiverIdEqualTo(remoteDeviceId)
-        .sortByTimestamp()
-        .findAll();
+  Stream<List<Message>> build(String remoteDeviceId) {
+    final stableId = int.parse(remoteDeviceId);
+    return IsarService().watchMessagesWithDevice(stableId);
   }
 
   Future<void> sendTextMessage(String text) async {
-    final isar = await ref.read(isarDatabaseProvider.future);
-    final bleServiceInstance = ref.read(bleServiceProvider);
-    
-    // 1. Save to Local DB
-    final message = MessageModel()
-      ..senderId = 'me'
-      ..receiverId = remoteDeviceId
-      ..content = text
-      ..timestamp = DateTime.now()
-      ..isRead = true;
-
-    await isar.writeTxn(() => isar.messageModels.put(message));
-    
-    // 2. Refresh UI
-    state = AsyncData([...state.value ?? [], message]);
-
-    // 3. Send over BLE
-    try {
-      await bleServiceInstance.sendMessage(remoteDeviceId, text);
-    } catch (e) {
-      // Log error
-    }
+    final stableId = int.parse(remoteDeviceId);
+    await MessageHandler.sendMessage(targetStableId: stableId, content: text);
   }
 
   Future<void> sendImageMessage() async {
@@ -56,39 +26,30 @@ class ChatController extends _$ChatController {
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     if (image == null) return;
 
-    final dir = await getTemporaryDirectory();
-    final targetPath = p.join(dir.path, "sent_${DateTime.now().millisecondsSinceEpoch}.jpg");
-
-    final XFile? compressedFile = await FlutterImageCompress.compressAndGetFile(
-      image.path,
-      targetPath,
+    final bytes = await image.readAsBytes();
+    
+    // Compress image to 128x128 for mesh transfer
+    final compressedBytes = await FlutterImageCompress.compressWithList(
+      bytes,
+      minWidth: 128,
+      minHeight: 128,
       quality: 75,
-      minWidth: 512,
-      minHeight: 512,
+      format: CompressFormat.webp,
     );
 
-    if (compressedFile == null) return;
-
-    final isar = await ref.read(isarDatabaseProvider.future);
-    final bleServiceInstance = ref.read(bleServiceProvider);
-
-    // 1. Save to Local DB
-    final message = MessageModel()
-      ..senderId = 'me'
-      ..receiverId = remoteDeviceId
-      ..content = "IMAGE:${compressedFile.path}"
-      ..timestamp = DateTime.now()
-      ..isRead = true;
-
-    await isar.writeTxn(() => isar.messageModels.put(message));
-    state = AsyncData([...state.value ?? [], message]);
-
-    // 2. Send over BLE
-    final bytes = await compressedFile.readAsBytes();
-    try {
-      await bleServiceInstance.sendImage(remoteDeviceId, bytes);
-    } catch (e) {
-      // Log error
-    }
+    final stableId = int.parse(remoteDeviceId);
+    
+    // Save locally first
+    await MessageHandler.handleOutgoingMessage(
+      receiverStableId: stableId,
+      content: "[Image]",
+      isImage: true,
+      imageData: Uint8List.fromList(compressedBytes),
+    );
+    
+    // MessageHandler will automatically pick up unsent messages in pushQueuedDataToPeer 
+    // when it next meets this peer. 
+    // But we can trigger a manual sync via background service if we want immediate attempt.
+    // For now, let the core logic handle it.
   }
 }

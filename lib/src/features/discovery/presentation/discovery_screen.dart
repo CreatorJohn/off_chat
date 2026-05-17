@@ -1,13 +1,15 @@
-import 'dart:io';
-import 'package:flutter/foundation.dart';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:off_chat/src/core/theme/app_theme.dart';
-import 'package:off_chat/src/core/utils/log_service.dart';
-import 'package:off_chat/src/features/discovery/data/ble_service.dart';
+import 'package:off_chat/src/core/database/models/found_device.dart';
+import 'package:off_chat/src/features/discovery/data/ble_discoverer.dart';
+import 'package:off_chat/src/features/discovery/presentation/widgets/log_viewer.dart';
 import 'package:off_chat/src/features/discovery/presentation/discovery_controller.dart';
+import 'package:off_chat/src/features/discovery/presentation/advertising_state.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:intl/intl.dart';
 
 class DiscoveryScreen extends ConsumerStatefulWidget {
   const DiscoveryScreen({super.key});
@@ -17,104 +19,141 @@ class DiscoveryScreen extends ConsumerStatefulWidget {
 }
 
 class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
-  void _showDebugTerminal(BuildContext context, WidgetRef ref) {
-    showModalBottomSheet(
+  void _showDebugTerminal(BuildContext context) {
+    showDialog(
       context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.black,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      builder: (context) {
-        final logs = ref.watch(logServiceProvider);
-        return DraggableScrollableSheet(
-          initialChildSize: 0.7,
-          minChildSize: 0.5,
-          maxChildSize: 0.95,
-          expand: false,
-          builder: (context, scrollController) => Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      color: Colors.white.withValues(alpha: 0.1),
-                    ),
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'SYSTEM LOGS',
-                      style: TextStyle(
-                        color: AppTheme.primaryGold,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 2,
-                      ),
-                    ),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.delete_sweep,
-                        color: Colors.redAccent,
-                      ),
-                      onPressed: () =>
-                          ref.read(logServiceProvider.notifier).clearLogs(),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: ListView.builder(
-                  controller: scrollController,
-                  padding: const EdgeInsets.all(16),
-                  itemCount: logs.length,
-                  itemBuilder: (context, index) {
-                    final log = logs[index];
-                    Color color = Colors.white70;
-                    if (log.contains('[SEVERE]')) color = Colors.redAccent;
-                    if (log.contains('[WARNING]')) color = Colors.orangeAccent;
-                    if (log.contains('[INFO]')) color = Colors.blueAccent;
+      barrierColor: Colors.black87,
+      builder: (context) => const LogViewer(),
+    );
+  }
 
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: Text(
-                        log,
-                        style: TextStyle(
-                          color: color,
-                          fontFamily: 'monospace',
-                          fontSize: 11,
-                        ),
-                      ),
-                    );
-                  },
-                ),
+  void _showProfileDialog(BuildContext context, FoundDevice device) {
+    final dateFormat = DateFormat('HH:mm:ss dd.MM.yyyy');
+    final lastSeenStr = dateFormat.format(device.lastSeen);
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: AppTheme.surfaceBlack,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(28),
+          side: const BorderSide(color: Colors.white10),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(height: 16),
+            Container(
+              width: 120,
+              height: 120,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: AppTheme.primaryGold, width: 2),
+              ),
+              child: ClipOval(
+                child: device.profilePicture != null
+                    ? Image.memory(Uint8List.fromList(device.profilePicture!), fit: BoxFit.cover)
+                    : const Icon(Icons.person, size: 64, color: AppTheme.primaryGold),
+              ),
+            ),
+            const SizedBox(height: 24),
+            Text(
+              device.name ?? 'Unknown Node',
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'STABLE ID: ${device.stableId}',
+              style: const TextStyle(color: Colors.white38, fontSize: 12, letterSpacing: 1),
+            ),
+            const SizedBox(height: 24),
+            const Divider(color: Colors.white10),
+            const SizedBox(height: 16),
+            _buildProfileInfo(Icons.history, 'LAST SEEN', lastSeenStr),
+            if (device.latitude != null) ...[
+              const SizedBox(height: 12),
+              _buildProfileInfo(
+                Icons.location_on,
+                'LOCATION',
+                '${device.latitude!.toStringAsFixed(4)}, ${device.longitude!.toStringAsFixed(4)}',
               ),
             ],
-          ),
-        );
-      },
+            const SizedBox(height: 32),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('CLOSE'),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      context.push('/chat/${device.stableId}');
+                    },
+                    child: const Text('MESSAGE'),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildProfileInfo(IconData icon, String label, String value) {
+    return Row(
+      children: [
+        Icon(icon, size: 16, color: AppTheme.primaryGold),
+        const SizedBox(width: 12),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(label, style: const TextStyle(color: Colors.white38, fontSize: 10, fontWeight: FontWeight.bold)),
+            Text(value, style: const TextStyle(color: Colors.white70, fontSize: 13)),
+          ],
+        ),
+      ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
     final devicesAsync = ref.watch(discoveryControllerProvider);
-    final bleServiceInstance = ref.watch(bleServiceProvider);
+    final isAdvertising = ref.watch(isAdvertisingProvider);
+    final scanProgress = ref.watch(scanProgressProvider).value ?? 0.0;
+    final discoverer = BLEDiscoverer();
 
     return Scaffold(
       backgroundColor: AppTheme.surfaceBlack,
       appBar: AppBar(
         backgroundColor: AppTheme.surfaceBlack.withValues(alpha: 0.8),
         elevation: 0,
+        bottom: scanProgress > 0 && scanProgress < 1.0
+            ? PreferredSize(
+                preferredSize: const Size.fromHeight(2),
+                child: LinearProgressIndicator(
+                  value: scanProgress,
+                  backgroundColor: Colors.transparent,
+                  color: AppTheme.primaryGold.withValues(alpha: 0.5),
+                  minHeight: 2,
+                ),
+              )
+            : null,
         leading: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             const SizedBox(width: 8),
             StreamBuilder<bool>(
-              stream: bleServiceInstance.isScanning,
-              initialData: false,
+              stream: discoverer.scanStatusStream,
+              initialData: discoverer.isScanOperationInProgress,
               builder: (context, snapshot) {
                 final isScanning = snapshot.data ?? false;
                 return _StatusIndicator(
@@ -126,27 +165,20 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
               },
             ),
             const SizedBox(width: 8),
-            StreamBuilder<bool>(
-              stream: bleServiceInstance.isAdvertising,
-              initialData: false,
-              builder: (context, snapshot) {
-                final isAdvertising = snapshot.data ?? false;
-                return _StatusIndicator(
-                  isActive: isAdvertising,
-                  activeColor: Colors.green,
-                  icon: Icons.broadcast_on_personal,
-                  tooltip: isAdvertising
-                      ? 'Advertising Active'
-                      : 'Advertising Inactive',
-                );
-              },
+            _StatusIndicator(
+              isActive: isAdvertising,
+              activeColor: Colors.green,
+              icon: Icons.visibility,
+              tooltip: isAdvertising
+                  ? 'Visible to others'
+                  : 'Invisible (Advertising Off)',
             ),
           ],
         ),
-        leadingWidth: kDebugMode ? 100 : 60,
+        leadingWidth: 100,
         title: GestureDetector(
           behavior: HitTestBehavior.opaque,
-          onLongPress: () => _showDebugTerminal(context, ref),
+          onDoubleTap: () => _showDebugTerminal(context),
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Text(
@@ -159,14 +191,6 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
           ),
         ),
         centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh, color: AppTheme.primaryGold),
-            onPressed: () {
-              ref.read(discoveryControllerProvider.notifier).manualRefresh();
-            },
-          ),
-        ],
       ),
       body: CustomScrollView(
         slivers: [
@@ -241,29 +265,20 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
                 return SliverList(
                   delegate: SliverChildBuilderDelegate((context, index) {
                     final device = devices[index];
-                    final timeAgoStr = device.lastDiscovered != null
-                        ? 'Discovered ${timeago.format(device.lastDiscovered!)}'
-                        : 'Unknown';
-                    // Consider "online" if seen in the last 5 minutes
+                    // Consider "online" if seen in the last 2 minutes
                     final isOnline =
-                        device.lastDiscovered != null &&
-                        DateTime.now()
-                                .difference(device.lastDiscovered!)
-                                .inMinutes <
-                            5;
+                        DateTime.now().difference(device.lastSeen).inMinutes < 2;
 
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 16.0),
                       child: GestureDetector(
                         onTap: () {
-                          context.push('/chat/${device.deviceId}');
+                          _showProfileDialog(context, device);
                         },
                         child: _buildDeviceCard(
                           context: context,
-                          name: device.username ?? 'Unknown Node',
-                          timeAgo: timeAgoStr,
+                          device: device,
                           isOnline: isOnline,
-                          profilePicturePath: device.profilePicturePath,
                         ),
                       ),
                     );
@@ -292,11 +307,18 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
 
   Widget _buildDeviceCard({
     required BuildContext context,
-    required String name,
-    required String timeAgo,
+    required FoundDevice device,
     required bool isOnline,
-    String? profilePicturePath,
   }) {
+    final scanStatusAsync = ref.watch(scanStatusProvider);
+    String? granularStatus;
+    if (scanStatusAsync.hasValue) {
+      final data = scanStatusAsync.value!;
+      if (data['syncingStableId'] == device.stableId) {
+        granularStatus = data['deviceStatus'] as String?;
+      }
+    }
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -317,8 +339,8 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),
-                  child: profilePicturePath != null
-                      ? Image.file(File(profilePicturePath), fit: BoxFit.cover)
+                  child: device.profilePicture != null
+                      ? Image.memory(Uint8List.fromList(device.profilePicture!), fit: BoxFit.cover)
                       : const Icon(Icons.person, color: AppTheme.primaryGold),
                 ),
               ),
@@ -346,30 +368,48 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  name,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: AppTheme.onSurfaceVariant,
-                  ),
-                ),
-                const SizedBox(height: 4),
                 Row(
                   children: [
-                    Icon(
-                      Icons.history,
-                      size: 14,
-                      color: AppTheme.onSurfaceVariant.withValues(alpha: 0.7),
-                    ),
-                    const SizedBox(width: 4),
                     Text(
-                      timeAgo,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: AppTheme.onSurfaceVariant.withValues(alpha: 0.7),
+                      device.name ?? 'Unknown Node',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: AppTheme.onSurfaceVariant,
                       ),
                     ),
+                    if (device.publicKey != null) ...[
+                      const SizedBox(width: 4),
+                      const Icon(Icons.verified, size: 16, color: AppTheme.primaryGold),
+                    ],
                   ],
                 ),
+                const SizedBox(height: 4),
+                if (granularStatus != null)
+                  Text(
+                    granularStatus,
+                    style: const TextStyle(
+                      color: AppTheme.primaryGold,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                else
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.history,
+                        size: 14,
+                        color: AppTheme.onSurfaceVariant.withValues(alpha: 0.7),
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        'Seen ${timeago.format(device.lastSeen)}',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: AppTheme.onSurfaceVariant.withValues(alpha: 0.7),
+                        ),
+                      ),
+                    ],
+                  ),
               ],
             ),
           ),
@@ -380,7 +420,7 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
               color: Colors.white.withValues(alpha: 0.05),
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.bolt, color: AppTheme.primaryGold),
+            child: const Icon(Icons.message, color: AppTheme.primaryGold),
           ),
         ],
       ),

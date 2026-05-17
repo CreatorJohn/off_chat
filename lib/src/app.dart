@@ -2,16 +2,48 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:off_chat/src/core/routing/router.dart';
 import 'package:off_chat/src/core/theme/app_theme.dart';
-import 'package:off_chat/src/features/discovery/presentation/advertising_controller.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
 
-class OffChatApp extends ConsumerWidget {
+class OffChatApp extends ConsumerStatefulWidget {
   const OffChatApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<OffChatApp> createState() => _OffChatAppState();
+}
+
+class _OffChatAppState extends ConsumerState<OffChatApp> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    // Notify service that app is active
+    Future.delayed(const Duration(seconds: 1), () => _setOnlineStatus(true));
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      _setOnlineStatus(true);
+    } else {
+      _setOnlineStatus(false);
+    }
+  }
+
+  void _setOnlineStatus(bool isOnline) {
+    FlutterBackgroundService().invoke("setOnlineStatus", {
+      "isOnline": isOnline,
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final router = ref.watch(routerProvider);
-    // Start advertising if onboarded
-    ref.watch(advertisingControllerProvider);
 
     return MaterialApp.router(
       title: 'Off Chat',

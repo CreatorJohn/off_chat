@@ -1,13 +1,13 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:off_chat/src/features/location/data/location_service.dart';
 import 'package:off_chat/src/features/discovery/presentation/discovery_controller.dart';
-import 'package:off_chat/src/features/discovery/domain/discovered_device_model.dart';
-import 'package:off_chat/src/features/location/domain/radar_utils.dart';
+import 'package:off_chat/src/core/database/models/found_device.dart';
+import 'package:off_chat/src/core/utils/geo_utils.dart';
 
 part 'radar_controller.g.dart';
 
 class RadarDevice {
-  final DiscoveredDeviceModel model;
+  final FoundDevice model;
   final double distance; // in meters
   final double bearing;  // in degrees (0-360)
 
@@ -51,13 +51,15 @@ class RadarController extends _$RadarController {
     final radarDevices = devices
         .where((d) => d.latitude != null && d.longitude != null)
         .map((d) {
-          final distance = RadarUtils.calculateDistance(
+          // Convert km to meters
+          final distance = GeoUtils.calculateDistance(
             userLocation.latitude,
             userLocation.longitude,
             d.latitude!,
             d.longitude!,
-          );
-          final bearing = RadarUtils.calculateBearing(
+          ) * 1000;
+          
+          final bearing = GeoUtils.calculateBearing(
             userLocation.latitude,
             userLocation.longitude,
             d.latitude!,

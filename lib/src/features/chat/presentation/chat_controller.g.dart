@@ -6,7 +6,7 @@ part of 'chat_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$chatControllerHash() => r'79a756b940cc311b73f004382a2c180fe19bdb46';
+String _$chatControllerHash() => r'f4f1ed52636787b42d80c5505e5de7d0a416fadf';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,10 +30,10 @@ class _SystemHash {
 }
 
 abstract class _$ChatController
-    extends BuildlessAutoDisposeAsyncNotifier<List<MessageModel>> {
+    extends BuildlessAutoDisposeStreamNotifier<List<Message>> {
   late final String remoteDeviceId;
 
-  FutureOr<List<MessageModel>> build(
+  Stream<List<Message>> build(
     String remoteDeviceId,
   );
 }
@@ -43,7 +43,7 @@ abstract class _$ChatController
 const chatControllerProvider = ChatControllerFamily();
 
 /// See also [ChatController].
-class ChatControllerFamily extends Family<AsyncValue<List<MessageModel>>> {
+class ChatControllerFamily extends Family<AsyncValue<List<Message>>> {
   /// See also [ChatController].
   const ChatControllerFamily();
 
@@ -81,8 +81,8 @@ class ChatControllerFamily extends Family<AsyncValue<List<MessageModel>>> {
 }
 
 /// See also [ChatController].
-class ChatControllerProvider extends AutoDisposeAsyncNotifierProviderImpl<
-    ChatController, List<MessageModel>> {
+class ChatControllerProvider extends AutoDisposeStreamNotifierProviderImpl<
+    ChatController, List<Message>> {
   /// See also [ChatController].
   ChatControllerProvider(
     String remoteDeviceId,
@@ -113,7 +113,7 @@ class ChatControllerProvider extends AutoDisposeAsyncNotifierProviderImpl<
   final String remoteDeviceId;
 
   @override
-  FutureOr<List<MessageModel>> runNotifierBuild(
+  Stream<List<Message>> runNotifierBuild(
     covariant ChatController notifier,
   ) {
     return notifier.build(
@@ -138,7 +138,7 @@ class ChatControllerProvider extends AutoDisposeAsyncNotifierProviderImpl<
   }
 
   @override
-  AutoDisposeAsyncNotifierProviderElement<ChatController, List<MessageModel>>
+  AutoDisposeStreamNotifierProviderElement<ChatController, List<Message>>
       createElement() {
     return _ChatControllerProviderElement(this);
   }
@@ -158,15 +158,14 @@ class ChatControllerProvider extends AutoDisposeAsyncNotifierProviderImpl<
   }
 }
 
-mixin ChatControllerRef
-    on AutoDisposeAsyncNotifierProviderRef<List<MessageModel>> {
+mixin ChatControllerRef on AutoDisposeStreamNotifierProviderRef<List<Message>> {
   /// The parameter `remoteDeviceId` of this provider.
   String get remoteDeviceId;
 }
 
 class _ChatControllerProviderElement
-    extends AutoDisposeAsyncNotifierProviderElement<ChatController,
-        List<MessageModel>> with ChatControllerRef {
+    extends AutoDisposeStreamNotifierProviderElement<ChatController,
+        List<Message>> with ChatControllerRef {
   _ChatControllerProviderElement(super.provider);
 
   @override
