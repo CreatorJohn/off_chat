@@ -2,7 +2,6 @@ import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'generated/ble_peripheral.g.dart';
-import 'models/ble_enums.dart';
 
 abstract class BlePeripheralInterface {
   Future initialize();

@@ -8,6 +8,7 @@ import 'package:off_chat/src/features/chat/presentation/chat_screen.dart';
 import 'package:off_chat/src/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:off_chat/src/features/onboarding/presentation/onboarding_controller.dart';
 import 'package:off_chat/src/core/theme/app_theme.dart';
+import 'package:logging/logging.dart';
 
 part 'router.g.dart';
 
@@ -16,6 +17,7 @@ final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
 @riverpod
 GoRouter router(Ref ref) {
+  final log = Logger('Router');
   final refreshListenable = ValueNotifier<bool>(false);
   ref.listen(onboardingControllerProvider, (_, _) => refreshListenable.value = !refreshListenable.value);
   ref.onDispose(() => refreshListenable.dispose());
@@ -26,6 +28,8 @@ GoRouter router(Ref ref) {
     refreshListenable: refreshListenable,
     redirect: (context, state) {
       final isOnboardedAsync = ref.read(onboardingControllerProvider);
+      log.info('Redirect check: path=${state.uri.path}, isOnboarded=${isOnboardedAsync.value}, isLoading=${isOnboardedAsync.isLoading}');
+      
       if (isOnboardedAsync.isLoading) return null;
       
       final isOnboarded = isOnboardedAsync.value ?? false;

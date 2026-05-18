@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:off_chat/src/core/theme/app_theme.dart';
 import 'package:off_chat/src/features/onboarding/presentation/onboarding_controller.dart';
 import 'package:off_chat/src/features/profile/data/profile_manager.dart';
+import 'package:off_chat/src/features/discovery/presentation/widgets/log_viewer.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -80,14 +81,25 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     final localPath = "${dir.path}/profile_pic.webp";
     final file = File(localPath);
     
-    await ref.read(onboardingControllerProvider.notifier).completeOnboarding(
-      username: _nameController.text.trim(),
-      profilePicturePath: await file.exists() ? localPath : null,
-    );
+    try {
+      await ref.read(onboardingControllerProvider.notifier).completeOnboarding(
+        username: _nameController.text.trim(),
+        profilePicturePath: await file.exists() ? localPath : null,
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to complete onboarding: $e')),
+        );
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final onboardingState = ref.watch(onboardingControllerProvider);
+    final isLoading = onboardingState.isLoading;
+
     return Scaffold(
       backgroundColor: AppTheme.surfaceBlack,
       body: Stack(
@@ -95,6 +107,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
           PageView(
             controller: _pageController,
             onPageChanged: (page) => setState(() => _currentPage = page),
+            physics: isLoading ? const NeverScrollableScrollPhysics() : null,
             children: [
               _buildSplashStep(),
               _buildStep(
@@ -130,7 +143,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
               _buildFinalStep(),
             ],
           ),
-          if (_currentPage > 0) _buildFooter(),
+          if (_currentPage > 0) _buildFooter(isLoading),
         ],
       ),
     );
@@ -143,11 +156,20 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
         children: [
           const Icon(Icons.chat_bubble_outline, size: 120, color: AppTheme.primaryGold),
           const SizedBox(height: 24),
-          Text(
-            'OFFCHAT',
-            style: Theme.of(context).textTheme.displayLarge?.copyWith(
-              color: AppTheme.primaryGold,
-              letterSpacing: 8,
+          GestureDetector(
+            onDoubleTap: () {
+              showDialog(
+                context: context,
+                barrierColor: Colors.black87,
+                builder: (context) => const LogViewer(),
+              );
+            },
+            child: Text(
+              'OFFCHAT',
+              style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                    color: AppTheme.primaryGold,
+                    letterSpacing: 8,
+                  ),
             ),
           ),
           const SizedBox(height: 8),
@@ -301,7 +323,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     );
   }
 
-  Widget _buildFooter() {
+  Widget _buildFooter(bool isLoading) {
     return Positioned(
       bottom: 0,
       left: 0,
@@ -323,11 +345,20 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             ),
             const SizedBox(height: 24),
             ElevatedButton(
-              onPressed: _nextPage,
+              onPressed: isLoading ? null : _nextPage,
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 56),
               ),
-              child: Text(_currentPage == 6 ? 'FINISH' : 'CONTINUE'),
+              child: isLoading
+                  ? const SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation(Colors.black),
+                      ),
+                    )
+                  : Text(_currentPage == 6 ? 'FINISH' : 'CONTINUE'),
             ),
           ],
         ),

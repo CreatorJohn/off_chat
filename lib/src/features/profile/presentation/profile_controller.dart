@@ -2,21 +2,26 @@ import 'package:isar_community/isar.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:off_chat/src/core/database/database_provider.dart';
 import 'package:off_chat/src/features/profile/domain/user_model.dart';
+import 'package:logging/logging.dart';
 
 part 'profile_controller.g.dart';
 
 @riverpod
 class ProfileController extends _$ProfileController {
+  static final _log = Logger('ProfileController');
+
   @override
   FutureOr<UserModel?> build() async {
+    _log.info('Building ProfileController...');
     final isar = await ref.watch(isarDatabaseProvider.future);
     final user = await isar.userModels.where().findFirst();
     if (user == null) {
-      // Create a default user if none exists
+      _log.info('No user found, creating default profile...');
       final newUser = UserModel()..username = 'Alex Sterling';
       await isar.writeTxn(() => isar.userModels.put(newUser));
       return newUser;
     }
+    _log.info('Profile loaded: ${user.username}');
     return user;
   }
 
