@@ -12,8 +12,6 @@ import 'package:pigeon/pigeon.dart';
     cppOptions: CppOptions(namespace: 'ble_peripheral'),
     kotlinOptions: KotlinOptions(package: 'com.rohit.ble_peripheral'),
     swiftOptions: SwiftOptions(),
-    cppHeaderOut: 'windows/BlePeripheral.g.h',
-    cppSourceOut: 'windows/BlePeripheral.g.cpp',
   ),
 )
 

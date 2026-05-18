@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:ble_peripheral/src/ble_peripheral_interface.dart';
-import 'package:ble_peripheral/src/generated/ble_peripheral.g.dart';
-import 'package:ble_peripheral/src/pigeon/ble_peripheral_pigeon.dart';
+import 'ble_peripheral_interface.dart';
+import 'generated/ble_peripheral.g.dart';
+import 'pigeon/ble_peripheral_pigeon.dart';
 import 'package:flutter/foundation.dart';
-export 'package:ble_peripheral/src/models/ble_enums.dart';
-export 'package:ble_peripheral/src/generated/ble_peripheral.g.dart';
+export 'models/ble_enums.dart';
+export 'generated/ble_peripheral.g.dart';
 
 /// [BlePeripheral] is the main class to interact with the BLE peripheral plugin.
 class BlePeripheral {
