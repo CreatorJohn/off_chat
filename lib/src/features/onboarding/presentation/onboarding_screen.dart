@@ -154,7 +154,11 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.chat_bubble_outline, size: 120, color: AppTheme.primaryGold),
+          Image.asset(
+            'assets/images/off-chat-logo-transparent.png',
+            width: 180,
+            height: 180,
+          ),
           const SizedBox(height: 24),
           GestureDetector(
             onDoubleTap: () {
@@ -240,11 +244,20 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'IDENTITY.',
-            style: Theme.of(context).textTheme.displayMedium?.copyWith(
-              color: AppTheme.onSurfaceVariant,
-              fontWeight: FontWeight.bold,
+          GestureDetector(
+            onDoubleTap: () {
+              showDialog(
+                context: context,
+                barrierColor: Colors.black87,
+                builder: (context) => const LogViewer(),
+              );
+            },
+            child: Text(
+              'IDENTITY.',
+              style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                    color: AppTheme.onSurfaceVariant,
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
           ),
           const SizedBox(height: 8),

@@ -3,6 +3,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:off_chat/src/core/database/models/found_device.dart';
 import 'package:off_chat/src/core/database/models/message.dart';
 import 'package:off_chat/src/core/database/models/relay_task.dart';
+import 'package:off_chat/src/features/profile/domain/user_model.dart';
 
 class IsarService {
   static final IsarService _instance = IsarService._internal();
@@ -26,6 +27,7 @@ class IsarService {
 
     final dir = await getApplicationDocumentsDirectory();
     _isar = await Isar.open([
+      UserModelSchema,
       FoundDeviceSchema,
       MessageSchema,
       RelayTaskSchema,
