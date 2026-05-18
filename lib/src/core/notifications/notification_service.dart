@@ -43,6 +43,6 @@ class NotificationService {
 }
 
 @Riverpod(keepAlive: true)
-NotificationService notificationService(NotificationServiceRef ref) {
+NotificationService notificationService(Ref ref) {
   return NotificationService();
 }

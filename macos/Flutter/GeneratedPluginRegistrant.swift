@@ -13,7 +13,7 @@ import flutter_image_compress_macos
 import flutter_local_notifications
 import flutter_secure_storage_darwin
 import geolocator_apple
-import isar_flutter_libs
+import isar_community_flutter_libs
 import package_info_plus
 import shared_preferences_foundation
 

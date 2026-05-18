@@ -6,19 +6,38 @@ part of 'database_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$isarDatabaseHash() => r'fbca7f56a97516d2dd2808670060229414fcb541';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [isarDatabase].
 @ProviderFor(isarDatabase)
-final isarDatabaseProvider = FutureProvider<Isar>.internal(
-  isarDatabase,
-  name: r'isarDatabaseProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$isarDatabaseHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+final isarDatabaseProvider = IsarDatabaseProvider._();
 
-typedef IsarDatabaseRef = FutureProviderRef<Isar>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+final class IsarDatabaseProvider
+    extends $FunctionalProvider<AsyncValue<Isar>, Isar, FutureOr<Isar>>
+    with $FutureModifier<Isar>, $FutureProvider<Isar> {
+  IsarDatabaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'isarDatabaseProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$isarDatabaseHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<Isar> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<Isar> create(Ref ref) {
+    return isarDatabase(ref);
+  }
+}
+
+String _$isarDatabaseHash() => r'0ad11a5c6e16cbb8bd7bbd25d0aaa5b74e73c3bb';

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:off_chat/src/features/discovery/presentation/discovery_screen.dart';
 import 'package:off_chat/src/features/location/presentation/location_screen.dart';

@@ -14,7 +14,7 @@ import 'package:cryptography/cryptography.dart';
 import 'package:off_chat/src/core/database/models/found_device.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
-import 'package:isar/isar.dart';
+import 'package:isar_community/isar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PendingAck {

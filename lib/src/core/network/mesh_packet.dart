@@ -6,7 +6,7 @@ import 'package:off_chat/src/features/chat/data/message_handler.dart';
 import 'package:off_chat/src/core/database/models/found_device.dart';
 import 'package:off_chat/src/core/database/models/message.dart';
 import 'package:off_chat/src/features/discovery/data/ble_advertiser.dart';
-import 'package:isar/isar.dart';
+import 'package:isar_community/isar.dart';
 
 class PacketContext {
   final int directSenderId;

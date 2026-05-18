@@ -1,4 +1,4 @@
-import 'package:isar/isar.dart';
+import 'package:isar_community/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:off_chat/src/features/profile/domain/user_model.dart';
@@ -10,7 +10,7 @@ import 'package:off_chat/src/core/database/isar_service.dart';
 part 'database_provider.g.dart';
 
 @Riverpod(keepAlive: true)
-Future<Isar> isarDatabase(IsarDatabaseRef ref) async {
+Future<Isar> isarDatabase(Ref ref) async {
   final dir = await getApplicationDocumentsDirectory();
   final isar = await Isar.open(
     [

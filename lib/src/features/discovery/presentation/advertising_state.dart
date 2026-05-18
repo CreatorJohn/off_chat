@@ -44,7 +44,7 @@ class IsAdvertising extends _$IsAdvertising {
 }
 
 @riverpod
-Stream<bool> isServiceRunning(IsServiceRunningRef ref) {
+Stream<bool> isServiceRunning(Ref ref) {
   final service = FlutterBackgroundService();
   return Stream.periodic(
     const Duration(seconds: 1),
@@ -52,13 +52,13 @@ Stream<bool> isServiceRunning(IsServiceRunningRef ref) {
 }
 
 @riverpod
-Stream<Map<String, dynamic>> scanStatus(ScanStatusRef ref) {
+Stream<Map<String, dynamic>> scanStatus(Ref ref) {
   final service = FlutterBackgroundService();
   return service.on('updateProgress').map((event) => event ?? {});
 }
 
 @riverpod
-Stream<double> scanProgress(ScanProgressRef ref) {
+Stream<double> scanProgress(Ref ref) {
   final service = FlutterBackgroundService();
   return service.on('updateProgress').map((event) {
     final value = event?['value'];

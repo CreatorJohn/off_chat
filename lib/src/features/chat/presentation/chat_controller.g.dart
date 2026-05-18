@@ -6,171 +6,94 @@ part of 'chat_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$chatControllerHash() => r'f4f1ed52636787b42d80c5505e5de7d0a416fadf';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
-abstract class _$ChatController
-    extends BuildlessAutoDisposeStreamNotifier<List<Message>> {
-  late final String remoteDeviceId;
-
-  Stream<List<Message>> build(
-    String remoteDeviceId,
-  );
-}
-
-/// See also [ChatController].
 @ProviderFor(ChatController)
-const chatControllerProvider = ChatControllerFamily();
+final chatControllerProvider = ChatControllerFamily._();
 
-/// See also [ChatController].
-class ChatControllerFamily extends Family<AsyncValue<List<Message>>> {
-  /// See also [ChatController].
-  const ChatControllerFamily();
+final class ChatControllerProvider
+    extends $StreamNotifierProvider<ChatController, List<Message>> {
+  ChatControllerProvider._({
+    required ChatControllerFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'chatControllerProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
 
-  /// See also [ChatController].
-  ChatControllerProvider call(
-    String remoteDeviceId,
-  ) {
-    return ChatControllerProvider(
-      remoteDeviceId,
-    );
+  @override
+  String debugGetCreateSourceHash() => _$chatControllerHash();
+
+  @override
+  String toString() {
+    return r'chatControllerProvider'
+        ''
+        '($argument)';
   }
 
+  @$internal
   @override
-  ChatControllerProvider getProviderOverride(
-    covariant ChatControllerProvider provider,
-  ) {
-    return call(
-      provider.remoteDeviceId,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'chatControllerProvider';
-}
-
-/// See also [ChatController].
-class ChatControllerProvider extends AutoDisposeStreamNotifierProviderImpl<
-    ChatController, List<Message>> {
-  /// See also [ChatController].
-  ChatControllerProvider(
-    String remoteDeviceId,
-  ) : this._internal(
-          () => ChatController()..remoteDeviceId = remoteDeviceId,
-          from: chatControllerProvider,
-          name: r'chatControllerProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$chatControllerHash,
-          dependencies: ChatControllerFamily._dependencies,
-          allTransitiveDependencies:
-              ChatControllerFamily._allTransitiveDependencies,
-          remoteDeviceId: remoteDeviceId,
-        );
-
-  ChatControllerProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.remoteDeviceId,
-  }) : super.internal();
-
-  final String remoteDeviceId;
-
-  @override
-  Stream<List<Message>> runNotifierBuild(
-    covariant ChatController notifier,
-  ) {
-    return notifier.build(
-      remoteDeviceId,
-    );
-  }
-
-  @override
-  Override overrideWith(ChatController Function() create) {
-    return ProviderOverride(
-      origin: this,
-      override: ChatControllerProvider._internal(
-        () => create()..remoteDeviceId = remoteDeviceId,
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        remoteDeviceId: remoteDeviceId,
-      ),
-    );
-  }
-
-  @override
-  AutoDisposeStreamNotifierProviderElement<ChatController, List<Message>>
-      createElement() {
-    return _ChatControllerProviderElement(this);
-  }
+  ChatController create() => ChatController();
 
   @override
   bool operator ==(Object other) {
-    return other is ChatControllerProvider &&
-        other.remoteDeviceId == remoteDeviceId;
+    return other is ChatControllerProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, remoteDeviceId.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-mixin ChatControllerRef on AutoDisposeStreamNotifierProviderRef<List<Message>> {
-  /// The parameter `remoteDeviceId` of this provider.
-  String get remoteDeviceId;
-}
+String _$chatControllerHash() => r'f4f1ed52636787b42d80c5505e5de7d0a416fadf';
 
-class _ChatControllerProviderElement
-    extends AutoDisposeStreamNotifierProviderElement<ChatController,
-        List<Message>> with ChatControllerRef {
-  _ChatControllerProviderElement(super.provider);
+final class ChatControllerFamily extends $Family
+    with
+        $ClassFamilyOverride<
+          ChatController,
+          AsyncValue<List<Message>>,
+          List<Message>,
+          Stream<List<Message>>,
+          String
+        > {
+  ChatControllerFamily._()
+    : super(
+        retry: null,
+        name: r'chatControllerProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  ChatControllerProvider call(String remoteDeviceId) =>
+      ChatControllerProvider._(argument: remoteDeviceId, from: this);
 
   @override
-  String get remoteDeviceId =>
-      (origin as ChatControllerProvider).remoteDeviceId;
+  String toString() => r'chatControllerProvider';
 }
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+
+abstract class _$ChatController extends $StreamNotifier<List<Message>> {
+  late final _$args = ref.$arg as String;
+  String get remoteDeviceId => _$args;
+
+  Stream<List<Message>> build(String remoteDeviceId);
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<AsyncValue<List<Message>>, List<Message>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<List<Message>>, List<Message>>,
+              AsyncValue<List<Message>>,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, () => build(_$args));
+  }
+}

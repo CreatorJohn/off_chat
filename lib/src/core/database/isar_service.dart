@@ -1,4 +1,4 @@
-import 'package:isar/isar.dart';
+import 'package:isar_community/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:off_chat/src/core/database/models/found_device.dart';
 import 'package:off_chat/src/core/database/models/message.dart';
