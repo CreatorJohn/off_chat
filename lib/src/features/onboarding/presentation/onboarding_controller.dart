@@ -44,7 +44,10 @@ class OnboardingController extends _$OnboardingController {
         
         // Initialize background service without blocking the state update
         _log.info('Initializing background service in background...');
-        initializeBackgroundService().catchError((e) {
+        initializeBackgroundService().then((_) {
+          _log.info('Service initialized, triggering startAdvertising...');
+          FlutterBackgroundService().invoke("startAdvertising", {"name": username});
+        }).catchError((e) {
           _log.severe('Background service init failed: $e');
         });
         
