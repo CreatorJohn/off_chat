@@ -1,5 +1,6 @@
 import 'package:isar_community/isar.dart';
 import 'package:off_chat/src/core/background_service.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:off_chat/src/core/database/database_provider.dart';
 import 'package:off_chat/src/features/profile/presentation/profile_controller.dart';
