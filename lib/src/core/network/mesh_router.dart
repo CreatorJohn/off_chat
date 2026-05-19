@@ -15,6 +15,10 @@ abstract class MeshRouter {
 }
 
 class DirectedBeamRouter extends MeshRouter {
+  static const double angleWeight = 0.6;
+  static const double rssiWeight = 0.4;
+  static const double scoreThreshold = 0.5;
+
   @override
   bool shouldRelayToPeer({
     required RelayTask task,
@@ -24,26 +28,62 @@ class DirectedBeamRouter extends MeshRouter {
     FoundDevice? ourDevice,
   }) {
     if (targetDevice == null || targetDevice.latitude == null) return true;
-    if (peer.latitude == null) return false;
+    if (peer.latitude == null || ourDevice?.latitude == null) return false;
 
-    final ourDist = ourDevice?.latitude != null
-        ? GeoUtils.calculateDistance(
-            ourDevice!.latitude!,
-            ourDevice.longitude!,
-            targetDevice.latitude!,
-            targetDevice.longitude!,
-          )
-        : double.infinity;
+    final score = calculateScore(
+      ourDevice: ourDevice!,
+      peer: peer,
+      target: targetDevice,
+    );
 
+    return score >= scoreThreshold;
+  }
+
+  double calculateScore({
+    required FoundDevice ourDevice,
+    required FoundDevice peer,
+    required FoundDevice target,
+  }) {
+    // 1. Angular Deviation Score
+    final bearingToTarget = GeoUtils.calculateBearing(
+      ourDevice.latitude!,
+      ourDevice.longitude!,
+      target.latitude!,
+      target.longitude!,
+    );
+    final bearingToPeer = GeoUtils.calculateBearing(
+      ourDevice.latitude!,
+      ourDevice.longitude!,
+      peer.latitude!,
+      peer.longitude!,
+    );
+
+    double angleDiff = (bearingToTarget - bearingToPeer).abs();
+    if (angleDiff > 180) angleDiff = 360 - angleDiff;
+    
+    final angleScore = (180 - angleDiff) / 180;
+
+    // 2. RSSI Score (Normalized -100 to -30 range)
+    final double normalizedRssi = (peer.rssi + 100).clamp(0, 70) / 70;
+
+    // 3. Distance improvement (Optional but good: is peer closer than us?)
+    final ourDist = GeoUtils.calculateDistance(
+      ourDevice.latitude!,
+      ourDevice.longitude!,
+      target.latitude!,
+      target.longitude!,
+    );
     final peerDist = GeoUtils.calculateDistance(
       peer.latitude!,
       peer.longitude!,
-      targetDevice.latitude!,
-      targetDevice.longitude!,
+      target.latitude!,
+      target.longitude!,
     );
+    
+    final distanceMultiplier = peerDist < ourDist ? 1.0 : 0.5;
 
-    // Only relay if peer is closer to target than we are
-    return peerDist < ourDist;
+    return ((angleScore * angleWeight) + (normalizedRssi * rssiWeight)) *
+        distanceMultiplier;
   }
 }
 

@@ -83,6 +83,7 @@ class _LocationScreenState extends ConsumerState<LocationScreen> with SingleTick
                       painter: RadarPainter(
                         sweepAngle: _sweepController.value * pi * 2,
                         userHeading: radarState.userLocation?.heading ?? 0,
+                        devices: radarState.nearbyDevices,
                       ),
                       child: Stack(
                         alignment: Alignment.center,
@@ -94,9 +95,6 @@ class _LocationScreenState extends ConsumerState<LocationScreen> with SingleTick
 
                           // My Device (Center)
                           _buildCenterAnchor(profileAsync),
-
-                          // Nearby Device Blips
-                          ...radarState.nearbyDevices.map((device) => _buildDeviceBlip(device, radarState.userLocation?.heading ?? 0)),
                         ],
                       ),
                     );
