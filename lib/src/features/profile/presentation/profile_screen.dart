@@ -120,6 +120,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           color: AppTheme.onSurfaceVariant,
                         ),
                       ),
+                      const SizedBox(height: 8),
+                      Text(
+                        "ID: ${user.deviceId ?? "UNKNOWN"}",
+                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                          color: AppTheme.onSurfaceVariant.withValues(alpha: 0.5),
+                          fontFamily: "monospace",
+                        ),
+                      ),
                       const SizedBox(height: 40),
 
                       const SystemHealthCard(),
@@ -130,18 +138,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       const SizedBox(height: 24),
                       
                       // Settings Bento Grid
-                      _buildSettingCard(
-                        context: context,
-                        icon: Icons.radar,
-                        title: 'Location Visibility',
-                        subtitle: 'Broadcast device presence on active radar',
-                        trailing: Switch(
-                          value: user.isLocationVisible,
-                          activeTrackColor: AppTheme.primaryGold,
-                          onChanged: (val) => ref.read(profileControllerProvider.notifier).toggleLocationVisibility(val),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
                       _buildSettingCard(
                         context: context,
                         icon: Icons.notifications_active,
