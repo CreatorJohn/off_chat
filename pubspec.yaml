@@ -59,7 +59,17 @@ flutter:
 flutter_native_splash:
   color: "#000000"
   image: assets/images/off-chat-logo-transparent.png
+  android: true
+  ios: true
+  
+  # For pre-Android 12
+  android_gravity: center
+  
+  # For Android 12+
   android_12:
     image: assets/images/off-chat-logo-transparent.png
     color: "#000000"
-  fullscreen: true
+    icon_background_color: "#000000"
+    image_dark: assets/images/off-chat-logo-transparent.png
+    color_dark: "#000000"
+    icon_background_color_dark: "#000000"
