@@ -7,6 +7,8 @@ import 'package:off_chat/src/core/database/models/found_device.dart';
 import 'package:off_chat/src/features/discovery/presentation/widgets/log_viewer.dart';
 import 'package:off_chat/src/features/discovery/presentation/discovery_controller.dart';
 import 'package:off_chat/src/features/discovery/presentation/advertising_state.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
+import 'package:off_chat/src/core/database/isar_service.dart';
 import 'package:logging/logging.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:intl/intl.dart';
@@ -166,7 +168,29 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
         leading: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const SizedBox(width: 12),
+            const SizedBox(width: 8),
+            IconButton(
+              icon: const Icon(Icons.stop_circle_outlined, size: 20, color: Colors.red),
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(),
+              tooltip: 'DEV: Stop Service',
+              onPressed: () {
+                FlutterBackgroundService().invoke("stopService");
+              },
+            ),
+            const SizedBox(width: 8),
+            IconButton(
+              icon: const Icon(Icons.refresh, size: 20, color: AppTheme.primaryGold),
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(),
+              tooltip: 'DEV: Wipe & Restart',
+              onPressed: () async {
+                await IsarService().db.writeTxn(() => IsarService().db.clear());
+                FlutterBackgroundService().invoke("stopService");
+                // Service restarts automatically on next relevant user action or manual trigger
+              },
+            ),
+            const SizedBox(width: 8),
             _StatusIndicator(
               isActive: isAdvertising,
               activeColor: Colors.green,
@@ -177,7 +201,7 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
             ),
           ],
         ),
-        leadingWidth: 56,
+        leadingWidth: 120,
         title: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onDoubleTap: () => _showDebugTerminal(context),
