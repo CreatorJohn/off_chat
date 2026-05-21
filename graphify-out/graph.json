@@ -9,7 +9,7 @@
       "source_file": "lib/main.dart",
       "source_location": null,
       "id": "lib_main_dart",
-      "community": 3,
+      "community": 2,
       "norm_label": "main.dart"
     },
     {
@@ -18,8 +18,17 @@
       "source_file": "lib/main.dart",
       "source_location": null,
       "id": "lib_main_dart_main",
-      "community": 3,
+      "community": 2,
       "norm_label": "main"
+    },
+    {
+      "label": "NotificationService",
+      "file_type": "code",
+      "source_file": "lib/main.dart",
+      "source_location": null,
+      "id": "lib_main_dart_notificationservice",
+      "community": 2,
+      "norm_label": "notificationservice"
     },
     {
       "label": "package:flutter/material.dart",
@@ -27,7 +36,7 @@
       "source_file": "lib/src/features/profile/data/profile_manager.dart",
       "source_location": null,
       "id": "package_flutter_material_dart",
-      "community": 3,
+      "community": 2,
       "norm_label": "package:flutter/material.dart"
     },
     {
@@ -36,7 +45,7 @@
       "source_file": "lib/src/features/profile/presentation/profile_screen.dart",
       "source_location": null,
       "id": "package_flutter_riverpod_flutter_riverpod_dart",
-      "community": 3,
+      "community": 2,
       "norm_label": "package:flutter_riverpod/flutter_riverpod.dart"
     },
     {
@@ -45,7 +54,7 @@
       "source_file": "lib/main.dart",
       "source_location": null,
       "id": "package_off_chat_src_app_dart",
-      "community": 3,
+      "community": 2,
       "norm_label": "package:off_chat/src/app.dart"
     },
     {
@@ -54,8 +63,17 @@
       "source_file": "lib/src/features/discovery/presentation/widgets/log_viewer.dart",
       "source_location": null,
       "id": "package_off_chat_src_core_utils_watch_log_dart",
-      "community": 3,
+      "community": 2,
       "norm_label": "package:off_chat/src/core/utils/watch_log.dart"
+    },
+    {
+      "label": "package:off_chat/src/core/notifications/notification_service.dart",
+      "file_type": "code",
+      "source_file": "lib/src/features/chat/data/message_handler.dart",
+      "source_location": null,
+      "id": "package_off_chat_src_core_notifications_notification_service_dart",
+      "community": 2,
+      "norm_label": "package:off_chat/src/core/notifications/notification_service.dart"
     },
     {
       "label": "app.dart",
@@ -63,7 +81,7 @@
       "source_file": "lib/src/app.dart",
       "source_location": null,
       "id": "lib_src_app_dart",
-      "community": 3,
+      "community": 2,
       "norm_label": "app.dart"
     },
     {
@@ -72,7 +90,7 @@
       "source_file": "lib/src/app.dart",
       "source_location": null,
       "id": "lib_src_app_dart_offchatapp",
-      "community": 3,
+      "community": 2,
       "norm_label": "offchatapp"
     },
     {
@@ -81,7 +99,7 @@
       "source_file": "lib/src/app.dart",
       "source_location": null,
       "id": "lib_src_app_dart_offchatappstate",
-      "community": 3,
+      "community": 2,
       "norm_label": "_offchatappstate"
     },
     {
@@ -90,7 +108,7 @@
       "source_file": "lib/src/app.dart",
       "source_location": null,
       "id": "lib_src_app_dart_initstate",
-      "community": 3,
+      "community": 2,
       "norm_label": "initstate"
     },
     {
@@ -99,7 +117,7 @@
       "source_file": "lib/src/app.dart",
       "source_location": null,
       "id": "lib_src_app_dart_dispose",
-      "community": 3,
+      "community": 2,
       "norm_label": "dispose"
     },
     {
@@ -108,7 +126,7 @@
       "source_file": "lib/src/app.dart",
       "source_location": null,
       "id": "lib_src_app_dart_didchangeapplifecyclestate",
-      "community": 3,
+      "community": 2,
       "norm_label": "didchangeapplifecyclestate"
     },
     {
@@ -117,7 +135,7 @@
       "source_file": "lib/src/app.dart",
       "source_location": null,
       "id": "lib_src_app_dart_setonlinestatus",
-      "community": 3,
+      "community": 2,
       "norm_label": "_setonlinestatus"
     },
     {
@@ -126,7 +144,7 @@
       "source_file": "lib/src/app.dart",
       "source_location": null,
       "id": "lib_src_app_dart_build",
-      "community": 3,
+      "community": 2,
       "norm_label": "build"
     },
     {
@@ -135,7 +153,7 @@
       "source_file": "lib/src/app.dart",
       "source_location": null,
       "id": "package_off_chat_src_core_routing_router_dart",
-      "community": 3,
+      "community": 2,
       "norm_label": "package:off_chat/src/core/routing/router.dart"
     },
     {
@@ -144,7 +162,7 @@
       "source_file": "lib/src/features/profile/presentation/profile_screen.dart",
       "source_location": null,
       "id": "package_off_chat_src_core_theme_app_theme_dart",
-      "community": 4,
+      "community": 5,
       "norm_label": "package:off_chat/src/core/theme/app_theme.dart"
     },
     {
@@ -173,6 +191,15 @@
       "id": "lib_src_core_background_service_dart_onstart",
       "community": 0,
       "norm_label": "onstart"
+    },
+    {
+      "label": "NotificationService",
+      "file_type": "code",
+      "source_file": "lib/src/core/background_service.dart",
+      "source_location": null,
+      "id": "lib_src_core_background_service_dart_notificationservice",
+      "community": 0,
+      "norm_label": "notificationservice"
     },
     {
       "label": "dart:async",
@@ -216,7 +243,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_controller.dart",
       "source_location": null,
       "id": "package_off_chat_src_core_database_isar_service_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "package:off_chat/src/core/database/isar_service.dart"
     },
     {
@@ -225,7 +252,7 @@
       "source_file": "lib/src/features/discovery/data/ble_discoverer.dart",
       "source_location": null,
       "id": "package_off_chat_src_features_chat_data_message_handler_dart",
-      "community": 11,
+      "community": 7,
       "norm_label": "package:off_chat/src/features/chat/data/message_handler.dart"
     },
     {
@@ -252,7 +279,7 @@
       "source_file": "lib/src/features/location/data/location_service.dart",
       "source_location": null,
       "id": "package_geolocator_geolocator_dart",
-      "community": 0,
+      "community": 10,
       "norm_label": "package:geolocator/geolocator.dart"
     },
     {
@@ -279,16 +306,16 @@
       "source_file": "lib/src/core/database/database_provider.dart",
       "source_location": null,
       "id": "lib_src_core_database_database_provider_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "database_provider.dart"
     },
     {
       "label": "package:isar_community/isar.dart",
       "file_type": "code",
-      "source_file": "lib/src/features/profile/presentation/profile_controller.dart",
+      "source_file": "lib/src/features/discovery/data/ble_discoverer.dart",
       "source_location": null,
       "id": "package_isar_community_isar_dart",
-      "community": 1,
+      "community": 3,
       "norm_label": "package:isar_community/isar.dart"
     },
     {
@@ -306,7 +333,7 @@
       "source_file": "lib/src/core/database/isar_service.dart",
       "source_location": null,
       "id": "lib_src_core_database_isar_service_dart",
-      "community": 1,
+      "community": 7,
       "norm_label": "isar_service.dart"
     },
     {
@@ -315,7 +342,7 @@
       "source_file": "lib/src/core/database/isar_service.dart",
       "source_location": null,
       "id": "lib_src_core_database_isar_service_dart_isarservice",
-      "community": 1,
+      "community": 7,
       "norm_label": "isarservice"
     },
     {
@@ -324,7 +351,7 @@
       "source_file": "lib/src/core/database/isar_service.dart",
       "source_location": null,
       "id": "lib_src_core_database_isar_service_dart_exception",
-      "community": 1,
+      "community": 7,
       "norm_label": "exception"
     },
     {
@@ -333,7 +360,7 @@
       "source_file": "lib/src/core/database/isar_service.dart",
       "source_location": null,
       "id": "lib_src_core_database_isar_service_dart_duration",
-      "community": 1,
+      "community": 7,
       "norm_label": "duration"
     },
     {
@@ -342,7 +369,7 @@
       "source_file": "lib/src/features/profile/data/profile_manager.dart",
       "source_location": null,
       "id": "package_path_provider_path_provider_dart",
-      "community": 1,
+      "community": 7,
       "norm_label": "package:path_provider/path_provider.dart"
     },
     {
@@ -360,7 +387,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_screen.dart",
       "source_location": null,
       "id": "package_off_chat_src_core_database_models_message_dart",
-      "community": 1,
+      "community": 7,
       "norm_label": "package:off_chat/src/core/database/models/message.dart"
     },
     {
@@ -373,21 +400,12 @@
       "norm_label": "package:off_chat/src/core/database/models/relay_task.dart"
     },
     {
-      "label": "package:off_chat/src/features/profile/domain/user_model.dart",
-      "file_type": "code",
-      "source_file": "lib/src/features/profile/presentation/profile_controller.dart",
-      "source_location": null,
-      "id": "package_off_chat_src_features_profile_domain_user_model_dart",
-      "community": 0,
-      "norm_label": "package:off_chat/src/features/profile/domain/user_model.dart"
-    },
-    {
       "label": "database_provider.g.dart",
       "file_type": "code",
       "source_file": "lib/src/core/database/database_provider.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_database_provider_g_dart",
-      "community": 26,
+      "community": 25,
       "norm_label": "database_provider.g.dart"
     },
     {
@@ -396,7 +414,7 @@
       "source_file": "lib/src/core/database/database_provider.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_database_provider_g_dart_debuggetcreatesourcehash",
-      "community": 26,
+      "community": 25,
       "norm_label": "debuggetcreatesourcehash"
     },
     {
@@ -405,7 +423,7 @@
       "source_file": "lib/src/core/database/database_provider.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_database_provider_g_dart_isardatabase",
-      "community": 26,
+      "community": 25,
       "norm_label": "isardatabase"
     },
     {
@@ -414,7 +432,7 @@
       "source_file": "lib/src/core/database/models/found_device.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_found_device_dart",
-      "community": 1,
+      "community": 3,
       "norm_label": "found_device.dart"
     },
     {
@@ -423,7 +441,7 @@
       "source_file": "lib/src/core/database/models/found_device.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_found_device_dart_founddevice",
-      "community": 1,
+      "community": 3,
       "norm_label": "founddevice"
     },
     {
@@ -432,7 +450,7 @@
       "source_file": "lib/src/core/database/models/message.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_message_dart",
-      "community": 1,
+      "community": 3,
       "norm_label": "message.dart"
     },
     {
@@ -441,7 +459,7 @@
       "source_file": "lib/src/core/database/models/message.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_message_dart_message",
-      "community": 1,
+      "community": 3,
       "norm_label": "message"
     },
     {
@@ -450,7 +468,7 @@
       "source_file": "lib/src/core/database/models/relay_task.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_relay_task_dart",
-      "community": 1,
+      "community": 3,
       "norm_label": "relay_task.dart"
     },
     {
@@ -459,7 +477,7 @@
       "source_file": "lib/src/core/database/models/relay_task.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_relay_task_dart_relaytask",
-      "community": 1,
+      "community": 3,
       "norm_label": "relaytask"
     },
     {
@@ -468,7 +486,7 @@
       "source_file": "lib/src/core/database/models/message.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_message_g_dart",
-      "community": 15,
+      "community": 14,
       "norm_label": "message.g.dart"
     },
     {
@@ -477,7 +495,7 @@
       "source_file": "lib/src/core/database/models/message.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_message_g_dart_messageestimatesize",
-      "community": 15,
+      "community": 14,
       "norm_label": "_messageestimatesize"
     },
     {
@@ -486,7 +504,7 @@
       "source_file": "lib/src/core/database/models/message.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_message_g_dart_messageserialize",
-      "community": 15,
+      "community": 14,
       "norm_label": "_messageserialize"
     },
     {
@@ -495,7 +513,7 @@
       "source_file": "lib/src/core/database/models/message.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_message_g_dart_messagedeserialize",
-      "community": 15,
+      "community": 14,
       "norm_label": "_messagedeserialize"
     },
     {
@@ -504,7 +522,7 @@
       "source_file": "lib/src/core/database/models/message.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_message_g_dart_isarerror",
-      "community": 15,
+      "community": 14,
       "norm_label": "isarerror"
     },
     {
@@ -513,7 +531,7 @@
       "source_file": "lib/src/core/database/models/message.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_message_g_dart_messagegetid",
-      "community": 15,
+      "community": 14,
       "norm_label": "_messagegetid"
     },
     {
@@ -522,7 +540,7 @@
       "source_file": "lib/src/core/database/models/message.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_message_g_dart_messageattach",
-      "community": 15,
+      "community": 14,
       "norm_label": "_messageattach"
     },
     {
@@ -531,7 +549,7 @@
       "source_file": "lib/src/core/database/models/found_device.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_found_device_g_dart",
-      "community": 7,
+      "community": 6,
       "norm_label": "found_device.g.dart"
     },
     {
@@ -540,7 +558,7 @@
       "source_file": "lib/src/core/database/models/found_device.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_found_device_g_dart_founddeviceestimatesize",
-      "community": 7,
+      "community": 6,
       "norm_label": "_founddeviceestimatesize"
     },
     {
@@ -549,7 +567,7 @@
       "source_file": "lib/src/core/database/models/found_device.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_found_device_g_dart_founddeviceserialize",
-      "community": 7,
+      "community": 6,
       "norm_label": "_founddeviceserialize"
     },
     {
@@ -558,7 +576,7 @@
       "source_file": "lib/src/core/database/models/found_device.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_found_device_g_dart_founddevicedeserialize",
-      "community": 7,
+      "community": 6,
       "norm_label": "_founddevicedeserialize"
     },
     {
@@ -567,7 +585,7 @@
       "source_file": "lib/src/core/database/models/found_device.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_found_device_g_dart_isarerror",
-      "community": 7,
+      "community": 6,
       "norm_label": "isarerror"
     },
     {
@@ -576,7 +594,7 @@
       "source_file": "lib/src/core/database/models/found_device.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_found_device_g_dart_founddevicegetid",
-      "community": 7,
+      "community": 6,
       "norm_label": "_founddevicegetid"
     },
     {
@@ -585,7 +603,7 @@
       "source_file": "lib/src/core/database/models/found_device.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_found_device_g_dart_founddeviceattach",
-      "community": 7,
+      "community": 6,
       "norm_label": "_founddeviceattach"
     },
     {
@@ -594,7 +612,7 @@
       "source_file": "lib/src/core/database/models/found_device.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_found_device_g_dart_getbyindex",
-      "community": 7,
+      "community": 6,
       "norm_label": "getbyindex"
     },
     {
@@ -603,7 +621,7 @@
       "source_file": "lib/src/core/database/models/found_device.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_found_device_g_dart_getbyindexsync",
-      "community": 7,
+      "community": 6,
       "norm_label": "getbyindexsync"
     },
     {
@@ -612,7 +630,7 @@
       "source_file": "lib/src/core/database/models/found_device.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_found_device_g_dart_deletebyindex",
-      "community": 7,
+      "community": 6,
       "norm_label": "deletebyindex"
     },
     {
@@ -621,7 +639,7 @@
       "source_file": "lib/src/core/database/models/found_device.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_found_device_g_dart_deletebystableidsync",
-      "community": 7,
+      "community": 6,
       "norm_label": "deletebystableidsync"
     },
     {
@@ -630,7 +648,7 @@
       "source_file": "lib/src/core/database/models/found_device.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_found_device_g_dart_deletebyindexsync",
-      "community": 7,
+      "community": 6,
       "norm_label": "deletebyindexsync"
     },
     {
@@ -639,7 +657,7 @@
       "source_file": "lib/src/core/database/models/found_device.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_found_device_g_dart_getallbyindex",
-      "community": 7,
+      "community": 6,
       "norm_label": "getallbyindex"
     },
     {
@@ -648,7 +666,7 @@
       "source_file": "lib/src/core/database/models/found_device.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_found_device_g_dart_getallbyindexsync",
-      "community": 7,
+      "community": 6,
       "norm_label": "getallbyindexsync"
     },
     {
@@ -657,7 +675,7 @@
       "source_file": "lib/src/core/database/models/found_device.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_found_device_g_dart_deleteallbyindex",
-      "community": 7,
+      "community": 6,
       "norm_label": "deleteallbyindex"
     },
     {
@@ -666,7 +684,7 @@
       "source_file": "lib/src/core/database/models/found_device.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_found_device_g_dart_deleteallbystableidsync",
-      "community": 7,
+      "community": 6,
       "norm_label": "deleteallbystableidsync"
     },
     {
@@ -675,7 +693,7 @@
       "source_file": "lib/src/core/database/models/found_device.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_found_device_g_dart_deleteallbyindexsync",
-      "community": 7,
+      "community": 6,
       "norm_label": "deleteallbyindexsync"
     },
     {
@@ -684,7 +702,7 @@
       "source_file": "lib/src/core/database/models/found_device.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_found_device_g_dart_putbyindex",
-      "community": 7,
+      "community": 6,
       "norm_label": "putbyindex"
     },
     {
@@ -693,7 +711,7 @@
       "source_file": "lib/src/core/database/models/found_device.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_found_device_g_dart_putbystableidsync",
-      "community": 7,
+      "community": 6,
       "norm_label": "putbystableidsync"
     },
     {
@@ -702,7 +720,7 @@
       "source_file": "lib/src/core/database/models/found_device.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_found_device_g_dart_putbyindexsync",
-      "community": 7,
+      "community": 6,
       "norm_label": "putbyindexsync"
     },
     {
@@ -711,7 +729,7 @@
       "source_file": "lib/src/core/database/models/found_device.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_found_device_g_dart_putallbyindex",
-      "community": 7,
+      "community": 6,
       "norm_label": "putallbyindex"
     },
     {
@@ -720,7 +738,7 @@
       "source_file": "lib/src/core/database/models/found_device.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_found_device_g_dart_putallbyindexsync",
-      "community": 7,
+      "community": 6,
       "norm_label": "putallbyindexsync"
     },
     {
@@ -729,7 +747,7 @@
       "source_file": "lib/src/core/database/models/relay_task.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_relay_task_g_dart",
-      "community": 16,
+      "community": 15,
       "norm_label": "relay_task.g.dart"
     },
     {
@@ -738,7 +756,7 @@
       "source_file": "lib/src/core/database/models/relay_task.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_relay_task_g_dart_relaytaskestimatesize",
-      "community": 16,
+      "community": 15,
       "norm_label": "_relaytaskestimatesize"
     },
     {
@@ -747,7 +765,7 @@
       "source_file": "lib/src/core/database/models/relay_task.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_relay_task_g_dart_relaytaskserialize",
-      "community": 16,
+      "community": 15,
       "norm_label": "_relaytaskserialize"
     },
     {
@@ -756,7 +774,7 @@
       "source_file": "lib/src/core/database/models/relay_task.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_relay_task_g_dart_relaytaskdeserialize",
-      "community": 16,
+      "community": 15,
       "norm_label": "_relaytaskdeserialize"
     },
     {
@@ -765,7 +783,7 @@
       "source_file": "lib/src/core/database/models/relay_task.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_relay_task_g_dart_isarerror",
-      "community": 16,
+      "community": 15,
       "norm_label": "isarerror"
     },
     {
@@ -774,7 +792,7 @@
       "source_file": "lib/src/core/database/models/relay_task.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_relay_task_g_dart_relaytaskgetid",
-      "community": 16,
+      "community": 15,
       "norm_label": "_relaytaskgetid"
     },
     {
@@ -783,7 +801,7 @@
       "source_file": "lib/src/core/database/models/relay_task.g.dart",
       "source_location": null,
       "id": "lib_src_core_database_models_relay_task_g_dart_relaytaskattach",
-      "community": 16,
+      "community": 15,
       "norm_label": "_relaytaskattach"
     },
     {
@@ -810,7 +828,7 @@
       "source_file": "lib/src/core/notifications/notification_service.g.dart",
       "source_location": null,
       "id": "lib_src_core_notifications_notification_service_g_dart",
-      "community": 20,
+      "community": 19,
       "norm_label": "notification_service.g.dart"
     },
     {
@@ -819,7 +837,7 @@
       "source_file": "lib/src/core/notifications/notification_service.g.dart",
       "source_location": null,
       "id": "lib_src_core_notifications_notification_service_g_dart_debuggetcreatesourcehash",
-      "community": 20,
+      "community": 19,
       "norm_label": "debuggetcreatesourcehash"
     },
     {
@@ -828,7 +846,7 @@
       "source_file": "lib/src/core/notifications/notification_service.g.dart",
       "source_location": null,
       "id": "lib_src_core_notifications_notification_service_g_dart_create",
-      "community": 20,
+      "community": 19,
       "norm_label": "create"
     },
     {
@@ -837,7 +855,7 @@
       "source_file": "lib/src/core/notifications/notification_service.g.dart",
       "source_location": null,
       "id": "lib_src_core_notifications_notification_service_g_dart_notificationservice",
-      "community": 20,
+      "community": 19,
       "norm_label": "notificationservice"
     },
     {
@@ -846,7 +864,7 @@
       "source_file": "lib/src/core/notifications/notification_service.g.dart",
       "source_location": null,
       "id": "lib_src_core_notifications_notification_service_g_dart_overridewithvalue",
-      "community": 20,
+      "community": 19,
       "norm_label": "overridewithvalue"
     },
     {
@@ -855,7 +873,7 @@
       "source_file": "lib/src/core/routing/router.dart",
       "source_location": null,
       "id": "lib_src_core_routing_router_dart",
-      "community": 12,
+      "community": 11,
       "norm_label": "router.dart"
     },
     {
@@ -864,7 +882,7 @@
       "source_file": "lib/src/core/routing/router.dart",
       "source_location": null,
       "id": "lib_src_core_routing_router_dart_scaffoldwithnavbar",
-      "community": 12,
+      "community": 11,
       "norm_label": "scaffoldwithnavbar"
     },
     {
@@ -873,7 +891,7 @@
       "source_file": "lib/src/core/routing/router.dart",
       "source_location": null,
       "id": "lib_src_core_routing_router_dart_router",
-      "community": 12,
+      "community": 11,
       "norm_label": "router"
     },
     {
@@ -882,7 +900,7 @@
       "source_file": "lib/src/core/routing/router.dart",
       "source_location": null,
       "id": "lib_src_core_routing_router_dart_gorouter",
-      "community": 12,
+      "community": 11,
       "norm_label": "gorouter"
     },
     {
@@ -891,7 +909,7 @@
       "source_file": "lib/src/core/routing/router.dart",
       "source_location": null,
       "id": "lib_src_core_routing_router_dart_chatscreen",
-      "community": 12,
+      "community": 11,
       "norm_label": "chatscreen"
     },
     {
@@ -900,7 +918,7 @@
       "source_file": "lib/src/core/routing/router.dart",
       "source_location": null,
       "id": "lib_src_core_routing_router_dart_build",
-      "community": 12,
+      "community": 11,
       "norm_label": "build"
     },
     {
@@ -909,7 +927,7 @@
       "source_file": "lib/src/core/routing/router.dart",
       "source_location": null,
       "id": "lib_src_core_routing_router_dart_scaffold",
-      "community": 12,
+      "community": 11,
       "norm_label": "scaffold"
     },
     {
@@ -918,7 +936,7 @@
       "source_file": "lib/src/core/routing/router.dart",
       "source_location": null,
       "id": "lib_src_core_routing_router_dart_calculateselectedindex",
-      "community": 12,
+      "community": 11,
       "norm_label": "_calculateselectedindex"
     },
     {
@@ -927,7 +945,7 @@
       "source_file": "lib/src/core/routing/router.dart",
       "source_location": null,
       "id": "lib_src_core_routing_router_dart_onitemtapped",
-      "community": 12,
+      "community": 11,
       "norm_label": "_onitemtapped"
     },
     {
@@ -936,7 +954,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "package_go_router_go_router_dart",
-      "community": 12,
+      "community": 11,
       "norm_label": "package:go_router/go_router.dart"
     },
     {
@@ -945,7 +963,7 @@
       "source_file": "lib/src/core/routing/router.dart",
       "source_location": null,
       "id": "package_off_chat_src_features_discovery_presentation_discovery_screen_dart",
-      "community": 12,
+      "community": 11,
       "norm_label": "package:off_chat/src/features/discovery/presentation/discovery_screen.dart"
     },
     {
@@ -954,7 +972,7 @@
       "source_file": "lib/src/core/routing/router.dart",
       "source_location": null,
       "id": "package_off_chat_src_features_location_presentation_location_screen_dart",
-      "community": 12,
+      "community": 11,
       "norm_label": "package:off_chat/src/features/location/presentation/location_screen.dart"
     },
     {
@@ -963,7 +981,7 @@
       "source_file": "lib/src/core/routing/router.dart",
       "source_location": null,
       "id": "package_off_chat_src_features_profile_presentation_profile_screen_dart",
-      "community": 12,
+      "community": 11,
       "norm_label": "package:off_chat/src/features/profile/presentation/profile_screen.dart"
     },
     {
@@ -972,7 +990,7 @@
       "source_file": "lib/src/core/routing/router.dart",
       "source_location": null,
       "id": "package_off_chat_src_features_chat_presentation_chat_screen_dart",
-      "community": 12,
+      "community": 11,
       "norm_label": "package:off_chat/src/features/chat/presentation/chat_screen.dart"
     },
     {
@@ -981,7 +999,7 @@
       "source_file": "lib/src/core/routing/router.dart",
       "source_location": null,
       "id": "package_off_chat_src_features_onboarding_presentation_onboarding_screen_dart",
-      "community": 12,
+      "community": 11,
       "norm_label": "package:off_chat/src/features/onboarding/presentation/onboarding_screen.dart"
     },
     {
@@ -990,7 +1008,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_screen.dart",
       "source_location": null,
       "id": "package_off_chat_src_features_onboarding_presentation_onboarding_controller_dart",
-      "community": 12,
+      "community": 11,
       "norm_label": "package:off_chat/src/features/onboarding/presentation/onboarding_controller.dart"
     },
     {
@@ -999,7 +1017,7 @@
       "source_file": "lib/src/core/routing/router.g.dart",
       "source_location": null,
       "id": "lib_src_core_routing_router_g_dart",
-      "community": 21,
+      "community": 20,
       "norm_label": "router.g.dart"
     },
     {
@@ -1008,7 +1026,7 @@
       "source_file": "lib/src/core/routing/router.g.dart",
       "source_location": null,
       "id": "lib_src_core_routing_router_g_dart_debuggetcreatesourcehash",
-      "community": 21,
+      "community": 20,
       "norm_label": "debuggetcreatesourcehash"
     },
     {
@@ -1017,7 +1035,7 @@
       "source_file": "lib/src/core/routing/router.g.dart",
       "source_location": null,
       "id": "lib_src_core_routing_router_g_dart_create",
-      "community": 21,
+      "community": 20,
       "norm_label": "create"
     },
     {
@@ -1026,7 +1044,7 @@
       "source_file": "lib/src/core/routing/router.g.dart",
       "source_location": null,
       "id": "lib_src_core_routing_router_g_dart_router",
-      "community": 21,
+      "community": 20,
       "norm_label": "router"
     },
     {
@@ -1035,7 +1053,7 @@
       "source_file": "lib/src/core/routing/router.g.dart",
       "source_location": null,
       "id": "lib_src_core_routing_router_g_dart_overridewithvalue",
-      "community": 21,
+      "community": 20,
       "norm_label": "overridewithvalue"
     },
     {
@@ -1044,7 +1062,7 @@
       "source_file": "lib/src/core/theme/app_theme.dart",
       "source_location": null,
       "id": "lib_src_core_theme_app_theme_dart",
-      "community": 3,
+      "community": 2,
       "norm_label": "app_theme.dart"
     },
     {
@@ -1053,7 +1071,7 @@
       "source_file": "lib/src/core/theme/app_theme.dart",
       "source_location": null,
       "id": "lib_src_core_theme_app_theme_dart_apptheme",
-      "community": 3,
+      "community": 2,
       "norm_label": "apptheme"
     },
     {
@@ -1062,7 +1080,7 @@
       "source_file": "lib/src/core/theme/app_theme.dart",
       "source_location": null,
       "id": "lib_src_core_theme_app_theme_dart_themedata",
-      "community": 3,
+      "community": 2,
       "norm_label": "themedata"
     },
     {
@@ -1071,7 +1089,7 @@
       "source_file": "lib/src/core/theme/app_theme.dart",
       "source_location": null,
       "id": "lib_src_core_theme_app_theme_dart_texttheme",
-      "community": 3,
+      "community": 2,
       "norm_label": "texttheme"
     },
     {
@@ -1080,7 +1098,7 @@
       "source_file": "lib/src/core/theme/app_theme.dart",
       "source_location": null,
       "id": "package_google_fonts_google_fonts_dart",
-      "community": 3,
+      "community": 2,
       "norm_label": "package:google_fonts/google_fonts.dart"
     },
     {
@@ -1089,7 +1107,7 @@
       "source_file": "lib/src/core/utils/constants.dart",
       "source_location": null,
       "id": "lib_src_core_utils_constants_dart",
-      "community": 28,
+      "community": 27,
       "norm_label": "constants.dart"
     },
     {
@@ -1098,7 +1116,7 @@
       "source_file": "lib/src/core/utils/constants.dart",
       "source_location": null,
       "id": "lib_src_core_utils_constants_dart_meshconstants",
-      "community": 28,
+      "community": 27,
       "norm_label": "meshconstants"
     },
     {
@@ -1107,7 +1125,7 @@
       "source_file": "lib/src/core/utils/geo_utils.dart",
       "source_location": null,
       "id": "lib_src_core_utils_geo_utils_dart",
-      "community": 4,
+      "community": 5,
       "norm_label": "geo_utils.dart"
     },
     {
@@ -1116,7 +1134,7 @@
       "source_file": "lib/src/core/utils/geo_utils.dart",
       "source_location": null,
       "id": "lib_src_core_utils_geo_utils_dart_geoutils",
-      "community": 4,
+      "community": 5,
       "norm_label": "geoutils"
     },
     {
@@ -1125,7 +1143,7 @@
       "source_file": "lib/src/core/utils/geo_utils.dart",
       "source_location": null,
       "id": "lib_src_core_utils_geo_utils_dart_calculatedistance",
-      "community": 4,
+      "community": 5,
       "norm_label": "calculatedistance"
     },
     {
@@ -1134,7 +1152,7 @@
       "source_file": "lib/src/core/utils/geo_utils.dart",
       "source_location": null,
       "id": "lib_src_core_utils_geo_utils_dart_calculatebearing",
-      "community": 4,
+      "community": 5,
       "norm_label": "calculatebearing"
     },
     {
@@ -1143,7 +1161,7 @@
       "source_file": "lib/src/features/profile/data/profile_manager.dart",
       "source_location": null,
       "id": "dart_math",
-      "community": 4,
+      "community": 5,
       "norm_label": "dart:math"
     },
     {
@@ -1215,7 +1233,7 @@
       "source_file": "lib/src/core/utils/system_health.dart",
       "source_location": null,
       "id": "lib_src_core_utils_system_health_dart",
-      "community": 2,
+      "community": 10,
       "norm_label": "system_health.dart"
     },
     {
@@ -1224,7 +1242,7 @@
       "source_file": "lib/src/core/utils/system_health.dart",
       "source_location": null,
       "id": "lib_src_core_utils_system_health_dart_systemhealthstate",
-      "community": 2,
+      "community": 10,
       "norm_label": "systemhealthstate"
     },
     {
@@ -1233,7 +1251,7 @@
       "source_file": "lib/src/core/utils/system_health.dart",
       "source_location": null,
       "id": "lib_src_core_utils_system_health_dart_systemhealth",
-      "community": 2,
+      "community": 10,
       "norm_label": "systemhealth"
     },
     {
@@ -1242,7 +1260,7 @@
       "source_file": "lib/src/core/utils/system_health.dart",
       "source_location": null,
       "id": "lib_src_core_utils_system_health_dart_build",
-      "community": 2,
+      "community": 10,
       "norm_label": "build"
     },
     {
@@ -1251,7 +1269,7 @@
       "source_file": "lib/src/core/utils/system_health.dart",
       "source_location": null,
       "id": "package_battery_plus_battery_plus_dart",
-      "community": 2,
+      "community": 10,
       "norm_label": "package:battery_plus/battery_plus.dart"
     },
     {
@@ -1260,7 +1278,7 @@
       "source_file": "lib/src/features/profile/presentation/system_health_card.dart",
       "source_location": null,
       "id": "package_disable_battery_optimization_disable_battery_optimization_dart",
-      "community": 2,
+      "community": 10,
       "norm_label": "package:disable_battery_optimization/disable_battery_optimization.dart"
     },
     {
@@ -1269,7 +1287,7 @@
       "source_file": "lib/src/features/discovery/data/ble_discoverer.dart",
       "source_location": null,
       "id": "package_flutter_blue_plus_flutter_blue_plus_dart",
-      "community": 2,
+      "community": 10,
       "norm_label": "package:flutter_blue_plus/flutter_blue_plus.dart"
     },
     {
@@ -1278,7 +1296,7 @@
       "source_file": "lib/src/features/profile/presentation/system_health_card.dart",
       "source_location": null,
       "id": "package_permission_handler_permission_handler_dart",
-      "community": 2,
+      "community": 10,
       "norm_label": "package:permission_handler/permission_handler.dart"
     },
     {
@@ -1287,7 +1305,7 @@
       "source_file": "lib/src/core/utils/extensions.dart",
       "source_location": null,
       "id": "lib_src_core_utils_extensions_dart",
-      "community": 29,
+      "community": 28,
       "norm_label": "extensions.dart"
     },
     {
@@ -1296,7 +1314,7 @@
       "source_file": "lib/src/core/utils/extensions.dart",
       "source_location": null,
       "id": "lib_src_core_utils_extensions_dart_title",
-      "community": 29,
+      "community": 28,
       "norm_label": "title"
     },
     {
@@ -1305,7 +1323,7 @@
       "source_file": "lib/src/core/utils/system_health.g.dart",
       "source_location": null,
       "id": "lib_src_core_utils_system_health_g_dart",
-      "community": 17,
+      "community": 16,
       "norm_label": "_"
     },
     {
@@ -1314,7 +1332,7 @@
       "source_file": "lib/src/core/utils/system_health.g.dart",
       "source_location": null,
       "id": "lib_src_core_utils_system_health_g_dart_debuggetcreatesourcehash",
-      "community": 17,
+      "community": 16,
       "norm_label": "debuggetcreatesourcehash"
     },
     {
@@ -1323,7 +1341,7 @@
       "source_file": "lib/src/core/utils/system_health.g.dart",
       "source_location": null,
       "id": "lib_src_core_utils_system_health_g_dart_create",
-      "community": 17,
+      "community": 16,
       "norm_label": "create"
     },
     {
@@ -1332,7 +1350,7 @@
       "source_file": "lib/src/core/utils/system_health.g.dart",
       "source_location": null,
       "id": "lib_src_core_utils_system_health_g_dart_overridewithvalue",
-      "community": 17,
+      "community": 16,
       "norm_label": "overridewithvalue"
     },
     {
@@ -1341,7 +1359,7 @@
       "source_file": "lib/src/core/utils/system_health.g.dart",
       "source_location": null,
       "id": "lib_src_core_utils_system_health_g_dart_build",
-      "community": 17,
+      "community": 16,
       "norm_label": "build"
     },
     {
@@ -1350,7 +1368,7 @@
       "source_file": "lib/src/core/utils/system_health.g.dart",
       "source_location": null,
       "id": "lib_src_core_utils_system_health_g_dart_runbuild",
-      "community": 17,
+      "community": 16,
       "norm_label": "runbuild"
     },
     {
@@ -1359,7 +1377,7 @@
       "source_file": "lib/src/core/network/mesh_packet.dart",
       "source_location": null,
       "id": "lib_src_core_network_mesh_packet_dart",
-      "community": 1,
+      "community": 12,
       "norm_label": "mesh_packet.dart"
     },
     {
@@ -1368,7 +1386,7 @@
       "source_file": "lib/src/core/network/mesh_packet.dart",
       "source_location": null,
       "id": "lib_src_core_network_mesh_packet_dart_packetcontext",
-      "community": 1,
+      "community": 12,
       "norm_label": "packetcontext"
     },
     {
@@ -1377,7 +1395,7 @@
       "source_file": "lib/src/core/network/mesh_packet.dart",
       "source_location": null,
       "id": "lib_src_core_network_mesh_packet_dart_meshpacket",
-      "community": 1,
+      "community": 12,
       "norm_label": "meshpacket"
     },
     {
@@ -1386,7 +1404,7 @@
       "source_file": "lib/src/core/network/mesh_packet.dart",
       "source_location": null,
       "id": "lib_src_core_network_mesh_packet_dart_textpacket",
-      "community": 1,
+      "community": 12,
       "norm_label": "textpacket"
     },
     {
@@ -1395,7 +1413,7 @@
       "source_file": "lib/src/core/network/mesh_packet.dart",
       "source_location": null,
       "id": "lib_src_core_network_mesh_packet_dart_imagepacket",
-      "community": 1,
+      "community": 12,
       "norm_label": "imagepacket"
     },
     {
@@ -1404,7 +1422,7 @@
       "source_file": "lib/src/core/network/mesh_packet.dart",
       "source_location": null,
       "id": "lib_src_core_network_mesh_packet_dart_profilepicpacket",
-      "community": 1,
+      "community": 12,
       "norm_label": "profilepicpacket"
     },
     {
@@ -1413,7 +1431,7 @@
       "source_file": "lib/src/core/network/mesh_packet.dart",
       "source_location": null,
       "id": "lib_src_core_network_mesh_packet_dart_relaypacket",
-      "community": 1,
+      "community": 12,
       "norm_label": "relaypacket"
     },
     {
@@ -1422,7 +1440,7 @@
       "source_file": "lib/src/core/network/mesh_packet.dart",
       "source_location": null,
       "id": "lib_src_core_network_mesh_packet_dart_ackpacket",
-      "community": 1,
+      "community": 12,
       "norm_label": "ackpacket"
     },
     {
@@ -1431,7 +1449,7 @@
       "source_file": "lib/src/core/network/mesh_packet.dart",
       "source_location": null,
       "id": "lib_src_core_network_mesh_packet_dart_identitypacket",
-      "community": 1,
+      "community": 12,
       "norm_label": "identitypacket"
     },
     {
@@ -1440,7 +1458,7 @@
       "source_file": "lib/src/core/network/mesh_packet.dart",
       "source_location": null,
       "id": "lib_src_core_network_mesh_packet_dart_syncdonepacket",
-      "community": 1,
+      "community": 12,
       "norm_label": "syncdonepacket"
     },
     {
@@ -1449,7 +1467,7 @@
       "source_file": "lib/src/core/network/mesh_packet.dart",
       "source_location": null,
       "id": "lib_src_core_network_mesh_packet_dart_requestprofilepicpacket",
-      "community": 1,
+      "community": 12,
       "norm_label": "requestprofilepicpacket"
     },
     {
@@ -1458,7 +1476,7 @@
       "source_file": "lib/src/core/network/mesh_packet.dart",
       "source_location": null,
       "id": "lib_src_core_network_mesh_packet_dart_tobytes",
-      "community": 1,
+      "community": 12,
       "norm_label": "tobytes"
     },
     {
@@ -1467,7 +1485,7 @@
       "source_file": "lib/src/core/network/mesh_packet.dart",
       "source_location": null,
       "id": "lib_src_core_network_mesh_packet_dart_parse",
-      "community": 1,
+      "community": 12,
       "norm_label": "parse"
     },
     {
@@ -1476,8 +1494,17 @@
       "source_file": "lib/src/core/network/mesh_packet.dart",
       "source_location": null,
       "id": "lib_src_core_network_mesh_packet_dart_exception",
-      "community": 1,
+      "community": 12,
       "norm_label": "exception"
+    },
+    {
+      "label": "NotificationService",
+      "file_type": "code",
+      "source_file": "lib/src/core/network/mesh_packet.dart",
+      "source_location": null,
+      "id": "lib_src_core_network_mesh_packet_dart_notificationservice",
+      "community": 12,
+      "norm_label": "notificationservice"
     },
     {
       "label": "dart:convert",
@@ -1485,7 +1512,7 @@
       "source_file": "lib/src/features/profile/data/profile_manager.dart",
       "source_location": null,
       "id": "dart_convert",
-      "community": 11,
+      "community": 0,
       "norm_label": "dart:convert"
     },
     {
@@ -1494,7 +1521,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_screen.dart",
       "source_location": null,
       "id": "dart_typed_data",
-      "community": 13,
+      "community": 4,
       "norm_label": "dart:typed_data"
     },
     {
@@ -1503,7 +1530,7 @@
       "source_file": "lib/src/core/network/mesh_packet_encoder.dart",
       "source_location": null,
       "id": "lib_src_core_network_mesh_packet_encoder_dart",
-      "community": 13,
+      "community": 4,
       "norm_label": "mesh_packet_encoder.dart"
     },
     {
@@ -1512,7 +1539,7 @@
       "source_file": "lib/src/core/network/mesh_packet_encoder.dart",
       "source_location": null,
       "id": "lib_src_core_network_mesh_packet_encoder_dart_meshpacketencoder",
-      "community": 13,
+      "community": 4,
       "norm_label": "meshpacketencoder"
     },
     {
@@ -1521,7 +1548,7 @@
       "source_file": "lib/src/core/network/mesh_packet_encoder.dart",
       "source_location": null,
       "id": "lib_src_core_network_mesh_packet_encoder_dart_encodecoordinate",
-      "community": 13,
+      "community": 4,
       "norm_label": "encodecoordinate"
     },
     {
@@ -1530,7 +1557,7 @@
       "source_file": "lib/src/core/network/mesh_packet_encoder.dart",
       "source_location": null,
       "id": "lib_src_core_network_mesh_packet_encoder_dart_decodecoordinate",
-      "community": 13,
+      "community": 4,
       "norm_label": "decodecoordinate"
     },
     {
@@ -1539,7 +1566,7 @@
       "source_file": "lib/src/core/network/mesh_packet_encoder.dart",
       "source_location": null,
       "id": "lib_src_core_network_mesh_packet_encoder_dart_encodemainpacket",
-      "community": 13,
+      "community": 4,
       "norm_label": "encodemainpacket"
     },
     {
@@ -1548,7 +1575,7 @@
       "source_file": "lib/src/core/network/mesh_packet_encoder.dart",
       "source_location": null,
       "id": "lib_src_core_network_mesh_packet_encoder_dart_encodescanresponsemanufacturerdata",
-      "community": 13,
+      "community": 4,
       "norm_label": "encodescanresponsemanufacturerdata"
     },
     {
@@ -1557,7 +1584,7 @@
       "source_file": "lib/src/core/network/mesh_packet_encoder.dart",
       "source_location": null,
       "id": "lib_src_core_network_mesh_packet_encoder_dart_encodelocation",
-      "community": 13,
+      "community": 4,
       "norm_label": "encodelocation"
     },
     {
@@ -1629,7 +1656,7 @@
       "source_file": "lib/src/features/chat/data/chunked_transfer_manager.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_chunked_transfer_manager_dart",
-      "community": 13,
+      "community": 4,
       "norm_label": "chunked_transfer_manager.dart"
     },
     {
@@ -1638,7 +1665,7 @@
       "source_file": "lib/src/features/chat/data/chunked_transfer_manager.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_chunked_transfer_manager_dart_chunkedtransfermanager",
-      "community": 13,
+      "community": 4,
       "norm_label": "chunkedtransfermanager"
     },
     {
@@ -1647,7 +1674,7 @@
       "source_file": "lib/src/features/chat/data/chunked_transfer_manager.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_chunked_transfer_manager_dart_handleincomingchunk",
-      "community": 13,
+      "community": 4,
       "norm_label": "handleincomingchunk"
     },
     {
@@ -1656,7 +1683,7 @@
       "source_file": "lib/src/features/chat/data/chunked_transfer_manager.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_chunked_transfer_manager_dart_duration",
-      "community": 13,
+      "community": 4,
       "norm_label": "duration"
     },
     {
@@ -1665,7 +1692,7 @@
       "source_file": "lib/src/features/chat/data/chunked_transfer_manager.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_chunked_transfer_manager_dart_finalizetransfer",
-      "community": 13,
+      "community": 4,
       "norm_label": "_finalizetransfer"
     },
     {
@@ -1674,7 +1701,7 @@
       "source_file": "lib/src/features/chat/data/message_handler.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_message_handler_dart",
-      "community": 6,
+      "community": 3,
       "norm_label": "message_handler.dart"
     },
     {
@@ -1683,7 +1710,7 @@
       "source_file": "lib/src/features/chat/data/message_handler.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_message_handler_dart_pendingack",
-      "community": 6,
+      "community": 3,
       "norm_label": "pendingack"
     },
     {
@@ -1692,7 +1719,7 @@
       "source_file": "lib/src/features/chat/data/message_handler.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_message_handler_dart_messagehandler",
-      "community": 6,
+      "community": 3,
       "norm_label": "messagehandler"
     },
     {
@@ -1701,7 +1728,7 @@
       "source_file": "lib/src/features/chat/data/message_handler.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_message_handler_dart_startcachecleanuptimer",
-      "community": 6,
+      "community": 3,
       "norm_label": "_startcachecleanuptimer"
     },
     {
@@ -1710,7 +1737,7 @@
       "source_file": "lib/src/features/chat/data/message_handler.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_message_handler_dart_updateuiprogress",
-      "community": 6,
+      "community": 3,
       "norm_label": "updateuiprogress"
     },
     {
@@ -1719,7 +1746,7 @@
       "source_file": "lib/src/features/chat/data/message_handler.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_message_handler_dart_initialize",
-      "community": 6,
+      "community": 3,
       "norm_label": "initialize"
     },
     {
@@ -1728,7 +1755,7 @@
       "source_file": "lib/src/features/chat/data/message_handler.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_message_handler_dart_hasseenmessage",
-      "community": 6,
+      "community": 3,
       "norm_label": "hasseenmessage"
     },
     {
@@ -1737,7 +1764,7 @@
       "source_file": "lib/src/features/chat/data/message_handler.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_message_handler_dart_markmessageseen",
-      "community": 6,
+      "community": 3,
       "norm_label": "markmessageseen"
     },
     {
@@ -1746,7 +1773,7 @@
       "source_file": "lib/src/features/chat/data/message_handler.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_message_handler_dart_addneighbortobreadcrumb",
-      "community": 6,
+      "community": 3,
       "norm_label": "addneighbortobreadcrumb"
     },
     {
@@ -1755,7 +1782,7 @@
       "source_file": "lib/src/features/chat/data/message_handler.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_message_handler_dart_dropbreadcrumb",
-      "community": 6,
+      "community": 3,
       "norm_label": "dropbreadcrumb"
     },
     {
@@ -1764,7 +1791,7 @@
       "source_file": "lib/src/features/chat/data/message_handler.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_message_handler_dart_enqueueterminalack",
-      "community": 6,
+      "community": 3,
       "norm_label": "enqueueterminalack"
     },
     {
@@ -1773,7 +1800,7 @@
       "source_file": "lib/src/features/chat/data/message_handler.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_message_handler_dart_enqueueforward",
-      "community": 6,
+      "community": 3,
       "norm_label": "enqueueforward"
     },
     {
@@ -1782,7 +1809,7 @@
       "source_file": "lib/src/features/chat/data/message_handler.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_message_handler_dart_iswaitingforimage",
-      "community": 6,
+      "community": 3,
       "norm_label": "iswaitingforimage"
     },
     {
@@ -1791,7 +1818,7 @@
       "source_file": "lib/src/features/chat/data/message_handler.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_message_handler_dart_clearwaitingforimage",
-      "community": 6,
+      "community": 3,
       "norm_label": "clearwaitingforimage"
     },
     {
@@ -1800,7 +1827,7 @@
       "source_file": "lib/src/features/chat/data/message_handler.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_message_handler_dart_completesync",
-      "community": 6,
+      "community": 3,
       "norm_label": "completesync"
     },
     {
@@ -1809,7 +1836,7 @@
       "source_file": "lib/src/features/chat/data/message_handler.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_message_handler_dart_completesyncwitherror",
-      "community": 6,
+      "community": 3,
       "norm_label": "completesyncwitherror"
     },
     {
@@ -1818,7 +1845,7 @@
       "source_file": "lib/src/features/chat/data/message_handler.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_message_handler_dart_handleoutgoingmessage",
-      "community": 6,
+      "community": 3,
       "norm_label": "handleoutgoingmessage"
     },
     {
@@ -1827,7 +1854,7 @@
       "source_file": "lib/src/features/chat/data/message_handler.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_message_handler_dart_pushornotify",
-      "community": 6,
+      "community": 3,
       "norm_label": "_pushornotify"
     },
     {
@@ -1836,7 +1863,7 @@
       "source_file": "lib/src/features/chat/data/message_handler.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_message_handler_dart_notifydata",
-      "community": 6,
+      "community": 3,
       "norm_label": "_notifydata"
     },
     {
@@ -1845,7 +1872,7 @@
       "source_file": "lib/src/features/chat/data/message_handler.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_message_handler_dart_pushqueueddatatopeer",
-      "community": 6,
+      "community": 3,
       "norm_label": "pushqueueddatatopeer"
     },
     {
@@ -1854,7 +1881,7 @@
       "source_file": "lib/src/features/chat/data/message_handler.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_message_handler_dart_removesynccompleter",
-      "community": 6,
+      "community": 3,
       "norm_label": "removesynccompleter"
     },
     {
@@ -1863,7 +1890,7 @@
       "source_file": "lib/src/features/chat/data/message_handler.dart",
       "source_location": null,
       "id": "lib_src_features_chat_data_message_handler_dart_encryptmessage",
-      "community": 6,
+      "community": 3,
       "norm_label": "_encryptmessage"
     },
     {
@@ -1872,7 +1899,7 @@
       "source_file": "lib/src/features/discovery/data/ble_discoverer.dart",
       "source_location": null,
       "id": "package_off_chat_src_features_chat_data_chunked_transfer_manager_dart",
-      "community": 2,
+      "community": 0,
       "norm_label": "package:off_chat/src/features/chat/data/chunked_transfer_manager.dart"
     },
     {
@@ -1881,7 +1908,7 @@
       "source_file": "lib/src/features/discovery/data/ble_discoverer.dart",
       "source_location": null,
       "id": "package_off_chat_src_core_network_mesh_packet_dart",
-      "community": 2,
+      "community": 0,
       "norm_label": "package:off_chat/src/core/network/mesh_packet.dart"
     },
     {
@@ -1890,7 +1917,7 @@
       "source_file": "lib/src/features/chat/data/message_handler.dart",
       "source_location": null,
       "id": "package_off_chat_src_core_network_mesh_router_dart",
-      "community": 6,
+      "community": 3,
       "norm_label": "package:off_chat/src/core/network/mesh_router.dart"
     },
     {
@@ -1899,7 +1926,7 @@
       "source_file": "lib/src/features/profile/data/profile_manager.dart",
       "source_location": null,
       "id": "package_cryptography_cryptography_dart",
-      "community": 11,
+      "community": 7,
       "norm_label": "package:cryptography/cryptography.dart"
     },
     {
@@ -1908,7 +1935,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_controller.dart",
       "source_location": null,
       "id": "lib_src_features_chat_presentation_chat_controller_dart",
-      "community": 11,
+      "community": 7,
       "norm_label": "chat_controller.dart"
     },
     {
@@ -1917,7 +1944,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_controller.dart",
       "source_location": null,
       "id": "lib_src_features_chat_presentation_chat_controller_dart_chatcontroller",
-      "community": 11,
+      "community": 7,
       "norm_label": "chatcontroller"
     },
     {
@@ -1926,7 +1953,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_controller.dart",
       "source_location": null,
       "id": "lib_src_features_chat_presentation_chat_controller_dart_isarservice",
-      "community": 11,
+      "community": 7,
       "norm_label": "isarservice"
     },
     {
@@ -1935,7 +1962,7 @@
       "source_file": "lib/src/features/profile/data/profile_manager.dart",
       "source_location": null,
       "id": "package_image_picker_image_picker_dart",
-      "community": 11,
+      "community": 7,
       "norm_label": "package:image_picker/image_picker.dart"
     },
     {
@@ -1944,7 +1971,7 @@
       "source_file": "lib/src/features/profile/data/profile_manager.dart",
       "source_location": null,
       "id": "package_flutter_image_compress_flutter_image_compress_dart",
-      "community": 11,
+      "community": 7,
       "norm_label": "package:flutter_image_compress/flutter_image_compress.dart"
     },
     {
@@ -1953,7 +1980,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_controller.g.dart",
       "source_location": null,
       "id": "lib_src_features_chat_presentation_chat_controller_g_dart",
-      "community": 18,
+      "community": 17,
       "norm_label": "_"
     },
     {
@@ -1962,7 +1989,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_controller.g.dart",
       "source_location": null,
       "id": "lib_src_features_chat_presentation_chat_controller_g_dart_debuggetcreatesourcehash",
-      "community": 18,
+      "community": 17,
       "norm_label": "debuggetcreatesourcehash"
     },
     {
@@ -1971,7 +1998,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_controller.g.dart",
       "source_location": null,
       "id": "lib_src_features_chat_presentation_chat_controller_g_dart_tostring",
-      "community": 18,
+      "community": 17,
       "norm_label": "tostring"
     },
     {
@@ -1980,7 +2007,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_controller.g.dart",
       "source_location": null,
       "id": "lib_src_features_chat_presentation_chat_controller_g_dart_create",
-      "community": 18,
+      "community": 17,
       "norm_label": "create"
     },
     {
@@ -1989,7 +2016,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_controller.g.dart",
       "source_location": null,
       "id": "lib_src_features_chat_presentation_chat_controller_g_dart_call",
-      "community": 18,
+      "community": 17,
       "norm_label": "call"
     },
     {
@@ -1998,7 +2025,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_controller.g.dart",
       "source_location": null,
       "id": "lib_src_features_chat_presentation_chat_controller_g_dart_runbuild",
-      "community": 18,
+      "community": 17,
       "norm_label": "runbuild"
     },
     {
@@ -2007,7 +2034,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_screen.dart",
       "source_location": null,
       "id": "lib_src_features_chat_presentation_chat_screen_dart",
-      "community": 3,
+      "community": 4,
       "norm_label": "chat_screen.dart"
     },
     {
@@ -2016,7 +2043,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_screen.dart",
       "source_location": null,
       "id": "lib_src_features_chat_presentation_chat_screen_dart_chatscreen",
-      "community": 3,
+      "community": 4,
       "norm_label": "chatscreen"
     },
     {
@@ -2025,7 +2052,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_screen.dart",
       "source_location": null,
       "id": "lib_src_features_chat_presentation_chat_screen_dart_chatscreenstate",
-      "community": 3,
+      "community": 4,
       "norm_label": "_chatscreenstate"
     },
     {
@@ -2034,7 +2061,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_screen.dart",
       "source_location": null,
       "id": "lib_src_features_chat_presentation_chat_screen_dart_dispose",
-      "community": 3,
+      "community": 4,
       "norm_label": "dispose"
     },
     {
@@ -2043,7 +2070,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_screen.dart",
       "source_location": null,
       "id": "lib_src_features_chat_presentation_chat_screen_dart_scrolltobottom",
-      "community": 3,
+      "community": 4,
       "norm_label": "_scrolltobottom"
     },
     {
@@ -2052,7 +2079,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_screen.dart",
       "source_location": null,
       "id": "lib_src_features_chat_presentation_chat_screen_dart_build",
-      "community": 3,
+      "community": 4,
       "norm_label": "build"
     },
     {
@@ -2061,7 +2088,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_screen.dart",
       "source_location": null,
       "id": "lib_src_features_chat_presentation_chat_screen_dart_scaffold",
-      "community": 3,
+      "community": 4,
       "norm_label": "scaffold"
     },
     {
@@ -2070,7 +2097,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_screen.dart",
       "source_location": null,
       "id": "lib_src_features_chat_presentation_chat_screen_dart_buildmessagebubble",
-      "community": 3,
+      "community": 4,
       "norm_label": "_buildmessagebubble"
     },
     {
@@ -2079,7 +2106,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_screen.dart",
       "source_location": null,
       "id": "lib_src_features_chat_presentation_chat_screen_dart_buildappbar",
-      "community": 3,
+      "community": 4,
       "norm_label": "_buildappbar"
     },
     {
@@ -2088,7 +2115,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_screen.dart",
       "source_location": null,
       "id": "lib_src_features_chat_presentation_chat_screen_dart_appbar",
-      "community": 3,
+      "community": 4,
       "norm_label": "appbar"
     },
     {
@@ -2097,7 +2124,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_screen.dart",
       "source_location": null,
       "id": "lib_src_features_chat_presentation_chat_screen_dart_sizedbox",
-      "community": 3,
+      "community": 4,
       "norm_label": "sizedbox"
     },
     {
@@ -2106,7 +2133,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_screen.dart",
       "source_location": null,
       "id": "lib_src_features_chat_presentation_chat_screen_dart_padding",
-      "community": 3,
+      "community": 4,
       "norm_label": "padding"
     },
     {
@@ -2115,7 +2142,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_screen.dart",
       "source_location": null,
       "id": "lib_src_features_chat_presentation_chat_screen_dart_buildinputarea",
-      "community": 3,
+      "community": 4,
       "norm_label": "_buildinputarea"
     },
     {
@@ -2124,7 +2151,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_screen.dart",
       "source_location": null,
       "id": "lib_src_features_chat_presentation_chat_screen_dart_container",
-      "community": 3,
+      "community": 4,
       "norm_label": "container"
     },
     {
@@ -2133,7 +2160,7 @@
       "source_file": "lib/src/features/chat/presentation/chat_screen.dart",
       "source_location": null,
       "id": "package_off_chat_src_features_chat_presentation_chat_controller_dart",
-      "community": 3,
+      "community": 4,
       "norm_label": "package:off_chat/src/features/chat/presentation/chat_controller.dart"
     },
     {
@@ -2142,7 +2169,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "package_intl_intl_dart",
-      "community": 3,
+      "community": 4,
       "norm_label": "package:intl/intl.dart"
     },
     {
@@ -2151,7 +2178,7 @@
       "source_file": "lib/src/features/discovery/data/ble_advertiser.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_data_ble_advertiser_dart",
-      "community": 2,
+      "community": 0,
       "norm_label": "ble_advertiser.dart"
     },
     {
@@ -2160,7 +2187,7 @@
       "source_file": "lib/src/features/discovery/data/ble_advertiser.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_data_ble_advertiser_dart_bleadvertiser",
-      "community": 2,
+      "community": 0,
       "norm_label": "bleadvertiser"
     },
     {
@@ -2169,7 +2196,7 @@
       "source_file": "lib/src/features/discovery/data/ble_advertiser.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_data_ble_advertiser_dart_isdeviceconnected",
-      "community": 2,
+      "community": 0,
       "norm_label": "isdeviceconnected"
     },
     {
@@ -2178,7 +2205,7 @@
       "source_file": "lib/src/features/discovery/data/ble_advertiser.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_data_ble_advertiser_dart_getmtufordevice",
-      "community": 2,
+      "community": 0,
       "norm_label": "getmtufordevice"
     },
     {
@@ -2187,7 +2214,7 @@
       "source_file": "lib/src/features/discovery/data/ble_advertiser.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_data_ble_advertiser_dart_waitforbluetooth",
-      "community": 2,
+      "community": 0,
       "norm_label": "_waitforbluetooth"
     },
     {
@@ -2196,7 +2223,7 @@
       "source_file": "lib/src/features/discovery/data/ble_advertiser.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_data_ble_advertiser_dart_writerequestresult",
-      "community": 2,
+      "community": 0,
       "norm_label": "writerequestresult"
     },
     {
@@ -2205,7 +2232,7 @@
       "source_file": "lib/src/features/discovery/data/ble_advertiser.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_data_ble_advertiser_dart_readrequestresult",
-      "community": 2,
+      "community": 0,
       "norm_label": "readrequestresult"
     },
     {
@@ -2214,7 +2241,7 @@
       "source_file": "lib/src/features/profile/data/profile_manager.dart",
       "source_location": null,
       "id": "dart_io",
-      "community": 11,
+      "community": 7,
       "norm_label": "dart:io"
     },
     {
@@ -2223,7 +2250,7 @@
       "source_file": "lib/src/features/discovery/data/ble_advertiser.dart",
       "source_location": null,
       "id": "package_ble_peripheral_ble_peripheral_dart",
-      "community": 2,
+      "community": 0,
       "norm_label": "package:ble_peripheral/ble_peripheral.dart"
     },
     {
@@ -2232,7 +2259,7 @@
       "source_file": "lib/src/features/discovery/data/ble_discoverer.dart",
       "source_location": null,
       "id": "package_off_chat_src_core_network_mesh_packet_encoder_dart",
-      "community": 2,
+      "community": 0,
       "norm_label": "package:off_chat/src/core/network/mesh_packet_encoder.dart"
     },
     {
@@ -2241,7 +2268,7 @@
       "source_file": "lib/src/features/discovery/data/ble_discoverer.dart",
       "source_location": null,
       "id": "package_off_chat_src_core_utils_constants_dart",
-      "community": 2,
+      "community": 0,
       "norm_label": "package:off_chat/src/core/utils/constants.dart"
     },
     {
@@ -2250,7 +2277,7 @@
       "source_file": "lib/src/features/discovery/data/ble_discoverer.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_data_ble_discoverer_dart",
-      "community": 2,
+      "community": 0,
       "norm_label": "ble_discoverer.dart"
     },
     {
@@ -2259,7 +2286,7 @@
       "source_file": "lib/src/features/discovery/data/ble_discoverer.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_data_ble_discoverer_dart_blediscoverer",
-      "community": 2,
+      "community": 0,
       "norm_label": "blediscoverer"
     },
     {
@@ -2268,7 +2295,7 @@
       "source_file": "lib/src/features/discovery/data/ble_discoverer.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_data_ble_discoverer_dart_isscanoperationinprogress",
-      "community": 2,
+      "community": 0,
       "norm_label": "isscanoperationinprogress"
     },
     {
@@ -2277,7 +2304,7 @@
       "source_file": "lib/src/features/discovery/data/ble_discoverer.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_data_ble_discoverer_dart_start",
-      "community": 2,
+      "community": 0,
       "norm_label": "start"
     },
     {
@@ -2286,7 +2313,7 @@
       "source_file": "lib/src/features/discovery/data/ble_discoverer.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_data_ble_discoverer_dart_processscanresults",
-      "community": 2,
+      "community": 0,
       "norm_label": "_processscanresults"
     },
     {
@@ -2295,7 +2322,7 @@
       "source_file": "lib/src/features/discovery/data/ble_discoverer.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_data_ble_discoverer_dart_stop",
-      "community": 2,
+      "community": 0,
       "norm_label": "stop"
     },
     {
@@ -2304,7 +2331,7 @@
       "source_file": "lib/src/features/discovery/data/ble_discoverer.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_data_ble_discoverer_dart_rundiscoverycycle",
-      "community": 2,
+      "community": 0,
       "norm_label": "_rundiscoverycycle"
     },
     {
@@ -2313,7 +2340,7 @@
       "source_file": "lib/src/features/discovery/data/ble_discoverer.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_data_ble_discoverer_dart_startsafescan",
-      "community": 2,
+      "community": 0,
       "norm_label": "_startsafescan"
     },
     {
@@ -2322,7 +2349,7 @@
       "source_file": "lib/src/features/discovery/data/ble_discoverer.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_data_ble_discoverer_dart_fetchfullmetadata",
-      "community": 2,
+      "community": 0,
       "norm_label": "_fetchfullmetadata"
     },
     {
@@ -2331,7 +2358,7 @@
       "source_file": "lib/src/features/discovery/data/ble_discoverer.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_data_ble_discoverer_dart_duration",
-      "community": 2,
+      "community": 0,
       "norm_label": "duration"
     },
     {
@@ -2340,7 +2367,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_controller.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_controller_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "discovery_controller.dart"
     },
     {
@@ -2349,7 +2376,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_controller.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_controller_dart_discoverycontroller",
-      "community": 1,
+      "community": 0,
       "norm_label": "discoverycontroller"
     },
     {
@@ -2358,7 +2385,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_controller.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_controller_dart_isarservice",
-      "community": 1,
+      "community": 0,
       "norm_label": "isarservice"
     },
     {
@@ -2421,7 +2448,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_controller.g.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_controller_g_dart",
-      "community": 22,
+      "community": 21,
       "norm_label": "_"
     },
     {
@@ -2430,7 +2457,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_controller.g.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_controller_g_dart_debuggetcreatesourcehash",
-      "community": 22,
+      "community": 21,
       "norm_label": "debuggetcreatesourcehash"
     },
     {
@@ -2439,7 +2466,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_controller.g.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_controller_g_dart_create",
-      "community": 22,
+      "community": 21,
       "norm_label": "create"
     },
     {
@@ -2448,7 +2475,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_controller.g.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_controller_g_dart_runbuild",
-      "community": 22,
+      "community": 21,
       "norm_label": "runbuild"
     },
     {
@@ -2457,7 +2484,7 @@
       "source_file": "lib/src/features/discovery/presentation/advertising_state.g.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_advertising_state_g_dart",
-      "community": 14,
+      "community": 13,
       "norm_label": "_"
     },
     {
@@ -2466,7 +2493,7 @@
       "source_file": "lib/src/features/discovery/presentation/advertising_state.g.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_advertising_state_g_dart_debuggetcreatesourcehash",
-      "community": 14,
+      "community": 13,
       "norm_label": "debuggetcreatesourcehash"
     },
     {
@@ -2475,7 +2502,7 @@
       "source_file": "lib/src/features/discovery/presentation/advertising_state.g.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_advertising_state_g_dart_create",
-      "community": 14,
+      "community": 13,
       "norm_label": "create"
     },
     {
@@ -2484,7 +2511,7 @@
       "source_file": "lib/src/features/discovery/presentation/advertising_state.g.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_advertising_state_g_dart_overridewithvalue",
-      "community": 14,
+      "community": 13,
       "norm_label": "overridewithvalue"
     },
     {
@@ -2493,7 +2520,7 @@
       "source_file": "lib/src/features/discovery/presentation/advertising_state.g.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_advertising_state_g_dart_runbuild",
-      "community": 14,
+      "community": 13,
       "norm_label": "runbuild"
     },
     {
@@ -2502,7 +2529,7 @@
       "source_file": "lib/src/features/discovery/presentation/advertising_state.g.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_advertising_state_g_dart_build",
-      "community": 14,
+      "community": 13,
       "norm_label": "build"
     },
     {
@@ -2511,7 +2538,7 @@
       "source_file": "lib/src/features/discovery/presentation/advertising_state.g.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_advertising_state_g_dart_isservicerunning",
-      "community": 14,
+      "community": 13,
       "norm_label": "isservicerunning"
     },
     {
@@ -2520,7 +2547,7 @@
       "source_file": "lib/src/features/discovery/presentation/advertising_state.g.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_advertising_state_g_dart_scanstatus",
-      "community": 14,
+      "community": 13,
       "norm_label": "scanstatus"
     },
     {
@@ -2529,7 +2556,7 @@
       "source_file": "lib/src/features/discovery/presentation/advertising_state.g.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_advertising_state_g_dart_scanprogress",
-      "community": 14,
+      "community": 13,
       "norm_label": "scanprogress"
     },
     {
@@ -2538,7 +2565,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_screen_dart",
-      "community": 5,
+      "community": 1,
       "norm_label": "discovery_screen.dart"
     },
     {
@@ -2547,7 +2574,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_screen_dart_discoveryscreen",
-      "community": 5,
+      "community": 1,
       "norm_label": "discoveryscreen"
     },
     {
@@ -2556,7 +2583,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_screen_dart_discoveryscreenstate",
-      "community": 5,
+      "community": 1,
       "norm_label": "_discoveryscreenstate"
     },
     {
@@ -2565,7 +2592,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_screen_dart_statusindicator",
-      "community": 5,
+      "community": 1,
       "norm_label": "_statusindicator"
     },
     {
@@ -2574,7 +2601,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_screen_dart_pulseanimation",
-      "community": 5,
+      "community": 1,
       "norm_label": "_pulseanimation"
     },
     {
@@ -2583,7 +2610,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_screen_dart_pulseanimationstate",
-      "community": 5,
+      "community": 1,
       "norm_label": "_pulseanimationstate"
     },
     {
@@ -2592,7 +2619,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_screen_dart_showdebugterminal",
-      "community": 5,
+      "community": 1,
       "norm_label": "_showdebugterminal"
     },
     {
@@ -2601,7 +2628,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_screen_dart_showprofiledialog",
-      "community": 5,
+      "community": 1,
       "norm_label": "_showprofiledialog"
     },
     {
@@ -2610,7 +2637,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_screen_dart_sizedbox",
-      "community": 5,
+      "community": 1,
       "norm_label": "sizedbox"
     },
     {
@@ -2619,7 +2646,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_screen_dart_buildprofileinfo",
-      "community": 5,
+      "community": 1,
       "norm_label": "_buildprofileinfo"
     },
     {
@@ -2628,7 +2655,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_screen_dart_row",
-      "community": 5,
+      "community": 1,
       "norm_label": "row"
     },
     {
@@ -2637,7 +2664,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_screen_dart_build",
-      "community": 5,
+      "community": 1,
       "norm_label": "build"
     },
     {
@@ -2646,7 +2673,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_screen_dart_scaffold",
-      "community": 5,
+      "community": 1,
       "norm_label": "scaffold"
     },
     {
@@ -2655,7 +2682,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_screen_dart_slivertoboxadapter",
-      "community": 5,
+      "community": 1,
       "norm_label": "slivertoboxadapter"
     },
     {
@@ -2664,7 +2691,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_screen_dart_sliverlist",
-      "community": 5,
+      "community": 1,
       "norm_label": "sliverlist"
     },
     {
@@ -2673,7 +2700,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_screen_dart_padding",
-      "community": 5,
+      "community": 1,
       "norm_label": "padding"
     },
     {
@@ -2682,7 +2709,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_screen_dart_builddevicecard",
-      "community": 5,
+      "community": 1,
       "norm_label": "_builddevicecard"
     },
     {
@@ -2691,7 +2718,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_screen_dart_container",
-      "community": 5,
+      "community": 1,
       "norm_label": "container"
     },
     {
@@ -2700,7 +2727,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_screen_dart_icon",
-      "community": 5,
+      "community": 1,
       "norm_label": "icon"
     },
     {
@@ -2709,7 +2736,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_screen_dart_initstate",
-      "community": 5,
+      "community": 1,
       "norm_label": "initstate"
     },
     {
@@ -2718,7 +2745,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_screen_dart_dispose",
-      "community": 5,
+      "community": 1,
       "norm_label": "dispose"
     },
     {
@@ -2727,7 +2754,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_discovery_screen_dart_animatedbuilder",
-      "community": 5,
+      "community": 1,
       "norm_label": "animatedbuilder"
     },
     {
@@ -2736,7 +2763,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_screen.dart",
       "source_location": null,
       "id": "package_off_chat_src_features_discovery_presentation_widgets_log_viewer_dart",
-      "community": 9,
+      "community": 8,
       "norm_label": "package:off_chat/src/features/discovery/presentation/widgets/log_viewer.dart"
     },
     {
@@ -2754,7 +2781,7 @@
       "source_file": "lib/src/features/profile/presentation/profile_screen.dart",
       "source_location": null,
       "id": "package_off_chat_src_features_discovery_presentation_advertising_state_dart",
-      "community": 10,
+      "community": 9,
       "norm_label": "package:off_chat/src/features/discovery/presentation/advertising_state.dart"
     },
     {
@@ -2763,7 +2790,7 @@
       "source_file": "lib/src/features/discovery/presentation/discovery_screen.dart",
       "source_location": null,
       "id": "package_timeago_timeago_dart",
-      "community": 5,
+      "community": 1,
       "norm_label": "package:timeago/timeago.dart"
     },
     {
@@ -2772,7 +2799,7 @@
       "source_file": "lib/src/features/discovery/presentation/widgets/log_viewer.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_widgets_log_viewer_dart",
-      "community": 0,
+      "community": 2,
       "norm_label": "log_viewer.dart"
     },
     {
@@ -2781,7 +2808,7 @@
       "source_file": "lib/src/features/discovery/presentation/widgets/log_viewer.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_widgets_log_viewer_dart_logviewer",
-      "community": 0,
+      "community": 2,
       "norm_label": "logviewer"
     },
     {
@@ -2790,7 +2817,7 @@
       "source_file": "lib/src/features/discovery/presentation/widgets/log_viewer.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_widgets_log_viewer_dart_logviewerstate",
-      "community": 0,
+      "community": 2,
       "norm_label": "_logviewerstate"
     },
     {
@@ -2799,7 +2826,7 @@
       "source_file": "lib/src/features/discovery/presentation/widgets/log_viewer.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_widgets_log_viewer_dart_initstate",
-      "community": 0,
+      "community": 2,
       "norm_label": "initstate"
     },
     {
@@ -2808,7 +2835,7 @@
       "source_file": "lib/src/features/discovery/presentation/widgets/log_viewer.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_widgets_log_viewer_dart_getcolor",
-      "community": 0,
+      "community": 2,
       "norm_label": "_getcolor"
     },
     {
@@ -2817,7 +2844,7 @@
       "source_file": "lib/src/features/discovery/presentation/widgets/log_viewer.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_widgets_log_viewer_dart_build",
-      "community": 0,
+      "community": 2,
       "norm_label": "build"
     },
     {
@@ -2826,7 +2853,7 @@
       "source_file": "lib/src/features/discovery/presentation/widgets/log_viewer.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_widgets_log_viewer_dart_layoutbuilder",
-      "community": 0,
+      "community": 2,
       "norm_label": "layoutbuilder"
     },
     {
@@ -2835,7 +2862,7 @@
       "source_file": "lib/src/features/discovery/presentation/widgets/log_viewer.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_widgets_log_viewer_dart_alertdialog",
-      "community": 0,
+      "community": 2,
       "norm_label": "alertdialog"
     },
     {
@@ -2844,7 +2871,7 @@
       "source_file": "lib/src/features/discovery/presentation/widgets/log_viewer.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_widgets_log_viewer_dart_expanded",
-      "community": 0,
+      "community": 2,
       "norm_label": "expanded"
     },
     {
@@ -2853,7 +2880,7 @@
       "source_file": "lib/src/features/discovery/presentation/widgets/log_viewer.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_widgets_log_viewer_dart_padding",
-      "community": 0,
+      "community": 2,
       "norm_label": "padding"
     },
     {
@@ -2862,7 +2889,7 @@
       "source_file": "lib/src/features/discovery/presentation/widgets/log_viewer.dart",
       "source_location": null,
       "id": "lib_src_features_discovery_presentation_widgets_log_viewer_dart_dispose",
-      "community": 0,
+      "community": 2,
       "norm_label": "dispose"
     },
     {
@@ -2907,7 +2934,7 @@
       "source_file": "lib/src/features/location/data/location_service.g.dart",
       "source_location": null,
       "id": "lib_src_features_location_data_location_service_g_dart",
-      "community": 23,
+      "community": 22,
       "norm_label": "_"
     },
     {
@@ -2916,7 +2943,7 @@
       "source_file": "lib/src/features/location/data/location_service.g.dart",
       "source_location": null,
       "id": "lib_src_features_location_data_location_service_g_dart_debuggetcreatesourcehash",
-      "community": 23,
+      "community": 22,
       "norm_label": "debuggetcreatesourcehash"
     },
     {
@@ -2925,7 +2952,7 @@
       "source_file": "lib/src/features/location/data/location_service.g.dart",
       "source_location": null,
       "id": "lib_src_features_location_data_location_service_g_dart_create",
-      "community": 23,
+      "community": 22,
       "norm_label": "create"
     },
     {
@@ -2934,7 +2961,7 @@
       "source_file": "lib/src/features/location/data/location_service.g.dart",
       "source_location": null,
       "id": "lib_src_features_location_data_location_service_g_dart_runbuild",
-      "community": 23,
+      "community": 22,
       "norm_label": "runbuild"
     },
     {
@@ -2943,7 +2970,7 @@
       "source_file": "lib/src/features/location/presentation/location_screen.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_location_screen_dart",
-      "community": 4,
+      "community": 5,
       "norm_label": "location_screen.dart"
     },
     {
@@ -2952,7 +2979,7 @@
       "source_file": "lib/src/features/location/presentation/location_screen.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_location_screen_dart_locationscreen",
-      "community": 4,
+      "community": 5,
       "norm_label": "locationscreen"
     },
     {
@@ -2961,7 +2988,7 @@
       "source_file": "lib/src/features/location/presentation/location_screen.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_location_screen_dart_locationscreenstate",
-      "community": 4,
+      "community": 5,
       "norm_label": "_locationscreenstate"
     },
     {
@@ -2970,7 +2997,7 @@
       "source_file": "lib/src/features/location/presentation/location_screen.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_location_screen_dart_initstate",
-      "community": 4,
+      "community": 5,
       "norm_label": "initstate"
     },
     {
@@ -2979,7 +3006,7 @@
       "source_file": "lib/src/features/location/presentation/location_screen.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_location_screen_dart_dispose",
-      "community": 4,
+      "community": 5,
       "norm_label": "dispose"
     },
     {
@@ -2988,7 +3015,7 @@
       "source_file": "lib/src/features/location/presentation/location_screen.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_location_screen_dart_build",
-      "community": 4,
+      "community": 5,
       "norm_label": "build"
     },
     {
@@ -2997,7 +3024,7 @@
       "source_file": "lib/src/features/location/presentation/location_screen.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_location_screen_dart_scaffold",
-      "community": 4,
+      "community": 5,
       "norm_label": "scaffold"
     },
     {
@@ -3006,7 +3033,7 @@
       "source_file": "lib/src/features/location/presentation/location_screen.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_location_screen_dart_custompaint",
-      "community": 4,
+      "community": 5,
       "norm_label": "custompaint"
     },
     {
@@ -3015,7 +3042,7 @@
       "source_file": "lib/src/features/location/presentation/location_screen.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_location_screen_dart_builddistancelabel",
-      "community": 4,
+      "community": 5,
       "norm_label": "_builddistancelabel"
     },
     {
@@ -3024,7 +3051,7 @@
       "source_file": "lib/src/features/location/presentation/location_screen.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_location_screen_dart_positioned",
-      "community": 4,
+      "community": 5,
       "norm_label": "positioned"
     },
     {
@@ -3033,7 +3060,7 @@
       "source_file": "lib/src/features/location/presentation/location_screen.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_location_screen_dart_buildcenteranchor",
-      "community": 4,
+      "community": 5,
       "norm_label": "_buildcenteranchor"
     },
     {
@@ -3042,7 +3069,7 @@
       "source_file": "lib/src/features/location/presentation/location_screen.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_location_screen_dart_sizedbox",
-      "community": 4,
+      "community": 5,
       "norm_label": "sizedbox"
     },
     {
@@ -3051,7 +3078,7 @@
       "source_file": "lib/src/features/location/presentation/location_screen.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_location_screen_dart_builddeviceblip",
-      "community": 4,
+      "community": 5,
       "norm_label": "_builddeviceblip"
     },
     {
@@ -3060,7 +3087,7 @@
       "source_file": "lib/src/features/location/presentation/location_screen.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_location_screen_dart_layoutbuilder",
-      "community": 4,
+      "community": 5,
       "norm_label": "layoutbuilder"
     },
     {
@@ -3078,7 +3105,7 @@
       "source_file": "lib/src/features/location/presentation/radar_painter.dart",
       "source_location": null,
       "id": "package_off_chat_src_features_location_presentation_radar_controller_dart",
-      "community": 4,
+      "community": 5,
       "norm_label": "package:off_chat/src/features/location/presentation/radar_controller.dart"
     },
     {
@@ -3087,7 +3114,7 @@
       "source_file": "lib/src/features/location/presentation/location_screen.dart",
       "source_location": null,
       "id": "package_off_chat_src_features_location_presentation_radar_painter_dart",
-      "community": 4,
+      "community": 5,
       "norm_label": "package:off_chat/src/features/location/presentation/radar_painter.dart"
     },
     {
@@ -3150,7 +3177,7 @@
       "source_file": "lib/src/features/location/presentation/radar_painter.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_radar_painter_dart",
-      "community": 4,
+      "community": 5,
       "norm_label": "radar_painter.dart"
     },
     {
@@ -3159,7 +3186,7 @@
       "source_file": "lib/src/features/location/presentation/radar_painter.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_radar_painter_dart_radarpainter",
-      "community": 4,
+      "community": 5,
       "norm_label": "radarpainter"
     },
     {
@@ -3168,7 +3195,7 @@
       "source_file": "lib/src/features/location/presentation/radar_painter.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_radar_painter_dart_paint",
-      "community": 4,
+      "community": 5,
       "norm_label": "paint"
     },
     {
@@ -3177,7 +3204,7 @@
       "source_file": "lib/src/features/location/presentation/radar_painter.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_radar_painter_dart_drawdevicenode",
-      "community": 4,
+      "community": 5,
       "norm_label": "_drawdevicenode"
     },
     {
@@ -3186,7 +3213,7 @@
       "source_file": "lib/src/features/location/presentation/radar_painter.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_radar_painter_dart_shouldrepaint",
-      "community": 4,
+      "community": 5,
       "norm_label": "shouldrepaint"
     },
     {
@@ -3195,7 +3222,7 @@
       "source_file": "lib/src/features/location/presentation/radar_controller.g.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_radar_controller_g_dart",
-      "community": 19,
+      "community": 18,
       "norm_label": "_"
     },
     {
@@ -3204,7 +3231,7 @@
       "source_file": "lib/src/features/location/presentation/radar_controller.g.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_radar_controller_g_dart_debuggetcreatesourcehash",
-      "community": 19,
+      "community": 18,
       "norm_label": "debuggetcreatesourcehash"
     },
     {
@@ -3213,7 +3240,7 @@
       "source_file": "lib/src/features/location/presentation/radar_controller.g.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_radar_controller_g_dart_create",
-      "community": 19,
+      "community": 18,
       "norm_label": "create"
     },
     {
@@ -3222,7 +3249,7 @@
       "source_file": "lib/src/features/location/presentation/radar_controller.g.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_radar_controller_g_dart_overridewithvalue",
-      "community": 19,
+      "community": 18,
       "norm_label": "overridewithvalue"
     },
     {
@@ -3231,7 +3258,7 @@
       "source_file": "lib/src/features/location/presentation/radar_controller.g.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_radar_controller_g_dart_build",
-      "community": 19,
+      "community": 18,
       "norm_label": "build"
     },
     {
@@ -3240,7 +3267,7 @@
       "source_file": "lib/src/features/location/presentation/radar_controller.g.dart",
       "source_location": null,
       "id": "lib_src_features_location_presentation_radar_controller_g_dart_runbuild",
-      "community": 19,
+      "community": 18,
       "norm_label": "runbuild"
     },
     {
@@ -3280,13 +3307,13 @@
       "norm_label": "package:off_chat/src/core/background_service.dart"
     },
     {
-      "label": "package:off_chat/src/core/database/database_provider.dart",
+      "label": "package:off_chat/src/features/profile/domain/user_model.dart",
       "file_type": "code",
       "source_file": "lib/src/features/profile/presentation/profile_controller.dart",
       "source_location": null,
-      "id": "package_off_chat_src_core_database_database_provider_dart",
+      "id": "package_off_chat_src_features_profile_domain_user_model_dart",
       "community": 0,
-      "norm_label": "package:off_chat/src/core/database/database_provider.dart"
+      "norm_label": "package:off_chat/src/features/profile/domain/user_model.dart"
     },
     {
       "label": "_",
@@ -3294,7 +3321,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_controller.g.dart",
       "source_location": null,
       "id": "lib_src_features_onboarding_presentation_onboarding_controller_g_dart",
-      "community": 24,
+      "community": 23,
       "norm_label": "_"
     },
     {
@@ -3303,7 +3330,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_controller.g.dart",
       "source_location": null,
       "id": "lib_src_features_onboarding_presentation_onboarding_controller_g_dart_debuggetcreatesourcehash",
-      "community": 24,
+      "community": 23,
       "norm_label": "debuggetcreatesourcehash"
     },
     {
@@ -3312,7 +3339,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_controller.g.dart",
       "source_location": null,
       "id": "lib_src_features_onboarding_presentation_onboarding_controller_g_dart_create",
-      "community": 24,
+      "community": 23,
       "norm_label": "create"
     },
     {
@@ -3321,7 +3348,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_controller.g.dart",
       "source_location": null,
       "id": "lib_src_features_onboarding_presentation_onboarding_controller_g_dart_runbuild",
-      "community": 24,
+      "community": 23,
       "norm_label": "runbuild"
     },
     {
@@ -3330,7 +3357,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_screen.dart",
       "source_location": null,
       "id": "lib_src_features_onboarding_presentation_onboarding_screen_dart",
-      "community": 9,
+      "community": 8,
       "norm_label": "onboarding_screen.dart"
     },
     {
@@ -3339,7 +3366,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_screen.dart",
       "source_location": null,
       "id": "lib_src_features_onboarding_presentation_onboarding_screen_dart_onboardingscreen",
-      "community": 9,
+      "community": 8,
       "norm_label": "onboardingscreen"
     },
     {
@@ -3348,7 +3375,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_screen.dart",
       "source_location": null,
       "id": "lib_src_features_onboarding_presentation_onboarding_screen_dart_onboardingscreenstate",
-      "community": 9,
+      "community": 8,
       "norm_label": "_onboardingscreenstate"
     },
     {
@@ -3357,7 +3384,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_screen.dart",
       "source_location": null,
       "id": "lib_src_features_onboarding_presentation_onboarding_screen_dart_dispose",
-      "community": 9,
+      "community": 8,
       "norm_label": "dispose"
     },
     {
@@ -3366,7 +3393,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_screen.dart",
       "source_location": null,
       "id": "lib_src_features_onboarding_presentation_onboarding_screen_dart_nextpage",
-      "community": 9,
+      "community": 8,
       "norm_label": "_nextpage"
     },
     {
@@ -3375,7 +3402,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_screen.dart",
       "source_location": null,
       "id": "lib_src_features_onboarding_presentation_onboarding_screen_dart_snackbar",
-      "community": 9,
+      "community": 8,
       "norm_label": "snackbar"
     },
     {
@@ -3384,7 +3411,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_screen.dart",
       "source_location": null,
       "id": "lib_src_features_onboarding_presentation_onboarding_screen_dart_build",
-      "community": 9,
+      "community": 8,
       "norm_label": "build"
     },
     {
@@ -3393,7 +3420,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_screen.dart",
       "source_location": null,
       "id": "lib_src_features_onboarding_presentation_onboarding_screen_dart_scaffold",
-      "community": 9,
+      "community": 8,
       "norm_label": "scaffold"
     },
     {
@@ -3402,7 +3429,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_screen.dart",
       "source_location": null,
       "id": "lib_src_features_onboarding_presentation_onboarding_screen_dart_buildsplashstep",
-      "community": 9,
+      "community": 8,
       "norm_label": "_buildsplashstep"
     },
     {
@@ -3411,7 +3438,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_screen.dart",
       "source_location": null,
       "id": "lib_src_features_onboarding_presentation_onboarding_screen_dart_center",
-      "community": 9,
+      "community": 8,
       "norm_label": "center"
     },
     {
@@ -3420,7 +3447,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_screen.dart",
       "source_location": null,
       "id": "lib_src_features_onboarding_presentation_onboarding_screen_dart_sizedbox",
-      "community": 9,
+      "community": 8,
       "norm_label": "sizedbox"
     },
     {
@@ -3429,7 +3456,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_screen.dart",
       "source_location": null,
       "id": "lib_src_features_onboarding_presentation_onboarding_screen_dart_buildstep",
-      "community": 9,
+      "community": 8,
       "norm_label": "_buildstep"
     },
     {
@@ -3438,7 +3465,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_screen.dart",
       "source_location": null,
       "id": "lib_src_features_onboarding_presentation_onboarding_screen_dart_padding",
-      "community": 9,
+      "community": 8,
       "norm_label": "padding"
     },
     {
@@ -3447,7 +3474,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_screen.dart",
       "source_location": null,
       "id": "lib_src_features_onboarding_presentation_onboarding_screen_dart_buildfinalstep",
-      "community": 9,
+      "community": 8,
       "norm_label": "_buildfinalstep"
     },
     {
@@ -3456,7 +3483,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_screen.dart",
       "source_location": null,
       "id": "lib_src_features_onboarding_presentation_onboarding_screen_dart_singlechildscrollview",
-      "community": 9,
+      "community": 8,
       "norm_label": "singlechildscrollview"
     },
     {
@@ -3465,7 +3492,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_screen.dart",
       "source_location": null,
       "id": "lib_src_features_onboarding_presentation_onboarding_screen_dart_icon",
-      "community": 9,
+      "community": 8,
       "norm_label": "icon"
     },
     {
@@ -3474,7 +3501,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_screen.dart",
       "source_location": null,
       "id": "lib_src_features_onboarding_presentation_onboarding_screen_dart_buildfooter",
-      "community": 9,
+      "community": 8,
       "norm_label": "_buildfooter"
     },
     {
@@ -3483,7 +3510,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_screen.dart",
       "source_location": null,
       "id": "lib_src_features_onboarding_presentation_onboarding_screen_dart_positioned",
-      "community": 9,
+      "community": 8,
       "norm_label": "positioned"
     },
     {
@@ -3492,7 +3519,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_screen.dart",
       "source_location": null,
       "id": "lib_src_features_onboarding_presentation_onboarding_screen_dart_buildpageindicator",
-      "community": 9,
+      "community": 8,
       "norm_label": "_buildpageindicator"
     },
     {
@@ -3501,7 +3528,7 @@
       "source_file": "lib/src/features/onboarding/presentation/onboarding_screen.dart",
       "source_location": null,
       "id": "lib_src_features_onboarding_presentation_onboarding_screen_dart_container",
-      "community": 9,
+      "community": 8,
       "norm_label": "container"
     },
     {
@@ -3510,7 +3537,7 @@
       "source_file": "lib/src/features/profile/domain/profile_utils.dart",
       "source_location": null,
       "id": "lib_src_features_profile_domain_profile_utils_dart",
-      "community": 27,
+      "community": 26,
       "norm_label": "profile_utils.dart"
     },
     {
@@ -3519,7 +3546,7 @@
       "source_file": "lib/src/features/profile/domain/profile_utils.dart",
       "source_location": null,
       "id": "lib_src_features_profile_domain_profile_utils_dart_profileutils",
-      "community": 27,
+      "community": 26,
       "norm_label": "profileutils"
     },
     {
@@ -3528,7 +3555,7 @@
       "source_file": "lib/src/features/profile/domain/profile_utils.dart",
       "source_location": null,
       "id": "lib_src_features_profile_domain_profile_utils_dart_generateprofilehash",
-      "community": 27,
+      "community": 26,
       "norm_label": "generateprofilehash"
     },
     {
@@ -3537,7 +3564,7 @@
       "source_file": "lib/src/features/profile/domain/user_model.dart",
       "source_location": null,
       "id": "lib_src_features_profile_domain_user_model_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "user_model.dart"
     },
     {
@@ -3546,206 +3573,17 @@
       "source_file": "lib/src/features/profile/domain/user_model.dart",
       "source_location": null,
       "id": "lib_src_features_profile_domain_user_model_dart_usermodel",
-      "community": 1,
+      "community": 0,
       "norm_label": "usermodel"
     },
     {
-      "label": "user_model.g.dart",
+      "label": "copyWith",
       "file_type": "code",
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
+      "source_file": "lib/src/features/profile/domain/user_model.dart",
       "source_location": null,
-      "id": "lib_src_features_profile_domain_user_model_g_dart",
-      "community": 8,
-      "norm_label": "user_model.g.dart"
-    },
-    {
-      "label": "_userModelEstimateSize",
-      "file_type": "code",
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "id": "lib_src_features_profile_domain_user_model_g_dart_usermodelestimatesize",
-      "community": 8,
-      "norm_label": "_usermodelestimatesize"
-    },
-    {
-      "label": "_userModelSerialize",
-      "file_type": "code",
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "id": "lib_src_features_profile_domain_user_model_g_dart_usermodelserialize",
-      "community": 8,
-      "norm_label": "_usermodelserialize"
-    },
-    {
-      "label": "_userModelDeserialize",
-      "file_type": "code",
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "id": "lib_src_features_profile_domain_user_model_g_dart_usermodeldeserialize",
-      "community": 8,
-      "norm_label": "_usermodeldeserialize"
-    },
-    {
-      "label": "IsarError",
-      "file_type": "code",
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "id": "lib_src_features_profile_domain_user_model_g_dart_isarerror",
-      "community": 8,
-      "norm_label": "isarerror"
-    },
-    {
-      "label": "_userModelGetId",
-      "file_type": "code",
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "id": "lib_src_features_profile_domain_user_model_g_dart_usermodelgetid",
-      "community": 8,
-      "norm_label": "_usermodelgetid"
-    },
-    {
-      "label": "_userModelAttach",
-      "file_type": "code",
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "id": "lib_src_features_profile_domain_user_model_g_dart_usermodelattach",
-      "community": 8,
-      "norm_label": "_usermodelattach"
-    },
-    {
-      "label": "getByIndex",
-      "file_type": "code",
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "id": "lib_src_features_profile_domain_user_model_g_dart_getbyindex",
-      "community": 8,
-      "norm_label": "getbyindex"
-    },
-    {
-      "label": "getByIndexSync",
-      "file_type": "code",
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "id": "lib_src_features_profile_domain_user_model_g_dart_getbyindexsync",
-      "community": 8,
-      "norm_label": "getbyindexsync"
-    },
-    {
-      "label": "deleteByIndex",
-      "file_type": "code",
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "id": "lib_src_features_profile_domain_user_model_g_dart_deletebyindex",
-      "community": 8,
-      "norm_label": "deletebyindex"
-    },
-    {
-      "label": "deleteByDeviceIdSync",
-      "file_type": "code",
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "id": "lib_src_features_profile_domain_user_model_g_dart_deletebydeviceidsync",
-      "community": 8,
-      "norm_label": "deletebydeviceidsync"
-    },
-    {
-      "label": "deleteByIndexSync",
-      "file_type": "code",
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "id": "lib_src_features_profile_domain_user_model_g_dart_deletebyindexsync",
-      "community": 8,
-      "norm_label": "deletebyindexsync"
-    },
-    {
-      "label": "getAllByIndex",
-      "file_type": "code",
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "id": "lib_src_features_profile_domain_user_model_g_dart_getallbyindex",
-      "community": 8,
-      "norm_label": "getallbyindex"
-    },
-    {
-      "label": "getAllByIndexSync",
-      "file_type": "code",
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "id": "lib_src_features_profile_domain_user_model_g_dart_getallbyindexsync",
-      "community": 8,
-      "norm_label": "getallbyindexsync"
-    },
-    {
-      "label": "deleteAllByIndex",
-      "file_type": "code",
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "id": "lib_src_features_profile_domain_user_model_g_dart_deleteallbyindex",
-      "community": 8,
-      "norm_label": "deleteallbyindex"
-    },
-    {
-      "label": "deleteAllByDeviceIdSync",
-      "file_type": "code",
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "id": "lib_src_features_profile_domain_user_model_g_dart_deleteallbydeviceidsync",
-      "community": 8,
-      "norm_label": "deleteallbydeviceidsync"
-    },
-    {
-      "label": "deleteAllByIndexSync",
-      "file_type": "code",
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "id": "lib_src_features_profile_domain_user_model_g_dart_deleteallbyindexsync",
-      "community": 8,
-      "norm_label": "deleteallbyindexsync"
-    },
-    {
-      "label": "putByIndex",
-      "file_type": "code",
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "id": "lib_src_features_profile_domain_user_model_g_dart_putbyindex",
-      "community": 8,
-      "norm_label": "putbyindex"
-    },
-    {
-      "label": "putByDeviceIdSync",
-      "file_type": "code",
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "id": "lib_src_features_profile_domain_user_model_g_dart_putbydeviceidsync",
-      "community": 8,
-      "norm_label": "putbydeviceidsync"
-    },
-    {
-      "label": "putByIndexSync",
-      "file_type": "code",
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "id": "lib_src_features_profile_domain_user_model_g_dart_putbyindexsync",
-      "community": 8,
-      "norm_label": "putbyindexsync"
-    },
-    {
-      "label": "putAllByIndex",
-      "file_type": "code",
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "id": "lib_src_features_profile_domain_user_model_g_dart_putallbyindex",
-      "community": 8,
-      "norm_label": "putallbyindex"
-    },
-    {
-      "label": "putAllByIndexSync",
-      "file_type": "code",
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "id": "lib_src_features_profile_domain_user_model_g_dart_putallbyindexsync",
-      "community": 8,
-      "norm_label": "putallbyindexsync"
+      "id": "lib_src_features_profile_domain_user_model_dart_copywith",
+      "community": 0,
+      "norm_label": "copywith"
     },
     {
       "label": "profile_controller.dart",
@@ -3766,12 +3604,30 @@
       "norm_label": "profilecontroller"
     },
     {
+      "label": "_saveProfile",
+      "file_type": "code",
+      "source_file": "lib/src/features/profile/presentation/profile_controller.dart",
+      "source_location": null,
+      "id": "lib_src_features_profile_presentation_profile_controller_dart_saveprofile",
+      "community": 0,
+      "norm_label": "_saveprofile"
+    },
+    {
+      "label": "package:off_chat/src/core/database/database_provider.dart",
+      "file_type": "code",
+      "source_file": "lib/src/features/profile/presentation/profile_controller.dart",
+      "source_location": null,
+      "id": "package_off_chat_src_core_database_database_provider_dart",
+      "community": 0,
+      "norm_label": "package:off_chat/src/core/database/database_provider.dart"
+    },
+    {
       "label": "system_health_card.dart",
       "file_type": "code",
       "source_file": "lib/src/features/profile/presentation/system_health_card.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_system_health_card_dart",
-      "community": 2,
+      "community": 10,
       "norm_label": "system_health_card.dart"
     },
     {
@@ -3780,7 +3636,7 @@
       "source_file": "lib/src/features/profile/presentation/system_health_card.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_system_health_card_dart_systemhealthcard",
-      "community": 2,
+      "community": 10,
       "norm_label": "systemhealthcard"
     },
     {
@@ -3789,7 +3645,7 @@
       "source_file": "lib/src/features/profile/presentation/system_health_card.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_system_health_card_dart_healthitem",
-      "community": 2,
+      "community": 10,
       "norm_label": "_healthitem"
     },
     {
@@ -3798,7 +3654,7 @@
       "source_file": "lib/src/features/profile/presentation/system_health_card.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_system_health_card_dart_build",
-      "community": 2,
+      "community": 10,
       "norm_label": "build"
     },
     {
@@ -3807,7 +3663,7 @@
       "source_file": "lib/src/features/profile/presentation/system_health_card.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_system_health_card_dart_container",
-      "community": 2,
+      "community": 10,
       "norm_label": "container"
     },
     {
@@ -3816,7 +3672,7 @@
       "source_file": "lib/src/features/profile/presentation/system_health_card.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_system_health_card_dart_sizedbox",
-      "community": 2,
+      "community": 10,
       "norm_label": "sizedbox"
     },
     {
@@ -3825,7 +3681,7 @@
       "source_file": "lib/src/features/profile/presentation/system_health_card.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_system_health_card_dart_iconbutton",
-      "community": 2,
+      "community": 10,
       "norm_label": "iconbutton"
     },
     {
@@ -3834,7 +3690,7 @@
       "source_file": "lib/src/features/profile/presentation/system_health_card.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_system_health_card_dart_padding",
-      "community": 2,
+      "community": 10,
       "norm_label": "padding"
     },
     {
@@ -3843,7 +3699,7 @@
       "source_file": "lib/src/features/profile/presentation/system_health_card.dart",
       "source_location": null,
       "id": "package_off_chat_src_core_utils_system_health_dart",
-      "community": 2,
+      "community": 10,
       "norm_label": "package:off_chat/src/core/utils/system_health.dart"
     },
     {
@@ -3852,7 +3708,7 @@
       "source_file": "lib/src/features/profile/presentation/profile_controller.g.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_profile_controller_g_dart",
-      "community": 25,
+      "community": 24,
       "norm_label": "_"
     },
     {
@@ -3861,7 +3717,7 @@
       "source_file": "lib/src/features/profile/presentation/profile_controller.g.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_profile_controller_g_dart_debuggetcreatesourcehash",
-      "community": 25,
+      "community": 24,
       "norm_label": "debuggetcreatesourcehash"
     },
     {
@@ -3870,7 +3726,7 @@
       "source_file": "lib/src/features/profile/presentation/profile_controller.g.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_profile_controller_g_dart_create",
-      "community": 25,
+      "community": 24,
       "norm_label": "create"
     },
     {
@@ -3879,7 +3735,7 @@
       "source_file": "lib/src/features/profile/presentation/profile_controller.g.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_profile_controller_g_dart_runbuild",
-      "community": 25,
+      "community": 24,
       "norm_label": "runbuild"
     },
     {
@@ -3888,7 +3744,7 @@
       "source_file": "lib/src/features/profile/presentation/profile_screen.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_profile_screen_dart",
-      "community": 10,
+      "community": 9,
       "norm_label": "profile_screen.dart"
     },
     {
@@ -3897,7 +3753,7 @@
       "source_file": "lib/src/features/profile/presentation/profile_screen.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_profile_screen_dart_profilescreen",
-      "community": 10,
+      "community": 9,
       "norm_label": "profilescreen"
     },
     {
@@ -3906,7 +3762,7 @@
       "source_file": "lib/src/features/profile/presentation/profile_screen.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_profile_screen_dart_profilescreenstate",
-      "community": 10,
+      "community": 9,
       "norm_label": "_profilescreenstate"
     },
     {
@@ -3915,7 +3771,7 @@
       "source_file": "lib/src/features/profile/presentation/profile_screen.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_profile_screen_dart_initstate",
-      "community": 10,
+      "community": 9,
       "norm_label": "initstate"
     },
     {
@@ -3924,7 +3780,7 @@
       "source_file": "lib/src/features/profile/presentation/profile_screen.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_profile_screen_dart_dispose",
-      "community": 10,
+      "community": 9,
       "norm_label": "dispose"
     },
     {
@@ -3933,7 +3789,7 @@
       "source_file": "lib/src/features/profile/presentation/profile_screen.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_profile_screen_dart_build",
-      "community": 10,
+      "community": 9,
       "norm_label": "build"
     },
     {
@@ -3942,7 +3798,7 @@
       "source_file": "lib/src/features/profile/presentation/profile_screen.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_profile_screen_dart_scaffold",
-      "community": 10,
+      "community": 9,
       "norm_label": "scaffold"
     },
     {
@@ -3951,7 +3807,7 @@
       "source_file": "lib/src/features/profile/presentation/profile_screen.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_profile_screen_dart_customscrollview",
-      "community": 10,
+      "community": 9,
       "norm_label": "customscrollview"
     },
     {
@@ -3960,7 +3816,7 @@
       "source_file": "lib/src/features/profile/presentation/profile_screen.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_profile_screen_dart_sizedbox",
-      "community": 10,
+      "community": 9,
       "norm_label": "sizedbox"
     },
     {
@@ -3969,7 +3825,7 @@
       "source_file": "lib/src/features/profile/presentation/profile_screen.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_profile_screen_dart_systemhealthcard",
-      "community": 10,
+      "community": 9,
       "norm_label": "systemhealthcard"
     },
     {
@@ -3978,7 +3834,7 @@
       "source_file": "lib/src/features/profile/presentation/profile_screen.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_profile_screen_dart_text",
-      "community": 10,
+      "community": 9,
       "norm_label": "text"
     },
     {
@@ -3987,7 +3843,7 @@
       "source_file": "lib/src/features/profile/presentation/profile_screen.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_profile_screen_dart_buildidentitycard",
-      "community": 10,
+      "community": 9,
       "norm_label": "_buildidentitycard"
     },
     {
@@ -3996,7 +3852,7 @@
       "source_file": "lib/src/features/profile/presentation/profile_screen.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_profile_screen_dart_container",
-      "community": 10,
+      "community": 9,
       "norm_label": "container"
     },
     {
@@ -4005,8 +3861,17 @@
       "source_file": "lib/src/features/profile/presentation/profile_screen.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_profile_screen_dart_snackbar",
-      "community": 10,
+      "community": 9,
       "norm_label": "snackbar"
+    },
+    {
+      "label": "_buildSubSettingCard",
+      "file_type": "code",
+      "source_file": "lib/src/features/profile/presentation/profile_screen.dart",
+      "source_location": null,
+      "id": "lib_src_features_profile_presentation_profile_screen_dart_buildsubsettingcard",
+      "community": 9,
+      "norm_label": "_buildsubsettingcard"
     },
     {
       "label": "_buildSettingCard",
@@ -4014,7 +3879,7 @@
       "source_file": "lib/src/features/profile/presentation/profile_screen.dart",
       "source_location": null,
       "id": "lib_src_features_profile_presentation_profile_screen_dart_buildsettingcard",
-      "community": 10,
+      "community": 9,
       "norm_label": "_buildsettingcard"
     },
     {
@@ -4023,7 +3888,7 @@
       "source_file": "lib/src/features/profile/presentation/profile_screen.dart",
       "source_location": null,
       "id": "package_package_info_plus_package_info_plus_dart",
-      "community": 10,
+      "community": 9,
       "norm_label": "package:package_info_plus/package_info_plus.dart"
     },
     {
@@ -4032,7 +3897,7 @@
       "source_file": "lib/src/features/profile/presentation/profile_screen.dart",
       "source_location": null,
       "id": "package_off_chat_src_features_profile_presentation_system_health_card_dart",
-      "community": 10,
+      "community": 9,
       "norm_label": "package:off_chat/src/features/profile/presentation/system_health_card.dart"
     },
     {
@@ -4041,7 +3906,7 @@
       "source_file": "lib/src/features/profile/data/profile_manager.dart",
       "source_location": null,
       "id": "lib_src_features_profile_data_profile_manager_dart",
-      "community": 11,
+      "community": 7,
       "norm_label": "profile_manager.dart"
     },
     {
@@ -4050,7 +3915,7 @@
       "source_file": "lib/src/features/profile/data/profile_manager.dart",
       "source_location": null,
       "id": "lib_src_features_profile_data_profile_manager_dart_profilemanager",
-      "community": 11,
+      "community": 7,
       "norm_label": "profilemanager"
     },
     {
@@ -4059,7 +3924,7 @@
       "source_file": "lib/src/features/profile/data/profile_manager.dart",
       "source_location": null,
       "id": "lib_src_features_profile_data_profile_manager_dart_saveprofilepicture",
-      "community": 11,
+      "community": 7,
       "norm_label": "saveprofilepicture"
     },
     {
@@ -4068,7 +3933,7 @@
       "source_file": "lib/src/features/profile/data/profile_manager.dart",
       "source_location": null,
       "id": "lib_src_features_profile_data_profile_manager_dart_simplekeypairdata",
-      "community": 11,
+      "community": 7,
       "norm_label": "simplekeypairdata"
     },
     {
@@ -4077,7 +3942,7 @@
       "source_file": "lib/src/features/profile/data/profile_manager.dart",
       "source_location": null,
       "id": "package_crypto_crypto_dart",
-      "community": 11,
+      "community": 7,
       "norm_label": "package:crypto/crypto.dart"
     },
     {
@@ -4086,7 +3951,7 @@
       "source_file": "lib/src/features/profile/data/profile_manager.dart",
       "source_location": null,
       "id": "package_flutter_secure_storage_flutter_secure_storage_dart",
-      "community": 11,
+      "community": 7,
       "norm_label": "package:flutter_secure_storage/flutter_secure_storage.dart"
     },
     {
@@ -4095,7 +3960,7 @@
       "source_file": "lib/src/features/profile/data/profile_manager.dart",
       "source_location": null,
       "id": "package_image_cropper_image_cropper_dart",
-      "community": 11,
+      "community": 7,
       "norm_label": "package:image_cropper/image_cropper.dart"
     },
     {
@@ -4104,7 +3969,7 @@
       "source_file": "lib/src/features/profile/data/profile_manager.dart",
       "source_location": null,
       "id": "package_flutter_foundation_dart",
-      "community": 11,
+      "community": 7,
       "norm_label": "package:flutter/foundation.dart"
     }
   ],
@@ -4120,6 +3985,18 @@
       "_tgt": "lib_main_dart_main",
       "source": "lib_main_dart",
       "target": "lib_main_dart_main"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/main.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "lib_main_dart",
+      "_tgt": "lib_main_dart_notificationservice",
+      "source": "lib_main_dart",
+      "target": "lib_main_dart_notificationservice"
     },
     {
       "relation": "imports",
@@ -4168,6 +4045,18 @@
       "_tgt": "package_off_chat_src_core_utils_watch_log_dart",
       "source": "lib_main_dart",
       "target": "package_off_chat_src_core_utils_watch_log_dart"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/main.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "lib_main_dart",
+      "_tgt": "package_off_chat_src_core_notifications_notification_service_dart",
+      "source": "lib_main_dart",
+      "target": "package_off_chat_src_core_notifications_notification_service_dart"
     },
     {
       "relation": "imports",
@@ -4408,6 +4297,42 @@
       "_tgt": "package_off_chat_src_core_utils_watch_log_dart",
       "source": "package_off_chat_src_core_utils_watch_log_dart",
       "target": "lib_src_features_discovery_presentation_widgets_log_viewer_dart"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/src/core/background_service.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "lib_src_core_background_service_dart",
+      "_tgt": "package_off_chat_src_core_notifications_notification_service_dart",
+      "source": "package_off_chat_src_core_notifications_notification_service_dart",
+      "target": "lib_src_core_background_service_dart"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/src/core/network/mesh_packet.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "lib_src_core_network_mesh_packet_dart",
+      "_tgt": "package_off_chat_src_core_notifications_notification_service_dart",
+      "source": "package_off_chat_src_core_notifications_notification_service_dart",
+      "target": "lib_src_core_network_mesh_packet_dart"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/src/features/chat/data/message_handler.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "lib_src_features_chat_data_message_handler_dart",
+      "_tgt": "package_off_chat_src_core_notifications_notification_service_dart",
+      "source": "package_off_chat_src_core_notifications_notification_service_dart",
+      "target": "lib_src_features_chat_data_message_handler_dart"
     },
     {
       "relation": "defines",
@@ -4720,6 +4645,18 @@
       "_tgt": "lib_src_core_background_service_dart_onstart",
       "source": "lib_src_core_background_service_dart",
       "target": "lib_src_core_background_service_dart_onstart"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/src/core/background_service.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "lib_src_core_background_service_dart",
+      "_tgt": "lib_src_core_background_service_dart_notificationservice",
+      "source": "lib_src_core_background_service_dart",
+      "target": "lib_src_core_background_service_dart_notificationservice"
     },
     {
       "relation": "imports",
@@ -5397,13 +5334,13 @@
       "relation": "imports",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "lib/src/features/chat/data/message_handler.dart",
+      "source_file": "lib/src/core/database/database_provider.dart",
       "source_location": null,
       "weight": 1.0,
-      "_src": "lib_src_features_chat_data_message_handler_dart",
+      "_src": "lib_src_core_database_database_provider_dart",
       "_tgt": "package_shared_preferences_shared_preferences_dart",
       "source": "package_shared_preferences_shared_preferences_dart",
-      "target": "lib_src_features_chat_data_message_handler_dart"
+      "target": "lib_src_core_database_database_provider_dart"
     },
     {
       "relation": "imports",
@@ -5428,6 +5365,30 @@
       "_tgt": "package_shared_preferences_shared_preferences_dart",
       "source": "package_shared_preferences_shared_preferences_dart",
       "target": "lib_src_features_discovery_presentation_advertising_state_dart"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/src/features/profile/domain/user_model.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "lib_src_features_profile_domain_user_model_dart",
+      "_tgt": "package_shared_preferences_shared_preferences_dart",
+      "source": "package_shared_preferences_shared_preferences_dart",
+      "target": "lib_src_features_profile_domain_user_model_dart"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/src/features/profile/presentation/profile_controller.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "lib_src_features_profile_presentation_profile_controller_dart",
+      "_tgt": "package_shared_preferences_shared_preferences_dart",
+      "source": "package_shared_preferences_shared_preferences_dart",
+      "target": "lib_src_features_profile_presentation_profile_controller_dart"
     },
     {
       "relation": "imports",
@@ -5548,42 +5509,6 @@
       "_tgt": "package_isar_community_isar_dart",
       "source": "package_isar_community_isar_dart",
       "target": "lib_src_features_discovery_data_ble_discoverer_dart"
-    },
-    {
-      "relation": "imports",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/onboarding/presentation/onboarding_controller.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_onboarding_presentation_onboarding_controller_dart",
-      "_tgt": "package_isar_community_isar_dart",
-      "source": "package_isar_community_isar_dart",
-      "target": "lib_src_features_onboarding_presentation_onboarding_controller_dart"
-    },
-    {
-      "relation": "imports",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/profile/domain/user_model.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_profile_domain_user_model_dart",
-      "_tgt": "package_isar_community_isar_dart",
-      "source": "package_isar_community_isar_dart",
-      "target": "lib_src_features_profile_domain_user_model_dart"
-    },
-    {
-      "relation": "imports",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/profile/presentation/profile_controller.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_profile_presentation_profile_controller_dart",
-      "_tgt": "package_isar_community_isar_dart",
-      "source": "package_isar_community_isar_dart",
-      "target": "lib_src_features_profile_presentation_profile_controller_dart"
     },
     {
       "relation": "imports",
@@ -5793,18 +5718,6 @@
       "relation": "imports",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "lib/src/core/database/isar_service.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_core_database_isar_service_dart",
-      "_tgt": "package_off_chat_src_features_profile_domain_user_model_dart",
-      "source": "lib_src_core_database_isar_service_dart",
-      "target": "package_off_chat_src_features_profile_domain_user_model_dart"
-    },
-    {
-      "relation": "imports",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": "lib/src/features/onboarding/presentation/onboarding_screen.dart",
       "source_location": null,
       "weight": 1.0,
@@ -5980,30 +5893,6 @@
       "_tgt": "package_off_chat_src_core_database_models_relay_task_dart",
       "source": "package_off_chat_src_core_database_models_relay_task_dart",
       "target": "lib_src_features_chat_data_message_handler_dart"
-    },
-    {
-      "relation": "imports",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/onboarding/presentation/onboarding_controller.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_onboarding_presentation_onboarding_controller_dart",
-      "_tgt": "package_off_chat_src_features_profile_domain_user_model_dart",
-      "source": "package_off_chat_src_features_profile_domain_user_model_dart",
-      "target": "lib_src_features_onboarding_presentation_onboarding_controller_dart"
-    },
-    {
-      "relation": "imports",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/profile/presentation/profile_controller.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_profile_presentation_profile_controller_dart",
-      "_tgt": "package_off_chat_src_features_profile_domain_user_model_dart",
-      "source": "package_off_chat_src_features_profile_domain_user_model_dart",
-      "target": "lib_src_features_profile_presentation_profile_controller_dart"
     },
     {
       "relation": "defines",
@@ -7422,6 +7311,18 @@
       "target": "lib_src_core_network_mesh_packet_dart_exception"
     },
     {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/src/core/network/mesh_packet.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "lib_src_core_network_mesh_packet_dart",
+      "_tgt": "lib_src_core_network_mesh_packet_dart_notificationservice",
+      "source": "lib_src_core_network_mesh_packet_dart",
+      "target": "lib_src_core_network_mesh_packet_dart_notificationservice"
+    },
+    {
       "relation": "imports",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -7444,6 +7345,30 @@
       "_tgt": "dart_typed_data",
       "source": "lib_src_core_network_mesh_packet_dart",
       "target": "dart_typed_data"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/src/features/profile/domain/user_model.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "lib_src_features_profile_domain_user_model_dart",
+      "_tgt": "dart_convert",
+      "source": "dart_convert",
+      "target": "lib_src_features_profile_domain_user_model_dart"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/src/features/profile/presentation/profile_controller.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "lib_src_features_profile_presentation_profile_controller_dart",
+      "_tgt": "dart_convert",
+      "source": "dart_convert",
+      "target": "lib_src_features_profile_presentation_profile_controller_dart"
     },
     {
       "relation": "imports",
@@ -10021,9 +9946,9 @@
       "source_location": null,
       "weight": 1.0,
       "_src": "lib_src_features_onboarding_presentation_onboarding_controller_dart",
-      "_tgt": "package_off_chat_src_core_database_database_provider_dart",
+      "_tgt": "package_off_chat_src_features_profile_domain_user_model_dart",
       "source": "lib_src_features_onboarding_presentation_onboarding_controller_dart",
-      "target": "package_off_chat_src_core_database_database_provider_dart"
+      "target": "package_off_chat_src_features_profile_domain_user_model_dart"
     },
     {
       "relation": "imports",
@@ -10033,8 +9958,8 @@
       "source_location": null,
       "weight": 1.0,
       "_src": "lib_src_features_profile_presentation_profile_controller_dart",
-      "_tgt": "package_off_chat_src_core_database_database_provider_dart",
-      "source": "package_off_chat_src_core_database_database_provider_dart",
+      "_tgt": "package_off_chat_src_features_profile_domain_user_model_dart",
+      "source": "package_off_chat_src_features_profile_domain_user_model_dart",
       "target": "lib_src_features_profile_presentation_profile_controller_dart"
     },
     {
@@ -10353,253 +10278,13 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
+      "source_file": "lib/src/features/profile/domain/user_model.dart",
       "source_location": null,
       "weight": 1.0,
-      "_src": "lib_src_features_profile_domain_user_model_g_dart",
-      "_tgt": "lib_src_features_profile_domain_user_model_g_dart_usermodelestimatesize",
-      "source": "lib_src_features_profile_domain_user_model_g_dart",
-      "target": "lib_src_features_profile_domain_user_model_g_dart_usermodelestimatesize"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_profile_domain_user_model_g_dart",
-      "_tgt": "lib_src_features_profile_domain_user_model_g_dart_usermodelserialize",
-      "source": "lib_src_features_profile_domain_user_model_g_dart",
-      "target": "lib_src_features_profile_domain_user_model_g_dart_usermodelserialize"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_profile_domain_user_model_g_dart",
-      "_tgt": "lib_src_features_profile_domain_user_model_g_dart_usermodeldeserialize",
-      "source": "lib_src_features_profile_domain_user_model_g_dart",
-      "target": "lib_src_features_profile_domain_user_model_g_dart_usermodeldeserialize"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_profile_domain_user_model_g_dart",
-      "_tgt": "lib_src_features_profile_domain_user_model_g_dart_isarerror",
-      "source": "lib_src_features_profile_domain_user_model_g_dart",
-      "target": "lib_src_features_profile_domain_user_model_g_dart_isarerror"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_profile_domain_user_model_g_dart",
-      "_tgt": "lib_src_features_profile_domain_user_model_g_dart_usermodelgetid",
-      "source": "lib_src_features_profile_domain_user_model_g_dart",
-      "target": "lib_src_features_profile_domain_user_model_g_dart_usermodelgetid"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_profile_domain_user_model_g_dart",
-      "_tgt": "lib_src_features_profile_domain_user_model_g_dart_usermodelattach",
-      "source": "lib_src_features_profile_domain_user_model_g_dart",
-      "target": "lib_src_features_profile_domain_user_model_g_dart_usermodelattach"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_profile_domain_user_model_g_dart",
-      "_tgt": "lib_src_features_profile_domain_user_model_g_dart_getbyindex",
-      "source": "lib_src_features_profile_domain_user_model_g_dart",
-      "target": "lib_src_features_profile_domain_user_model_g_dart_getbyindex"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_profile_domain_user_model_g_dart",
-      "_tgt": "lib_src_features_profile_domain_user_model_g_dart_getbyindexsync",
-      "source": "lib_src_features_profile_domain_user_model_g_dart",
-      "target": "lib_src_features_profile_domain_user_model_g_dart_getbyindexsync"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_profile_domain_user_model_g_dart",
-      "_tgt": "lib_src_features_profile_domain_user_model_g_dart_deletebyindex",
-      "source": "lib_src_features_profile_domain_user_model_g_dart",
-      "target": "lib_src_features_profile_domain_user_model_g_dart_deletebyindex"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_profile_domain_user_model_g_dart",
-      "_tgt": "lib_src_features_profile_domain_user_model_g_dart_deletebydeviceidsync",
-      "source": "lib_src_features_profile_domain_user_model_g_dart",
-      "target": "lib_src_features_profile_domain_user_model_g_dart_deletebydeviceidsync"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_profile_domain_user_model_g_dart",
-      "_tgt": "lib_src_features_profile_domain_user_model_g_dart_deletebyindexsync",
-      "source": "lib_src_features_profile_domain_user_model_g_dart",
-      "target": "lib_src_features_profile_domain_user_model_g_dart_deletebyindexsync"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_profile_domain_user_model_g_dart",
-      "_tgt": "lib_src_features_profile_domain_user_model_g_dart_getallbyindex",
-      "source": "lib_src_features_profile_domain_user_model_g_dart",
-      "target": "lib_src_features_profile_domain_user_model_g_dart_getallbyindex"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_profile_domain_user_model_g_dart",
-      "_tgt": "lib_src_features_profile_domain_user_model_g_dart_getallbyindexsync",
-      "source": "lib_src_features_profile_domain_user_model_g_dart",
-      "target": "lib_src_features_profile_domain_user_model_g_dart_getallbyindexsync"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_profile_domain_user_model_g_dart",
-      "_tgt": "lib_src_features_profile_domain_user_model_g_dart_deleteallbyindex",
-      "source": "lib_src_features_profile_domain_user_model_g_dart",
-      "target": "lib_src_features_profile_domain_user_model_g_dart_deleteallbyindex"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_profile_domain_user_model_g_dart",
-      "_tgt": "lib_src_features_profile_domain_user_model_g_dart_deleteallbydeviceidsync",
-      "source": "lib_src_features_profile_domain_user_model_g_dart",
-      "target": "lib_src_features_profile_domain_user_model_g_dart_deleteallbydeviceidsync"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_profile_domain_user_model_g_dart",
-      "_tgt": "lib_src_features_profile_domain_user_model_g_dart_deleteallbyindexsync",
-      "source": "lib_src_features_profile_domain_user_model_g_dart",
-      "target": "lib_src_features_profile_domain_user_model_g_dart_deleteallbyindexsync"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_profile_domain_user_model_g_dart",
-      "_tgt": "lib_src_features_profile_domain_user_model_g_dart_putbyindex",
-      "source": "lib_src_features_profile_domain_user_model_g_dart",
-      "target": "lib_src_features_profile_domain_user_model_g_dart_putbyindex"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_profile_domain_user_model_g_dart",
-      "_tgt": "lib_src_features_profile_domain_user_model_g_dart_putbydeviceidsync",
-      "source": "lib_src_features_profile_domain_user_model_g_dart",
-      "target": "lib_src_features_profile_domain_user_model_g_dart_putbydeviceidsync"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_profile_domain_user_model_g_dart",
-      "_tgt": "lib_src_features_profile_domain_user_model_g_dart_putbyindexsync",
-      "source": "lib_src_features_profile_domain_user_model_g_dart",
-      "target": "lib_src_features_profile_domain_user_model_g_dart_putbyindexsync"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_profile_domain_user_model_g_dart",
-      "_tgt": "lib_src_features_profile_domain_user_model_g_dart_putallbyindex",
-      "source": "lib_src_features_profile_domain_user_model_g_dart",
-      "target": "lib_src_features_profile_domain_user_model_g_dart_putallbyindex"
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/src/features/profile/domain/user_model.g.dart",
-      "source_location": null,
-      "weight": 1.0,
-      "_src": "lib_src_features_profile_domain_user_model_g_dart",
-      "_tgt": "lib_src_features_profile_domain_user_model_g_dart_putallbyindexsync",
-      "source": "lib_src_features_profile_domain_user_model_g_dart",
-      "target": "lib_src_features_profile_domain_user_model_g_dart_putallbyindexsync"
+      "_src": "lib_src_features_profile_domain_user_model_dart",
+      "_tgt": "lib_src_features_profile_domain_user_model_dart_copywith",
+      "source": "lib_src_features_profile_domain_user_model_dart",
+      "target": "lib_src_features_profile_domain_user_model_dart_copywith"
     },
     {
       "relation": "defines",
@@ -10612,6 +10297,30 @@
       "_tgt": "lib_src_features_profile_presentation_profile_controller_dart_profilecontroller",
       "source": "lib_src_features_profile_presentation_profile_controller_dart",
       "target": "lib_src_features_profile_presentation_profile_controller_dart_profilecontroller"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/src/features/profile/presentation/profile_controller.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "lib_src_features_profile_presentation_profile_controller_dart",
+      "_tgt": "lib_src_features_profile_presentation_profile_controller_dart_saveprofile",
+      "source": "lib_src_features_profile_presentation_profile_controller_dart",
+      "target": "lib_src_features_profile_presentation_profile_controller_dart_saveprofile"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/src/features/profile/presentation/profile_controller.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "lib_src_features_profile_presentation_profile_controller_dart",
+      "_tgt": "package_off_chat_src_core_database_database_provider_dart",
+      "source": "lib_src_features_profile_presentation_profile_controller_dart",
+      "target": "package_off_chat_src_core_database_database_provider_dart"
     },
     {
       "relation": "defines",
@@ -10912,6 +10621,18 @@
       "_tgt": "lib_src_features_profile_presentation_profile_screen_dart_snackbar",
       "source": "lib_src_features_profile_presentation_profile_screen_dart",
       "target": "lib_src_features_profile_presentation_profile_screen_dart_snackbar"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/src/features/profile/presentation/profile_screen.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "lib_src_features_profile_presentation_profile_screen_dart",
+      "_tgt": "lib_src_features_profile_presentation_profile_screen_dart_buildsubsettingcard",
+      "source": "lib_src_features_profile_presentation_profile_screen_dart",
+      "target": "lib_src_features_profile_presentation_profile_screen_dart_buildsubsettingcard"
     },
     {
       "relation": "defines",

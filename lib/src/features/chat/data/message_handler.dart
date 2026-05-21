@@ -15,6 +15,8 @@ import 'package:off_chat/src/core/database/models/found_device.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:isar_community/isar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:off_chat/src/features/profile/domain/user_model.dart';
 import 'package:off_chat/src/core/notifications/notification_service.dart';
 
 class PendingAck {

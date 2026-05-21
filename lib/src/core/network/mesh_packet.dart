@@ -7,6 +7,7 @@ import 'package:off_chat/src/core/database/models/found_device.dart';
 import 'package:off_chat/src/core/database/models/message.dart';
 import 'package:off_chat/src/features/discovery/data/ble_advertiser.dart';
 import 'package:off_chat/src/core/notifications/notification_service.dart';
+import 'package:off_chat/src/features/profile/domain/user_model.dart';
 import 'package:isar_community/isar.dart';
 
 class PacketContext {
