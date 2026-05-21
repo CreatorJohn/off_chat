@@ -10,15 +10,8 @@ part 'discovery_controller.g.dart';
 class DiscoveryController extends _$DiscoveryController {
   @override
   Stream<List<FoundDevice>> build() {
-    // Watch the provider to ensure Isar is initialized
-    final isarAsync = ref.watch(isarDatabaseProvider);
-    
-    if (isarAsync.hasValue) {
-      return IsarService().watchFoundDevices();
-    }
-    
-    // Return empty stream while initializing
-    return const Stream.empty();
+    ref.watch(isarDatabaseProvider);
+    return IsarService().watchFoundDevices();
   }
 
   Future<void> manualRefresh() async {

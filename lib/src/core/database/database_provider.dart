@@ -6,12 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 part 'database_provider.g.dart';
 
 @Riverpod(keepAlive: true)
-Future<Isar> isarDatabase(Ref ref) async {
-  final service = IsarService();
-  if (!service.isOpen) {
-    await service.initialize();
-  }
-  return service.db;
+Isar isarDatabase(Ref ref) {
+  return IsarService().db;
 }
 
 @Riverpod(keepAlive: true)

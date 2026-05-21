@@ -13,15 +13,9 @@ part 'chat_controller.g.dart';
 class ChatController extends _$ChatController {
   @override
   Stream<List<Message>> build(String remoteDeviceId) {
-    // Ensure Isar is initialized
-    final isarAsync = ref.watch(isarDatabaseProvider);
-    
-    if (isarAsync.hasValue) {
-      final stableId = int.parse(remoteDeviceId);
-      return IsarService().watchMessagesWithDevice(stableId);
-    }
-    
-    return const Stream.empty();
+    ref.watch(isarDatabaseProvider);
+    final stableId = int.parse(remoteDeviceId);
+    return IsarService().watchMessagesWithDevice(stableId);
   }
 
   Future<void> sendTextMessage(String text) async {
