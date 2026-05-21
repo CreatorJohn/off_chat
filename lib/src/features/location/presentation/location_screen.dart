@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:math';
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:off_chat/src/core/theme/app_theme.dart';
 import 'package:off_chat/src/features/profile/presentation/profile_controller.dart';
@@ -164,58 +164,6 @@ class _LocationScreenState extends ConsumerState<LocationScreen> with SingleTick
       ),
       loading: () => const CircularProgressIndicator(),
       error: (err, stack) => const Icon(Icons.error),
-    );
-  }
-
-  Widget _buildDeviceBlip(RadarDevice device, double userHeading) {
-    // Math to position blip based on distance and bearing
-    // Max radar distance is 50m
-    const double maxRadarDistance = 50.0;
-    final double normalizedDistance = (device.distance / maxRadarDistance).clamp(0.0, 1.0);
-    
-    // Adjust bearing relative to user heading
-    final double relativeBearing = (device.bearing - userHeading + 360) % 360;
-    final double angleRad = (relativeBearing - 90) * pi / 180;
-
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final double radius = constraints.maxWidth / 2;
-        final double dx = radius * normalizedDistance * cos(angleRad);
-        final double dy = radius * normalizedDistance * sin(angleRad);
-
-        return Transform.translate(
-          offset: Offset(dx, dy),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                width: 48,
-                height: 48,
-                padding: const EdgeInsets.all(1),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: AppTheme.primaryGold.withValues(alpha: 0.4)),
-                  color: AppTheme.surfaceBlack,
-                ),
-                child: ClipOval(
-                  child: device.model.profilePicture != null
-                      ? Image.memory(Uint8List.fromList(device.model.profilePicture!), fit: BoxFit.cover)
-                      : const Icon(Icons.person, color: AppTheme.primaryGold, size: 20),
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                device.model.name ?? "Unknown",
-                style: const TextStyle(
-                  color: AppTheme.onSurfaceVariant,
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        );
-      },
     );
   }
 }

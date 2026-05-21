@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:off_chat/src/core/theme/app_theme.dart';
 import 'package:off_chat/src/features/location/presentation/radar_controller.dart';

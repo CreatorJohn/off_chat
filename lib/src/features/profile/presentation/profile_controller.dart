@@ -3,7 +3,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:off_chat/src/core/database/database_provider.dart';
 import 'package:off_chat/src/features/profile/domain/user_model.dart';
 import 'package:logging/logging.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 part 'profile_controller.g.dart';
 
