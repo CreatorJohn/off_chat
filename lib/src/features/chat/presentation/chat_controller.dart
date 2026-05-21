@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:off_chat/src/core/database/database_provider.dart';
 import 'package:off_chat/src/core/database/isar_service.dart';
 import 'package:off_chat/src/core/database/models/message.dart';
 import 'package:off_chat/src/features/chat/data/message_handler.dart';
@@ -12,8 +13,15 @@ part 'chat_controller.g.dart';
 class ChatController extends _$ChatController {
   @override
   Stream<List<Message>> build(String remoteDeviceId) {
-    final stableId = int.parse(remoteDeviceId);
-    return IsarService().watchMessagesWithDevice(stableId);
+    // Ensure Isar is initialized
+    final isarAsync = ref.watch(isarDatabaseProvider);
+    
+    if (isarAsync.hasValue) {
+      final stableId = int.parse(remoteDeviceId);
+      return IsarService().watchMessagesWithDevice(stableId);
+    }
+    
+    return const Stream.empty();
   }
 
   Future<void> sendTextMessage(String text) async {
