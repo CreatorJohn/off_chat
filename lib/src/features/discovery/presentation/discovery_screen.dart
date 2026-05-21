@@ -167,21 +167,7 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
         leading: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const SizedBox(width: 8),
-            StreamBuilder<bool>(
-              stream: discoverer.scanStatusStream,
-              initialData: discoverer.isScanOperationInProgress,
-              builder: (context, snapshot) {
-                final isScanning = snapshot.data ?? false;
-                return _StatusIndicator(
-                  isActive: isScanning,
-                  activeColor: Colors.blue,
-                  icon: Icons.radar,
-                  tooltip: isScanning ? 'Scanning Active' : 'Scanning Inactive',
-                );
-              },
-            ),
-            const SizedBox(width: 8),
+            const SizedBox(width: 12),
             _StatusIndicator(
               isActive: isAdvertising,
               activeColor: Colors.green,
@@ -192,7 +178,7 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
             ),
           ],
         ),
-        leadingWidth: 100,
+        leadingWidth: 56,
         title: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onDoubleTap: () => _showDebugTerminal(context),
@@ -302,19 +288,38 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
                   }, childCount: devices.length),
                 );
               },
-              loading: () => const SliverToBoxAdapter(
+              loading: () => const SliverFillRemaining(
+                hasScrollBody: false,
                 child: Center(
                   child: CircularProgressIndicator(color: AppTheme.primaryGold),
                 ),
               ),
-              error: (err, stack) => SliverToBoxAdapter(
-                child: Center(
-                  child: Text(
-                    'Error: $err',
-                    style: const TextStyle(color: Colors.red),
+              error: (err, stack) {
+                // Log the error
+                Logger('DiscoveryScreen').severe('Database error: $err', err, stack);
+                
+                // Show snackbar on next frame
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Error loading devices: $err'),
+                      backgroundColor: Colors.red.withValues(alpha: 0.8),
+                    ),
+                  );
+                });
+
+                return const SliverToBoxAdapter(
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(32.0),
+                      child: Text(
+                        'Database offline.',
+                        style: TextStyle(color: AppTheme.onSurfaceVariant),
+                      ),
+                    ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ),
         ],
