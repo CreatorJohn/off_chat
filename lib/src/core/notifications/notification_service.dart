@@ -4,6 +4,10 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'notification_service.g.dart';
 
 class NotificationService {
+  static final NotificationService _instance = NotificationService._internal();
+  factory NotificationService() => _instance;
+  NotificationService._internal();
+
   final _notifications = FlutterLocalNotificationsPlugin();
 
   Future<void> init() async {
@@ -37,6 +41,29 @@ class NotificationService {
       id: message.hashCode,
       title: title,
       body: message,
+      notificationDetails: details,
+    );
+  }
+
+  Future<void> showNewUserIdentifiedNotification({
+    required String userName,
+    required int stableId,
+  }) async {
+    const androidDetails = AndroidNotificationDetails(
+      'off_chat_discovery',
+      'Off Chat Discovery',
+      channelDescription: 'Notifications for new users discovered',
+      importance: Importance.defaultImportance,
+      priority: Priority.defaultPriority,
+    );
+
+    const iosDetails = DarwinNotificationDetails();
+    final details = NotificationDetails(android: androidDetails, iOS: iosDetails);
+
+    await _notifications.show(
+      id: stableId,
+      title: "New User Discovered",
+      body: "$userName is now nearby",
       notificationDetails: details,
     );
   }

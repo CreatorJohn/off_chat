@@ -11,6 +11,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:logging/logging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:off_chat/src/core/notifications/notification_service.dart';
 
 Future<void> initializeBackgroundService() async {
   final service = FlutterBackgroundService();
@@ -54,6 +55,7 @@ final Logger log = Logger('BackgroundService');
 void onStart(ServiceInstance service) async {
   DartPluginRegistrant.ensureInitialized();
   final advertiser = BLEAdvertiser();
+  await NotificationService().init();
 
   Logger.root.level = Level.ALL;
   Logger.root.onRecord.listen(

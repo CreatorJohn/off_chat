@@ -15,7 +15,7 @@ import 'package:off_chat/src/core/database/models/found_device.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:isar_community/isar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:off_chat/src/core/notifications/notification_service.dart';
 
 class PendingAck {
   final Set<int> upstreamNodeIds;
@@ -452,6 +452,7 @@ class MessageHandler {
           .findFirst();
 
       bool needsPic = false;
+      bool isNewUser = false;
       if (dev == null) {
         final hashHex = packet.profileHash
             .map((b) => b.toRadixString(16).padLeft(2, '0'))
@@ -465,6 +466,7 @@ class MessageHandler {
           ..publicKey = packet.publicKey
           ..lastSeen = DateTime.now();
         needsPic = true;
+        isNewUser = true;
       } else {
         final hashHex = packet.profileHash
             .map((b) => b.toRadixString(16).padLeft(2, '0'))
@@ -479,6 +481,18 @@ class MessageHandler {
         dev.lastSeen = DateTime.now();
       }
       await isar.putFoundDevice(dev);
+
+      if (isNewUser) {
+        final user = await UserModel.load();
+        if (user != null &&
+            user.isNotificationsEnabled &&
+            user.notifyNewUserIdentified) {
+          NotificationService().showNewUserIdentifiedNotification(
+            userName: packet.name,
+            stableId: packet.stableId,
+          );
+        }
+      }
 
       if (needsPic) {
         final req = RequestProfilePicPacket();

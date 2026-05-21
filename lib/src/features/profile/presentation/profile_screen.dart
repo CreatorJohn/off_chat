@@ -141,14 +141,46 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       _buildSettingCard(
                         context: context,
                         icon: Icons.notifications_active,
-                        title: 'Notifications',
-                        subtitle: 'Configure message alerts',
+                        title: 'Master Toggle',
+                        subtitle: 'Enable or disable all alerts',
                         trailing: Switch(
                           value: user.isNotificationsEnabled,
                           activeTrackColor: AppTheme.primaryGold,
                           onChanged: (val) => ref.read(profileControllerProvider.notifier).toggleNotifications(val),
                         ),
                       ),
+                      const SizedBox(height: 12),
+                      if (user.isNotificationsEnabled) ...[
+                        _buildSubSettingCard(
+                          context: context,
+                          title: 'New User Discovered',
+                          subtitle: 'Notify when a new node is identified',
+                          value: user.notifyNewUserIdentified,
+                          onChanged: (val) => ref
+                              .read(profileControllerProvider.notifier)
+                              .toggleNotifyNewUserIdentified(val),
+                        ),
+                        const SizedBox(height: 8),
+                        _buildSubSettingCard(
+                          context: context,
+                          title: 'First Contact',
+                          subtitle: 'Alert on first message from a user',
+                          value: user.notifyFirstMessage,
+                          onChanged: (val) => ref
+                              .read(profileControllerProvider.notifier)
+                              .toggleNotifyFirstMessage(val),
+                        ),
+                        const SizedBox(height: 8),
+                        _buildSubSettingCard(
+                          context: context,
+                          title: 'New Messages',
+                          subtitle: 'Alert on all incoming chat data',
+                          value: user.notifySubsequentMessages,
+                          onChanged: (val) => ref
+                              .read(profileControllerProvider.notifier)
+                              .toggleNotifySubsequentMessages(val),
+                        ),
+                      ],
                       const SizedBox(height: 48),
                       
                       // Footer
@@ -264,6 +296,56 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 ),
               ],
             ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSubSettingCard({
+    required BuildContext context,
+    required String title,
+    required String subtitle,
+    required bool value,
+    required ValueChanged<bool> onChanged,
+  }) {
+    return Container(
+      margin: const EdgeInsets.only(left: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      decoration: BoxDecoration(
+        color: AppTheme.surfaceContainerLow.withValues(alpha: 0.4),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: AppTheme.primaryGold.withValues(alpha: 0.05)),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  subtitle,
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: AppTheme.onSurfaceVariant.withValues(alpha: 0.5),
+                      ),
+                ),
+              ],
+            ),
+          ),
+          Transform.scale(
+            scale: 0.8,
+            child: Switch(
+              value: value,
+              activeTrackColor: AppTheme.primaryGold,
+              onChanged: onChanged,
+            ),
           ),
         ],
       ),

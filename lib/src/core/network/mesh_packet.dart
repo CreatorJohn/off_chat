@@ -6,6 +6,7 @@ import 'package:off_chat/src/features/chat/data/message_handler.dart';
 import 'package:off_chat/src/core/database/models/found_device.dart';
 import 'package:off_chat/src/core/database/models/message.dart';
 import 'package:off_chat/src/features/discovery/data/ble_advertiser.dart';
+import 'package:off_chat/src/core/notifications/notification_service.dart';
 import 'package:isar_community/isar.dart';
 
 class PacketContext {
@@ -97,6 +98,32 @@ class TextPacket extends MeshPacket {
       ..isReceived = true
       ..isImage = false;
     await context.isar.putMessage(message);
+
+    final msgCount = await context.isar.db.messages
+        .filter()
+        .senderStableIdEqualTo(context.directSenderId)
+        .count();
+
+    final sender = await context.isar.db.foundDevices
+        .where()
+        .stableIdEqualTo(context.directSenderId)
+        .findFirst();
+
+    final user = await UserModel.load();
+    if (user != null && user.isNotificationsEnabled) {
+      final isFirstTime = msgCount == 1;
+      final shouldNotify = isFirstTime
+          ? user.notifyFirstMessage
+          : user.notifySubsequentMessages;
+
+      if (shouldNotify) {
+        await NotificationService().showMessageNotification(
+          senderName: sender?.name ?? "Unknown User",
+          message: text,
+          isFirstTime: isFirstTime,
+        );
+      }
+    }
   }
 }
 
@@ -130,6 +157,32 @@ class ImagePacket extends MeshPacket {
       ..isImage = true
       ..data = imageData;
     await context.isar.putMessage(message);
+
+    final msgCount = await context.isar.db.messages
+        .filter()
+        .senderStableIdEqualTo(context.directSenderId)
+        .count();
+
+    final sender = await context.isar.db.foundDevices
+        .where()
+        .stableIdEqualTo(context.directSenderId)
+        .findFirst();
+
+    final user = await UserModel.load();
+    if (user != null && user.isNotificationsEnabled) {
+      final isFirstTime = msgCount == 1;
+      final shouldNotify = isFirstTime
+          ? user.notifyFirstMessage
+          : user.notifySubsequentMessages;
+
+      if (shouldNotify) {
+        await NotificationService().showMessageNotification(
+          senderName: sender?.name ?? "Unknown User",
+          message: "Sent an image",
+          isFirstTime: isFirstTime,
+        );
+      }
+    }
   }
 }
 
