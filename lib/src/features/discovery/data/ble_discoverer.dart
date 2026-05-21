@@ -270,17 +270,6 @@ class BLEDiscoverer {
         return;
       }
 
-      // Sync existing devices that are missing critical metadata (Zero-Read fallback)
-      final needsSync = await isar.db.foundDevices
-          .filter()
-          .publicKeyIsNull()
-          .findAll();
-      for (final dev in needsSync) {
-        if (!_syncQueue.containsKey(dev.stableId)) {
-          _syncQueue[dev.stableId] = BluetoothDevice.fromId(dev.remoteId);
-        }
-      }
-
       if (FlutterBluePlus.isScanningNow) {
         await FlutterBluePlus.stopScan();
         await Future.delayed(const Duration(seconds: 1));
