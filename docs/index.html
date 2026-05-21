@@ -553,12 +553,12 @@
                     <p>High-speed environments (airplanes, fast trains) present a challenge for BLE stability. The protocol implements <strong>Adaptive Throttling</strong>:</p>
                     <div class="grid">
                         <div class="card" style="margin-bottom: 0;">
-                            <h4>Normal Mode (< 72 km/h)</h4>
-                            <p>Updates location and resets advertising every <strong>10 meters</strong> for high spatial resolution.</p>
+                            <h4>Normal Mode</h4>
+                            <p>Resets advertising every <strong>111 meters</strong> of movement to maintain spatial accuracy while conserving battery.</p>
                         </div>
                         <div class="card" style="margin-bottom: 0;">
-                            <h4>Flight Mode (≥ 72 km/h)</h4>
-                            <p>Switches to a stable <strong>2-minute timer</strong>, ignoring distance changes. This ensures a reliable connection window for peers.</p>
+                            <h4>Stationary Mode</h4>
+                            <p>Executes a heartbeat pulse every <strong>300 seconds</strong> (5 minutes) to maintain node presence in the local mesh registry.</p>
                         </div>
                     </div>
                 </div>
@@ -583,12 +583,12 @@ lib/src/
 │   ├── onboarding/   # Security setup protocol
 │   ├── discovery/    # BLE Scanning & Peer management
 │   ├── location/     # Radar math, Compass, & UI Canvas
-│   ├── profile/      # Local identity & Settings
+│   ├── profile/      # SharedPreferences identity store
 │   └── chat/         # Messaging logic & Media chunking
 ├── core/
 │   ├── routing/      # Reactive GoRouter
 │   ├── theme/        # Centralized Aurelian Noir
-│   └── database/     # Isar persistence layer
+│   └── database/     # Isar mesh persistence layer
 └── app.dart          # Root Application</pre>
             </section>
 
@@ -719,12 +719,12 @@ lib/src/
                     <p>Prostředí s vysokou rychlostí (letadla, rychlovlaky) představují výzvu pro stabilitu BLE. Protokol implementuje <strong>Adaptivní Throttling</strong>:</p>
                     <div class="grid">
                         <div class="card" style="margin-bottom: 0;">
-                            <h4>Normální režim (< 72 km/h)</h4>
-                            <p>Aktualizuje polohu a restartuje vysílání každých <strong>10 metrů</strong> pro vysoké prostorové rozlišení.</p>
+                            <h4>Normální režim</h4>
+                            <p>Restartuje vysílání po ujetí každých <strong>111 metrů</strong> pro udržení prostorové přesnosti při šetření baterie.</p>
                         </div>
                         <div class="card" style="margin-bottom: 0;">
-                            <h4>Letový režim (≥ 72 km/h)</h4>
-                            <p>Přepne na stabilní <strong>2minutový časovač</strong>, ignorujíc změny vzdálenosti. To zajišťuje spolehlivé okno pro připojení ostatních.</p>
+                            <h4>Stacionární režim</h4>
+                            <p>Provádí "heartbeat" puls každých <strong>300 sekund</strong> (5 minut) pro udržení přítomnosti uzlu v lokálním mesh registru.</p>
                         </div>
                     </div>
                 </div>
@@ -749,13 +749,13 @@ lib/src/
 │   ├── onboarding/   # Protokol zabezpečeného nastavení
 │   ├── discovery/    # BLE Skenování & správa peerů
 │   ├── location/     # Matematika radaru, Kompas & UI Canvas
-│   ├── profile/      # Lokální identita & Nastavení
+│   ├── profile/      # SharedPreferences úložiště identity
 │   └── chat/         # Logika zpráv & dělení médií
 ├── core/
 │   ├── routing/      # Reaktivní GoRouter
-│   ├── theme/        # Centralizovaný Aurelian Noir
-│   └── database/     # Perzistentní vrstva Isar
-└── app.dart          # Kořenová aplikace</pre>
+│   ├── theme/        # Centralized Aurelian Noir
+│   └── database/     # Isar perzistence mesh dat
+└── app.dart          # Kořenová aplikace
             </section>
 
             <section class="section">
@@ -778,7 +778,7 @@ lib/src/
         </main>
 
         <footer style="text-align: center; padding: 4rem 0; border-top: 1px solid var(--surface-variant); color: var(--text-secondary); font-size: 0.8rem;">
-            <p>© 2026 Off Chat - CTU FEE Bachelor Thesis | V1.1.8+10</p>
+            <p>© 2026 Off Chat - CTU FEE Bachelor Thesis | V1.2.0+11</p>
         </footer>
     </div>
 
