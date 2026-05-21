@@ -4,10 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:off_chat/src/core/theme/app_theme.dart';
 import 'package:off_chat/src/core/database/models/found_device.dart';
-import 'package:off_chat/src/features/discovery/data/ble_discoverer.dart';
 import 'package:off_chat/src/features/discovery/presentation/widgets/log_viewer.dart';
 import 'package:off_chat/src/features/discovery/presentation/discovery_controller.dart';
 import 'package:off_chat/src/features/discovery/presentation/advertising_state.dart';
+import 'package:logging/logging.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:intl/intl.dart';
 
@@ -146,7 +146,6 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
     final devicesAsync = ref.watch(discoveryControllerProvider);
     final isAdvertising = ref.watch(isAdvertisingProvider);
     final scanProgress = ref.watch(scanProgressProvider).value ?? 0.0;
-    final discoverer = BLEDiscoverer();
 
     return Scaffold(
       backgroundColor: AppTheme.surfaceBlack,
