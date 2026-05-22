@@ -24,7 +24,6 @@ class CanAdvertise extends _$CanAdvertise {
 @riverpod
 class IsAdvertising extends _$IsAdvertising {
   final FlutterBackgroundService _service = FlutterBackgroundService();
-  static const String _adKey = 'advertising_on';
 
   @override
   bool build() {
@@ -33,13 +32,7 @@ class IsAdvertising extends _$IsAdvertising {
       if (active != null) state = active;
     });
 
-    _loadInitial();
     return false;
-  }
-
-  Future<void> _loadInitial() async {
-    final prefs = await SharedPreferences.getInstance();
-    state = prefs.getBool(_adKey) ?? false;
   }
 }
 

@@ -89,7 +89,7 @@ Future<void> _startServiceLogic(
   await Future.delayed(const Duration(seconds: 1));
   final prefs = await SharedPreferences.getInstance();
   String currentName = prefs.getString('advertising_name_v2') ?? "BLE Node";
-  bool advertisingOn = prefs.getBool('advertising_on') ?? false;
+  bool advertisingOn = false;
   double currentLat = 0.0, currentLon = 0.0;
   bool isOnline = false, isAdUpdating = false, needsTrailingUpdate = false;
   DateTime lastAdStartTime = DateTime.fromMillisecondsSinceEpoch(0);
@@ -126,7 +126,6 @@ Future<void> _startServiceLogic(
         isOnline: isOnline,
       );
       lastAdStartTime = DateTime.now();
-      await prefs.setBool('advertising_on', true);
       service.invoke("advertisingChange", {"active": true});
     } catch (e) {
       log.severe('Ad update fail: $e');
@@ -177,7 +176,6 @@ Future<void> _startServiceLogic(
   service.on('startAdvertising').listen((e) async {
     final String? name = e?['name'];
     advertisingOn = true;
-    await prefs.setBool('advertising_on', true);
     if (name != null) {
       currentName = name;
       updateAd();
@@ -194,7 +192,6 @@ Future<void> _startServiceLogic(
   
   service.on("stopAdvertising").listen((_) async {
     advertisingOn = false;
-    await prefs.setBool('advertising_on', false);
     await advertiser.stopAdvertising();
     service.invoke("advertisingChange", {"active": false});
   });
