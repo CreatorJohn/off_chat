@@ -26,7 +26,6 @@ class BLEDiscoverer {
   final Logger _log = Logger('BLEDiscoverer');
   final Map<int, BluetoothDevice> _syncQueue = {};
   final Map<int, DateTime> _lastSyncAttempt = {};
-  final Map<int, DateTime> _lastHandshakeAttempt = {};
   final Set<int> _activeSyncs = {};
 
   final StreamController<bool> _scanStatusController = StreamController.broadcast();
@@ -297,16 +296,8 @@ class BLEDiscoverer {
             Duration(milliseconds: 1000 + Random().nextInt(2000)),
           );
           _lastSyncAttempt[entry.key] = DateTime.now();
-          
-          final lastHandshake = _lastHandshakeAttempt[entry.key];
-          if (lastHandshake != null && 
-              DateTime.now().difference(lastHandshake).inMinutes < 5) {
-            _log.info('Skipping full sync for ${entry.key} due to backoff');
-            continue;
-          }
 
           _activeSyncs.add(entry.key);
-          _lastHandshakeAttempt[entry.key] = DateTime.now();
 
           service.invoke('updateProgress', {
             'value': 1.0,
