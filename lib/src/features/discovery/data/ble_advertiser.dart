@@ -166,11 +166,15 @@ class BLEAdvertiser {
             BleCharacteristic(
               uuid: messageCharUuid,
               properties: [
+                CharacteristicProperties.read.index,
                 CharacteristicProperties.write.index,
                 CharacteristicProperties.notify.index,
                 CharacteristicProperties.indicate.index,
               ],
-              permissions: [AttributePermissions.writeable.index],
+              permissions: [
+                AttributePermissions.readable.index,
+                AttributePermissions.writeable.index,
+              ],
               value: Uint8List.fromList([0x00]),
             ),
           ],
