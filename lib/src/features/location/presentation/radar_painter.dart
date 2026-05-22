@@ -25,10 +25,12 @@ class RadarPainter extends CustomPainter {
       ..strokeWidth = 1;
 
     // Draw rings
-    canvas.drawCircle(center, radius, ringPaint);
-    canvas.drawCircle(center, radius * 0.75, ringPaint);
-    canvas.drawCircle(center, radius * 0.5, ringPaint);
-    canvas.drawCircle(center, radius * 0.25, ringPaint);
+    final distances = [10.0, 20.0, 30.0, 40.0, 50.0];
+    const double maxDist = 50.0;
+    for (final d in distances) {
+      final r = _getScaledRadius(d, maxDist, radius);
+      canvas.drawCircle(center, r, ringPaint);
+    }
 
     // Draw Sweep
     final sweepPaint = Paint()
@@ -60,13 +62,9 @@ class RadarPainter extends CustomPainter {
   }
 
   void _drawDeviceNode(Canvas canvas, Offset center, double maxRadius, RadarDevice device) {
-    // Logarithmic scaling formula from thesis:
-    // d_scaled = radius * log(1 + d * k) / log(1 + d_max * k)
-    const double k = 0.5; // steepness coefficient
     const double maxDist = 50.0; // meters
-    
     final d = device.distance.clamp(0.0, maxDist);
-    final scaledDistance = maxRadius * (log(1 + d * k) / log(1 + maxDist * k));
+    final scaledDistance = _getScaledRadius(d, maxDist, maxRadius);
 
     // Calculate bearing relative to user heading
     final double relativeBearing = (device.bearing - userHeading + 360) % 360;
@@ -109,6 +107,13 @@ class RadarPainter extends CustomPainter {
       canvas, 
       Offset(nodePos.dx - textPainter.width / 2, nodePos.dy + 8)
     );
+  }
+
+  double _getScaledRadius(double distance, double maxDistance, double maxVisualRadius) {
+    // Logarithmic scaling formula from thesis:
+    // d_scaled = radius * log(1 + d * k) / log(1 + d_max * k)
+    const double k = 0.5; // steepness coefficient
+    return maxVisualRadius * (log(1 + distance * k) / log(1 + maxDistance * k));
   }
 
   @override
