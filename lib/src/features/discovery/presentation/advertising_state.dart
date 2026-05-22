@@ -1,7 +1,7 @@
 import 'package:off_chat/src/features/discovery/data/ble_advertiser.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:off_chat/src/features/profile/domain/user_model.dart';
 
 part 'advertising_state.g.dart';
 
@@ -48,20 +48,17 @@ Stream<double> scanProgress(Ref ref) {
 
 @riverpod
 class AdvertisingName extends _$AdvertisingName {
-  static const String _storageKey = 'advertising_name_v2';
-  final String _defaultName = "Off Chat Node";
   final FlutterBackgroundService _bgService = FlutterBackgroundService();
 
   @override
   Future<String> build() async {
-    final prefs = await SharedPreferences.getInstance();
-
     _bgService.on("updateAdvertisingName").forEach((data) {
       final name = data?["name"];
       if (name is String) state = AsyncData(name);
     });
 
-    return prefs.getString(_storageKey) ?? _defaultName;
+    final user = await UserModel.load();
+    return user?.username ?? "Off Chat Node";
   }
 
   Future<void> change(String newName) async {
@@ -75,8 +72,12 @@ class AdvertisingName extends _$AdvertisingName {
     }
 
     state = AsyncData(trimmed);
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_storageKey, trimmed);
+    
+    // Save to main UserModel (Source of truth)
+    final user = await UserModel.load();
+    if (user != null) {
+      await user.copyWith(username: trimmed).save();
+    }
 
     // Refresh GATT characteristics first
     FlutterBackgroundService().invoke("updateLocalProfile");
@@ -85,8 +86,11 @@ class AdvertisingName extends _$AdvertisingName {
   }
 
   Future<void> reset() async {
-    state = AsyncData(_defaultName);
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove(_storageKey);
+    final user = await UserModel.load();
+    if (user != null) {
+      const defaultName = "Off Chat Node";
+      state = const AsyncData(defaultName);
+      await user.copyWith(username: defaultName).save();
+    }
   }
 }

@@ -10,7 +10,6 @@ import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:logging/logging.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:off_chat/src/features/profile/domain/user_model.dart';
 import 'package:off_chat/src/core/notifications/notification_service.dart';
 
@@ -87,23 +86,17 @@ Future<void> _startServiceLogic(
   ServiceInstance service,
   BLEAdvertiser advertiser,
 ) async {
-  final prefs = await SharedPreferences.getInstance();
-  final user = await UserModel.load();
-  
-  String currentName = prefs.getString('advertising_name_v2') ?? user?.username ?? "BLE Node";
-  bool advertisingOn = user?.isOnboarded ?? false;
+  UserModel? user = await UserModel.load();
   
   double currentLat = 0.0, currentLon = 0.0;
   bool isOnline = false, isAdUpdating = false, needsTrailingUpdate = false;
   DateTime lastAdStartTime = DateTime.fromMillisecondsSinceEpoch(0);
 
   Future<void> updateAd() async {
-    if (!advertisingOn || !BLEAdvertiser.initialized) return;
+    // Reload user to get latest name/onboarding status
+    user = await UserModel.load();
+    if (user == null || !user!.isOnboarded || !BLEAdvertiser.initialized) return;
 
-    // Latest data fetch
-    await prefs.reload();
-    currentName = prefs.getString('advertising_name_v2') ?? currentName;
-    
     final now = DateTime.now();
     final timeSinceLastStart = now.difference(lastAdStartTime);
     
@@ -123,7 +116,7 @@ Future<void> _startServiceLogic(
         await Future.delayed(const Duration(milliseconds: 500));
       }
       await advertiser.startAdvertising(
-        localName: currentName,
+        localName: user!.username,
         latitude: currentLat,
         longitude: currentLon,
         isOnline: isOnline,
@@ -136,7 +129,7 @@ Future<void> _startServiceLogic(
 
     Timer(const Duration(seconds: 10), () {
       isAdUpdating = false;
-      if (needsTrailingUpdate && advertisingOn) {
+      if (needsTrailingUpdate && user != null && user!.isOnboarded) {
         log.info('Executing queued trailing ad update');
         updateAd();
       }
@@ -144,7 +137,7 @@ Future<void> _startServiceLogic(
   }
 
   BLEAdvertiser.connectionStream.listen((event) {
-    if (!event.values.first && needsTrailingUpdate && advertisingOn) updateAd();
+    if (!event.values.first && needsTrailingUpdate && user != null && user!.isOnboarded) updateAd();
   });
 
   Geolocator.getPositionStream(
@@ -155,7 +148,7 @@ Future<void> _startServiceLogic(
   ).listen((p) {
     currentLat = p.latitude;
     currentLon = p.longitude;
-    if (advertisingOn) updateAd();
+    if (user != null && user!.isOnboarded) updateAd();
   });
 
   final isar = IsarService();
@@ -169,8 +162,8 @@ Future<void> _startServiceLogic(
   BLEDiscoverer().start(service, isar, myStableId);
 
   // Initial Ad Start
-  if (advertisingOn) {
-    log.info('Auto-starting advertising for onboarded user: $currentName');
+  if (user != null && user!.isOnboarded) {
+    log.info('Auto-starting advertising for onboarded user: ${user!.username}');
     updateAd();
   }
 
@@ -183,24 +176,21 @@ Future<void> _startServiceLogic(
   });
   
   service.on('startAdvertising').listen((e) async {
-    final String? name = e?['name'];
-    advertisingOn = true;
-    if (name != null) {
-      currentName = name;
-      updateAd();
-    }
+    // Force immediate update if requested (e.g. from onboarding)
+    updateAd();
   });
   
   service.on('setOnlineStatus').listen((e) {
     final status = e?['isOnline'];
     if (status is bool) {
       isOnline = status;
-      if (advertisingOn) updateAd();
+      if (user != null && user!.isOnboarded) updateAd();
     }
   });
   
   service.on("stopAdvertising").listen((_) async {
-    advertisingOn = false;
+    // We don't have a persistent flag anymore, but we can stop the current broadcast.
+    // Note: It will restart on next location change or app relaunch if onboarded.
     await advertiser.stopAdvertising();
     service.invoke("advertisingChange", {"active": false});
   });
