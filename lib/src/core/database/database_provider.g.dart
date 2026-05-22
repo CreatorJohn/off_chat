@@ -12,9 +12,8 @@ part of 'database_provider.dart';
 @ProviderFor(isarDatabase)
 final isarDatabaseProvider = IsarDatabaseProvider._();
 
-final class IsarDatabaseProvider
-    extends $FunctionalProvider<AsyncValue<Isar>, Isar, FutureOr<Isar>>
-    with $FutureModifier<Isar>, $FutureProvider<Isar> {
+final class IsarDatabaseProvider extends $FunctionalProvider<Isar, Isar, Isar>
+    with $Provider<Isar> {
   IsarDatabaseProvider._()
     : super(
         from: null,
@@ -31,16 +30,24 @@ final class IsarDatabaseProvider
 
   @$internal
   @override
-  $FutureProviderElement<Isar> $createElement($ProviderPointer pointer) =>
-      $FutureProviderElement(pointer);
+  $ProviderElement<Isar> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
 
   @override
-  FutureOr<Isar> create(Ref ref) {
+  Isar create(Ref ref) {
     return isarDatabase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(Isar value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<Isar>(value),
+    );
   }
 }
 
-String _$isarDatabaseHash() => r'7be2f5fd5f165b9521d3cab14b5dfa66c59f1629';
+String _$isarDatabaseHash() => r'987a6e114cb08228295a647fad94d2f4583db4ea';
 
 @ProviderFor(sharedPreferences)
 final sharedPreferencesProvider = SharedPreferencesProvider._();

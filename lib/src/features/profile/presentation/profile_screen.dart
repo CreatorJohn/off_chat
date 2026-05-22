@@ -5,7 +5,6 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:off_chat/src/features/profile/presentation/profile_controller.dart';
 import 'package:off_chat/src/features/profile/data/profile_manager.dart';
 import 'package:off_chat/src/features/profile/presentation/system_health_card.dart';
-import 'package:off_chat/src/features/discovery/presentation/advertising_state.dart';
 import 'package:off_chat/src/features/discovery/data/ble_advertiser.dart';
 import 'package:off_chat/src/core/theme/app_theme.dart';
 
@@ -47,7 +46,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final profileAsync = ref.watch(profileControllerProvider);
-    final isAdvertising = ref.watch(isAdvertisingProvider).value ?? false;
 
     return Scaffold(
       body: profileAsync.when(
@@ -138,7 +136,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       const SizedBox(height: 24),
 
                       // Mesh Identity Card
-                      _buildIdentityCard(context, isAdvertising),
+                      _buildIdentityCard(context),
                       const SizedBox(height: 24),
                       
                       // Settings Bento Grid
@@ -230,7 +228,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     );
   }
 
-  Widget _buildIdentityCard(BuildContext context, bool isAdvertising) {
+  Widget _buildIdentityCard(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
@@ -291,16 +289,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   ),
                 ),
               ),
-              if (isAdvertising) ...[
-                const SizedBox(width: 8),
-                IconButton(
-                  onPressed: () {
-                    BLEAdvertiser().stopAdvertising();
-                  },
-                  icon: const Icon(Icons.stop_circle, color: Colors.redAccent),
-                  tooltip: 'Stop Broadcast',
-                ),
-              ],
             ],
           ),
         ],

@@ -34,7 +34,7 @@ final class DiscoveryControllerProvider
 }
 
 String _$discoveryControllerHash() =>
-    r'ebffedb768b587cd34a387f6fe2dba730b758d97';
+    r'f736fa6eddfbab73561b09427ae4b53e5a088106';
 
 abstract class _$DiscoveryController
     extends $StreamNotifier<List<FoundDevice>> {

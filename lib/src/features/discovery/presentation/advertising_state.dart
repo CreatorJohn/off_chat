@@ -22,12 +22,6 @@ class CanAdvertise extends _$CanAdvertise {
 }
 
 @riverpod
-Stream<bool> isAdvertising(Ref ref) {
-  final service = FlutterBackgroundService();
-  return service.on("advertisingChange").map((event) => event?["active"] ?? false);
-}
-
-@riverpod
 Stream<bool> isServiceRunning(Ref ref) {
   final service = FlutterBackgroundService();
   return Stream.periodic(

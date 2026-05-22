@@ -146,7 +146,6 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
   @override
   Widget build(BuildContext context) {
     final devicesAsync = ref.watch(discoveryControllerProvider);
-    final isAdvertising = ref.watch(isAdvertisingProvider).value ?? false;
     final scanProgress = ref.watch(scanProgressProvider).value ?? 0.0;
 
     return Scaffold(
@@ -190,18 +189,9 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
                 // Service restarts automatically on next relevant user action or manual trigger
               },
             ),
-            const SizedBox(width: 8),
-            _StatusIndicator(
-              isActive: isAdvertising,
-              activeColor: Colors.green,
-              icon: Icons.visibility,
-              tooltip: isAdvertising
-                  ? 'Visible to others'
-                  : 'Invisible (Advertising Off)',
-            ),
           ],
         ),
-        leadingWidth: 120,
+        leadingWidth: 80,
         title: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onDoubleTap: () => _showDebugTerminal(context),
@@ -469,91 +459,6 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
           ),
         ],
       ),
-    );
-  }
-}
-
-class _StatusIndicator extends StatelessWidget {
-  const _StatusIndicator({
-    required this.isActive,
-    required this.activeColor,
-    required this.icon,
-    required this.tooltip,
-  });
-
-  final bool isActive;
-  final Color activeColor;
-  final IconData icon;
-  final String tooltip;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 28,
-      height: 28,
-      child: Tooltip(
-        message: tooltip,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            if (isActive) _PulseAnimation(color: activeColor),
-            Icon(
-              icon,
-              size: 18,
-              color: isActive
-                  ? activeColor
-                  : AppTheme.onSurfaceVariant.withValues(alpha: 0.3),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _PulseAnimation extends StatefulWidget {
-  const _PulseAnimation({required this.color});
-  final Color color;
-
-  @override
-  State<_PulseAnimation> createState() => _PulseAnimationState();
-}
-
-class _PulseAnimationState extends State<_PulseAnimation>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 2),
-    )..repeat();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, child) {
-        return Container(
-          width: 24 + (16 * _controller.value),
-          height: 24 + (16 * _controller.value),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: widget.color.withValues(
-              alpha: 0.2 * (1 - _controller.value),
-            ),
-          ),
-        );
-      },
     );
   }
 }
