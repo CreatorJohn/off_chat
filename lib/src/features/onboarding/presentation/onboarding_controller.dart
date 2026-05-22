@@ -3,6 +3,7 @@ import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:off_chat/src/features/profile/presentation/profile_controller.dart';
 import 'package:off_chat/src/features/profile/domain/user_model.dart';
+import 'package:off_chat/src/features/discovery/presentation/advertising_state.dart';
 import 'package:logging/logging.dart';
 
 part 'onboarding_controller.g.dart';
@@ -43,6 +44,9 @@ class OnboardingController extends _$OnboardingController {
       
       _log.info('Saving user profile to SharedPreferences...');
       await user.save();
+      
+      // Sync with Mesh Identity
+      await ref.read(advertisingNameProvider.notifier).change(username);
       
       // Initialize background service without blocking the state update
       _log.info('Initializing background service in background...');

@@ -22,10 +22,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    // Initialize controller with current advertising name
+    // Initialize controller with current profile name
     Future.microtask(() async {
-      final currentName = await ref.read(advertisingNameProvider.future);
-      _nameController.text = currentName;
+      final profile = await ref.read(profileControllerProvider.future);
+      if (profile != null) {
+        setState(() {
+          _nameController.text = profile.username;
+        });
+      }
     });
   }
 
@@ -251,9 +255,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             maxLength: BLEAdvertiser.maxNameLength,
             style: const TextStyle(color: AppTheme.onSurfaceVariant),
             decoration: InputDecoration(
-              labelText: 'Display Alias',
+              labelText: 'User Identity',
               labelStyle: TextStyle(color: AppTheme.onSurfaceVariant.withValues(alpha: 0.38)),
-              hintText: 'Enter mesh name...',
+              hintText: 'Enter your name...',
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
                 borderSide: BorderSide(color: AppTheme.onSurfaceVariant.withValues(alpha: 0.1)),
@@ -272,14 +276,16 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   onPressed: () {
                     final newName = _nameController.text.trim();
                     if (newName.isNotEmpty) {
-                      ref.read(advertisingNameProvider.notifier).change(newName);
+                      ref.read(profileControllerProvider.notifier).updateUsername(newName);
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Identity synchronized with mesh')),
+                        const SnackBar(content: Text('Profile identity updated')),
                       );
+                      // Clear focus
+                      FocusScope.of(context).unfocus();
                     }
                   },
-                  icon: const Icon(Icons.sync, size: 18),
-                  label: const Text('SYNC NAME'),
+                  icon: const Icon(Icons.save, size: 18),
+                  label: const Text('UPDATE PROFILE'),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 12),
                   ),

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:off_chat/src/core/database/database_provider.dart';
 import 'package:off_chat/src/features/profile/domain/user_model.dart';
+import 'package:off_chat/src/features/discovery/presentation/advertising_state.dart';
 import 'package:logging/logging.dart';
 
 part 'profile_controller.g.dart';
@@ -37,7 +38,11 @@ class ProfileController extends _$ProfileController {
   Future<void> updateUsername(String name) async {
     final user = state.value;
     if (user != null) {
-      await _saveProfile(user.copyWith(username: name));
+      final trimmed = name.trim();
+      await _saveProfile(user.copyWith(username: trimmed));
+      
+      // Use existing advertisingNameProvider logic to sync with mesh
+      await ref.read(advertisingNameProvider.notifier).change(trimmed);
     }
   }
 
