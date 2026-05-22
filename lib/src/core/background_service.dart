@@ -11,6 +11,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:logging/logging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:off_chat/src/features/profile/domain/user_model.dart';
 import 'package:off_chat/src/core/notifications/notification_service.dart';
 
 Future<void> initializeBackgroundService() async {
@@ -87,8 +88,11 @@ Future<void> _startServiceLogic(
   BLEAdvertiser advertiser,
 ) async {
   final prefs = await SharedPreferences.getInstance();
-  String currentName = prefs.getString('advertising_name_v2') ?? "BLE Node";
-  bool advertisingOn = false;
+  final user = await UserModel.load();
+  
+  String currentName = prefs.getString('advertising_name_v2') ?? user?.username ?? "BLE Node";
+  bool advertisingOn = user?.isOnboarded ?? false;
+  
   double currentLat = 0.0, currentLon = 0.0;
   bool isOnline = false, isAdUpdating = false, needsTrailingUpdate = false;
   DateTime lastAdStartTime = DateTime.fromMillisecondsSinceEpoch(0);
@@ -163,6 +167,12 @@ Future<void> _startServiceLogic(
 
   // Start Discovery Engine
   BLEDiscoverer().start(service, isar, myStableId);
+
+  // Initial Ad Start
+  if (advertisingOn) {
+    log.info('Auto-starting advertising for onboarded user: $currentName');
+    updateAd();
+  }
 
   Timer.periodic(const Duration(minutes: 2), (_) => MessageHandler.checkExpiredMessages());
 
