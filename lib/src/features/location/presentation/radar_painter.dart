@@ -37,10 +37,10 @@ class RadarPainter extends CustomPainter {
         startAngle: 0,
         endAngle: pi * 2,
         colors: [
-          AppTheme.primaryGold.withValues(alpha: 0.2),
           AppTheme.primaryGold.withValues(alpha: 0.0),
+          AppTheme.primaryGold.withValues(alpha: 0.2),
         ],
-        stops: const [0.0, 0.2],
+        stops: const [0.75, 1.0],
         transform: GradientRotation(sweepAngle),
       ).createShader(Rect.fromCircle(center: center, radius: radius));
 
