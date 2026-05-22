@@ -24,7 +24,7 @@ class BLEAdvertiser {
   static const messageCharUuid = '12345678-90ab-cdef-1234-567890abcdef';
 
   static const int manufacturerId = MeshConstants.manufacturerId;
-  static const int maxNameLength = 13;
+  static const int maxNameLength = 10;
 
   static bool _initialized = false,
       _servicesAdded = false,
@@ -209,7 +209,7 @@ class BLEAdvertiser {
         manufacturerId: manufacturerId,
         data: manufacturerData,
       ),
-      addManufacturerDataInScanResponse: false, // Move StableId to primary packet
+      addManufacturerDataInScanResponse: true, // Allow OS to balance between packets
       scanResponseManufacturerData: ManufacturerData(
         manufacturerId: manufacturerId,
         data: scanResponseData,

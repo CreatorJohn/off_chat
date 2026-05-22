@@ -17,8 +17,12 @@ class OnboardingController extends _$OnboardingController {
     final user = await ref.watch(profileControllerProvider.future);
     final isOnboarded = user?.isOnboarded ?? false;
     if (isOnboarded) {
-      _log.info('User already onboarded, ensuring service is running');
-      await initializeBackgroundService().catchError((e) {
+      _log.info('User already onboarded, ensuring service is running and advertising is active');
+      await initializeBackgroundService().then((_) {
+        if (user != null) {
+          FlutterBackgroundService().invoke("startAdvertising", {"name": user.username});
+        }
+      }).catchError((e) {
         _log.severe('Failed to auto-start background service: $e');
       });
     }

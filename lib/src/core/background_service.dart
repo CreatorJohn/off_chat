@@ -86,7 +86,6 @@ Future<void> _startServiceLogic(
   ServiceInstance service,
   BLEAdvertiser advertiser,
 ) async {
-  await Future.delayed(const Duration(seconds: 1));
   final prefs = await SharedPreferences.getInstance();
   String currentName = prefs.getString('advertising_name_v2') ?? "BLE Node";
   bool advertisingOn = false;
