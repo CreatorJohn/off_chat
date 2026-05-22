@@ -47,7 +47,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final profileAsync = ref.watch(profileControllerProvider);
-    final isAdvertising = ref.watch(isAdvertisingProvider);
+    final isAdvertising = ref.watch(isAdvertisingProvider).value ?? false;
 
     return Scaffold(
       body: profileAsync.when(

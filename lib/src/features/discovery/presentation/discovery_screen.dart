@@ -146,7 +146,7 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
   @override
   Widget build(BuildContext context) {
     final devicesAsync = ref.watch(discoveryControllerProvider);
-    final isAdvertising = ref.watch(isAdvertisingProvider);
+    final isAdvertising = ref.watch(isAdvertisingProvider).value ?? false;
     final scanProgress = ref.watch(scanProgressProvider).value ?? 0.0;
 
     return Scaffold(

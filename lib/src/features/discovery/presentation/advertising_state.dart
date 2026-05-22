@@ -22,18 +22,9 @@ class CanAdvertise extends _$CanAdvertise {
 }
 
 @riverpod
-class IsAdvertising extends _$IsAdvertising {
-  final FlutterBackgroundService _service = FlutterBackgroundService();
-
-  @override
-  bool build() {
-    _service.on("advertisingChange").listen((event) {
-      final bool? active = event?["active"];
-      if (active != null) state = active;
-    });
-
-    return false;
-  }
+Stream<bool> isAdvertising(Ref ref) {
+  final service = FlutterBackgroundService();
+  return service.on("advertisingChange").map((event) => event?["active"] ?? false);
 }
 
 @riverpod
