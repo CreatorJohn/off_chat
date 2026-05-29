@@ -449,7 +449,7 @@
             <section class="section" style="padding-top: 4rem;">
                 <h1>Off Chat: A Decentralized Digital Concierge</h1>
                 <p style="font-size: 1.2rem; color: var(--primary-gold); margin-top: 0.5rem; font-weight: 600;">Bachelor Thesis Project | CTU FEE, Prague</p>
-                <p>Off Chat is an offline-first, peer-to-peer communication platform built with Flutter. It utilizes Bluetooth Low Energy (BLE) to enable device discovery, relative location tracking (Radar), and secure messaging without any reliance on internet or cellular connectivity.</p>
+                <p>Off Chat is an offline-first, peer-to-peer decentralized communication platform built with Flutter. It utilizes Bluetooth Low Energy (BLE) to enable instant device discovery, relative location tracking (Radar), and secure messaging without any reliance on internet, cellular connectivity, or central infrastructure.</p>
             </section>
 
             <section class="section section-carousel">
@@ -526,39 +526,45 @@
             </section>
 
             <section class="section">
-                <h2>🛰 The Off-Chat Protocol</h2>
+                <h2>🛰 The Off-Chat BLE Protocol</h2>
                 <div class="card">
-                    <h3>Hybrid Discovery Strategy</h3>
-                    <p>To overcome standard BLE advertisement limits (31 bytes) and iOS background restrictions, this project implements a specialized binary payload strategy:</p>
+                    <h3>Zero-read Identification Protocol</h3>
+                    <p>To overcome BLE advertisement limits (31 bytes) and iOS background restrictions, Off Chat splits data transmission between the primary packet and the scan response:</p>
                     <div class="grid" style="margin-top: 2rem;">
                         <div>
-                            <h4>1. The 13-Byte Payload</h4>
-                            <p>Essential metadata is packed into a compact structure:</p>
+                            <h4>1. Primary Advertisement Packet (5 Bytes)</h4>
+                            <p>Packs critical identity data tightly at the byte-level:</p>
                             <ul>
-                                <li><strong>Byte 0:</strong> Flags (Platform, Location Visibility)</li>
-                                <li><strong>Bytes 1-4:</strong> Profile Hash (CRC32 of username/avatar)</li>
-                                <li><strong>Bytes 5-8:</strong> Latitude (Float32)</li>
-                                <li><strong>Bytes 9-12:</strong> Longitude (Float32)</li>
+                                <li><strong>Bytes 0-3:</strong> Stable Device ID (32-bit big-endian unsigned integer).</li>
+                                <li><strong>Byte 4:</strong> Combined byte consisting of:</li>
+                                <ul>
+                                    <li><strong>Bits 7-2 (6 bits):</strong> Version Tag (first 6 bits of Profile Hash) for instant change detection.</li>
+                                    <li><strong>Bit 1 (1 bit):</strong> Platform Flag (1 for iOS, 0 for Android).</li>
+                                    <li><strong>Bit 0 (1 bit):</strong> Online Status Flag (1 if Internet Bridge, 0 if offline).</li>
+                                </ul>
                             </ul>
                         </div>
                         <div>
-                            <h4>2. Connection Logic</h4>
-                            <p><strong>Primary Advertisement:</strong> Broadcasts only the Service UUID and essential flags to minimize packet size and maximize discovery reliability (especially for iOS background).</p>
-                            <p><strong>Scan Response:</strong> The 13-byte custom metadata is moved to the Scan Response packet. Local Name is disabled.</p>
-                            <p><strong>Background (iOS):</strong> When Scan Response data is stripped by the OS, the app initiates a <em>silent GATT connection</em> to read the "Identity Characteristic."</p>
+                            <h4>2. Scan Response Packet (12 Bytes)</h4>
+                            <p>Dispatched only when requested by active scanners to conserve battery:</p>
+                            <ul>
+                                <li><strong>Bytes 0-2 (24 bits):</strong> Latitude compressed to a 24-bit fixed-point integer.</li>
+                                <li><strong>Bytes 3-5 (24 bits):</strong> Longitude compressed to a 24-bit fixed-point integer.</li>
+                                <li><strong>Bytes 6-11 (6 bytes):</strong> Full Profile Hash for cryptographically verifying user identity.</li>
+                            </ul>
                         </div>
                     </div>
                     
-                    <h3 style="margin-top: 3rem;">✈️ Intelligent Motion (Flight Mode)</h3>
-                    <p>High-speed environments (airplanes, fast trains) present a challenge for BLE stability. The protocol implements <strong>Adaptive Throttling</strong>:</p>
+                    <h3 style="margin-top: 3rem;">✈️ Throttled Heartbeat (Energy Conservation)</h3>
+                    <p>Continuous scanning and advertising is resource-heavy. Off Chat utilizes <strong>Adaptive Throttling</strong>:</p>
                     <div class="grid">
                         <div class="card" style="margin-bottom: 0;">
-                            <h4>Normal Mode</h4>
-                            <p>Resets advertising every <strong>111 meters</strong> of movement to maintain spatial accuracy while conserving battery.</p>
+                            <h4>Motion State</h4>
+                            <p>Resets and updates advertising instantly when a change of <strong>111 meters</strong> or physical sensor movement is detected to maintain spatial accuracy.</p>
                         </div>
                         <div class="card" style="margin-bottom: 0;">
-                            <h4>Stationary Mode</h4>
-                            <p>Executes a heartbeat pulse every <strong>300 seconds</strong> (5 minutes) to maintain node presence in the local mesh registry.</p>
+                            <h4>Stationary State</h4>
+                            <p>If the user is sitting still, the advertiser sleeps and restarts advertising only every <strong>300 seconds</strong> (5 minutes) to maintain node connection tables.</p>
                         </div>
                     </div>
                 </div>
@@ -580,32 +586,33 @@
                 <pre>
 lib/src/
 ├── features/
-│   ├── onboarding/   # Security setup protocol
-│   ├── discovery/    # BLE Scanning & Peer management
-│   ├── location/     # Radar math, Compass, & UI Canvas
-│   ├── profile/      # SharedPreferences identity store
-│   └── chat/         # Messaging logic & Media chunking
+│   ├── onboarding/   # Security setup, profile configuration & key generation
+│   ├── discovery/    # BLE Discovery engine, scanning & Sync Queue
+│   ├── location/     # Radar math, Compass sensors & CustomPaint Canvas
+│   ├── profile/      # Local identity & Settings Bento Grid
+│   └── chat/         # Messaging logic, encryption & ChunkedTransferManager
 ├── core/
-│   ├── routing/      # Reactive GoRouter
-│   ├── theme/        # Centralized Aurelian Noir
-│   └── database/     # Isar mesh persistence layer
-└── app.dart          # Root Application</pre>
+│   ├── routing/      # Reactive GoRouter with state guards
+│   ├── theme/        # Centralized Aurelian Noir ThemeData
+│   ├── database/     # Isar local database layer (FoundDevice, Message, RelayTask)
+│   └── notifications/# Local background alerts
+└── app.dart          # Root Material application</pre>
             </section>
 
             <section class="section">
                 <h2>🧪 Verification & Quality</h2>
                 <div class="grid">
                     <div class="card">
-                        <h3>Netsim Testing</h3>
-                        <p>Simulates BLE radio signals between multiple Android emulators, allowing local verification of discovery and GATT sync logic.</p>
+                        <h3>Netsim Proximity Simulation</h3>
+                        <p>Simulates BLE radio signals and distances between multiple Android emulators, allowing offline local verification of the Directed Beam routing and GATT sync logics.</p>
                     </div>
                     <div class="card">
-                        <h3>Developer Terminal</h3>
-                        <p>A hidden real-time log viewer accessible via triple-tap on the home screen title, enabling deep on-device diagnostics.</p>
+                        <h3>In-App Developer Terminal</h3>
+                        <p>A hidden, color-coded, real-time diagnostic console accessible via triple-tap on the home screen "OFFCHAT" logo title, displaying the last 200 system events.</p>
                     </div>
                     <div class="card">
-                        <h3>CI/CD Pipeline</h3>
-                        <p>GitHub Actions automatically builds release APKs and App Bundles on every push to the master branch.</p>
+                        <h3>CI/CD Release Automation</h3>
+                        <p>GitHub Actions automatically builds release APKs and App Bundles on every push to the master branch, deploying directly to targeted releases.</p>
                     </div>
                 </div>
             </section>
@@ -616,7 +623,7 @@ lib/src/
             <section class="section" style="padding-top: 4rem;">
                 <h1>Off Chat: Decentralizovaný Digitální Concierge</h1>
                 <p style="font-size: 1.2rem; color: var(--primary-gold); margin-top: 0.5rem; font-weight: 600;">Bakalářská práce | ČVUT FEL, Praha</p>
-                <p>Off Chat je offline peer-to-peer komunikační platforma postavená na Flutteru. Využívá Bluetooth Low Energy (BLE) pro objevování zařízení, sledování relativní polohy (Radar) a bezpečnou výměnu zpráv bez závislosti na internetu nebo mobilním signálu.</p>
+                <p>Off Chat je offline peer-to-peer decentralizovaná komunikační platforma postavená na Flutteru. Využívá Bluetooth Low Energy (BLE) pro okamžité objevování zařízení, sledování relativní polohy (Radar) a bezpečnou výměnu zpráv bez jakékoli závislosti na internetu, mobilním signálu či centrální infrastruktuře.</p>
             </section>
 
             <section class="section section-carousel">
@@ -693,38 +700,45 @@ lib/src/
             </section>
 
             <section class="section">
-                <h2>🛰 Protokol Off-Chat</h2>
+                <h2>🛰 Protokol Off-Chat BLE</h2>
                 <div class="card">
-                    <h3>Hybridní Strategie Objevování</h3>
-                    <p>K překonání limitů BLE reklamy (31 bajtů) a omezení iOS na pozadí projekt implementuje specializovanou binární strategii:</p>
+                    <h3>Zero-read Identifikační Protokol</h3>
+                    <p>K překonání limitů BLE reklamy (31 bajtů) a omezení iOS na pozadí Off Chat rozděluje přenos dat mezi primární paket a skenovací odpověď:</p>
                     <div class="grid" style="margin-top: 2rem;">
                         <div>
-                            <h4>1. 13-Bajtový Payload</h4>
-                            <p>Klíčová metadata jsou zabalena do kompaktní struktury:</p>
+                            <h4>1. Primární inzerční paket (5 bajtů)</h4>
+                            <p>Zabaluje klíčová identifikační data na bitové úrovni:</p>
                             <ul>
-                                <li><strong>Byte 0:</strong> Příznaky (Platforma, Viditelnost polohy)</li>
-                                <li><strong>Bytes 1-4:</strong> Hash profilu (CRC32 jména a avataru)</li>
-                                <li><strong>Bytes 5-8:</strong> Zeměpisná šířka (Float32)</li>
-                                <li><strong>Bytes 9-12:</strong> Zeměpisná délka (Float32)</li>
+                                <li><strong>Bajty 0-3:</strong> Stable Device ID (32bitový big-endian unsigned integer).</li>
+                                <li><strong>Bajt 4:</strong> Kombinovaný bajt obsahující:</li>
+                                <ul>
+                                    <li><strong>Bity 7-2 (6 bitů):</strong> Version Tag (prvních 6 bitů hashe profilu) pro okamžitou detekci změn bez navazování GATT spojení.</li>
+                                    <li><strong>Bit 1 (1 bit):</strong> Příznak platformy (1 pro iOS, 0 pro Android).</li>
+                                    <li><strong>Bit 0 (1 bit):</strong> Příznak online stavu (1 pro Internet Bridge, 0 pro offline).</li>
+                                </ul>
                             </ul>
                         </div>
                         <div>
-                            <h4>2. Logika Připojení</h4>
-                            <p><strong>Popředí:</strong> Data jsou vysílána přes pakety Scan Response pro okamžitou aktualizaci.</p>
-                            <p><strong>Pozadí:</strong> Na iOS aplikace zahájí <em>tiché GATT připojení</em> pro přečtení identity, pokud jsou pakety ořezány operačním systémem.</p>
+                            <h4>2. Paket odpovědi na skenování (12 bajtů)</h4>
+                            <p>Vysílán pouze na vyžádání skenerem, což šetří energii baterie:</p>
+                            <ul>
+                                <li><strong>Bajty 0-2 (24 bitů):</strong> Zeměpisná šířka (Latitude) komprimovaná do 24bitového integeru s pevnou řádovou čárkou.</li>
+                                <li><strong>Bajty 3-5 (24 bitů):</strong> Zeměpisná délka (Longitude) komprimovaná do 24bitového integeru s pevnou řádovou čárkou.</li>
+                                <li><strong>Bajty 6-11 (6 bajtů):</strong> Full Profile Hash pro kryptografické ověření identity uzlu.</li>
+                            </ul>
                         </div>
                     </div>
 
-                    <h3 style="margin-top: 3rem;">✈️ Inteligentní pohyb (Letový režim)</h3>
-                    <p>Prostředí s vysokou rychlostí (letadla, rychlovlaky) představují výzvu pro stabilitu BLE. Protokol implementuje <strong>Adaptivní Throttling</strong>:</p>
+                    <h3 style="margin-top: 3rem;">✈️ Throttled Heartbeat (Energetická optimalizace)</h3>
+                    <p>Neustálé vysílání a skenování je energeticky náročné. Off Chat využívá <strong>Adaptivní Throttling</strong>:</p>
                     <div class="grid">
                         <div class="card" style="margin-bottom: 0;">
-                            <h4>Normální režim</h4>
-                            <p>Restartuje vysílání po ujetí každých <strong>111 metrů</strong> pro udržení prostorové přesnosti při šetření baterie.</p>
+                            <h4>Stav v pohybu</h4>
+                            <p>Okamžitě restartuje a aktualizuje inzerci při změně polohy o více než <strong>111 metrů</strong> nebo při detekci pohybu ze senzorů pro udržení přesnosti polohy.</p>
                         </div>
                         <div class="card" style="margin-bottom: 0;">
-                            <h4>Stacionární režim</h4>
-                            <p>Provádí "heartbeat" puls každých <strong>300 sekund</strong> (5 minut) pro udržení přítomnosti uzlu v lokálním mesh registru.</p>
+                            <h4>Stacionární stav</h4>
+                            <p>Pokud uživatel sedí v klidu, inzerce se uspí a restartuje se pouze každých <strong>300 sekund</strong> (5 minut) pro údržbu tabulek spojení.</p>
                         </div>
                     </div>
                 </div>
@@ -746,32 +760,32 @@ lib/src/
                 <pre>
 lib/src/
 ├── features/
-│   ├── onboarding/   # Protokol zabezpečeného nastavení
-│   ├── discovery/    # BLE Skenování & správa peerů
+│   ├── onboarding/   # Protokol zabezpečeného nastavení, profil a klíče
+│   ├── discovery/    # BLE Skenování, objevování a Sync Queue
 │   ├── location/     # Matematika radaru, Kompas & UI Canvas
-│   ├── profile/      # SharedPreferences úložiště identity
-│   └── chat/         # Logika zpráv & dělení médií
+│   ├── profile/      # Lokální identita a Bento Grid nastavení
+│   └── chat/         # Logika zpráv, šifrování & ChunkedTransferManager
 ├── core/
-│   ├── routing/      # Reaktivní GoRouter
-│   ├── theme/        # Centralized Aurelian Noir
-│   └── database/     # Isar perzistence mesh dat
-└── app.dart          # Kořenová aplikace
+│   ├── routing/      # Reaktivní GoRouter s ochranou stavů
+│   ├── theme/        # Centralizovaný motiv Aurelian Noir
+│   └── database/     # Perzistentní vrstva Isar (FoundDevice, Message, RelayTask)
+└── app.dart          # Kořenová aplikace</pre>
             </section>
 
             <section class="section">
                 <h2>🧪 Ověřování a Kvalita</h2>
                 <div class="grid">
                     <div class="card">
-                        <h3>Testování Netsim</h3>
-                        <p>Simuluje BLE rádiové signály mezi emulátory Android, což umožňuje lokální ověření logiky objevování a GATT synchronizace.</p>
+                        <h3>Simulace blízkosti (Netsim)</h3>
+                        <p>Simuluje BLE signály a vzdálenosti mezi více Android emulátory, což umožňuje offline lokální testování Directed Beam směrování a synchronizace.</p>
                     </div>
                     <div class="card">
-                        <h3>Vývojářský Terminál</h3>
-                        <p>Skrytý prohlížeč logů v reálném čase přístupný trojitým klepnutím na název domovské obrazovky.</p>
+                        <h3>Vývojářský Diagnostický Terminál</h3>
+                        <p>Skrytá konzole přístupná trojitým klepnutím na logo „OFFCHAT“ v záhlaví domovské obrazovky, zobrazující historii posledních 200 systémových událostí.</p>
                     </div>
                     <div class="card">
-                        <h3>CI/CD Pipeline</h3>
-                        <p>GitHub Actions automaticky sestavuje instalační APK a App Bundle při každém nahrání do hlavní větve.</p>
+                        <h3>Automatické Sestavení (CI/CD)</h3>
+                        <p>GitHub Actions automaticky sestavuje instalační APK a AAB balíčky při každém nahrání do hlavní větve s automatickým pushováním releasů.</p>
                     </div>
                 </div>
             </section>
@@ -781,6 +795,7 @@ lib/src/
             <p>© 2026 Off Chat - CTU FEE Bachelor Thesis | V1.2.0+11</p>
         </footer>
     </div>
+
 
     <script>
         const carouselStates = {
