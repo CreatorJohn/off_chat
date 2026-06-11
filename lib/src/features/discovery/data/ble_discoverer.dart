@@ -214,16 +214,19 @@ class BLEDiscoverer {
       bool isIdentified =
           dev.name != null && dev.publicKey != null && dev.profilePicture != null;
 
+      bool hasPendingData = await MessageHandler.hasPendingDataForPeer(stableId, isar);
+
       bool needsUpdate =
           !isIdentified ||
+          hasPendingData ||
           (versionTag != null && dev.versionTag != versionTag) ||
           (dev.lastPictureSync == null ||
               DateTime.now().difference(dev.lastPictureSync!).inHours >= 24);
 
       if (needsUpdate) {
         final last = _lastSyncAttempt[stableId];
-        // If not fully identified, ignore the 5-minute cooldown to try every scan
-        bool ignoreCooldown = !isIdentified;
+        // If not fully identified OR has pending data, ignore the 5-minute cooldown
+        bool ignoreCooldown = !isIdentified || hasPendingData;
 
         if (ignoreCooldown ||
             last == null ||

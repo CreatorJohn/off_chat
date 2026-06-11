@@ -241,6 +241,62 @@ class MessageHandler {
     await isar.db.writeTxn(() async => await isar.db.relayTasks.put(task));
   }
 
+  static Future<bool> hasPendingDataForPeer(
+      int peerStableId, IsarService isar) async {
+    // 1. Direct Messages
+    final unsentCount = await isar.db.messages
+        .filter()
+        .receiverStableIdEqualTo(peerStableId)
+        .wasSentEqualTo(false)
+        .count();
+    if (unsentCount > 0) return true;
+
+    // 2. Relay Tasks & ACKs
+    final tasks = await isar.db.relayTasks.where().findAll();
+    if (tasks.isEmpty) return false;
+
+    final myId = await ProfileManager.getStableDeviceId();
+    final peerDevice = await isar.db.foundDevices
+        .where()
+        .stableIdEqualTo(peerStableId)
+        .findFirst();
+    if (peerDevice == null) return false;
+
+    final ourDevice =
+        await isar.db.foundDevices.where().stableIdEqualTo(myId).findFirst();
+
+    for (final task in tasks) {
+      if (task.type == MeshPacket.typeAck) {
+        if (task.pendingNeighborIds.contains(peerStableId)) return true;
+      } else if (task.type == MeshPacket.typeRelay) {
+        if (task.pendingNeighborIds.contains(peerStableId)) continue;
+        if (task.sentCount >= 3) continue;
+
+        final targetDevice = await isar.db.foundDevices
+            .where()
+            .stableIdEqualTo(task.targetId)
+            .findFirst();
+
+        final MeshRouter router =
+            (targetDevice?.latitude != null && peerDevice.latitude != null)
+                ? DirectedBeamRouter()
+                : StarburstRouter();
+
+        if (router.shouldRelayToPeer(
+          task: task,
+          peer: peerDevice,
+          myId: myId,
+          targetDevice: targetDevice,
+          ourDevice: ourDevice,
+        )) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
   static Future<void> pushQueuedDataToPeer(
     int peerStableId, {
     required bool useNotifications,
