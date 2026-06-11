@@ -493,7 +493,7 @@ class BLEDiscoverer {
           }
 
           log.info('Waiting for B ($stableId) to complete its turn...');
-          await syncDoneCompleter.future.timeout(const Duration(seconds: 45));
+          await syncDoneCompleter.future.timeout(const Duration(seconds: 90));
           log.info('B ($stableId) signaled SyncDone. Full Handshake Complete.');
           MessageHandler.updateUiProgress('Sync Complete',
               syncingStableId: stableId, value: 1.0);

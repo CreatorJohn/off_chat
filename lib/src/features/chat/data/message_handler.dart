@@ -569,6 +569,10 @@ class MessageHandler {
 
   static Future<void> pushReciprocalSync(int peerStableId, String remoteId) async {
     _log.info('Starting reciprocal sync (B\'s turn) for $peerStableId');
+    
+    // Give the connection a moment to settle before pushing notifications
+    await Future.delayed(const Duration(milliseconds: 500));
+
     updateUiProgress('Exchanging Identity...',
         syncingStableId: peerStableId, value: 0.5);
     
@@ -624,6 +628,8 @@ class MessageHandler {
         value: chunk,
         deviceId: remoteId,
       );
+      // Pacing delay to prevent buffer overflow on receiver (Fixes "Device not found")
+      await Future.delayed(const Duration(milliseconds: 20));
     }
   }
 
@@ -655,6 +661,8 @@ class MessageHandler {
           deviceId: remoteId,
         );
       }
+      // Pacing delay to prevent buffer overflow on receiver (Fixes "Device not found")
+      await Future.delayed(const Duration(milliseconds: 20));
     }
 
     if (_waitingForImageFrom == peerStableId) {
