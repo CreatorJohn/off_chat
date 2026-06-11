@@ -205,19 +205,29 @@ class BLEDiscoverer {
 
       // Skip if device is already connected to our peripheral server
       if (BLEAdvertiser.isDeviceConnected(r.device.remoteId.toString())) {
-        _log.info('Device $stableId is already connected as an inbound peer. Skipping outbound sync.');
+        _log.info(
+          'Device $stableId is already connected as an inbound peer. Skipping outbound sync.',
+        );
         continue;
       }
 
+      bool isIdentified =
+          dev.name != null && dev.publicKey != null && dev.profilePicture != null;
+
       bool needsUpdate =
-          dev.profilePicture == null ||
+          !isIdentified ||
           (versionTag != null && dev.versionTag != versionTag) ||
           (dev.lastPictureSync == null ||
               DateTime.now().difference(dev.lastPictureSync!).inHours >= 24);
 
       if (needsUpdate) {
         final last = _lastSyncAttempt[stableId];
-        if (last == null || DateTime.now().difference(last).inMinutes >= 5) {
+        // If not fully identified, ignore the 5-minute cooldown to try every scan
+        bool ignoreCooldown = !isIdentified;
+
+        if (ignoreCooldown ||
+            last == null ||
+            DateTime.now().difference(last).inMinutes >= 5) {
           if (!_activeSyncs.contains(stableId)) {
             _syncQueue[stableId] = r.device;
           }
