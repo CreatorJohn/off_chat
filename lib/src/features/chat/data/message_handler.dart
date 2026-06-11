@@ -673,6 +673,7 @@ class MessageHandler {
         ..data = imageData
         ..messageId = messageId
         ..wasSent = wasSent
+        ..isDelivered = false
         ..wasFailed = wasFailed;
 
       await isar.putMessage(message);

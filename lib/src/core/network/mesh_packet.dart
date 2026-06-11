@@ -97,7 +97,10 @@ class TextPacket extends MeshPacket {
       ..content = text
       ..timestamp = DateTime.now()
       ..isReceived = true
-      ..isImage = false;
+      ..isImage = false
+      ..wasSent = false
+      ..isDelivered = true
+      ..wasFailed = false;
     await context.isar.putMessage(message);
 
     final msgCount = await context.isar.db.messages
@@ -156,7 +159,10 @@ class ImagePacket extends MeshPacket {
       ..timestamp = DateTime.now()
       ..isReceived = true
       ..isImage = true
-      ..data = imageData;
+      ..data = imageData
+      ..wasSent = false
+      ..isDelivered = true
+      ..wasFailed = false;
     await context.isar.putMessage(message);
 
     final msgCount = await context.isar.db.messages

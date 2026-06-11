@@ -183,6 +183,12 @@ class BLEDiscoverer {
 
       if (stableId == null || stableId == myStableId) continue;
 
+      // Skip if device is already connected to our peripheral server
+      if (BLEAdvertiser.isDeviceConnected(r.device.remoteId.toString())) {
+        _log.info('Device $stableId is already connected as an inbound peer. Skipping outbound sync.');
+        continue;
+      }
+
       final dev =
           (await isar.db.foundDevices
               .where()
