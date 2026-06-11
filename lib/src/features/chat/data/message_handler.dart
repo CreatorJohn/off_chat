@@ -499,10 +499,12 @@ class MessageHandler {
       if (needsPic) {
         final req = RequestProfilePicPacket();
         _waitingForImageFrom = packet.stableId;
+        // Use the remoteId from the active connection if provided, otherwise fallback to DB
+        final targetRemoteId = remoteId ?? dev.remoteId;
         await BLEAdvertiser.sendNotification(
           characteristicUuid: BLEAdvertiser.messageCharUuid,
           value: req.toBytes(),
-          deviceId: dev.remoteId,
+          deviceId: targetRemoteId,
         );
       }
     } catch (e) {
@@ -519,7 +521,9 @@ class MessageHandler {
     final myId = await ProfileManager.getStableDeviceId();
     final myHash = await ProfileManager.getProfileHash();
     final myPubKey = (await (await ProfileManager.getKeyPair()).extractPublicKey()).bytes;
-    final myName = (await SharedPreferences.getInstance()).getString('advertising_name_v2') ?? "BLE Node";
+    
+    final user = await UserModel.load();
+    final myName = user?.username ?? "BLE Node";
 
     final idPacket = IdentityPacket(
       stableId: myId,

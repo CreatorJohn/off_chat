@@ -434,11 +434,8 @@ class BLEDiscoverer {
           final myPubKey =
               (await (await ProfileManager.getKeyPair()).extractPublicKey())
                   .bytes;
-          final myName =
-              (await SharedPreferences.getInstance()).getString(
-                'advertising_name_v2',
-              ) ??
-              "BLE Node";
+          final user = await UserModel.load();
+          final myName = user?.username ?? "BLE Node";
 
           log.info('Sending our identity to $stableId...');
           MessageHandler.updateUiProgress('Sending Identity...',

@@ -59,7 +59,7 @@ class BLEAdvertiser {
         deviceId: deviceId,
       );
     } catch (e) {
-      _log.warning('Notify fail: $e');
+      _log.warning('Notify fail (Device: $deviceId): $e');
     }
   }
 
@@ -93,9 +93,11 @@ class BLEAdvertiser {
       _log.info('Connection Change | $id | Connected: $conn');
       if (conn) {
         _connectedDevices.add(id);
+        _log.info('Current connected devices: $_connectedDevices');
       } else {
         _connectedDevices.remove(id);
         _deviceMtu.remove(id);
+        _log.info('Device $id removed. Remaining: $_connectedDevices');
       }
       _connectionController.add({id: conn});
     });
