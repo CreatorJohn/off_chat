@@ -12,11 +12,11 @@ import 'package:off_chat/src/core/network/mesh_packet_encoder.dart';
 import 'package:off_chat/src/features/chat/data/message_handler.dart';
 import 'package:off_chat/src/features/profile/data/profile_manager.dart';
 import 'package:off_chat/src/core/utils/constants.dart';
+import 'package:off_chat/src/features/profile/domain/user_model.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:isar_community/isar.dart';
 import 'package:logging/logging.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class BLEDiscoverer {
   static final BLEDiscoverer _instance = BLEDiscoverer._internal();
@@ -183,12 +183,6 @@ class BLEDiscoverer {
 
       if (stableId == null || stableId == myStableId) continue;
 
-      // Skip if device is already connected to our peripheral server
-      if (BLEAdvertiser.isDeviceConnected(r.device.remoteId.toString())) {
-        _log.info('Device $stableId is already connected as an inbound peer. Skipping outbound sync.');
-        continue;
-      }
-
       final dev =
           (await isar.db.foundDevices
               .where()
@@ -207,13 +201,19 @@ class BLEDiscoverer {
       if (lat != null) dev.latitude = lat;
       if (lon != null) dev.longitude = lon;
 
+      await isar.putFoundDevice(dev);
+
+      // Skip if device is already connected to our peripheral server
+      if (BLEAdvertiser.isDeviceConnected(r.device.remoteId.toString())) {
+        _log.info('Device $stableId is already connected as an inbound peer. Skipping outbound sync.');
+        continue;
+      }
+
       bool needsUpdate =
           dev.profilePicture == null ||
           (versionTag != null && dev.versionTag != versionTag) ||
           (dev.lastPictureSync == null ||
               DateTime.now().difference(dev.lastPictureSync!).inHours >= 24);
-
-      await isar.putFoundDevice(dev);
 
       if (needsUpdate) {
         final last = _lastSyncAttempt[stableId];

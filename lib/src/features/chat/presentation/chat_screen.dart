@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:off_chat/src/core/theme/app_theme.dart';
 import 'package:off_chat/src/features/chat/presentation/chat_controller.dart';
+import 'package:off_chat/src/features/discovery/presentation/discovery_controller.dart';
 import 'package:off_chat/src/core/database/models/message.dart';
+import 'package:off_chat/src/core/database/models/found_device.dart';
 import 'package:intl/intl.dart';
 
 class ChatScreen extends ConsumerStatefulWidget {
@@ -40,10 +42,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     final messagesAsync = ref.watch(chatControllerProvider(widget.deviceId));
+    final deviceIdInt = int.tryParse(widget.deviceId) ?? 0;
+    final deviceAsync = ref.watch(watchDeviceProvider(deviceIdInt));
 
     return Scaffold(
       backgroundColor: AppTheme.surfaceBlack,
-      appBar: _buildAppBar(context),
+      appBar: _buildAppBar(context, deviceAsync.value),
       body: Column(
         children: [
           Expanded(
@@ -71,7 +75,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     );
   }
 
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
+  PreferredSizeWidget _buildAppBar(BuildContext context, FoundDevice? device) {
     return AppBar(
       backgroundColor: AppTheme.surfaceBlack.withValues(alpha: 0.8),
       elevation: 0,
@@ -83,21 +87,26 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         children: [
           CircleAvatar(
             backgroundColor: AppTheme.primaryGold.withValues(alpha: 0.1),
-            child: const Icon(Icons.person, color: AppTheme.primaryGold),
+            backgroundImage: device?.profilePicture != null 
+                ? MemoryImage(Uint8List.fromList(device!.profilePicture!)) 
+                : null,
+            child: device?.profilePicture == null 
+                ? const Icon(Icons.person, color: AppTheme.primaryGold)
+                : null,
           ),
           const SizedBox(width: 12),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Node: ${widget.deviceId}',
+                device?.name ?? 'Node: ${widget.deviceId}',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   color: AppTheme.primaryGold,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
-                'Secured Mesh Connection',
+                device?.publicKey != null ? 'Encrypted Mesh Connection' : 'Secured Mesh Connection',
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
                   color: AppTheme.onSurfaceVariant.withValues(alpha: 0.5),
                   fontSize: 10,

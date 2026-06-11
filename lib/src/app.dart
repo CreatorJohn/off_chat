@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:off_chat/src/core/routing/router.dart';
@@ -12,16 +13,19 @@ class OffChatApp extends ConsumerStatefulWidget {
 }
 
 class _OffChatAppState extends ConsumerState<OffChatApp> with WidgetsBindingObserver {
+  Timer? _onlineStatusTimer;
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     // Notify service that app is active
-    Future.delayed(const Duration(seconds: 1), () => _setOnlineStatus(true));
+    _onlineStatusTimer = Timer(const Duration(seconds: 1), () => _setOnlineStatus(true));
   }
 
   @override
   void dispose() {
+    _onlineStatusTimer?.cancel();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }

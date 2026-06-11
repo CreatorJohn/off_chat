@@ -191,7 +191,7 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen> {
             ),
           ],
         ),
-        leadingWidth: 80,
+        leadingWidth: 120,
         title: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onDoubleTap: () => _showDebugTerminal(context),
