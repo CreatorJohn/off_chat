@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:off_chat/src/features/profile/presentation/profile_controller.dart';
 import 'package:off_chat/src/features/profile/data/profile_manager.dart';
-import 'package:off_chat/src/features/profile/presentation/system_health_card.dart';
 import 'package:off_chat/src/features/discovery/data/ble_advertiser.dart';
 import 'package:off_chat/src/core/theme/app_theme.dart';
 
@@ -17,6 +16,7 @@ class ProfileScreen extends ConsumerStatefulWidget {
 
 class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   final TextEditingController _nameController = TextEditingController();
+  int? _stableId;
 
   @override
   void initState() {
@@ -29,6 +29,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           _nameController.text = profile.username;
         });
       }
+      
+      final stableId = await ProfileManager.getStableDeviceId();
+      setState(() {
+        _stableId = stableId;
+      });
     });
   }
 
@@ -124,16 +129,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        "ID: ${user.deviceId ?? "UNKNOWN"}",
+                        "STABLE ID: ${_stableId ?? "..."}",
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           color: AppTheme.onSurfaceVariant.withValues(alpha: 0.5),
                           fontFamily: "monospace",
+                          letterSpacing: 1.5,
                         ),
                       ),
                       const SizedBox(height: 40),
-
-                      const SystemHealthCard(),
-                      const SizedBox(height: 24),
 
                       // Mesh Identity Card
                       _buildIdentityCard(context),
